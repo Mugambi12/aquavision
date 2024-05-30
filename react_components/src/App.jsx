@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect, Suspense } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import Spinner from "./components/Spinner/Spinner";
+
+const LazyChatsPage = React.lazy(() => import("./pages/Chats"));
+const LazyExpensesPage = React.lazy(() => import("./pages/Expenses"));
+const LazyHomePage = React.lazy(() => import("./pages/Home"));
+const LazyPaymentsPage = React.lazy(() => import("./pages/Payments"));
+const LazyPeoplePage = React.lazy(() => import("./pages/People"));
+const LazyRecordsPage = React.lazy(() => import("./pages/Records"));
+const LazySettingsPage = React.lazy(() => import("./pages/Settings"));
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isRoutesLoaded, setIsRoutesLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsRoutesLoaded(true);
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <Suspense fallback={<Spinner />}>
+        {isRoutesLoaded && (
+          <Routes>
+            <Route path="/home" element={<LazyHomePage />} />
+            <Route path="/chats" element={<LazyChatsPage />} />
+            <Route path="/expenses" element={<LazyExpensesPage />} />
+            <Route path="/payments" element={<LazyPaymentsPage />} />
+            <Route path="/people" element={<LazyPeoplePage />} />
+            <Route path="/records" element={<LazyRecordsPage />} />
+            <Route path="/settings" element={<LazySettingsPage />} />
+
+            <Route path="*" element={<Navigate to="/home" />} />
+          </Routes>
+        )}
+      </Suspense>
+    </Router>
+  );
 }
 
-export default App
+export default App;
