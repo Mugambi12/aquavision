@@ -5,15 +5,53 @@ const Header = () => {
   useEffect(() => {
     const header = document.querySelector("[data-header]");
     const navToggleBtn = document.querySelector("[data-menu-toggle-btn]");
+    const navLinks = document.querySelectorAll(".navbar-link");
 
     const toggleNav = () => {
       header.classList.toggle("active");
     };
 
+    const handleNavLinkClick = (event) => {
+      // Remove active class from all nav links
+      navLinks.forEach((link) => link.classList.remove("active"));
+
+      // Add active class to the clicked link
+      event.currentTarget.classList.add("active");
+
+      // Store the active link in local storage
+      localStorage.setItem("activeLink", event.currentTarget.href);
+    };
+
+    // Add event listener to toggle button
     navToggleBtn.addEventListener("click", toggleNav);
+
+    // Add event listener to each nav link
+    navLinks.forEach((link) =>
+      link.addEventListener("click", handleNavLinkClick)
+    );
+
+    // On component mount, check local storage for active link
+    const activeLink = localStorage.getItem("activeLink");
+    if (activeLink) {
+      const activeNavLink = [...navLinks].find(
+        (link) => link.href === activeLink
+      );
+      if (activeNavLink) {
+        activeNavLink.classList.add("active");
+      }
+    } else {
+      // If no active link is stored, set the home link as active by default
+      const homeLink = document.querySelector(".navbar-link[href='/home']");
+      if (homeLink) {
+        homeLink.classList.add("active");
+      }
+    }
 
     return () => {
       navToggleBtn.removeEventListener("click", toggleNav);
+      navLinks.forEach((link) =>
+        link.removeEventListener("click", handleNavLinkClick)
+      );
     };
   }, []);
 
@@ -42,7 +80,7 @@ const Header = () => {
             <ul className="navbar-list">
               {/* Home */}
               <li>
-                <a href="/home" className="navbar-link active icon-box">
+                <a href="/home" className="navbar-link icon-box">
                   <span className="material-symbols-rounded icon">apps</span>
                   <span>Home</span>
                 </a>
@@ -74,7 +112,7 @@ const Header = () => {
               </li>
               {/* Expenses */}
               <li>
-                <a href="expenses" className="navbar-link icon-box">
+                <a href="/expenses" className="navbar-link icon-box">
                   <span className="material-symbols-rounded icon">
                     send_money
                   </span>
@@ -92,20 +130,18 @@ const Header = () => {
 
             {/* User Actions */}
             <ul className="user-action-list">
-              {/* Notifications */}
-              <li>
-                <a href="#!" className="notification icon-box">
-                  <span className="material-symbols-rounded icon">
-                    notifications
-                  </span>
-                </a>
-              </li>
               {/* Settings */}
               <li>
-                <a href="settings" className="notification icon-box">
+                <a href="/settings" className="notification icon-box">
                   <span className="material-symbols-rounded icon">
                     settings
                   </span>
+                </a>
+              </li>
+              {/* Logout */}
+              <li>
+                <a href="#!" className="notification icon-box">
+                  <span className="material-symbols-rounded icon">logout</span>
                 </a>
               </li>
               {/* Profile */}

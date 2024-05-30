@@ -43,7 +43,6 @@
 .navbar {
   position: absolute;
   top: 72px;
-  padding-top: 150px;
   left: 0;
   width: 100%;
   background: var(--white);
