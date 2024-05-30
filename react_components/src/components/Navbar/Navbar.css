@@ -72,7 +72,7 @@
   border-radius: var(--radius-6);
 }
 
-:is(.navbar-link, .notification, .header-profile):is(:hover, :focus) {
+:is(.navbar-link, .navbar-icons, .header-profile):is(:hover, :focus) {
   background: var(--black_08);
 }
 
@@ -88,10 +88,14 @@
   flex-direction: row-reverse;
 }
 
-.notification {
+.navbar-icons {
   color: var(--onyx);
   padding: 8px;
   border-radius: var(--radius-6);
+}
+
+.navbar-icons .logout {
+  color: var(--imperial-red);
 }
 
 .header-profile {

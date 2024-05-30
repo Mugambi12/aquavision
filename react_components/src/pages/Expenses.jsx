@@ -5,7 +5,9 @@ const Expenses = () => {
   return (
     <>
       <Navbar />
-      <div>Expenses</div>
+      <div className="main-container">
+        <div>Expenses</div>
+      </div>
     </>
   );
 };

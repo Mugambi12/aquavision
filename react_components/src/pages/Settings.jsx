@@ -5,7 +5,9 @@ const Settings = () => {
   return (
     <>
       <Navbar />
-      <div>Settings</div>
+      <div className="main-container">
+        <div>Settings</div>
+      </div>
     </>
   );
 };

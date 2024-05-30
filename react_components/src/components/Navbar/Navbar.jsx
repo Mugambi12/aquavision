@@ -132,7 +132,10 @@ const Header = () => {
             <ul className="user-action-list">
               {/* Settings */}
               <li>
-                <a href="/settings" className="notification icon-box">
+                <a
+                  href="/settings"
+                  className="navbar-link navbar-icons icon-box"
+                >
                   <span className="material-symbols-rounded icon">
                     settings
                   </span>
@@ -140,8 +143,10 @@ const Header = () => {
               </li>
               {/* Logout */}
               <li>
-                <a href="#!" className="notification icon-box">
-                  <span className="material-symbols-rounded icon">logout</span>
+                <a href="#!" className="navbar-icons icon-box">
+                  <span className="material-symbols-rounded icon logout">
+                    logout
+                  </span>
                 </a>
               </li>
               {/* Profile */}
