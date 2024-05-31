@@ -27,6 +27,7 @@
   --cool-gray: hsl(225, 11%, 59%);
   --cultured: hsl(225, 20%, 96%);
   --blue-ryb: hsl(220, 100%, 50%);
+  --black: hsl(0, 0%, 0%);
   --black_08: hsla(0, 0%, 0%, 0.06);
   --black_12: hsla(0, 0%, 0%, 0.12);
   --coral_12: hsla(15, 100%, 65%, 0.12);
@@ -43,6 +44,7 @@
 
   --ff-vietnam: "Be Vietnam Pro", sans-serif;
 
+  --fs-0: 2rem;
   --fs-1: 1.563rem;
   --fs-2: 1.5rem;
   --fs-3: 1.25rem;
@@ -54,8 +56,12 @@
   --fs-9: 0.813rem;
   --fs-10: 0.769rem;
 
+  --fw-300: 300;
+  --fw-400: 400;
   --fw-500: 500;
   --fw-600: 600;
+  --fw-700: 700;
+  --fw-800: 800;
 
   /**
      * transition
@@ -69,7 +75,12 @@
      * radius
      */
 
+  --radius-3: 3px;
   --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-10: 10px;
+  --radius-12: 12px;
+  --radius-16: 16px;
 
   /**
      * shadow
@@ -163,4 +174,19 @@ body {
 .main-container {
   padding: 20px 0;
   display: flex;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
 }

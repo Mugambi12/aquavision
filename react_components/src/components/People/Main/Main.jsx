@@ -1,9 +1,10 @@
-import React from "react";
+import "./Main.css";
+import Content from "./Content";
 
 const Main = ({ person }) => {
   return (
     <>
-      <div>Main</div>
+      <Content selectedPerson={person} />
     </>
   );
 };

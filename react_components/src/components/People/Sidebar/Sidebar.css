@@ -2,7 +2,7 @@
 
 /* Desktop Sidebar Styles */
 .sidebar {
-  width: 325px;
+  width: 367px;
   height: fit-content;
   padding-bottom: 15px;
   margin-left: 18px;
@@ -100,7 +100,7 @@
     background: var(--white);
     border-radius: 16px;
     transition: left var(--transition);
-    z-index: 1000;
+    z-index: 5;
   }
 
   .sidebar-header {

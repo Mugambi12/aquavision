@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar/Navbar";
+import Spinner from "../components/Spinner/Spinner";
 
 const Home = () => {
   return (

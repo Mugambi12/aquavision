@@ -1,0 +1,37 @@
+@import url("/src/index.css");
+
+/* Main layout */
+.person-content {
+  padding: 0 18px;
+  width: 100%;
+  gap: 2%;
+}
+
+.person-content-left {
+  width: 70%;
+}
+
+.person-content-right {
+  width: 30%;
+}
+
+/* Cards */
+.content-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .person-content {
+    flex-direction: column;
+  }
+
+  .person-content-left {
+    width: 100%;
+  }
+
+  .person-content-right {
+    width: 100%;
+  }
+}

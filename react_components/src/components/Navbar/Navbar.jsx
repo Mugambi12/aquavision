@@ -145,7 +145,7 @@ const Header = () => {
               <li>
                 <a href="#!" className="navbar-icons icon-box">
                   <span className="material-symbols-rounded icon logout">
-                    logout
+                    power_settings_new
                   </span>
                 </a>
               </li>
