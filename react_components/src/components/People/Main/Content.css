@@ -113,6 +113,20 @@
   font-weight: var(--fw-400);
 }
 
+hr {
+  height: 3px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  background: var(--davys-gray_12);
+}
+
+@media screen and (max-width: 768px) {
+  hr {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .water-row {
     flex-direction: column;
@@ -138,75 +152,62 @@
 }
 
 /* ================================ */
-/* Diagnostic List */
+/* Payment History */
 /* ================================ */
-.content-diagnostic-table {
+.payment-history-content-table {
   margin: 10px;
 }
 
-.content-diagnostic-table .table-title {
+.payment-history-content-table .table-title {
   font-size: var(--fs-4);
   font-weight: var(--fw-600);
   margin-bottom: 18px;
 }
 
-.content-diagnostic-header {
+.payment-history-content-header {
   margin-bottom: 10px;
 }
 
-.content-diagnostic-header .table_header {
+.payment-history-content-header .table_header {
   font-size: var(--fs-6);
   font-weight: var(--fw-500);
   flex-basis: 25%;
 }
 
-.content-diagnostic-body {
+.payment-history-content-body {
   overflow-y: auto;
-  max-height: 45vh;
+  max-height: 39vh;
 }
 
-.content-diagnostic-body .table_content {
+.payment-history-content-body .table_content {
   font-size: var(--fs-6);
   font-weight: var(--fw-400);
   line-height: 30px;
   flex-basis: 25%;
 }
 
-hr {
-  height: 3px;
-  width: 100%;
-  border: none;
-  border-radius: 5px;
-  background: var(--davys-gray_12);
-}
-
-@media screen and (max-width: 768px) {
-  hr {
-    display: none;
-  }
-}
-
 /* ================================ */
 /* Invoices List */
 /* ================================ */
-.content-lab-results {
+.personal-content-invoice-download {
   margin-left: 8px;
   padding: 10px;
 }
 
-.content-lab-results .title {
+.personal-content-invoice-download .title {
   font-size: var(--fs-4);
   font-weight: var(--fw-600);
   margin-bottom: 18px;
 }
 
-.content-lab-results-list {
+.personal-content-invoice-download-list {
   list-style: none;
   overflow-y: auto;
-  max-height: 30vh;
+  max-height: 35vh;
+  padding: 0 10px;
 }
 
-.content-lab-result-item {
+.personal-content-invoice-download-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -216,7 +217,7 @@ hr {
   color: var(--onyx-2);
 }
 
-.content-lab-result-item .icon {
+.personal-content-invoice-download-item .icon {
   width: 15px;
   height: 15px;
   margin-right: 10px;
@@ -292,9 +293,8 @@ hr {
 }
 
 /* ================================ */
-/* Key Info Cards */
+/* Data Point Cards */
 /* ================================ */
-/* Vital Cards */
 .personal-content-cards {
   justify-content: space-between;
   margin-bottom: 20px;

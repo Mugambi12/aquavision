@@ -188,11 +188,13 @@ const PersonalContentCard = ({ person, label, valueKey }) => {
           <div className="personal-content-card-label">{label}</div>
           <div className="personal-content-card-value">
             {latestEntry[valueKey].value}{" "}
-            {valueKey === "respiratory_rate" ? "°F" : "Ksh"}
+            {valueKey === "respiratory_rate" ? "Units" : "Ksh"}
           </div>
+          {/*
           <div className="personal-content-card-value-status">
             {latestEntry[valueKey].levels}
-          </div>
+                  </div>
+                  */}
         </div>
       )}
     </>
@@ -225,17 +227,18 @@ const UsageTrendsCard = ({ person }) => (
 
 const PaymentHistory = ({ person }) => (
   <div className="content-card">
-    <div className="content-diagnostic-table">
+    <div className="payment-history-content-table">
       <div className="table-title">Payment History</div>
-      <div className="row content-diagnostic-header">
+      <div className="d-flex payment-history-content-header">
         <div className="table_header">TransantionID</div>
         <div className="table_header">Date</div>
         <div className="table_header">Amount</div>
         <div className="table_header">Status</div>
       </div>
-      <div className="content-diagnostic-body">
+
+      <div className="payment-history-content-body">
         {person.diagnosticList.map((item, index) => (
-          <div key={index} className="row">
+          <div key={index} className="d-flex">
             <div className="table_content">{item.name}</div>
             <div className="table_content">{item.status}</div>
             <div className="table_content">{item.status}</div>
@@ -306,11 +309,11 @@ const ProfileCard = ({ person }) => (
 );
 
 const InvoicesDownload = ({ person }) => (
-  <div className="content-card content-lab-results">
-    <div className="title">Lab Results</div>
-    <ul className="content-lab-results-list">
+  <div className="content-card personal-content-invoice-download">
+    <div className="title">Invoice Download</div>
+    <ul className="personal-content-invoice-download-list">
       {person.labResults.map((result, index) => (
-        <li key={index} className="content-lab-result-item">
+        <li key={index} className="personal-content-invoice-download-item">
           {result}{" "}
           <span className="material-symbols-rounded icon">download</span>
         </li>
