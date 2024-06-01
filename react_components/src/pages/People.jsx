@@ -1,8 +1,8 @@
-// People.js
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/People/Sidebar/Sidebar";
 import Main from "../components/People/Main/Main";
+import Footer from "../components/Footer/Footer";
 
 const People = () => {
   const [people, setPeople] = useState([]);
@@ -54,13 +54,28 @@ const People = () => {
     setSelectedPerson(person);
   };
 
+  const [newPeople, setNewPeople] = useState([
+    // initial people data
+  ]);
+
+  const handleAddUser = (newUser) => {
+    setNewPeople([...newPeople, newUser]);
+    console.log("New user added:", newUser);
+    console.log("New people:", newPeople);
+  };
+
   return (
     <>
       <Navbar />
       <div className="main-container">
-        <Sidebar people={people} onPersonClick={handlePersonClick} />
+        <Sidebar
+          people={people}
+          onPersonClick={handlePersonClick}
+          onAddUser={handleAddUser}
+        />
         <Main person={selectedPerson} />
       </div>
+      <Footer />
     </>
   );
 };

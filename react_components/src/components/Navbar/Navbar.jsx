@@ -101,22 +101,13 @@ const Header = () => {
                   <span>Records</span>
                 </a>
               </li>
-              {/* Payments */}
+              {/* Transactions */}
               <li>
-                <a href="/payments" className="navbar-link icon-box">
+                <a href="/transactions" className="navbar-link icon-box">
                   <span className="material-symbols-rounded icon">
                     attach_money
                   </span>
-                  <span>Payments</span>
-                </a>
-              </li>
-              {/* Expenses */}
-              <li>
-                <a href="/expenses" className="navbar-link icon-box">
-                  <span className="material-symbols-rounded icon">
-                    send_money
-                  </span>
-                  <span>Expenses</span>
+                  <span>Transactions</span>
                 </a>
               </li>
               {/* Chats */}

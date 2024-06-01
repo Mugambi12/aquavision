@@ -1,0 +1,25 @@
+.expenses-section {
+  margin: 20px 0;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid var(--cool-gray);
+  padding: 8px;
+  text-align: left;
+}
+
+.data-table th {
+  background-color: var(--onyx);
+  color: var(--white);
+}
+
+.data-table tr:nth-child(even) {
+  background-color: var(--cultured);
+}

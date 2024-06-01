@@ -130,6 +130,16 @@ button {
   text-align: left;
 }
 
+input,
+select,
+input:focus,
+select:focus {
+  font: inherit;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
+
 html {
   font-family: var(--ff-vietnam);
   scroll-behavior: smooth;
@@ -138,6 +148,7 @@ html {
 body {
   padding-block-start: 72px;
   background: var(--cultured);
+  font-family: Arial, sans-serif;
 }
 
 :focus-visible {
@@ -178,6 +189,7 @@ body {
 
 .row {
   display: flex;
+  justify-content: space-between;
 }
 
 .d-flex {

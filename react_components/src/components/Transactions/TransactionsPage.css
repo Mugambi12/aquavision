@@ -1,0 +1,8 @@
+.main-container {
+  display: flex;
+}
+
+.transactions-content {
+  flex: 1;
+  padding: 0 20px;
+}
