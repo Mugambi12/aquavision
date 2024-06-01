@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
-import Invoices from "../components/Invoices/Content/Invoices";
+import Invoices from "../components/Records/Content/Invoices";
 import Footer from "../components/Footer/Footer";
 import Modal from "react-modal";
 
