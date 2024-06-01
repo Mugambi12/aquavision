@@ -271,13 +271,13 @@ hr {
 }
 
 .personal-user-content-detail .label {
-  font-weight: var(--fw-400);
+  font-weight: var(--fw-500);
   font-size: var(--fs-6);
 }
 
 .personal-user-content-detail .value {
   font-weight: var(--fw-300);
-  font-size: var(--fs-7);
+  font-size: var(--fs-8);
   margin-top: 5px;
 }
 

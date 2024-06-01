@@ -260,14 +260,14 @@ const ProfileCard = ({ person }) => (
       <div className="personal-full-name">{person.fullName}</div>
 
       <div className="personal-user-content-details">
-        <div className="row personal-user-content-detail">
+        <div className="d-flex personal-user-content-detail">
           <span className="material-symbols-rounded icon">calendar_month</span>
           <div className="column">
             <span className="label">Date of Birth:</span>
             <span className="value">{person.dateOfBirth}</span>
           </div>
         </div>
-        <div className="row personal-user-content-detail">
+        <div className="d-flex personal-user-content-detail">
           <span className="material-symbols-rounded icon">{`${
             person.gender === "Female" ? "female" : "male"
           }`}</span>
@@ -276,14 +276,14 @@ const ProfileCard = ({ person }) => (
             <span className="value">{person.gender}</span>
           </div>
         </div>
-        <div className="row personal-user-content-detail">
+        <div className="d-flex personal-user-content-detail">
           <span className="material-symbols-rounded icon">phone</span>
           <div className="column">
             <span className="label">Contact Info:</span>
             <span className="value">{person.phoneNumber}</span>
           </div>
         </div>
-        <div className="row personal-user-content-detail">
+        <div className="d-flex personal-user-content-detail">
           <span className="material-symbols-rounded icon">
             contact_emergency
           </span>
@@ -292,7 +292,7 @@ const ProfileCard = ({ person }) => (
             <span className="value">{person.emergencyContact}</span>
           </div>
         </div>
-        <div className="row personal-user-content-detail">
+        <div className="d-flex personal-user-content-detail">
           <span className="material-symbols-rounded icon">
             health_and_safety
           </span>

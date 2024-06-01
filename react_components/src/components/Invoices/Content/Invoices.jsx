@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import DataTable from "datatables.net-dt";
 import "datatables.net-responsive-dt";
 import "./Invoices.css";
-import invoiceData from "./invoiceData";
+import AddInvoiceForm from "../AddInvoiceForm/AddInvoiceForm";
+import ModalWrapper from "../../ModalWrapper/ModalWrapper";
+import invoiceData from "../../../db/invoiceData";
 
-const Invoices = () => {
+const Invoices = ({ onAddInvoice }) => {
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [filteredData, setFilteredData] = useState(invoiceData);
 
@@ -18,16 +20,24 @@ const Invoices = () => {
     };
   }, []);
 
+  const filtered = invoiceData.filter(
+    (invoice) => invoice.status === selectedFilter.toLowerCase()
+  );
+
   useEffect(() => {
     if (selectedFilter === "All") {
       setFilteredData(invoiceData);
     } else {
-      const filtered = invoiceData.filter(
-        (invoice) => invoice.status === selectedFilter.toLowerCase()
-      );
       setFilteredData(filtered);
     }
   }, [selectedFilter]);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleAddInvoice = (newInvoice) => {
+    onAddInvoice(newInvoice);
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="records-container">
@@ -65,23 +75,20 @@ const Invoices = () => {
         </span>
         <span
           className={selectedFilter === "Unpaid" ? "records-active" : ""}
-          onClick={() => setSelectedFilter("unpaid")}
+          onClick={() => setSelectedFilter("Unpaid")}
         >
           Unpaid
         </span>
         <span
           className={selectedFilter === "Paid" ? "records-active" : ""}
-          onClick={() => setSelectedFilter("paid")}
+          onClick={() => setSelectedFilter("Paid")}
         >
           Paid
         </span>
       </div>
 
       <div className="records-table-container">
-        <table
-          id="invoiceTable"
-          className="records-invoice-table display responsive"
-        >
+        <table id="invoiceTable" className="records-invoice-table display">
           <thead>
             <tr>
               <th>Status</th>
@@ -137,11 +144,21 @@ const Invoices = () => {
       </div>
 
       <div className="records-add-invoice-container">
-        <div className="records-add-invoice">
+        <div
+          className="records-add-invoice"
+          onClick={() => setIsModalOpen(true)}
+        >
           <span className="material-symbols-rounded">add</span>
           <span className="records-invoice-label">Invoice</span>
         </div>
       </div>
+
+      <ModalWrapper
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
+        <AddInvoiceForm onSubmit={handleAddInvoice} />
+      </ModalWrapper>
     </div>
   );
 };

@@ -1,0 +1,32 @@
+.add-invoice-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-invoice-form label {
+  margin-bottom: 10px;
+}
+
+.add-invoice-form input {
+  padding: 8px 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.add-invoice-form button {
+  padding: 8px 16px;
+  background: var(--blue-ryb);
+  color: var(--white);
+  width: 100%;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-invoice-form button:hover {
+  color: var(--color);
+}

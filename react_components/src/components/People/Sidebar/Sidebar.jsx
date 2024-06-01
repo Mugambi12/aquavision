@@ -1,10 +1,8 @@
 // Sidebar.js
 import React, { useState, useEffect } from "react";
 import "./Sidebar.css";
-import AddUserModal from "../AddUserModal/AddUserModal";
-import Modal from "react-modal";
-
-Modal.setAppElement("#root"); // Required for accessibility
+import ModalWrapper from "../../ModalWrapper/ModalWrapper";
+import AddUserForm from "../AddUserForm/AddUserForm";
 
 const Sidebar = ({ people, onPersonClick, onAddUser }) => {
   const [selectedPerson, setSelectedPerson] = useState(null);
@@ -68,11 +66,12 @@ const Sidebar = ({ people, onPersonClick, onAddUser }) => {
         ))}
       </ul>
 
-      <AddUserModal
+      <ModalWrapper
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
-        onAddUser={handleAddUser}
-      />
+      >
+        <AddUserForm onSubmit={handleAddUser} />
+      </ModalWrapper>
     </div>
   );
 };

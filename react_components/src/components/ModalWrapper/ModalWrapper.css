@@ -1,0 +1,44 @@
+/* ModalWrapper.css */
+.modal-wrapper {
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background: var(--white);
+  padding: 20px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.modal-close {
+  font-size: var(--fs-4);
+  font-weight: var(--fw-600);
+  color: var(--imperial-red);
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.modal-title {
+  font-size: var(--fs-4);
+  font-weight: var(--fw-600);
+  margin-bottom: 20px;
+}
