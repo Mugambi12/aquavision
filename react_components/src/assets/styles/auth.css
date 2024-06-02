@@ -1,0 +1,28 @@
+.auth-container {
+  width: fit-content;
+  margin: 0 auto;
+  padding: var(--fs-2); /* Example of using a font size constant */
+  text-align: center;
+  border-radius: var(
+    --radius-5
+  ); /* Example of using a border radius constant */
+  box-shadow: var(--shadow-2); /* Example of using a shadow constant */
+}
+
+.auth-container p {
+  display: flex;
+  margin: var(--fs-4) 0; /* Example of using a font size constant */
+}
+
+.auth-container .toggle-auth-page {
+  background: none;
+  margin-left: var(--fs-5); /* Example of using a font size constant */
+  border: none;
+  color: var(--imperial-red); /* Example of using a color constant */
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.auth-container .toggle-auth-page:hover {
+  color: var(--pacific-blue); /* Example of using a color constant */
+}

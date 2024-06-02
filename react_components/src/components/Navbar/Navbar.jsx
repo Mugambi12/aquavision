@@ -134,7 +134,7 @@ const Header = () => {
               </li>
               {/* Logout */}
               <li>
-                <a href="#!" className="navbar-icons icon-box">
+                <a href="/auth" className="navbar-icons icon-box">
                   <span className="material-symbols-rounded icon logout">
                     power_settings_new
                   </span>
@@ -145,7 +145,7 @@ const Header = () => {
                 <a href="#" className="header-profile">
                   <figure className="profile-avatar">
                     <img
-                      src="src/assets/default/profile.png"
+                      src="src/assets/images/static/profile.png"
                       alt="Profile Image"
                       width="32"
                       height="32"

@@ -5,10 +5,11 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import Spinner from "./components/Spinner/Spinner";
 import "./assets/styles/index.css";
-import ErrorBoundary from "./errors/ErrorBoundary";
+import Spinner from "./components/Spinner/Spinner";
+import ErrorBoundary from "./ErrorCatcher/ErrorBoundary";
 
+const LazyAuthPage = React.lazy(() => import("./pages/Auth"));
 const LazyChatsPage = React.lazy(() => import("./pages/Chats"));
 const LazyHomePage = React.lazy(() => import("./pages/Home"));
 const LazyPeoplePage = React.lazy(() => import("./pages/People"));
@@ -29,6 +30,7 @@ function App() {
         <Suspense fallback={<Spinner />}>
           {isRoutesLoaded && (
             <Routes>
+              <Route path="/auth" element={<LazyAuthPage />} />
               <Route path="/home" element={<LazyHomePage />} />
               <Route path="/chats" element={<LazyChatsPage />} />
               <Route path="/people" element={<LazyPeoplePage />} />
@@ -36,7 +38,7 @@ function App() {
               <Route path="/settings" element={<LazySettingsPage />} />
               <Route path="/transactions" element={<LazyTransactionsPage />} />
 
-              <Route path="*" element={<Navigate to="/home" />} />
+              <Route path="*" element={<Navigate to="/auth" />} />
             </Routes>
           )}
         </Suspense>

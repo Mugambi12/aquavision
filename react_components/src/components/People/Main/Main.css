@@ -25,6 +25,7 @@
 @media (max-width: 768px) {
   .person-content {
     flex-direction: column;
+    padding: 0 5px;
   }
 
   .person-content-left {

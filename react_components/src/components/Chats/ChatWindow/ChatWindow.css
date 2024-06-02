@@ -38,7 +38,7 @@
   display: flex;
   flex-direction: column;
   background: var(--cultured);
-  height: 64vh;
+  height: calc(100vh - 250px);
   overflow-y: auto;
   border-radius: var(--radius-6);
   box-shadow: var(--shadow-2);
@@ -127,9 +127,13 @@
     margin: 40px 3px auto;
     padding: 0 5px;
   }
+  .chat-window {
+    padding: 10px;
+    height: calc(100vh - 275px);
+  }
 
   .chat-window-welcome-message {
-    height: calc(100vh - 100px);
+    height: calc(100vh - 210px);
     width: 100%;
   }
 }

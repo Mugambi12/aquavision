@@ -1,0 +1,37 @@
+.register-container {
+  margin: var(--fs-0_5);
+}
+
+.register-container h2 {
+  text-align: center;
+  margin-bottom: var(--fs-1);
+}
+
+.register-container .form-group {
+  margin-bottom: var(--fs-10);
+}
+
+.register-container .form-group input {
+  width: 100%;
+  padding: var(--fs-10);
+  background: var(--white);
+  margin-bottom: var(--fs-3);
+  border: none;
+  border-radius: var(--radius-10);
+  box-sizing: border-box;
+}
+
+.register-button {
+  width: 100%;
+  padding: var(--fs-8);
+  background: var(--emerald);
+  color: var(--white);
+  text-align: center;
+  border: none;
+  border-radius: var(--radius-6);
+  cursor: pointer;
+}
+
+.register-button:hover {
+  background: var(--sonic-sliver);
+}

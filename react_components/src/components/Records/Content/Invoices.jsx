@@ -9,6 +9,10 @@ import invoiceData from "../../../db/invoiceData";
 const Invoices = ({ onAddInvoice }) => {
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [filteredData, setFilteredData] = useState(invoiceData);
+  const [processingInvoiceId, setProcessingInvoiceId] = useState("");
+
+  //console.log("Selected Filter: ", selectedFilter);
+  //console.log("Filtered Data: ", filteredData);
 
   useEffect(() => {
     const table = new DataTable("#invoiceTable", {
@@ -37,6 +41,21 @@ const Invoices = ({ onAddInvoice }) => {
   const handleAddInvoice = (newInvoice) => {
     onAddInvoice(newInvoice);
     setIsModalOpen(false);
+  };
+
+  const handleInvoicePayment = (invoice) => {
+    setProcessingInvoiceId(invoice.invoiceNo);
+
+    // Simulate payment process with setTimeout
+    setTimeout(() => {
+      const updatedInvoice = { ...invoice, status: "paid" };
+      const updatedData = invoiceData.map((inv) =>
+        inv.invoiceNo === updatedInvoice.invoiceNo ? updatedInvoice : inv
+      );
+      setFilteredData(updatedData);
+      setProcessingInvoiceId(null);
+      console.log("Payment made:", updatedInvoice);
+    }, 2000);
   };
 
   return (
@@ -101,6 +120,7 @@ const Invoices = ({ onAddInvoice }) => {
               <th>Description</th>
               <th>Status Text</th>
               <th>Amount</th>
+              <th>Action</th>
               <th>Options</th>
             </tr>
           </thead>
@@ -135,6 +155,20 @@ const Invoices = ({ onAddInvoice }) => {
                     {invoice.amount}
                   </div>
                 </td>
+
+                <td>
+                  {processingInvoiceId === invoice.invoiceNo ? (
+                    <div className="loader"></div>
+                  ) : (
+                    <span
+                      className="make-payment"
+                      onClick={() => handleInvoicePayment(invoice)}
+                    >
+                      Pay
+                    </span>
+                  )}
+                </td>
+
                 <td>
                   <span className="material-symbols-rounded more-vertical">
                     more_vert
