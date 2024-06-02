@@ -52,14 +52,17 @@ const Invoices = ({ onAddInvoice }) => {
             <span className="records-label">Progress</span>
             <div className="records-progress"></div>
           </div>
-          <div className="records-members-section">
-            <span className="records-label">Admin Members</span>
-            <div className="records-members">
-              <div className="records-member red">ZS</div>
-              <div className="records-member blue">XM</div>
-              <div className="records-member purple">HW</div>
-              <div className="records-member add">
-                <span className="material-symbols-rounded">add</span>
+          <div className="records-download-section">
+            <span className="records-label">Download</span>
+            <div className="records-download-buttons">
+              <div className="download-button red">
+                <span className="material-symbols-rounded">picture_as_pdf</span>
+              </div>
+              <div className="download-button blue">
+                <span className="material-symbols-rounded">csv</span>
+              </div>
+              <div className="download-button purple">
+                <span className="material-symbols-rounded">table_chart</span>
               </div>
             </div>
           </div>

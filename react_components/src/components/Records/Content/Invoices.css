@@ -3,7 +3,6 @@
   \*-----------------------------------*/
 
 .records-container {
-  background: #f5f9fb;
   width: 100%;
   padding: 0 50px;
 }
@@ -12,9 +11,6 @@
   display: flex;
   align-items: center;
   padding: 16px 20px;
-  border-radius: var(--radius-6);
-  margin-bottom: 10px;
-  background: var(--white);
 }
 
 .records-header-content {
@@ -75,23 +71,6 @@
   position: absolute;
 }
 
-.records-members {
-  display: flex;
-  justify-content: center;
-}
-
-.records-member {
-  font-size: 8px;
-  color: #e6eff3;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 3px;
-}
-
 .red {
   background: #ff9292;
 }
@@ -108,9 +87,59 @@
   border: 1px solid #c1c2cc;
 }
 
-.records-member .material-symbols-rounded {
-  color: #c1c2cc;
+.records-download-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.records-download-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.download-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
+  font-size: var(--fs-16);
+  background: var(--cultured);
+}
+
+.download-button.red {
+  color: #ff9292;
+}
+
+.download-button.blue {
+  color: #7ab9ff;
+}
+
+.download-button.purple {
+  color: #9292ff;
+}
+
+.download-button.red:hover {
+  color: #ff7c8c;
+}
+
+.download-button.blue:hover {
+  color: #65eb97;
+}
+
+.download-button.purple:hover {
+  color: #0056b3;
+}
+
+@media screen and (max-width: 768px) {
+  .records-download-section {
+    margin-top: 20px;
+  }
+
+  .download-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -149,20 +178,6 @@
   .records-progress {
     width: 100%;
   }
-
-  .records-members-section {
-    margin-top: 20px;
-  }
-
-  .records-member {
-    font-size: var(--fs-6);
-    width: 15px;
-    height: 15px;
-  }
-
-  .records-member .material-symbols-rounded {
-    font-size: var(--fs-6);
-  }
 }
 
 /*-----------------------------------*\
@@ -171,10 +186,6 @@
 
 .records-menu {
   display: flex;
-  padding-left: 70px;
-  background: var(--white);
-  padding: 10px 20px;
-  border-radius: var(--radius-6);
 }
 
 .records-menu span {
@@ -206,7 +217,10 @@
 \*-----------------------------------*/
 
 .records-table-container {
-  padding: 10px 40px 20px;
+  padding: 20px;
+  background: var(--white);
+  border-radius: var(--radius-6);
+  margin-top: 10px;
 }
 
 .records-invoice-table {
