@@ -12,7 +12,7 @@ const ModalWrapper = ({ isOpen, onRequestClose, children }) => {
     >
       <div className="modal-content">
         <button className="modal-close" onClick={onRequestClose}>
-          X
+          <span className="material-symbols-rounded">close</span>
         </button>
         {children}
       </div>

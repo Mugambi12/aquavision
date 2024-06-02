@@ -1,0 +1,70 @@
+.chats-sidebar {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  background: var(--white);
+  border-radius: var(--radius-16);
+}
+
+.chats-sidebar h2,
+.chats-sidebar .material-symbols-rounded {
+  margin-bottom: 20px;
+  font-size: var(--fs-3);
+  font-weight: var(--fw-700);
+  padding: 20px 20px 0;
+}
+
+.chats-sidebar .material-symbols-rounded {
+  font-weight: var(--fw-400) !important;
+  font-size: var(--fs-2) !important;
+  cursor: pointer;
+}
+
+.chats-sidebar .contacts {
+  height: calc(100vh - 180px);
+  overflow-y: auto;
+}
+
+.chats-sidebar .chats-contact-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 0 5px 10px;
+  border-radius: var(--radius-10);
+  background: var(----pacific-blue_12);
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+.chats-sidebar .chats-contact-item:hover {
+  background: var(--cultured);
+}
+
+.chats-sidebar .chats-contact-item.active {
+  background: var(--cultured);
+}
+
+.chats-sidebar .chats-profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-50);
+  margin-right: 15px;
+  object-fit: cover;
+}
+
+.chats-sidebar .chats-contact-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.chats-sidebar .chats-contact-name {
+  font-weight: var(--fw-500);
+  font-size: var(--fs-5);
+  margin-bottom: 5px;
+}
+
+.chats-sidebar .chats-last-message-time {
+  color: var(--sonic-sliver);
+  font-size: var(--fs-8);
+}
