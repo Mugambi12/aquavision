@@ -1,9 +1,10 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./ChatWindow.css";
 import Header from "../Header/Header";
 
 const ChatWindow = ({ chat }) => {
   const chatWindowRef = useRef(null);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (chatWindowRef.current) {
@@ -36,6 +37,22 @@ const ChatWindow = ({ chat }) => {
     ));
   }
 
+  const handleInputChange = (e) => {
+    setMessage(e.target.value);
+  };
+
+  const handleSendMessage = () => {
+    if (message.trim()) {
+      console.log("New message data:", {
+        content: message,
+        sender: "You",
+        timestamp: new Date().toISOString(),
+        is_read: false,
+      });
+      setMessage(""); // Clear the input field after sending the message
+    }
+  };
+
   return (
     <>
       {chat ? (
@@ -45,8 +62,13 @@ const ChatWindow = ({ chat }) => {
             {messageList}
           </div>
           <div className="chat-window-message-input">
-            <input type="text" placeholder="Type a message" />
-            <button>
+            <input
+              type="text"
+              placeholder="Type a message"
+              value={message}
+              onChange={handleInputChange}
+            />
+            <button onClick={handleSendMessage}>
               <span>Send</span>
               <span className="material-symbols-rounded">send</span>
             </button>
