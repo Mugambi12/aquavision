@@ -41,15 +41,18 @@ const ChatWindow = ({ chat }) => {
     setMessage(e.target.value);
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = (newMessage) => {
     if (message.trim()) {
-      console.log("New message data:", {
+      newMessage = {
         content: message,
         sender: "You",
         timestamp: new Date().toISOString(),
         is_read: false,
-      });
-      setMessage(""); // Clear the input field after sending the message
+        participant: recipient,
+      };
+      console.log("New message:", newMessage);
+      chat.messages.push(newMessage);
+      setMessage("");
     }
   };
 

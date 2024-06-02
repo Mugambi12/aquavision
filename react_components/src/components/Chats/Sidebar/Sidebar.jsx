@@ -19,7 +19,7 @@ const Sidebar = ({ chats, onChatSelect }) => {
     <>
       <div className="chats-media-screens">
         <div className="open-chats" onClick={toggleContacts}>
-          <span class="material-symbols-rounded">segment</span>
+          <span className="material-symbols-rounded">segment</span>
         </div>
         <div className="start-new-chat">
           <span className="material-symbols-rounded">person_search</span>
