@@ -1,0 +1,33 @@
+/* ErrorBoundary.css */
+.error-boundary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f8d7da;
+  color: #721c24;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.error-boundary h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.error-boundary button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #f5c6cb;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.error-boundary button:hover {
+  background-color: #f1b0b7;
+}
