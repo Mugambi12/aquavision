@@ -100,7 +100,7 @@ export const chats = [
         sender: "Alice Johnson",
         content: "Haha, indeed!",
         timestamp: "10:52 AM",
-        is_read: true,
+        is_read: false,
       },
       // More messages...
     ],
@@ -293,6 +293,132 @@ export const chats = [
         sender: "David Lee",
         content: "Sounds like a nice way to unwind. Enjoy!",
         timestamp: "1:12 PM",
+        is_read: true,
+      },
+      // More messages...
+    ],
+  },
+  {
+    _id: 5,
+    participants: [
+      {
+        _id: 6,
+        name: "Grace Brown",
+        status: "Offline",
+        profileImage: "https://fedskillstest.ct.digital/6.png",
+      },
+      {
+        _id: 3,
+        name: "You",
+        status: "Online",
+        profileImage: "https://fedskillstest.ct.digital/3.png",
+      },
+    ],
+    messages: [
+      {
+        _id: 1,
+        sender: "You",
+        content: "Hi Grace! How are you doing?",
+        timestamp: "2:00 PM",
+        is_read: true,
+      },
+      {
+        _id: 2,
+        sender: "Grace Brown",
+        content: "Hey! I'm doing well, thanks. How about you?",
+        timestamp: "2:02 PM",
+        is_read: true,
+      },
+      {
+        _id: 3,
+        sender: "You",
+        content: "I'm good, just keeping busy. Any plans for the weekend?",
+        timestamp: "2:05 PM",
+        is_read: true,
+      },
+      {
+        _id: 4,
+        sender: "Grace Brown",
+        content: "Not much planned, just relaxing. How about you?",
+        timestamp: "2:08 PM",
+        is_read: true,
+      },
+      {
+        _id: 5,
+        sender: "You",
+        content:
+          "Thinking of going for a hike and catching up on some reading.",
+        timestamp: "2:10 PM",
+        is_read: true,
+      },
+      {
+        _id: 6,
+        sender: "Grace Brown",
+        content: "Sounds like a nice way to spend the weekend.",
+        timestamp: "2:12 PM",
+        is_read: true,
+      },
+      // More messages...
+    ],
+  },
+  {
+    _id: 6,
+    participants: [
+      {
+        _id: 7,
+        name: "Henry Wilson",
+        status: "Offline",
+        profileImage: "https://fedskillstest.ct.digital/7.png",
+      },
+      {
+        _id: 3,
+        name: "You",
+        status: "Online",
+        profileImage: "https://fedskillstest.ct.digital/3.png",
+      },
+    ],
+    messages: [
+      {
+        _id: 1,
+        sender: "You",
+        content: "Hi Henry! How are you doing?",
+        timestamp: "3:00 PM",
+        is_read: true,
+      },
+      {
+        _id: 2,
+        sender: "Henry Wilson",
+        content: "Hey! I'm doing well, thanks. How about you?",
+        timestamp: "3:02 PM",
+        is_read: true,
+      },
+      {
+        _id: 3,
+        sender: "You",
+        content: "I'm good, just keeping busy. Any plans for the weekend?",
+        timestamp: "3:05 PM",
+        is_read: true,
+      },
+      {
+        _id: 4,
+        sender: "Henry Wilson",
+        content: "Not much planned, just relaxing. How about you?",
+        timestamp: "3:08 PM",
+        is_read: true,
+      },
+      {
+        _id: 5,
+        sender: "You",
+        content:
+          "Thinking of going for a hike and catching up on some reading.",
+        timestamp: "3:10 PM",
+        is_read: true,
+      },
+      {
+        _id: 6,
+        sender: "Henry Wilson",
+        content: "Sounds like a nice way to spend the weekend.",
+        timestamp: "3:12 PM",
         is_read: true,
       },
       // More messages...

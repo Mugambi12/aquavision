@@ -14,7 +14,7 @@ const Chats = () => {
   return (
     <>
       <Navbar />
-      <div className="main-container">
+      <div className="chats-main-container">
         <Sidebar chats={chats} onChatSelect={handleChatSelection} />
         <ChatWindow chat={selectedChat} />
       </div>

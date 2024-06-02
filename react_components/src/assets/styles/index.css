@@ -194,6 +194,7 @@ body {
 
 .d-flex {
   display: flex;
+  justify-content: space-between;
 }
 
 .column {
@@ -202,6 +203,10 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+  .main-container {
+    padding: 8px 0;
+  }
+
   .row {
     flex-direction: column;
   }

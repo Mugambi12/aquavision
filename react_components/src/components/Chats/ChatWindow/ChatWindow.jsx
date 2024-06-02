@@ -26,7 +26,11 @@ const ChatWindow = ({ chat }) => {
         <div className="chat-window-message-content">{message.content}</div>
         <div className="chat-window-message-time">
           <span>{message.timestamp}</span>
-          {message.is_read ? <span>Read</span> : <span>Unread</span>}
+          {message.is_read ? (
+            <span className="message-read">Read</span>
+          ) : (
+            <span className="message-unread">Unread</span>
+          )}
         </div>
       </div>
     ));
