@@ -3,16 +3,18 @@ import DataTable from "datatables.net-dt";
 import "datatables.net-responsive-dt";
 import "./Invoices.css";
 import AddInvoiceForm from "../AddInvoiceForm/AddInvoiceForm";
-import ModalWrapper from "../../ModalWrapper/ModalWrapper";
+import DeleteInvoice from "../DeleteInvoice/DeleteInvoice";
 import invoiceData from "../../../db/invoiceData";
+import ModalWrapper from "../../ModalWrapper/ModalWrapper";
 
 const Invoices = ({ onAddInvoice }) => {
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [filteredData, setFilteredData] = useState(invoiceData);
   const [processingInvoiceId, setProcessingInvoiceId] = useState("");
-
-  //console.log("Selected Filter: ", selectedFilter);
-  //console.log("Filtered Data: ", filteredData);
+  const [selectedInvoice, setSelectedInvoice] = useState(null);
+  const [isDeleteInvoiceModalOpen, setIsDeleteInvoiceModalOpen] =
+    useState(false);
+  const [isAddInvoiceModalOpen, setIsAddInvoiceModalOpen] = useState(false);
 
   useEffect(() => {
     const table = new DataTable("#invoiceTable", {
@@ -36,17 +38,21 @@ const Invoices = ({ onAddInvoice }) => {
     }
   }, [selectedFilter]);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const handleAddInvoice = (newInvoice) => {
     onAddInvoice(newInvoice);
-    setIsModalOpen(false);
+    setIsAddInvoiceModalOpen(false);
+  };
+
+  const handleDeleteInvoice = () => {
+    console.log("Deleting invoice:", selectedInvoice);
+    setIsDeleteInvoiceModalOpen(false);
   };
 
   const handleInvoicePayment = (invoice) => {
     setProcessingInvoiceId(invoice.invoiceNo);
 
-    // Simulate payment process with setTimeout
+    console.log("Processing payment for invoice:", invoice);
+
     setTimeout(() => {
       const updatedInvoice = { ...invoice, status: "paid" };
       const updatedData = invoiceData.map((inv) =>
@@ -114,13 +120,14 @@ const Invoices = ({ onAddInvoice }) => {
           <thead>
             <tr>
               <th>Status</th>
+              <th>Action</th>
               <th>Date</th>
               <th>Invoice No</th>
               <th>Client</th>
               <th>Description</th>
               <th>Status Text</th>
               <th>Amount</th>
-              <th>Action</th>
+              <th>Balance</th>
               <th>Options</th>
             </tr>
           </thead>
@@ -129,6 +136,22 @@ const Invoices = ({ onAddInvoice }) => {
               <tr className="records-invoice-row" key={index}>
                 <td>
                   <div className={`records-status ${invoice.status}-bg`}></div>
+                </td>
+                <td>
+                  {processingInvoiceId === invoice.invoiceNo ? (
+                    <span className="loader"></span>
+                  ) : (
+                    <>
+                      {invoice.status === "unpaid" && (
+                        <span
+                          className="material-symbols-rounded pay"
+                          onClick={() => handleInvoicePayment(invoice)}
+                        >
+                          payment
+                        </span>
+                      )}
+                    </>
+                  )}
                 </td>
                 <td>
                   <div className="records-date-info">
@@ -155,23 +178,21 @@ const Invoices = ({ onAddInvoice }) => {
                     {invoice.amount}
                   </div>
                 </td>
-
                 <td>
-                  {processingInvoiceId === invoice.invoiceNo ? (
-                    <div className="loader"></div>
-                  ) : (
-                    <span
-                      className="make-payment"
-                      onClick={() => handleInvoicePayment(invoice)}
-                    >
-                      Pay
-                    </span>
-                  )}
+                  <div className={`records-amount ${invoice.status}`}>
+                    {invoice.balance}
+                  </div>
                 </td>
 
                 <td>
-                  <span className="material-symbols-rounded more-vertical">
-                    more_vert
+                  <span
+                    className="material-symbols-rounded delete"
+                    onClick={() => {
+                      setSelectedInvoice(invoice);
+                      setIsDeleteInvoiceModalOpen(true);
+                    }}
+                  >
+                    delete
                   </span>
                 </td>
               </tr>
@@ -183,7 +204,7 @@ const Invoices = ({ onAddInvoice }) => {
       <div className="records-add-invoice-container">
         <div
           className="records-add-invoice"
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => setIsAddInvoiceModalOpen(true)}
         >
           <span className="material-symbols-rounded">add</span>
           <span className="records-invoice-label">Invoice</span>
@@ -191,8 +212,18 @@ const Invoices = ({ onAddInvoice }) => {
       </div>
 
       <ModalWrapper
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
+        isOpen={isDeleteInvoiceModalOpen}
+        onRequestClose={() => setIsDeleteInvoiceModalOpen(false)}
+      >
+        <DeleteInvoice
+          invoice={selectedInvoice}
+          onSubmit={handleDeleteInvoice}
+        />
+      </ModalWrapper>
+
+      <ModalWrapper
+        isOpen={isAddInvoiceModalOpen}
+        onRequestClose={() => setIsAddInvoiceModalOpen(false)}
       >
         <AddInvoiceForm onSubmit={handleAddInvoice} />
       </ModalWrapper>

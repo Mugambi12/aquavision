@@ -1,0 +1,33 @@
+.delete-invoice-container {
+  padding: var(--fs-8);
+}
+
+.delete-invoice-title {
+  font-size: var(--fs-3);
+  margin-bottom: var(--fs-5);
+}
+
+.delete-invoice-details {
+  margin-bottom: 25px;
+}
+
+.delete-invoice-info {
+  margin-bottom: var(--fs-6);
+}
+
+.delete-invoice-btn {
+  text-align: center;
+  padding: 10px 20px;
+  width: fit-content;
+  font-size: var(--fs-4);
+  color: var(--white);
+  background: var(--imperial-red);
+  margin: 0 auto;
+  border: none;
+  border-radius: var(--radius-6);
+  cursor: pointer;
+}
+
+.delete-invoice-btn:hover {
+  opacity: 0.8;
+}

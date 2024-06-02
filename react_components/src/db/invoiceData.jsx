@@ -7,6 +7,8 @@ const invoiceData = [
     description: "Webpage design",
     statusText: "UNPAID",
     amount: "$500",
+    balance: "$300",
+    paid: "$200",
   },
   {
     status: "unpaid",

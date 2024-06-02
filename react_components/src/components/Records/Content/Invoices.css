@@ -1,5 +1,5 @@
 /*-----------------------------------*\
-        #header
+          #header
   \*-----------------------------------*/
 
 .records-container {
@@ -20,20 +20,20 @@
 }
 
 .records-cust-invoice {
-  color: #7ab9ff;
+  color: var(--pacific-blue);
   font-weight: var(--fw-500);
   font-size: var(--fs-4);
 }
 
 .records-heading {
-  color: #5b5e78;
+  color: var(--davys-gray);
   font-weight: var(--fw-400);
   font-size: var(--fs-5);
   margin-top: 10px;
 }
 
 .records-company {
-  color: #c1c2cc;
+  color: var(--cool-gray);
   font-size: var(--fs-8);
   font-weight: var(--fw-500);
   margin-top: 5px;
@@ -47,7 +47,7 @@
 }
 
 .records-label {
-  color: #c1c2cc;
+  color: var(--cool-gray);
   font-size: var(--fs-10);
   font-weight: var(--fw-300);
   letter-spacing: 1px;
@@ -57,7 +57,7 @@
 .records-progress {
   width: 200px;
   height: 6px;
-  background: #e6eff3;
+  background: var(--eerie-black);
   border-radius: 20px;
   position: relative;
 }
@@ -65,26 +65,26 @@
 .records-progress::after {
   content: "";
   height: 100%;
-  background: #3598fe;
+  background: var(--pacific-blue);
   width: 50%;
   border-radius: 20px;
   position: absolute;
 }
 
 .red {
-  background: #ff9292;
+  background: var(--coral);
 }
 
 .blue {
-  background: #7ab9ff;
+  background: var(--pacific-blue);
 }
 
 .purple {
-  background: #9292ff;
+  background: var(--emerald);
 }
 
 .add {
-  border: 1px solid #c1c2cc;
+  border: 1px solid var(--davys-gray);
 }
 
 .records-download-section {
@@ -108,15 +108,15 @@
 }
 
 .download-button.red {
-  color: #ff9292;
+  color: var(--coral);
 }
 
 .download-button.blue {
-  color: #7ab9ff;
+  color: var(--pacific-blue);
 }
 
 .download-button.purple {
-  color: #9292ff;
+  color: var(--emerald);
 }
 
 .download-button.red:hover {
@@ -181,7 +181,7 @@
 }
 
 /*-----------------------------------*\
-        #menu
+          #menu
   \*-----------------------------------*/
 
 .records-menu {
@@ -189,19 +189,19 @@
 }
 
 .records-menu span {
-  color: #c1c2cc;
-  font-size: 12px;
+  color: var(--cool-gray);
+  font-size: var(--fs-10);
   padding: 10px 30px;
   cursor: pointer;
 }
 
 .records-menu span:hover {
-  color: #8d90a2;
+  color: var(--davys-gray);
 }
 
 .records-menu span.records-active {
-  color: #3598fe;
-  border-bottom: 2px solid #3598fe;
+  color: var(--pacific-blue);
+  border-bottom: 2px solid var(--pacific-blue);
   font-weight: bold;
 }
 
@@ -213,8 +213,8 @@
 }
 
 /*-----------------------------------*\
-      #records TABLE
-\*-----------------------------------*/
+        #records TABLE
+  \*-----------------------------------*/
 
 .records-table-container {
   padding: 20px;
@@ -233,10 +233,10 @@
 
 .records-invoice-row {
   height: 65px;
-  background: white;
-  font-size: 14px;
-  font-weight: 500;
-  color: #8d90a2;
+  background: var(--white);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-500);
+  color: var(--davys-gray);
 }
 
 .records-status {
@@ -247,6 +247,29 @@
   margin-left: 10px;
 }
 
+.records-invoice-row .pay {
+  color: var(--pacific-blue);
+  cursor: pointer;
+}
+
+.records-invoice-row .loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  padding: 8px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .records-date-info {
   display: flex;
   flex-direction: column;
@@ -255,19 +278,24 @@
 
 .records-month {
   font-size: var(--fs-10);
-  color: #c1c2cc;
+  color: var(--cool-gray);
   letter-spacing: 2px;
 }
 
 .records-date {
   font-size: var(--fs-8);
-  color: #5b5e78;
+  color: var(--davys-gray);
   letter-spacing: 4px;
   line-height: 1.5;
 }
 
 .records-status-text {
   text-align: center;
+}
+
+.records-invoice-row .delete {
+  color: var(--imperial-red);
+  cursor: pointer;
 }
 
 .unpaid-bg {
@@ -294,35 +322,9 @@
   color: #65eb97;
 }
 
-.make-payment {
-  color: #3598fe;
-  padding: var(--fs-10);
-  font-weight: var(--fw-600);
-  cursor: pointer;
-}
-
-.records-invoice-row .loader {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-  animation: spin 1s linear infinite;
-  display: inline-block;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 @media screen and (max-width: 768px) {
   .records-container {
-    padding: 0 20px;
+    padding: 0 5px;
   }
 
   .records-header {
@@ -363,7 +365,7 @@
 }
 
 /*-----------------------------------*\
-        #records ADD INVOICE
+          #records ADD INVOICE
   \*-----------------------------------*/
 
 .records-add-invoice-container {
@@ -376,28 +378,27 @@
 }
 
 .records-add-invoice {
-  background: #3598fe;
-  border-radius: 3px;
-  box-shadow: 0px 5px 15px 0px rgba(53, 152, 254, 0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
+  padding: var(--fs-10);
+  color: var(--cultured);
+  background: var(--pacific-blue);
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-1);
   cursor: pointer;
 }
 
 .records-add-invoice .material-symbols-rounded {
-  color: #f5f9fb;
-  font-size: 20px;
+  font-size: var(--fs-1);
 }
 
 .records-invoice-label {
-  color: #f5f9fb;
-  font-size: 10px;
-  font-weight: 300;
+  font-size: var(--fs-10);
+  font-weight: var(--fw-300);
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-top: 5px;
+  margin-top: var(--fs-5);
 }
 
 @media screen and (max-width: 768px) {

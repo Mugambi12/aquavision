@@ -2,6 +2,7 @@
 .modal-wrapper {
   z-index: 10;
   position: absolute;
+  min-width: 450px;
   top: 50%;
   left: 50%;
   right: auto;
@@ -41,4 +42,15 @@
   font-size: var(--fs-4);
   font-weight: var(--fw-600);
   margin-bottom: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .modal-wrapper {
+    min-width: 80%;
+    padding: 10px;
+  }
+
+  .modal-title {
+    font-size: var(--fs-3);
+  }
 }
