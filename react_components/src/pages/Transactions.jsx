@@ -10,7 +10,6 @@ const Transactions = () => {
   const [showRevenue, setShowRevenue] = useState(true);
 
   useEffect(() => {
-    // Retrieve the initial view from localStorage
     const storedView = localStorage.getItem("transactionsView");
     if (storedView) {
       setShowRevenue(storedView === "revenue");
@@ -19,7 +18,6 @@ const Transactions = () => {
 
   const toggleView = (view) => {
     setShowRevenue(view === "revenue");
-    // Save the selected view to localStorage
     localStorage.setItem("transactionsView", view);
   };
 
