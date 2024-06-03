@@ -7,7 +7,8 @@
   margin-bottom: 10px;
 }
 
-.add-invoice-form input {
+.add-invoice-form input,
+.add-invoice-form select {
   padding: 8px 10px;
   margin-bottom: 10px;
   border-radius: 5px;

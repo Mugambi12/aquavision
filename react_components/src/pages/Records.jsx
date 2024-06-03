@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from "react";
 import Navbar from "../components/Navbar/Navbar";
 import Invoices from "../components/Records/Content/Invoices";
 import Footer from "../components/Footer/Footer";
@@ -7,14 +7,9 @@ import Modal from "react-modal";
 Modal.setAppElement("#root");
 
 const Records = () => {
-  const [newInvoiceEnty, setNewInvoiceEnty] = useState([
-    // initial people data
-  ]);
-
   const handleAddInvoice = (newInvoice) => {
-    setNewInvoiceEnty([...newInvoiceEnty, newInvoice]);
     console.log("New Invoice Added: ", newInvoice);
-    console.log("New Invoice Entry: ", newInvoiceEnty);
+    // Implement logic for API
   };
 
   return (

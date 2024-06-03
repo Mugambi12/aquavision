@@ -127,7 +127,6 @@ const Invoices = ({ onAddInvoice }) => {
               <th>Description</th>
               <th>Status Text</th>
               <th>Amount</th>
-              <th>Balance</th>
               <th>Options</th>
             </tr>
           </thead>
@@ -175,12 +174,8 @@ const Invoices = ({ onAddInvoice }) => {
                 </td>
                 <td>
                   <div className={`records-amount ${invoice.status}`}>
-                    {invoice.amount}
-                  </div>
-                </td>
-                <td>
-                  <div className={`records-amount ${invoice.status}`}>
-                    {invoice.balance}
+                    <span>{invoice.amount}</span>
+                    <span className="balance">{invoice.balance}</span>
                   </div>
                 </td>
 

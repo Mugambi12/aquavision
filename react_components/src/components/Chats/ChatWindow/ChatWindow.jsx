@@ -43,15 +43,21 @@ const ChatWindow = ({ chat }) => {
 
   const handleSendMessage = (newMessage) => {
     if (message.trim()) {
+      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const timestamp = new Date().toLocaleString("en-US", {
+        timeZone: userTimezone,
+      });
+
       newMessage = {
         content: message,
         sender: "You",
-        timestamp: new Date().toISOString(),
+        timestamp,
         is_read: false,
         participant: recipient,
       };
+
       console.log("New message:", newMessage);
-      chat.messages.push(newMessage);
+      // chat.messages.push(newMessage);
       setMessage("");
     }
   };

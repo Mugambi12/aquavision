@@ -1,37 +1,70 @@
+/* Sidebar.css */
 .transactions-sidebar {
-  width: 200px;
+  width: 250px;
   padding: 15px;
   height: fit-content;
   padding-bottom: 15px;
   margin-left: 18px;
   background: var(--white);
-  border-radius: 16px;
+  border-radius: var(--radius-16);
+  box-shadow: var(--shadow-1);
 }
 
-.transactions-sidebar h2 {
-  font-size: var(--fs-4);
+.transactions-sidebar .transactions-sidebar-header {
+  font-size: var(--fs-3);
   font-weight: var(--fw-600);
   margin-bottom: 20px;
+  color: var(--eerie-black);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: var(--radius-8);
+  background-color: var(--pacific-blue_12);
+}
+
+.transactions-sidebar .transactions-sidebar-header .header-icon {
+  font-size: var(--fs-2);
+  color: var(--pacific-blue);
+}
+
+.transactions-sidebar .transactions-sidebar-header .header-text {
+  font-size: var(--fs-3);
+  font-weight: var(--fw-600);
 }
 
 .transactions-sidebar ul {
-  height: 70vh;
+  height: calc(100vh - 150px);
   list-style: none;
+  padding: 0;
 }
 
 .transactions-sidebar li {
   margin-bottom: 10px;
 }
 
-.transactions-sidebar button {
+.sidebar-button {
   background: none;
   border: none;
   gap: 20px;
+  width: 100%;
   font-size: var(--fs-4);
   cursor: pointer;
   transition: var(--transition);
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: var(--radius-8);
+  color: var(--davys-gray);
 }
 
-.transactions-sidebar button:hover {
+.sidebar-button:hover {
+  background-color: var(--pacific-blue_12);
   color: var(--pacific-blue);
+}
+
+.sidebar-button.active {
+  background-color: var(--pacific-blue);
+  color: var(--white);
+  font-weight: var(--fw-600);
 }
