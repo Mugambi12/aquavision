@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import DataTable from "datatables.net-dt";
 import "datatables.net-responsive-dt";
 import "./Invoices.css";
-import AddInvoiceForm from "../AddInvoiceForm/AddInvoiceForm";
-import DeleteInvoice from "../DeleteInvoice/DeleteInvoice";
-import invoiceData from "../../../db/invoiceData";
-import ModalWrapper from "../../ModalWrapper/ModalWrapper";
 
-const Invoices = ({ onAddInvoice }) => {
-  const [selectedFilter, setSelectedFilter] = useState("All");
-  const [filteredData, setFilteredData] = useState(invoiceData);
-  const [processingInvoiceId, setProcessingInvoiceId] = useState("");
-  const [selectedInvoice, setSelectedInvoice] = useState(null);
-  const [isDeleteInvoiceModalOpen, setIsDeleteInvoiceModalOpen] =
-    useState(false);
-  const [isAddInvoiceModalOpen, setIsAddInvoiceModalOpen] = useState(false);
-
+const Invoices = ({
+  data,
+  selectedFilter,
+  setSelectedFilter,
+  processingInvoiceId,
+  handleInvoicePayment,
+  openDeleteInvoiceModal,
+  openAddInvoiceModal,
+}) => {
   useEffect(() => {
     const table = new DataTable("#invoiceTable", {
       responsive: true,
@@ -24,45 +20,7 @@ const Invoices = ({ onAddInvoice }) => {
     return () => {
       table.destroy();
     };
-  }, []);
-
-  const filtered = invoiceData.filter(
-    (invoice) => invoice.status === selectedFilter.toLowerCase()
-  );
-
-  useEffect(() => {
-    if (selectedFilter === "All") {
-      setFilteredData(invoiceData);
-    } else {
-      setFilteredData(filtered);
-    }
-  }, [selectedFilter]);
-
-  const handleAddInvoice = (newInvoice) => {
-    onAddInvoice(newInvoice);
-    setIsAddInvoiceModalOpen(false);
-  };
-
-  const handleDeleteInvoice = () => {
-    console.log("Deleting invoice:", selectedInvoice);
-    setIsDeleteInvoiceModalOpen(false);
-  };
-
-  const handleInvoicePayment = (invoice) => {
-    setProcessingInvoiceId(invoice.invoiceNo);
-
-    console.log("Processing payment for invoice:", invoice);
-
-    setTimeout(() => {
-      const updatedInvoice = { ...invoice, status: "paid" };
-      const updatedData = invoiceData.map((inv) =>
-        inv.invoiceNo === updatedInvoice.invoiceNo ? updatedInvoice : inv
-      );
-      setFilteredData(updatedData);
-      setProcessingInvoiceId(null);
-      console.log("Payment made:", updatedInvoice);
-    }, 2000);
-  };
+  }, [data]);
 
   return (
     <div className="records-container">
@@ -131,7 +89,7 @@ const Invoices = ({ onAddInvoice }) => {
             </tr>
           </thead>
           <tbody>
-            {filteredData.map((invoice, index) => (
+            {data.map((invoice, index) => (
               <tr className="records-invoice-row" key={index}>
                 <td>
                   <div className={`records-status ${invoice.status}-bg`}></div>
@@ -178,14 +136,10 @@ const Invoices = ({ onAddInvoice }) => {
                     <span className="balance">{invoice.balance}</span>
                   </div>
                 </td>
-
                 <td>
                   <span
                     className="material-symbols-rounded delete"
-                    onClick={() => {
-                      setSelectedInvoice(invoice);
-                      setIsDeleteInvoiceModalOpen(true);
-                    }}
+                    onClick={() => openDeleteInvoiceModal(invoice)}
                   >
                     delete
                   </span>
@@ -197,31 +151,11 @@ const Invoices = ({ onAddInvoice }) => {
       </div>
 
       <div className="records-add-invoice-container">
-        <div
-          className="records-add-invoice"
-          onClick={() => setIsAddInvoiceModalOpen(true)}
-        >
+        <div className="records-add-invoice" onClick={openAddInvoiceModal}>
           <span className="material-symbols-rounded">add</span>
           <span className="records-invoice-label">Invoice</span>
         </div>
       </div>
-
-      <ModalWrapper
-        isOpen={isDeleteInvoiceModalOpen}
-        onRequestClose={() => setIsDeleteInvoiceModalOpen(false)}
-      >
-        <DeleteInvoice
-          invoice={selectedInvoice}
-          onSubmit={handleDeleteInvoice}
-        />
-      </ModalWrapper>
-
-      <ModalWrapper
-        isOpen={isAddInvoiceModalOpen}
-        onRequestClose={() => setIsAddInvoiceModalOpen(false)}
-      >
-        <AddInvoiceForm onSubmit={handleAddInvoice} />
-      </ModalWrapper>
     </div>
   );
 };
