@@ -66,11 +66,236 @@ const transformData = (revenue, filters) => {
   return { lineChartData, pieChartData };
 };
 
+const RevenueHeader = () => (
+  <div className="revenue-header">
+    <span className="material-symbols-rounded">arrow_left</span>
+    <div className="revenue-header-content">
+      <div className="revenue-invoice-info">
+        <span className="cust-invoice">Revenue</span>
+      </div>
+    </div>
+    <span className="material-symbols-rounded">monitoring</span>
+  </div>
+);
+
+const RevenueCharts = ({
+  filteredRevenue,
+  paymentMethodData,
+  availableYears,
+  filters,
+  handleYearChange,
+  handleStatusChange,
+  renderCustomizedLabel,
+}) => (
+  <div className="revenue-charts">
+    <div className="charts-revenue-data-filter">
+      <div className="filter">
+        <label htmlFor="filter">Year:</label>
+        <select
+          id="date-filter"
+          value={filters.year}
+          onChange={handleYearChange}
+        >
+          <option value="">All</option>
+          {availableYears.map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="filter">
+        <label htmlFor="filter">Status:</label>
+        <select
+          id="status-filter"
+          value={filters.status}
+          onChange={handleStatusChange}
+        >
+          <option value="all">All</option>
+          <option className="received" value="Received">
+            Received
+          </option>
+          <option className="cancelled" value="Cancelled">
+            Cancelled
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div className="revenue-charts-container">
+      <div className="line-chart-container">
+        <h2 className="chart-header">Monthly Revenue Trends</h2>
+        <ResponsiveContainer height={300}>
+          <LineChart
+            data={filteredRevenue}
+            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+          >
+            <XAxis dataKey="month" type="category" />
+            <YAxis type="number" />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip />
+            <Legend wrapperStyle={{ fontSize: "14px" }} />
+            <Line
+              type="monotone"
+              dataKey="revenue"
+              stroke="#8884d8"
+              activeDot={{ r: 8 }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+
+      <div className="doughnut-chart-container">
+        <h2 className="chart-header">Revenue by Payment Method</h2>
+        <ResponsiveContainer height={300}>
+          <PieChart>
+            <Pie
+              data={paymentMethodData}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              label={renderCustomizedLabel}
+              outerRadius={80}
+              fill="#8884d8"
+              dataKey="value"
+            >
+              {paymentMethodData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+            <Legend wrapperStyle={{ fontSize: "14px" }} />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  </div>
+);
+
+const RevenueTableContainer = ({ revenue, openDropdownId, toggleDropdown }) => (
+  <div className="revenue-table-container">
+    <table id="revenueTable" className="revenue-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Customer</th>
+          <th>Transaction ID</th>
+          <th>Payment Method</th>
+          <th>Source</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        {revenue.map((rev, index) => (
+          <tr key={rev._id}>
+            <td
+              className={`revenue-table-row ${
+                rev.status === "Cancelled" ? "Cancelled" : ""
+              }`}
+            >
+              {new Date(rev.date).toLocaleDateString()}
+            </td>
+            <td
+              className={`revenue-table-row ${
+                rev.status === "Cancelled" ? "Cancelled" : ""
+              }`}
+            >
+              {rev.customer}
+            </td>
+            <td
+              className={`revenue-table-row ${
+                rev.status === "Cancelled" ? "Cancelled" : ""
+              }`}
+            >
+              {rev.transaction_id}
+            </td>
+            <td
+              className={`revenue-table-row ${
+                rev.status === "Cancelled" ? "Cancelled" : ""
+              }`}
+            >
+              {rev.payment_method}
+            </td>
+            <td
+              className={`revenue-table-row ${
+                rev.status === "Cancelled" ? "Cancelled" : ""
+              }`}
+            >
+              {rev.source}
+            </td>
+            <td
+              className={`revenue-table-row ${
+                rev.status === "Cancelled" ? "Cancelled" : ""
+              }`}
+            >
+              {rev.description}
+            </td>
+            <td
+              className={`revenue-table-row ${
+                rev.status === "Cancelled" ? "Cancelled" : ""
+              }`}
+            >
+              {rev.amount.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+              })}
+            </td>
+            <td
+              className={`revenue-table-row ${
+                rev.status === "Cancelled" ? "Cancelled" : ""
+              }`}
+            >
+              {rev.status}
+            </td>
+
+            <td
+              className={`revenue-table-row options ${
+                openDropdownId === rev._id ? "active" : ""
+              }`}
+            >
+              <span
+                className="material-symbols-rounded"
+                onClick={() => toggleDropdown(rev._id)}
+              >
+                {`${openDropdownId === rev._id ? "close" : "more_horiz"}`}
+              </span>
+              {openDropdownId === rev._id && (
+                <div className="revenue-options-dropdown">
+                  <p>This is item ID {rev.transaction_id}</p>
+                  <button className="revenue-option">
+                    <span className="material-symbols-rounded">edit</span>
+                    <span className="dropdown-option-label">Edit</span>
+                  </button>
+                  <button className="revenue-option">
+                    <span className="material-symbols-rounded">money_off</span>
+                    <span className="dropdown-option-label">Refund</span>
+                  </button>
+                  <button className="revenue-option">
+                    <span className="material-symbols-rounded">delete</span>
+                    <span className="dropdown-option-label">Delete</span>
+                  </button>
+                </div>
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
 const Revenue = () => {
   const [filteredRevenue, setFilteredRevenue] = useState([]);
   const [paymentMethodData, setPaymentMethodData] = useState([]);
   const [filters, setFilters] = useState({ year: "", status: "all" });
   const [availableYears, setAvailableYears] = useState([]);
+  const [openDropdownId, setOpenDropdownId] = useState(null);
 
   useEffect(() => {
     // Extract unique years from the revenue data
@@ -96,12 +321,22 @@ const Revenue = () => {
     };
   }, []);
 
+  const toggleDropdown = (id) => {
+    setOpenDropdownId(openDropdownId === id ? null : id);
+  };
+
   const handleYearChange = (e) => {
-    setFilters((prevFilters) => ({ ...prevFilters, year: e.target.value }));
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      year: e.target.value,
+    }));
   };
 
   const handleStatusChange = (e) => {
-    setFilters((prevFilters) => ({ ...prevFilters, status: e.target.value }));
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      status: e.target.value,
+    }));
   };
 
   const renderCustomizedLabel = ({
@@ -130,225 +365,23 @@ const Revenue = () => {
     );
   };
 
-  const [openDropdownId, setOpenDropdownId] = useState(null);
-
-  const toggleDropdown = (id) => {
-    setOpenDropdownId(openDropdownId === id ? null : id);
-  };
-
   return (
     <div id="revenue" className="revenue-container">
-      <div className="revenue-header">
-        <span className="material-symbols-rounded">arrow_left</span>
-        <div className="revenue-header-content">
-          <div className="revenue-invoice-info">
-            <span className="cust-invoice">Revenue</span>
-          </div>
-        </div>
-        <span className="material-symbols-rounded">monitoring</span>
-      </div>
-
-      <div className="revenue-charts">
-        <div className="charts-revenue-data-filter">
-          <div className="filter">
-            <label htmlFor="filter">Year:</label>
-            <select
-              id="date-filter"
-              value={filters.year}
-              onChange={handleYearChange}
-            >
-              <option value="">All</option>
-              {availableYears.map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="filter">
-            <label htmlFor="filter">Status:</label>
-            <select
-              id="status-filter"
-              value={filters.status}
-              onChange={handleStatusChange}
-            >
-              <option value="all">All</option>
-              <option className="received" value="Received">
-                Received
-              </option>
-              <option className="cancelled" value="Cancelled">
-                Cancelled
-              </option>
-            </select>
-          </div>
-        </div>
-
-        <div className="revenue-charts-container">
-          <div className="line-chart-container">
-            <h2 className="chart-header">Monthly Revenue Trends</h2>
-            <ResponsiveContainer height={300}>
-              <LineChart
-                data={filteredRevenue}
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-              >
-                <XAxis dataKey="month" type="category" />
-                <YAxis type="number" />
-                <CartesianGrid strokeDasharray="3 3" />
-                <Tooltip />
-                <Legend wrapperStyle={{ fontSize: "14px" }} />
-                <Line
-                  type="monotone"
-                  dataKey="revenue"
-                  stroke="#8884d8"
-                  activeDot={{ r: 8 }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-
-          <div className="doughnut-chart-container">
-            <h2 className="chart-header">Revenue by Payment Method</h2>
-            <ResponsiveContainer height={300}>
-              <PieChart>
-                <Pie
-                  data={paymentMethodData}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={renderCustomizedLabel}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="value"
-                >
-                  {paymentMethodData.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={COLORS[index % COLORS.length]}
-                    />
-                  ))}
-                </Pie>
-                <Legend wrapperStyle={{ fontSize: "14px" }} />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-      </div>
-
-      <div className="revenue-table-container">
-        <table id="revenueTable" className="revenue-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Customer</th>
-              <th>Transaction ID</th>
-              <th>Payment Method</th>
-              <th>Source</th>
-              <th>Description</th>
-              <th>Amount</th>
-              <th>Status</th>
-              <th>Options</th>
-            </tr>
-          </thead>
-          <tbody>
-            {revenue.map((rev, index) => (
-              <tr key={rev._id}>
-                <td
-                  className={`revenue-table-row ${
-                    rev.status === "Cancelled" ? "Cancelled" : ""
-                  }`}
-                >
-                  {new Date(rev.date).toLocaleDateString()}
-                </td>
-                <td
-                  className={`revenue-table-row ${
-                    rev.status === "Cancelled" ? "Cancelled" : ""
-                  }`}
-                >
-                  {rev.customer}
-                </td>
-                <td
-                  className={`revenue-table-row ${
-                    rev.status === "Cancelled" ? "Cancelled" : ""
-                  }`}
-                >
-                  {rev.transaction_id}
-                </td>
-                <td
-                  className={`revenue-table-row ${
-                    rev.status === "Cancelled" ? "Cancelled" : ""
-                  }`}
-                >
-                  {rev.payment_method}
-                </td>
-                <td
-                  className={`revenue-table-row ${
-                    rev.status === "Cancelled" ? "Cancelled" : ""
-                  }`}
-                >
-                  {rev.source}
-                </td>
-                <td
-                  className={`revenue-table-row ${
-                    rev.status === "Cancelled" ? "Cancelled" : ""
-                  }`}
-                >
-                  {rev.description}
-                </td>
-                <td
-                  className={`revenue-table-row ${
-                    rev.status === "Cancelled" ? "Cancelled" : ""
-                  }`}
-                >
-                  {rev.amount.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  })}
-                </td>
-                <td
-                  className={`revenue-table-row ${
-                    rev.status === "Cancelled" ? "Cancelled" : ""
-                  }`}
-                >
-                  {rev.status}
-                </td>
-
-                <td
-                  className={`revenue-table-row options ${
-                    openDropdownId === rev._id ? "active" : ""
-                  }`}
-                >
-                  <span
-                    className="material-symbols-rounded"
-                    onClick={() => toggleDropdown(rev._id)}
-                  >
-                    {`${openDropdownId === rev._id ? "close" : "more_horiz"}`}
-                  </span>
-                  {openDropdownId === rev._id && (
-                    <div className="revenue-options-dropdown">
-                      <p>This is item ID {rev.transaction_id}</p>
-                      <button className="revenue-option">
-                        <span className="material-symbols-rounded">edit</span>
-                        <span className="dropdown-option-label">Edit</span>
-                      </button>
-                      <button className="revenue-option">
-                        <span className="material-symbols-rounded">
-                          money_off
-                        </span>
-                        <span className="dropdown-option-label">Refund</span>
-                      </button>
-                      <button className="revenue-option">
-                        <span className="material-symbols-rounded">delete</span>
-                        <span className="dropdown-option-label">Delete</span>
-                      </button>
-                    </div>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <RevenueHeader />
+      <RevenueCharts
+        filteredRevenue={filteredRevenue}
+        paymentMethodData={paymentMethodData}
+        availableYears={availableYears}
+        filters={filters}
+        handleYearChange={handleYearChange}
+        handleStatusChange={handleStatusChange}
+        renderCustomizedLabel={renderCustomizedLabel}
+      />
+      <RevenueTableContainer
+        revenue={revenue}
+        openDropdownId={openDropdownId}
+        toggleDropdown={toggleDropdown}
+      />
     </div>
   );
 };
