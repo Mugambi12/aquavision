@@ -46,6 +46,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .revenue-header {
+    display: none;
+  }
+
   .revenue-header-content {
     flex-direction: column;
     gap: var(--fs-3);
@@ -54,6 +58,11 @@
   .revenue-invoice-info {
     flex-direction: column;
     gap: var(--fs-3);
+  }
+
+  .cust-invoice {
+    font-weight: var(--fw-500);
+    font-size: var(--fs-4);
   }
 }
 
@@ -70,7 +79,7 @@
 /* revenue chart filter */
 /*==============================*/
 
-.revenue-charts .charts-data-filter {
+.revenue-charts .charts-revenue-data-filter {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -80,43 +89,49 @@
   border-radius: var(--radius-8);
 }
 
-.revenue-charts .charts-data-filter .filter {
+.revenue-charts .charts-revenue-data-filter .filter {
   display: flex;
   align-items: center;
 }
 
-.revenue-charts .charts-data-filter .filter .received {
+.revenue-charts .charts-revenue-data-filter .filter .received {
   color: var(--emerald);
 }
 
-.revenue-charts .charts-data-filter .filter .cancelled {
+.revenue-charts .charts-revenue-data-filter .filter .cancelled {
   color: var(--imperial-red);
 }
 
-.charts-data-filter label {
+.charts-revenue-data-filter label {
   font-weight: var(--fw-500);
   margin-right: var(--fs-1);
 }
 
-.charts-data-filter select,
-.charts-data-filter input[type="month"] {
-  padding: var(--fs-8);
+.charts-revenue-data-filter select,
+.charts-revenue-data-filter input[type="month"] {
+  padding: var(--radius-3) var(--radius-8);
+  margin: var(--radius-6);
   font-size: inherit;
   background: var(--white);
+  width: 10vw;
   border: none;
   border-radius: var(--radius-8);
 }
 
 @media screen and (max-width: 768px) {
-  .revenue-charts .charts-data-filter {
+  .revenue-charts .charts-revenue-data-filter {
     flex-direction: column;
-    gap: var(--fs-6);
+    gap: var(--radius-10);
+    padding: var(--radius-8) var(--radius-8);
   }
 
-  .charts-data-filter select,
-  .charts-data-filter input[type="month"] {
+  .charts-revenue-data-filter select,
+  .charts-revenue-data-filter input[type="month"] {
     width: 100%;
-    padding: var(--radius-6) var(--radius-10);
+    padding: var(--radius-3) var(--radius-8);
+    margin: var(--radius-6);
+    font-size: var(--fs-6);
+    width: 30vw;
   }
 }
 
@@ -232,7 +247,7 @@
 
   .revenue-table th,
   .revenue-table-row {
-    font-weight: var(--fw-500);
+    font-size: var(--fs-6);
   }
 }
 
@@ -240,53 +255,94 @@
 /* revenue table options */
 /*==============================*/
 
+/*
+<td
+                  className={`revenue-table-row options ${
+                    isDropdownOpen ? "active" : ""
+                  }`}
+                >
+                  <span
+                    className="material-symbols-rounded"
+                    onClick={toggleDropdown}
+                  >
+                    more_horiz
+                  </span>
+                  {isDropdownOpen && (
+                    <div className="revenue-options-dropdown">
+                      <button className="revenue-option">
+                        <span className="material-symbols-rounded">edit</span>{" "}
+                        Edit
+                      </button>
+                      <button className="revenue-option">
+                        <span className="material-symbols-rounded">
+                          money_off
+                        </span>{" "}
+                        Refund
+                      </button>
+                      <button className="revenue-option">
+                        <span className="material-symbols-rounded">delete</span>{" "}
+                        Delete
+                      </button>
+                    </div>
+                  )}
+                </td>
+/*==============================*/
+/* revenue table options */
+/*==============================*/
+
 .revenue-table .options {
   font-size: var(--fs-2);
   cursor: pointer;
+  position: relative;
+}
+
+.revenue-table .active {
+  background: var(--davys-gray_12);
 }
 
 .revenue-table .revenue-options-dropdown {
   display: none;
   position: absolute;
   background: var(--white);
+  box-shadow: 0 4px 6px var(--shadow-1);
   border-radius: var(--radius-8);
-  box-shadow: var(--shadow-1);
+  padding: var(--fs-3);
+  top: calc(100% + 10px);
   right: 0;
+  z-index: 10;
 }
 
-.revenue-table .revenue-options-dropdown button {
-  display: block;
+.revenue-table .revenue-options-dropdown p {
+  font-size: var(--fs-5);
+  font-weight: var(--fw-500);
+  color: var(--eerie-black);
+}
+
+.revenue-table .revenue-option {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
-  padding: var(--fs-8) var(--fs-1);
-  border: none;
+  padding: var(--fs-6);
+  font-size: var(--fs-5);
   border-radius: var(--radius-8);
-  background: none;
   cursor: pointer;
-  text-align: left;
+  transition: background-color 0.3s ease;
 }
 
-.revenue-table .revenue-options-dropdown button:hover {
-  background: var(--pacific-blue_12);
+.revenue-table .revenue-option:hover {
+  background: var(--davys-gray_12);
 }
 
-.revenue-table .revenue-table-row:hover .revenue-options-dropdown {
+.revenue-table .revenue-option .material-symbols-rounded {
+  font-size: var(--fs-4);
+  margin-right: var(--fs-3);
+}
+
+.revenue-table .revenue-option .dropdown-option-label {
+  margin-left: var(--fs-1);
+}
+
+.revenue-table .active .revenue-options-dropdown {
   display: block;
-}
-
-.revenue-table .revenue-table-row:hover {
-  background: var(--pacific-blue_12);
-}
-
-.revenue-table .revenue-table-row td {
-  padding: var(--fs-2);
-  border-radius: var(--radius-8);
-  box-shadow: var(--shadow-1);
-}
-
-.revenue-table .revenue-table-row td:first-child {
-  border-radius: var(--radius-8) 0 0 var(--radius-8);
-}
-
-.revenue-table .revenue-table-row td:last-child {
-  border-radius: 0 var(--radius-8) var(--radius-8) 0;
 }

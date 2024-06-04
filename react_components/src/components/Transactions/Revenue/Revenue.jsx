@@ -20,8 +20,54 @@ import revenue from "../../../db/revenue";
 // Define color palette for the pie chart
 const COLORS = ["#8884d8", "#a4de6c", "#ffc658", "#82ca9d", "#ff8042"];
 
+// Extract data transformation logic to a separate function
+const transformData = (revenue, filters) => {
+  // Filter revenue data based on filters
+  const filteredData = revenue.filter((rev) => {
+    const revDate = new Date(rev.date);
+    const revYear = revDate.getFullYear().toString();
+    const statusMatch =
+      filters.status === "all" || rev.status === filters.status;
+    const yearMatch = !filters.year || revYear === filters.year;
+    return statusMatch && yearMatch;
+  });
+
+  // Group by month and sum amounts for the line chart
+  const monthlyRevenue = filteredData.reduce((acc, rev) => {
+    const month = new Date(rev.date).toLocaleString("default", {
+      month: "short",
+    });
+    if (!acc[month]) {
+      acc[month] = 0;
+    }
+    acc[month] += rev.amount;
+    return acc;
+  }, {});
+
+  const lineChartData = Object.keys(monthlyRevenue).map((month) => ({
+    month,
+    revenue: monthlyRevenue[month],
+  }));
+
+  // Group by payment method and sum amounts for the pie chart
+  const paymentMethodData = filteredData.reduce((acc, rev) => {
+    if (!acc[rev.payment_method]) {
+      acc[rev.payment_method] = 0;
+    }
+    acc[rev.payment_method] += rev.amount;
+    return acc;
+  }, {});
+
+  const pieChartData = Object.keys(paymentMethodData).map((method) => ({
+    name: method,
+    value: paymentMethodData[method],
+  }));
+
+  return { lineChartData, pieChartData };
+};
+
 const Revenue = () => {
-  const [filteredRevenue, setFilteredRevenue] = useState(revenue);
+  const [filteredRevenue, setFilteredRevenue] = useState([]);
   const [paymentMethodData, setPaymentMethodData] = useState([]);
   const [filters, setFilters] = useState({ year: "", status: "all" });
   const [availableYears, setAvailableYears] = useState([]);
@@ -33,51 +79,12 @@ const Revenue = () => {
     );
     setAvailableYears(Array.from(years));
 
-    // Filter revenue data based on filters
-    const filteredData = revenue.filter((rev) => {
-      const revDate = new Date(rev.date);
-      const revYear = revDate.getFullYear().toString();
-      const statusMatch =
-        filters.status === "all" || rev.status === filters.status;
-      const yearMatch = !filters.year || revYear === filters.year;
-      return statusMatch && yearMatch;
-    });
+    // Transform data based on filters
+    const { lineChartData, pieChartData } = transformData(revenue, filters);
 
-    // Group by month and sum amounts for the line chart
-    const monthlyRevenue = filteredData.reduce((acc, rev) => {
-      const month = new Date(rev.date).toLocaleString("default", {
-        month: "short",
-      });
-      if (!acc[month]) {
-        acc[month] = 0;
-      }
-      acc[month] += rev.amount;
-      return acc;
-    }, {});
-
-    setFilteredRevenue(
-      Object.keys(monthlyRevenue).map((month) => ({
-        month,
-        revenue: monthlyRevenue[month],
-      }))
-    );
-
-    // Group by payment method and sum amounts for the pie chart
-    const paymentMethodData = filteredData.reduce((acc, rev) => {
-      if (!acc[rev.payment_method]) {
-        acc[rev.payment_method] = 0;
-      }
-      acc[rev.payment_method] += rev.amount;
-      return acc;
-    }, {});
-
-    setPaymentMethodData(
-      Object.keys(paymentMethodData).map((method) => ({
-        name: method,
-        value: paymentMethodData[method],
-      }))
-    );
-  }, [filters, revenue]);
+    setFilteredRevenue(lineChartData);
+    setPaymentMethodData(pieChartData);
+  }, [filters]);
 
   useEffect(() => {
     const table = new DataTable("#revenueTable", {
@@ -87,7 +94,7 @@ const Revenue = () => {
     return () => {
       table.destroy();
     };
-  }, [revenue]);
+  }, []);
 
   const handleYearChange = (e) => {
     setFilters((prevFilters) => ({ ...prevFilters, year: e.target.value }));
@@ -123,6 +130,12 @@ const Revenue = () => {
     );
   };
 
+  const [openDropdownId, setOpenDropdownId] = useState(null);
+
+  const toggleDropdown = (id) => {
+    setOpenDropdownId(openDropdownId === id ? null : id);
+  };
+
   return (
     <div id="revenue" className="revenue-container">
       <div className="revenue-header">
@@ -132,11 +145,11 @@ const Revenue = () => {
             <span className="cust-invoice">Revenue</span>
           </div>
         </div>
-        <span className="material-symbols-rounded">more_horiz</span>
+        <span className="material-symbols-rounded">monitoring</span>
       </div>
 
       <div className="revenue-charts">
-        <div className="charts-data-filter">
+        <div className="charts-revenue-data-filter">
           <div className="filter">
             <label htmlFor="filter">Year:</label>
             <select
@@ -254,16 +267,15 @@ const Revenue = () => {
                 >
                   {rev.customer}
                 </td>
-
                 <td
-                  className={`revenue-table-row  ${rev.method} ${
+                  className={`revenue-table-row ${
                     rev.status === "Cancelled" ? "Cancelled" : ""
                   }`}
                 >
                   {rev.transaction_id}
                 </td>
                 <td
-                  className={`revenue-table-row  ${rev.method} ${
+                  className={`revenue-table-row ${
                     rev.status === "Cancelled" ? "Cancelled" : ""
                   }`}
                 >
@@ -276,7 +288,6 @@ const Revenue = () => {
                 >
                   {rev.source}
                 </td>
-
                 <td
                   className={`revenue-table-row ${
                     rev.status === "Cancelled" ? "Cancelled" : ""
@@ -285,46 +296,53 @@ const Revenue = () => {
                   {rev.description}
                 </td>
                 <td
-                  className={`revenue-table-row  ${rev.method} ${
+                  className={`revenue-table-row ${
                     rev.status === "Cancelled" ? "Cancelled" : ""
                   }`}
                 >
-                  ${rev.amount}
+                  {rev.amount.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  })}
                 </td>
                 <td
-                  className={`revenue-table-row  ${rev.status} ${
+                  className={`revenue-table-row ${
                     rev.status === "Cancelled" ? "Cancelled" : ""
                   }`}
                 >
                   {rev.status}
                 </td>
-                <td className="revenue-table-row">
-                  <span className="material-symbols-rounded options">
-                    more_vert
+
+                <td
+                  className={`revenue-table-row options ${
+                    openDropdownId === rev._id ? "active" : ""
+                  }`}
+                >
+                  <span
+                    className="material-symbols-rounded"
+                    onClick={() => toggleDropdown(rev._id)}
+                  >
+                    {`${openDropdownId === rev._id ? "close" : "more_horiz"}`}
                   </span>
-                  <div className="revenue-options-dropdown">
-                    <button className="revenue-option">
-                      {" "}
-                      <span className="material-symbols-rounded">
-                        edit
-                      </span>{" "}
-                      Edit
-                    </button>
-                    <button className="revenue-option">
-                      {" "}
-                      <span className="material-symbols-rounded">
-                        money_off
-                      </span>{" "}
-                      Refund
-                    </button>
-                    <button className="revenue-option">
-                      {" "}
-                      <span className="material-symbols-rounded">
-                        delete
-                      </span>{" "}
-                      Delete
-                    </button>
-                  </div>
+                  {openDropdownId === rev._id && (
+                    <div className="revenue-options-dropdown">
+                      <p>This is item ID {rev.transaction_id}</p>
+                      <button className="revenue-option">
+                        <span className="material-symbols-rounded">edit</span>
+                        <span className="dropdown-option-label">Edit</span>
+                      </button>
+                      <button className="revenue-option">
+                        <span className="material-symbols-rounded">
+                          money_off
+                        </span>
+                        <span className="dropdown-option-label">Refund</span>
+                      </button>
+                      <button className="revenue-option">
+                        <span className="material-symbols-rounded">delete</span>
+                        <span className="dropdown-option-label">Delete</span>
+                      </button>
+                    </div>
+                  )}
                 </td>
               </tr>
             ))}
