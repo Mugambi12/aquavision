@@ -1,19 +1,37 @@
-/* Sidebar.css */
+/*==============================*/
+/* transactions sidebar */
+/*==============================*/
+
 .transactions-sidebar {
   width: 250px;
-  padding: 15px;
   height: fit-content;
-  padding-bottom: 15px;
-  margin-left: 18px;
-  background: var(--white);
+  padding-bottom: var(--fs-3);
+  margin: 0 0 0 18px;
+  background: var(--davys-gray_12);
   border-radius: var(--radius-16);
   box-shadow: var(--shadow-1);
 }
 
-.transactions-sidebar .transactions-sidebar-header {
+@media screen and (max-width: 768px) {
+  .transactions-sidebar {
+    width: calc(100% - (var(--radius-10) * 2));
+    margin: 0 0 0 var(--radius-10);
+    margin-bottom: var(--fs-8);
+  }
+}
+
+/*==============================*/
+/* transactions sidebar header */
+/*==============================*/
+
+.transactions-sidebar-actions {
+  padding: var(--fs-10) var(--fs-4);
+}
+
+.transactions-sidebar-actions .transactions-sidebar-header {
   font-size: var(--fs-3);
   font-weight: var(--fw-600);
-  margin-bottom: 20px;
+  margin-bottom: var(--fs-5);
   color: var(--eerie-black);
   display: flex;
   align-items: center;
@@ -23,27 +41,27 @@
   background-color: var(--pacific-blue_12);
 }
 
-.transactions-sidebar .transactions-sidebar-header .header-icon {
+.transactions-sidebar-actions .transactions-sidebar-header .header-icon {
   font-size: var(--fs-2);
   color: var(--pacific-blue);
 }
 
-.transactions-sidebar .transactions-sidebar-header .header-text {
+.transactions-sidebar-actions .transactions-sidebar-header .header-text {
   font-size: var(--fs-3);
   font-weight: var(--fw-600);
 }
 
-.transactions-sidebar ul {
-  height: calc(100vh - 150px);
+.transactions-sidebar-actions .sidebar-links {
   list-style: none;
   padding: 0;
+  margin-bottom: var(--fs-2);
 }
 
-.transactions-sidebar li {
+.transactions-sidebar-actions .sidebar-links li {
   margin-bottom: 10px;
 }
 
-.sidebar-button {
+.transactions-sidebar-actions .sidebar-button {
   background: none;
   border: none;
   gap: 20px;
@@ -58,13 +76,80 @@
   color: var(--davys-gray);
 }
 
-.sidebar-button:hover {
+.transactions-sidebar-actions .sidebar-button:hover {
   background-color: var(--pacific-blue_12);
   color: var(--pacific-blue);
 }
 
-.sidebar-button.active {
+.transactions-sidebar-actions .sidebar-button.active {
   background-color: var(--pacific-blue);
   color: var(--white);
   font-weight: var(--fw-600);
+}
+
+/*==============================*/
+/* transactions sidebar due payments */
+/*==============================*/
+
+.transactions-sidebar-due-payments {
+  list-style: none;
+  padding: 0;
+  border-radius: var(--radius-8);
+}
+
+.transactions-sidebar-due-payments .due-payments-title {
+  font-size: var(--fs-4);
+  font-weight: var(--fw-600);
+  color: var(--eerie-black);
+  background: var(--pacific-blue_12);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: var(--radius-8);
+}
+
+.transactions-sidebar-due-payments .due-payments {
+  height: 250px;
+  overflow-y: auto;
+  background: var(--white);
+  border-radius: var(--radius-6);
+  padding: 10px;
+}
+
+.transactions-sidebar-due-payments li {
+  margin-bottom: 10px;
+}
+
+.transactions-sidebar-due-payments .customer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  padding: 10px;
+  background: var(--pacific-blue_12);
+  border-radius: var(--radius-16);
+}
+
+.transactions-sidebar-due-payments .customer .customer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.transactions-sidebar-due-payments .customer .customer-name {
+  font-weight: var(--fw-600);
+  font-size: var(--fs-5);
+  color: var(--eerie-black);
+}
+
+.transactions-sidebar-due-payments .customer .customer-house,
+.transactions-sidebar-due-payments .customer .customer-amount {
+  font-size: var(--fs-5);
+  color: var(--davys-gray);
+}
+
+@media screen and (max-width: 768px) {
+  .transactions-sidebar-due-payments {
+    display: none;
+  }
 }

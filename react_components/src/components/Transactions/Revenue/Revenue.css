@@ -1,250 +1,292 @@
+/*==============================*/
+/* revenue container */
+/*==============================*/
+
 .revenue-container {
-  background: #f5f9fb;
+  background: var(--cultured);
   width: 100%;
-  padding: 0;
 }
+
+/*==============================*/
+/* revenue header */
+/*==============================*/
 
 .revenue-header {
   display: flex;
   align-items: center;
-  padding: 20px;
-  background: white;
+  padding: var(--fs-3);
+  background: var(--davys-gray_12);
+  border-radius: var(--radius-8);
+  box-shadow: var(--shadow-1);
+  margin-bottom: var(--fs-3);
+}
+
+.revenue-header span.material-symbols-rounded {
+  cursor: pointer;
+  font-size: var(--fs-2);
+  color: var(--space-cadet);
 }
 
 .revenue-header-content {
   display: flex;
   flex-grow: 1;
-  justify-content: space-between;
-  margin-left: 20px;
+  align-items: center;
+  margin: 0 var(--fs-3);
 }
 
 .revenue-invoice-info {
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
 }
 
 .cust-invoice {
-  color: #7ab9ff;
-  font-weight: bold;
-  font-size: 16px;
+  color: var(--pacific-blue);
+  font-weight: var(--fw-600);
+  font-size: var(--fs-2);
 }
 
-.heading {
-  color: #5b5e78;
-  font-weight: bold;
-  font-size: 16px;
+@media screen and (max-width: 768px) {
+  .revenue-header-content {
+    flex-direction: column;
+    gap: var(--fs-3);
+  }
+
+  .revenue-invoice-info {
+    flex-direction: column;
+    gap: var(--fs-3);
+  }
 }
 
-.category {
-  font-size: 10px;
-  background: #668ae9;
-  color: #eaeffc;
-  width: 55px;
-  border-radius: 2px;
-  padding: 2px 4px;
+/*==============================*/
+/* revenue chart */
+/*==============================*/
+
+.revenue-charts {
+  width: 100%;
+  margin-bottom: var(--fs-3);
 }
 
-.company {
-  color: #c1c2cc;
-  font-size: 12px;
-  font-weight: bold;
-}
+/*==============================*/
+/* revenue chart filter */
+/*==============================*/
 
-.progress-section,
-.members-section {
+.revenue-charts .charts-data-filter {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: var(--fs-10);
+  background: var(--davys-gray_12);
+  color: var(--black);
+  border-radius: var(--radius-8);
+}
+
+.revenue-charts .charts-data-filter .filter {
+  display: flex;
   align-items: center;
 }
 
-.label {
-  color: #c1c2cc;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 1px;
+.revenue-charts .charts-data-filter .filter .received {
+  color: var(--emerald);
 }
 
-.progress {
-  width: 300px;
-  height: 8px;
-  background: #e6eff3;
-  border-radius: 20px;
-  position: relative;
+.revenue-charts .charts-data-filter .filter .cancelled {
+  color: var(--imperial-red);
 }
 
-.progress::after {
-  content: "";
-  height: 100%;
-  background: #3598fe;
-  width: 50%;
-  border-radius: 20px;
-  position: absolute;
+.charts-data-filter label {
+  font-weight: var(--fw-500);
+  margin-right: var(--fs-1);
 }
 
-.members {
+.charts-data-filter select,
+.charts-data-filter input[type="month"] {
+  padding: var(--fs-8);
+  font-size: inherit;
+  background: var(--white);
+  border: none;
+  border-radius: var(--radius-8);
+}
+
+@media screen and (max-width: 768px) {
+  .revenue-charts .charts-data-filter {
+    flex-direction: column;
+    gap: var(--fs-6);
+  }
+
+  .charts-data-filter select,
+  .charts-data-filter input[type="month"] {
+    width: 100%;
+    padding: var(--radius-6) var(--radius-10);
+  }
+}
+
+/*==============================*/
+/* revenue charts container */
+/*==============================*/
+
+.revenue-charts-container {
   display: flex;
-  justify-content: center;
+  gap: var(--fs-3);
 }
 
-.member {
-  font-size: 10px;
-  color: #e6eff3;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 5px;
+.revenue-charts-container .chart-header {
+  font-size: var(--fs-4);
+  font-weight: var(--fw-600);
+  color: var(--eerie-black);
+  margin-bottom: var(--fs-3);
 }
 
-.red {
-  background: #ff9292;
+.line-chart-container {
+  flex-basis: 65%;
+  overflow-x: auto;
+  padding: var(--fs-3);
+  background: var(--white);
+  border-radius: var(--radius-8);
+  box-shadow: var(--shadow-1);
 }
 
-.blue {
-  background: #7ab9ff;
+.doughnut-chart-container {
+  flex-basis: 35%;
+  overflow-x: auto;
+  padding: var(--fs-3);
+  background: var(--white);
+  border-radius: var(--radius-8);
+  box-shadow: var(--shadow-1);
 }
 
-.purple {
-  background: #9292ff;
+@media screen and (max-width: 768px) {
+  .revenue-charts-container {
+    flex-direction: column;
+  }
+
+  .line-chart-container,
+  .doughnut-chart-container {
+    flex-basis: 100%;
+    padding: var(--fs-6);
+  }
 }
 
-.add {
-  border: 1px solid #c1c2cc;
+/*==============================*/
+/* table container */
+/*==============================*/
+
+.revenue-table-container {
+  margin-left: -270px;
+  padding: var(--fs-3);
+  background: var(--white);
+  border-radius: var(--radius-8);
+  box-shadow: var(--shadow-1);
 }
 
-.add i {
-  color: #c1c2cc;
-}
-
-/*-----------------------------------*\
-    #REVENUE TABLE
-\*-----------------------------------*/
-
-.menu {
-  display: flex;
-  padding-left: 70px;
-  background: white;
-  padding: 10px 0;
-}
-
-.menu span {
-  color: #c1c2cc;
-  font-size: 12px;
-  padding: 10px 30px;
-  cursor: pointer;
-}
-
-.menu span:hover {
-  color: #8d90a2;
-}
-
-.menu span.active {
-  color: #3598fe;
-  border-bottom: 2px solid #3598fe;
-  font-weight: bold;
-}
-
-.table-container {
-  margin: 40px 80px;
-}
-
-.invoice-table {
+.revenue-table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0 35px;
 }
 
-.invoice-row {
-  height: 85px;
-  background: white;
-  font-size: 14px;
-  font-weight: 500;
-  color: #8d90a2;
+.revenue-table th,
+.revenue-table-row {
+  height: 65px;
+  background: var(--white);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-500);
+  color: var(--davys-gray);
+  text-align: center;
 }
 
-.status {
-  width: 10px;
-  height: 10px;
-  background: #ddd;
-  border-radius: 50%;
-  margin-left: 10px;
+.revenue-table .Card {
+  color: #8884d8;
 }
 
-.date-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.revenue-table .Bank {
+  color: #a4de6c;
 }
 
-.month {
-  font-size: 10px;
-  color: #c1c2cc;
-  letter-spacing: 2px;
+.revenue-table .Cash {
+  color: #ffc658;
 }
 
-.date {
-  font-size: 24px;
-  color: #5b5e78;
-  letter-spacing: 4px;
+.revenue-table .Mpesa {
+  color: #82ca9d;
 }
 
-.status-text {
-  text-align: right;
+.revenue-table .Received {
+  color: #82ca9d;
 }
 
-.unpaid-bg {
-  background: #ff7c8c;
+.revenue-table .Cancelled {
+  color: #ff8042;
 }
 
-.unpaid {
-  color: #ff7c8c;
+@media screen and (max-width: 768px) {
+  .revenue-table-container {
+    margin-left: 0;
+    padding: var(--fs-10) 0;
+    width: 100%;
+  }
+
+  .revenue-table {
+    border-spacing: 0 0px;
+    width: 100%;
+  }
+
+  .revenue-table th,
+  .revenue-table-row {
+    font-weight: var(--fw-500);
+  }
 }
 
-.drafted-bg {
-  background: #c1c2cc;
+/*==============================*/
+/* revenue table options */
+/*==============================*/
+
+.revenue-table .options {
+  font-size: var(--fs-2);
+  cursor: pointer;
 }
 
-.drafted {
-  color: #c1c2cc;
+.revenue-table .revenue-options-dropdown {
+  display: none;
+  position: absolute;
+  background: var(--white);
+  border-radius: var(--radius-8);
+  box-shadow: var(--shadow-1);
+  right: 0;
 }
 
-.paid-bg {
-  background: #65eb97;
+.revenue-table .revenue-options-dropdown button {
+  display: block;
+  width: 100%;
+  padding: var(--fs-8) var(--fs-1);
+  border: none;
+  border-radius: var(--radius-8);
+  background: none;
+  cursor: pointer;
+  text-align: left;
 }
 
-.paid {
-  color: #65eb97;
+.revenue-table .revenue-options-dropdown button:hover {
+  background: var(--pacific-blue_12);
 }
 
-.add-invoice-container {
-  display: flex;
-  justify-content: flex-end;
-  padding: 20px;
+.revenue-table .revenue-table-row:hover .revenue-options-dropdown {
+  display: block;
 }
 
-.add-invoice {
-  background: #3598fe;
-  border-radius: 3px;
-  box-shadow: 0px 5px 15px 0px rgba(53, 152, 254, 0.5);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
+.revenue-table .revenue-table-row:hover {
+  background: var(--pacific-blue_12);
 }
 
-.add-invoice i {
-  color: #f5f9fb;
-  font-size: 20px;
+.revenue-table .revenue-table-row td {
+  padding: var(--fs-2);
+  border-radius: var(--radius-8);
+  box-shadow: var(--shadow-1);
 }
 
-.invoice-label {
-  color: #f5f9fb;
-  font-size: 10px;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-top: 5px;
+.revenue-table .revenue-table-row td:first-child {
+  border-radius: var(--radius-8) 0 0 var(--radius-8);
+}
+
+.revenue-table .revenue-table-row td:last-child {
+  border-radius: 0 var(--radius-8) var(--radius-8) 0;
 }

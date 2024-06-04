@@ -73,7 +73,7 @@ const People = () => {
           onPersonClick={handlePersonClick}
           onAddUser={handleAddUser}
         />
-        <Main person={selectedPerson} />
+        <Main selectedPerson={selectedPerson} />
       </div>
       <Footer />
     </>

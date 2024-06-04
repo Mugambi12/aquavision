@@ -231,6 +231,7 @@
   text-align: center;
 }
 
+.records-invoice-table th,
 .records-invoice-row {
   height: 65px;
   background: var(--white);
