@@ -230,7 +230,7 @@
 }
 
 .revenue-table .Cancelled {
-  color: #ff8042;
+  color: #ff4242;
 }
 
 @media screen and (max-width: 768px) {
@@ -255,41 +255,6 @@
 /* revenue table options */
 /*==============================*/
 
-/*
-<td
-                  className={`revenue-table-row options ${
-                    isDropdownOpen ? "active" : ""
-                  }`}
-                >
-                  <span
-                    className="material-symbols-rounded"
-                    onClick={toggleDropdown}
-                  >
-                    more_horiz
-                  </span>
-                  {isDropdownOpen && (
-                    <div className="revenue-options-dropdown">
-                      <button className="revenue-option">
-                        <span className="material-symbols-rounded">edit</span>{" "}
-                        Edit
-                      </button>
-                      <button className="revenue-option">
-                        <span className="material-symbols-rounded">
-                          money_off
-                        </span>{" "}
-                        Refund
-                      </button>
-                      <button className="revenue-option">
-                        <span className="material-symbols-rounded">delete</span>{" "}
-                        Delete
-                      </button>
-                    </div>
-                  )}
-                </td>
-/*==============================*/
-/* revenue table options */
-/*==============================*/
-
 .revenue-table .options {
   font-size: var(--fs-2);
   cursor: pointer;
@@ -303,19 +268,13 @@
 .revenue-table .revenue-options-dropdown {
   display: none;
   position: absolute;
-  background: var(--white);
+  background: var(--cultured);
   box-shadow: 0 4px 6px var(--shadow-1);
   border-radius: var(--radius-8);
-  padding: var(--fs-3);
   top: calc(100% + 10px);
   right: 0;
-  z-index: 10;
-}
-
-.revenue-table .revenue-options-dropdown p {
-  font-size: var(--fs-5);
-  font-weight: var(--fw-500);
-  color: var(--eerie-black);
+  padding: var(--fs-8);
+  z-index: 1;
 }
 
 .revenue-table .revenue-option {

@@ -2,6 +2,8 @@ import React from "react";
 import Modal from "react-modal";
 import "./ModalWrapper.css";
 
+Modal.setAppElement("#root");
+
 const ModalWrapper = ({ isOpen, onRequestClose, children }) => {
   return (
     <Modal

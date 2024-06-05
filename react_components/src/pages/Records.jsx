@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Modal from "react-modal";
 import Navbar from "../components/Navbar/Navbar";
 import Invoices from "../components/Records/Content/Invoices";
 import Footer from "../components/Footer/Footer";
@@ -7,8 +6,6 @@ import AddInvoiceForm from "../components/Records/AddInvoiceForm/AddInvoiceForm"
 import DeleteInvoice from "../components/Records/DeleteInvoice/DeleteInvoice";
 import ModalWrapper from "../components/ModalWrapper/ModalWrapper";
 import invoiceData from "../db/invoiceData";
-
-Modal.setAppElement("#root");
 
 const Records = () => {
   const [selectedFilter, setSelectedFilter] = useState("All");

@@ -1,0 +1,32 @@
+/* RefundRevenue.css */
+.refund-revenue-container {
+  padding: var(--fs-10);
+  margin: 0 auto;
+  border-radius: var(--radius-8);
+}
+
+.refund-revenue-container h2 {
+  margin-bottom: var(--fs-1);
+  font-size: var(--fs-4);
+  color: var(--davys-gray);
+}
+
+.refund-revenue-container p {
+  margin-bottom: var(--fs-1);
+  font-size: var(--fs-5);
+  color: var(--sonic-sliver);
+}
+
+.refund-revenue-container button {
+  padding: var(--fs-10) var(--fs-5);
+  background: var(--pacific-blue);
+  color: var(--white);
+  font-size: var(--fs-4);
+  border: none;
+  border-radius: var(--radius-6);
+  cursor: pointer;
+}
+
+.refund-revenue-container button:first-child {
+  background: var(--space-cadet);
+}

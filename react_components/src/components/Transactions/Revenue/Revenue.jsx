@@ -15,7 +15,6 @@ import {
 } from "recharts";
 import DataTable from "datatables.net-dt";
 import "datatables.net-responsive-dt";
-import revenue from "../../../db/revenue";
 
 // Define color palette for the pie chart
 const COLORS = ["#8884d8", "#a4de6c", "#ffc658", "#82ca9d", "#ff8042"];
@@ -175,16 +174,24 @@ const RevenueCharts = ({
   </div>
 );
 
-const RevenueTableContainer = ({ revenue, openDropdownId, toggleDropdown }) => (
+// Revenue.js
+const RevenueTableContainer = ({
+  revenue,
+  openDropdownId,
+  toggleDropdown,
+  openDeleteRevenueModal,
+  openEditRevenueModal,
+  openRefundRevenueModal,
+}) => (
   <div className="revenue-table-container">
-    <table id="revenueTable" className="revenue-table">
+    <table id="revenueTable" className="revenue-table display">
       <thead>
         <tr>
+          <th>#ID</th>
           <th>Date</th>
-          <th>Customer</th>
-          <th>Transaction ID</th>
-          <th>Payment Method</th>
-          <th>Source</th>
+          <th>Customer_Name</th>
+          <th>Transaction_ID</th>
+          <th>Payment_Method</th>
           <th>Description</th>
           <th>Amount</th>
           <th>Status</th>
@@ -194,6 +201,13 @@ const RevenueTableContainer = ({ revenue, openDropdownId, toggleDropdown }) => (
       <tbody>
         {revenue.map((rev, index) => (
           <tr key={rev._id}>
+            <td
+              className={`revenue-table-row ${
+                rev.status === "Cancelled" ? "Cancelled" : ""
+              }`}
+            >
+              #{rev._id}
+            </td>
             <td
               className={`revenue-table-row ${
                 rev.status === "Cancelled" ? "Cancelled" : ""
@@ -221,13 +235,6 @@ const RevenueTableContainer = ({ revenue, openDropdownId, toggleDropdown }) => (
               }`}
             >
               {rev.payment_method}
-            </td>
-            <td
-              className={`revenue-table-row ${
-                rev.status === "Cancelled" ? "Cancelled" : ""
-              }`}
-            >
-              {rev.source}
             </td>
             <td
               className={`revenue-table-row ${
@@ -267,16 +274,25 @@ const RevenueTableContainer = ({ revenue, openDropdownId, toggleDropdown }) => (
               </span>
               {openDropdownId === rev._id && (
                 <div className="revenue-options-dropdown">
-                  <p>This is item ID {rev.transaction_id}</p>
-                  <button className="revenue-option">
+                  <p style={{ fontSize: 10 }}>ID {rev.transaction_id}</p>
+                  <button
+                    className="revenue-option"
+                    onClick={() => openEditRevenueModal(rev)}
+                  >
                     <span className="material-symbols-rounded">edit</span>
                     <span className="dropdown-option-label">Edit</span>
                   </button>
-                  <button className="revenue-option">
+                  <button
+                    className="revenue-option"
+                    onClick={() => openRefundRevenueModal(rev)}
+                  >
                     <span className="material-symbols-rounded">money_off</span>
                     <span className="dropdown-option-label">Refund</span>
                   </button>
-                  <button className="revenue-option">
+                  <button
+                    className="revenue-option"
+                    onClick={() => openDeleteRevenueModal(rev)}
+                  >
                     <span className="material-symbols-rounded">delete</span>
                     <span className="dropdown-option-label">Delete</span>
                   </button>
@@ -290,7 +306,12 @@ const RevenueTableContainer = ({ revenue, openDropdownId, toggleDropdown }) => (
   </div>
 );
 
-const Revenue = () => {
+const Revenue = ({
+  revenue,
+  openDeleteRevenueModal,
+  openEditRevenueModal,
+  openRefundRevenueModal,
+}) => {
   const [filteredRevenue, setFilteredRevenue] = useState([]);
   const [paymentMethodData, setPaymentMethodData] = useState([]);
   const [filters, setFilters] = useState({ year: "", status: "all" });
@@ -381,6 +402,9 @@ const Revenue = () => {
         revenue={revenue}
         openDropdownId={openDropdownId}
         toggleDropdown={toggleDropdown}
+        openDeleteRevenueModal={openDeleteRevenueModal}
+        openEditRevenueModal={openEditRevenueModal}
+        openRefundRevenueModal={openRefundRevenueModal}
       />
     </div>
   );
