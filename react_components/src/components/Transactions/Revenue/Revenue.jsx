@@ -277,22 +277,26 @@ const RevenueTableContainer = ({
                     className="revenue-option"
                     onClick={() => openEditRevenueModal(rev)}
                   >
-                    <span className="material-symbols-rounded">edit</span>
-                    <span className="dropdown-option-label">Edit</span>
+                    <span className="material-symbols-rounded edit">edit</span>
+                    <span className="dropdown-option-label edit">Edit</span>
                   </button>
                   <button
                     className="revenue-option"
                     onClick={() => openRefundRevenueModal(rev)}
                   >
-                    <span className="material-symbols-rounded">money_off</span>
-                    <span className="dropdown-option-label">Refund</span>
+                    <span className="material-symbols-rounded refund">
+                      money_off
+                    </span>
+                    <span className="dropdown-option-label refund">Refund</span>
                   </button>
                   <button
                     className="revenue-option"
                     onClick={() => openDeleteRevenueModal(rev)}
                   >
-                    <span className="material-symbols-rounded">delete</span>
-                    <span className="dropdown-option-label">Delete</span>
+                    <span className="material-symbols-rounded delete">
+                      delete
+                    </span>
+                    <span className="dropdown-option-label delete">Delete</span>
                   </button>
                 </div>
               )}

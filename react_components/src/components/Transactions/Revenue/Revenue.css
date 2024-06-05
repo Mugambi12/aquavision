@@ -201,7 +201,7 @@
 
 .revenue-table th,
 .revenue-table-row {
-  height: 65px;
+  height: 60px;
   background: var(--white);
   font-size: var(--fs-6);
   font-weight: var(--fw-500);
@@ -230,7 +230,7 @@
 }
 
 .revenue-table .Cancelled {
-  color: #ff4242;
+  color: var(--imperial-red);
 }
 
 @media screen and (max-width: 768px) {
@@ -271,9 +271,8 @@
   background: var(--cultured);
   box-shadow: 0 4px 6px var(--shadow-1);
   border-radius: var(--radius-8);
-  top: calc(100% + 10px);
+  top: calc(100% + var(--radius-3));
   right: 0;
-  padding: var(--fs-8);
   z-index: 1;
 }
 
@@ -282,7 +281,7 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  padding: var(--fs-6);
+  padding: var(--fs-10);
   font-size: var(--fs-5);
   border-radius: var(--radius-8);
   cursor: pointer;
@@ -291,6 +290,18 @@
 
 .revenue-table .revenue-option:hover {
   background: var(--davys-gray_12);
+}
+
+.revenue-table .revenue-option .edit {
+  color: var(--emerald);
+}
+
+.revenue-table .revenue-option .refund {
+  color: var(--pacific-blue);
+}
+
+.revenue-table .revenue-option .delete {
+  color: var(--imperial-red);
 }
 
 .revenue-table .revenue-option .material-symbols-rounded {
