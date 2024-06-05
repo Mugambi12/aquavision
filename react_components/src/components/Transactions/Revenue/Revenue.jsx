@@ -16,10 +16,8 @@ import {
 import DataTable from "datatables.net-dt";
 import "datatables.net-responsive-dt";
 
-// Define color palette for the pie chart
 const COLORS = ["#8884d8", "#a4de6c", "#ffc658", "#82ca9d", "#ff8042"];
 
-// Extract data transformation logic to a separate function
 const transformData = (revenue, filters) => {
   // Filter revenue data based on filters
   const filteredData = revenue.filter((rev) => {
@@ -65,7 +63,7 @@ const transformData = (revenue, filters) => {
   return { lineChartData, pieChartData };
 };
 
-const RevenueHeader = () => (
+const RevenueHeader = ({ openAddRevenueModal }) => (
   <div className="revenue-header">
     <span className="material-symbols-rounded">arrow_left</span>
     <div className="revenue-header-content">
@@ -73,7 +71,9 @@ const RevenueHeader = () => (
         <span className="cust-invoice">Revenue</span>
       </div>
     </div>
-    <span className="material-symbols-rounded">monitoring</span>
+    <span className="material-symbols-rounded" onClick={openAddRevenueModal}>
+      add
+    </span>
   </div>
 );
 
@@ -174,7 +174,6 @@ const RevenueCharts = ({
   </div>
 );
 
-// Revenue.js
 const RevenueTableContainer = ({
   revenue,
   openDropdownId,
@@ -274,7 +273,6 @@ const RevenueTableContainer = ({
               </span>
               {openDropdownId === rev._id && (
                 <div className="revenue-options-dropdown">
-                  <p style={{ fontSize: 10 }}>ID {rev.transaction_id}</p>
                   <button
                     className="revenue-option"
                     onClick={() => openEditRevenueModal(rev)}
@@ -311,6 +309,7 @@ const Revenue = ({
   openDeleteRevenueModal,
   openEditRevenueModal,
   openRefundRevenueModal,
+  openAddRevenueModal,
 }) => {
   const [filteredRevenue, setFilteredRevenue] = useState([]);
   const [paymentMethodData, setPaymentMethodData] = useState([]);
@@ -388,7 +387,7 @@ const Revenue = ({
 
   return (
     <div id="revenue" className="revenue-container">
-      <RevenueHeader />
+      <RevenueHeader openAddRevenueModal={openAddRevenueModal} />
       <RevenueCharts
         filteredRevenue={filteredRevenue}
         paymentMethodData={paymentMethodData}

@@ -8,17 +8,22 @@ const customers = [
   { name: "Jane Smith", house: "Phase 3, 77", amount: 1200 },
 ];
 
-const Sidebar = ({ toggleView, currentView }) => {
+const Sidebar = ({ toggleView, currentView, openAddRevenueModal }) => {
   return (
     <div className="transactions-sidebar">
       <div className="mobile-transactions-sidebar">
-        <span className="material-symbols-rounded icon-sort">sort</span>
+        <span className="material-symbols-rounded icon-sort">monitoring</span>
         <div className="mobile-transactions-sidebar-title">
           <div className="mobile-revenue-info">
             <span className="customer-invoice">Revenue</span>
           </div>
         </div>
-        <span className="material-symbols-rounded icon-segment">segment</span>
+        <span
+          className="material-symbols-rounded icon-segment"
+          onClick={openAddRevenueModal}
+        >
+          add
+        </span>
       </div>
 
       <div className="transactions-sidebar-container">

@@ -11,6 +11,7 @@ import ModalWrapper from "../components/ModalWrapper/ModalWrapper";
 import DeleteRevenue from "../components/Transactions/Revenue/DeleteRevenue/DeleteRevenue";
 import EditRevenue from "../components/Transactions/Revenue/EditRevenue/EditRevenue";
 import RefundRevenue from "../components/Transactions/Revenue/RefundRevenue/RefundRevenue";
+import AddRevenue from "../components/Transactions/Revenue/AddRevenue/AddRevenue";
 
 const Transactions = () => {
   const [showRevenue, setShowRevenue] = useState(true);
@@ -20,6 +21,7 @@ const Transactions = () => {
   const [isEditRevenueModalOpen, setIsEditRevenueModalOpen] = useState(false);
   const [isRefundRevenueModalOpen, setIsRefundRevenueModalOpen] =
     useState(false);
+  const [isAddRevenueModalOpen, setIsAddRevenueModalOpen] = useState(false);
 
   useEffect(() => {
     const storedView = localStorage.getItem("transactionsView");
@@ -48,6 +50,10 @@ const Transactions = () => {
     setIsRefundRevenueModalOpen(true);
   };
 
+  const openAddRevenueModal = () => {
+    setIsAddRevenueModalOpen(true);
+  };
+
   const handleDeleteRevenue = async () => {
     console.log("Deleting revenue:", selectedRevenue);
     // Implement logic to delete the revenue data
@@ -69,6 +75,13 @@ const Transactions = () => {
     setIsRefundRevenueModalOpen(false);
   };
 
+  const handleAddRevenue = (newRevenue) => {
+    console.log("Adding revenue:", newRevenue);
+    // Implement logic to add the revenue data
+    console.log("Revenue added successfully.");
+    setIsAddRevenueModalOpen(false);
+  };
+
   return (
     <>
       <Navbar />
@@ -76,6 +89,7 @@ const Transactions = () => {
         <Sidebar
           toggleView={toggleView}
           currentView={showRevenue ? "revenue" : "expenses"}
+          openAddRevenueModal={openAddRevenueModal}
         />
         <div className="transactions-content">
           {showRevenue ? (
@@ -84,6 +98,7 @@ const Transactions = () => {
               openDeleteRevenueModal={openDeleteRevenueModal}
               openEditRevenueModal={openEditRevenueModal}
               openRefundRevenueModal={openRefundRevenueModal}
+              openAddRevenueModal={openAddRevenueModal}
             />
           ) : (
             <Expenses />
@@ -117,6 +132,13 @@ const Transactions = () => {
           revenue={selectedRevenue}
           onSubmit={handleRefundRevenue}
         />
+      </ModalWrapper>
+
+      <ModalWrapper
+        isOpen={isAddRevenueModalOpen}
+        onRequestClose={() => setIsAddRevenueModalOpen(false)}
+      >
+        <AddRevenue onSubmit={handleAddRevenue} />
       </ModalWrapper>
     </>
   );
