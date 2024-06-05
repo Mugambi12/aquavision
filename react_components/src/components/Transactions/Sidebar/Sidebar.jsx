@@ -1,3 +1,4 @@
+// Sidebar.js
 import React from "react";
 import "./Sidebar.css";
 
@@ -63,22 +64,24 @@ const Sidebar = ({ toggleView, currentView, openAddRevenueModal }) => {
           </ul>
         </div>
 
-        <ul className="transactions-sidebar-due-payments">
-          <h2 className="due-payments-title">Due Payments</h2>
-          <div className="due-payments">
-            {customers.map((customer, index) => (
-              <li key={index} className="customer">
-                <div className="customer-info">
-                  <span className="customer-name">{customer.name}</span>
-                  <span className="customer-house">{customer.house}</span>
-                  <span className="customer-amount">
-                    Amount: ${customer.amount}
-                  </span>
-                </div>
-              </li>
-            ))}
-          </div>
-        </ul>
+        {currentView === "revenue" && (
+          <ul className="transactions-sidebar-due-payments">
+            <h2 className="due-payments-title">Due Payments</h2>
+            <div className="due-payments">
+              {customers.map((customer, index) => (
+                <li key={index} className="customer">
+                  <div className="customer-info">
+                    <span className="customer-name">{customer.name}</span>
+                    <span className="customer-house">{customer.house}</span>
+                    <span className="customer-amount">
+                      Amount: ${customer.amount}
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </div>
+          </ul>
+        )}
       </div>
     </div>
   );
