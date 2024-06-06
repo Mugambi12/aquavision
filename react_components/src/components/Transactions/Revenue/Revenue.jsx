@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Revenue.css";
 import {
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -126,22 +126,30 @@ const RevenueCharts = ({
       <div className="line-chart-container">
         <h2 className="chart-header">Monthly Revenue Trends</h2>
         <ResponsiveContainer height={300}>
-          <LineChart
+          <AreaChart
             data={filteredRevenue}
             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
           >
+            <defs>
+              <linearGradient id="areaColor" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+              </linearGradient>
+            </defs>
             <XAxis dataKey="month" type="category" />
             <YAxis type="number" />
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid strokeDasharray="0.5 0.5" />
             <Tooltip />
             <Legend wrapperStyle={{ fontSize: "14px" }} />
-            <Line
-              type="monotone"
+            <Area
               dataKey="revenue"
+              type="monotone"
               stroke="#8884d8"
+              fillOpacity={1}
+              fill="url(#areaColor)"
               activeDot={{ r: 8 }}
             />
-          </LineChart>
+          </AreaChart>
         </ResponsiveContainer>
       </div>
 

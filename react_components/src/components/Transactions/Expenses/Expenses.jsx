@@ -4,6 +4,7 @@ import {
   Area,
   XAxis,
   YAxis,
+  CartesianGrid,
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
@@ -54,9 +55,17 @@ const ExpensesAreaChart = ({ expenses }) => {
     setSelectedYear(e.target.value);
   };
 
-  const data = filteredData.map((expense) => ({
-    month: getShortMonth(expense.date),
-    amount: expense.amount,
+  // Summing expenses for each month
+  const monthlyExpenses = {};
+  filteredData.forEach((expense) => {
+    const month = getShortMonth(expense.date);
+    monthlyExpenses[month] = (monthlyExpenses[month] || 0) + expense.amount;
+  });
+
+  // Transforming data for recharts
+  const data = Object.keys(monthlyExpenses).map((month) => ({
+    month,
+    amount: monthlyExpenses[month],
   }));
 
   return (
@@ -88,12 +97,15 @@ const ExpensesAreaChart = ({ expenses }) => {
             </defs>
             <XAxis dataKey="month" />
             <YAxis />
+            <CartesianGrid strokeDasharray="0.5 0.5" />
             <Tooltip />
             <Area
               dataKey="amount"
+              type="monotone"
               stroke="#8884d8"
               fillOpacity={1}
               fill="url(#colorUv)"
+              activeDot={{ r: 8 }}
             />
           </AreaChart>
         </ResponsiveContainer>

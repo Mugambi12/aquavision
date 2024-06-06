@@ -9,7 +9,7 @@
   background: var(--davys-gray_12);
   border-radius: var(--radius-8);
   box-shadow: var(--shadow-1);
-  margin-bottom: var(--fs-3);
+  margin-bottom: var(--fs-5);
 }
 
 .expenses-header span.material-symbols-rounded {
@@ -65,7 +65,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--fs-3);
+  padding: var(--fs-3) var(--fs-3) var(--fs-3);
   max-width: 100%;
   background: var(--white);
   margin-bottom: var(--fs-3);
@@ -76,7 +76,9 @@
 .chart-data-filter {
   display: flex;
   align-items: center;
+  margin-top: calc(var(--fs-6) * -6);
   margin-bottom: var(--fs-3);
+  position: absolute;
 }
 
 .chart-data-filter label {
@@ -104,7 +106,7 @@
 
   .area-chart {
     max-width: 100%;
-    margin: 0;
+    margin: calc(var(--fs-1) * 2) 0 0;
     padding: 0;
   }
 }
@@ -112,6 +114,7 @@
 @media (max-width: 480px) {
   .chart-data-filter {
     align-items: center;
+    margin-top: calc(var(--fs-6) * -1);
   }
 
   .chart-data-filter label,
