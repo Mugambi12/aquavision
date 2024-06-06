@@ -1,0 +1,46 @@
+.add-expense-container {
+  padding: var(--fs-10);
+  margin: 0 auto;
+  border-radius: var(--radius-8);
+}
+
+.add-expense-container h2 {
+  margin-bottom: var(--fs-1);
+  font-size: var(--fs-4);
+  color: var(--davys-gray);
+}
+
+.add-expense-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-expense-container label {
+  margin-bottom: var(--fs-1);
+  font-size: var(--fs-4);
+  color: var(--davys-gray);
+  width: 100%;
+}
+
+.add-expense-container input {
+  padding: var(--fs-10) var(--fs-5);
+  font-size: var(--fs-5);
+  background: var(--cultured);
+  width: 100%;
+  border: none;
+  border-radius: var(--radius-3);
+}
+
+.add-expense-container button {
+  padding: var(--fs-10) var(--fs-5);
+  background: var(--blue-ryb);
+  color: var(--white);
+  font-size: var(--fs-4);
+  border: none;
+  border-radius: var(--radius-6);
+  cursor: pointer;
+}
+
+.add-expense-container button:first-child {
+  background: var(--space-cadet);
+}

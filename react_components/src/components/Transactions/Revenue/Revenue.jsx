@@ -322,7 +322,6 @@ const Revenue = ({
   const [openDropdownId, setOpenDropdownId] = useState(null);
 
   useEffect(() => {
-    // Extract unique years from the revenue data
     const years = new Set(
       revenue.map((rev) => new Date(rev.date).getFullYear().toString())
     );

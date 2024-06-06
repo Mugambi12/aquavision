@@ -1,9 +1,8 @@
-// AddRevenue.js
 import React, { useState } from "react";
-import "./AddRevenue.css";
+import "./AddExpense.css";
 
-const AddRevenue = ({ onSubmit }) => {
-  const [newRevenue, setNewRevenue] = useState({
+const AddExpense = ({ onSubmit }) => {
+  const [newExpense, setNewExpense] = useState({
     customer: "",
     amount: "",
     date: "",
@@ -11,24 +10,24 @@ const AddRevenue = ({ onSubmit }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewRevenue({ ...newRevenue, [name]: value });
+    setNewExpense({ ...newExpense, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(newRevenue);
+    onSubmit(newExpense);
   };
 
   return (
-    <div className="add-revenue-container">
-      <h2>Add Revenue</h2>
+    <div className="add-expense-container">
+      <h2>Add Expense</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Customer Name:
           <input
             type="text"
             name="customer"
-            value={newRevenue.customer}
+            value={newExpense.customer}
             onChange={handleChange}
             required
           />
@@ -38,7 +37,7 @@ const AddRevenue = ({ onSubmit }) => {
           <input
             type="number"
             name="amount"
-            value={newRevenue.amount}
+            value={newExpense.amount}
             onChange={handleChange}
             required
           />
@@ -48,7 +47,7 @@ const AddRevenue = ({ onSubmit }) => {
           <input
             type="date"
             name="date"
-            value={newRevenue.date}
+            value={newExpense.date}
             onChange={handleChange}
             required
           />
@@ -58,11 +57,11 @@ const AddRevenue = ({ onSubmit }) => {
           <button type="button" onClick={() => onSubmit(null)}>
             Cancel
           </button>
-          <button type="submit">Add Revenue</button>
+          <button type="submit">Add Expense</button>
         </div>
       </form>
     </div>
   );
 };
 
-export default AddRevenue;
+export default AddExpense;

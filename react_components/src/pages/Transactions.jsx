@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import "../assets/styles/transactions.css";
 import revenueData from "../db/revenue";
+import expensesData from "../db/expenses";
 import Expenses from "../components/Transactions/Expenses/Expenses";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
@@ -12,6 +13,7 @@ import DeleteRevenue from "../components/Transactions/Revenue/DeleteRevenue/Dele
 import EditRevenue from "../components/Transactions/Revenue/EditRevenue/EditRevenue";
 import RefundRevenue from "../components/Transactions/Revenue/RefundRevenue/RefundRevenue";
 import AddRevenue from "../components/Transactions/Revenue/AddRevenue/AddRevenue";
+import AddExpense from "../components/Transactions/Expenses/AddExpense/AddExpense";
 
 const Transactions = () => {
   const [showRevenue, setShowRevenue] = useState(true);
@@ -22,6 +24,7 @@ const Transactions = () => {
   const [isRefundRevenueModalOpen, setIsRefundRevenueModalOpen] =
     useState(false);
   const [isAddRevenueModalOpen, setIsAddRevenueModalOpen] = useState(false);
+  const [isAddExpenseModalOpen, setIsAddExpenseModalOpen] = useState(false);
 
   useEffect(() => {
     const storedView = localStorage.getItem("transactionsView");
@@ -54,6 +57,10 @@ const Transactions = () => {
     setIsAddRevenueModalOpen(true);
   };
 
+  const openAddExpenseModal = () => {
+    setIsAddExpenseModalOpen(true);
+  };
+
   const handleDeleteRevenue = async () => {
     console.log("Deleting revenue:", selectedRevenue);
     // Implement logic to delete the revenue data
@@ -82,6 +89,13 @@ const Transactions = () => {
     setIsAddRevenueModalOpen(false);
   };
 
+  const handleAddExpense = (newExpense) => {
+    console.log("Adding expense:", newExpense);
+    // Implement logic to add the revenue data
+    console.log("Expense added successfully.");
+    setIsAddExpenseModalOpen(false);
+  };
+
   return (
     <>
       <Navbar />
@@ -90,6 +104,7 @@ const Transactions = () => {
           toggleView={toggleView}
           currentView={showRevenue ? "revenue" : "expenses"}
           openAddRevenueModal={openAddRevenueModal}
+          openAddExpenseModal={openAddExpenseModal}
         />
         <div className="transactions-content">
           {showRevenue ? (
@@ -101,7 +116,10 @@ const Transactions = () => {
               openAddRevenueModal={openAddRevenueModal}
             />
           ) : (
-            <Expenses />
+            <Expenses
+              expenses={expensesData}
+              openAddExpenseModal={openAddExpenseModal}
+            />
           )}
         </div>
       </div>
@@ -139,6 +157,23 @@ const Transactions = () => {
         onRequestClose={() => setIsAddRevenueModalOpen(false)}
       >
         <AddRevenue onSubmit={handleAddRevenue} />
+      </ModalWrapper>
+
+      {/*<ModalWrapper
+        isOpen={isDeleteExpensesModalOpen}
+        onRequestClose={() => setIsDeleteExpensesModalOpen(false)}
+      >
+        <DeleteExpense
+          expense={selectedExpense}
+          onSubmit={handleDeleteExpenses}
+        />
+      </ModalWrapper>*/}
+
+      <ModalWrapper
+        isOpen={isAddExpenseModalOpen}
+        onRequestClose={() => setIsAddExpenseModalOpen(false)}
+      >
+        <AddExpense onSubmit={handleAddExpense} />
       </ModalWrapper>
     </>
   );
