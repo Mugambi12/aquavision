@@ -1,49 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Settings.css";
 
-const HouseSection = ({ section, onDelete, onUpdate }) => {
-  const handleUpdate = () => {
-    const updatedSectionName = prompt("Enter the updated section name:");
-    if (updatedSectionName !== null) {
-      onUpdate(updatedSectionName);
-    }
-  };
-
+const GeneralSettings = ({ settings, handleChange, handleFileChange }) => {
   return (
-    <div className="house-section">
-      <input type="text" value={section} readOnly />
-      <button onClick={handleUpdate}>Update</button>
-      <button onClick={onDelete}>Delete</button>
-    </div>
-  );
-};
-
-const CompanySettings = ({ settings, handleChange }) => {
-  const handleDeleteSection = (index) => {
-    const updatedSections = [...settings.services.house_sections];
-    updatedSections.splice(index, 1);
-    handleChange(updatedSections, "services", "house_sections");
-  };
-
-  const handleUpdateSection = (index, updatedSectionName) => {
-    const updatedSections = [...settings.services.house_sections];
-    updatedSections[index].section = updatedSectionName;
-    handleChange(updatedSections, "services", "house_sections");
-  };
-
-  const handleAddSection = () => {
-    const newSectionName = prompt("Enter the name for the new section:");
-    if (newSectionName !== null) {
-      const newSection = { _id: Date.now(), section: newSectionName };
-      const updatedSections = [...settings.services.house_sections, newSection];
-      handleChange(updatedSections, "services", "house_sections");
-    }
-  };
-
-  return (
-    <div className="company-settings">
+    <div className="settings-section-container">
       <h2 className="settings-section-title">General Settings</h2>
+      <div className="company-logo-image">
+        {settings.company_logo && (
+          <img
+            src={settings.company_logo}
+            alt="Company Logo"
+            className="company-logo-preview"
+          />
+        )}
+      </div>
       <div className="settings-section">
+        <div className="form-group">
+          <label htmlFor="companyLogo">Company Logo:</label>
+          <input type="file" id="companyLogo" onChange={handleFileChange} />
+        </div>
         <div className="form-group">
           <label htmlFor="companyName">Company Name:</label>
           <input
@@ -51,15 +26,6 @@ const CompanySettings = ({ settings, handleChange }) => {
             id="companyName"
             value={settings.company_name}
             onChange={(e) => handleChange(e, "general", "company_name")}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="companyLogo">Company Logo:</label>
-          <input
-            type="text"
-            id="companyLogo"
-            value={settings.company_logo}
-            onChange={(e) => handleChange(e, "general", "company_logo")}
           />
         </div>
         <div className="form-group">
@@ -107,27 +73,68 @@ const CompanySettings = ({ settings, handleChange }) => {
           />
         </div>
       </div>
+    </div>
+  );
+};
 
-      {/* Services */}
+const ServicesSettings = ({
+  settings,
+  handleChange,
+  selectedSection,
+  setSelectedSection,
+}) => {
+  return (
+    <div className="settings-section container">
       <h2 className="settings-section-title">Services</h2>
       <div className="settings-section">
-        {/* Unit Price, Service Fee */}
         <div className="form-group">
-          <label>House Sections:</label>
-          {settings.services.house_sections.map((section, index) => (
-            <HouseSection
-              key={section._id}
-              section={section.section}
-              onDelete={() => handleDeleteSection(index)}
-              onUpdate={(updatedSectionName) =>
-                handleUpdateSection(index, updatedSectionName)
-              }
-            />
-          ))}
-          <button onClick={handleAddSection}>Add New Section</button>
+          <label htmlFor="unitPrice">Unit Price:</label>
+          <input
+            type="number"
+            id="unitPrice"
+            value={settings.services.unit_price}
+            onChange={(e) => handleChange(e, "services", "unit_price")}
+          />
         </div>
+        <div className="form-group">
+          <label htmlFor="serviceFee">Service Fee:</label>
+          <input
+            type="number"
+            id="serviceFee"
+            value={settings.services.service_fee}
+            onChange={(e) => handleChange(e, "services", "service_fee")}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="houseSections">House Sections:</label>
+          <select
+            id="houseSections"
+            value={selectedSection}
+            onChange={(e) => setSelectedSection(e.target.value)}
+          >
+            <option value="" disabled>
+              Select a section
+            </option>
+            {settings.services.house_sections.map((section) => (
+              <option key={section._id} value={section._id}>
+                {section._id} - {section.section}
+              </option>
+            ))}
+          </select>
+        </div>
+        {/*<div className="action-buttons">
+          <button onClick={handleUpdateSection}>Update</button>
+          <button onClick={handleDeleteSection}>Delete</button>
+          <button onClick={handleAddSection}>Add New Section</button>
+        </div>*/}
       </div>
+    </div>
+  );
+};
 
+const PaymentsSettings = ({ settings, handleChange }) => {
+  return (
+    <div className="settings-section-container">
       <h2 className="settings-section-title">Payments</h2>
       <div className="settings-section">
         {settings.payments.map((payment) => (
@@ -137,14 +144,18 @@ const CompanySettings = ({ settings, handleChange }) => {
               type="text"
               id={`bankName_${payment._id}`}
               value={payment.bank_name}
-              onChange={(e) => handleChange(e, "payments", "bank_name")}
+              onChange={(e) =>
+                handleChange(e, "payments", "bank_name", payment._id)
+              }
             />
             <label htmlFor={`paybill_${payment._id}`}>Paybill:</label>
             <input
               type="number"
               id={`paybill_${payment._id}`}
               value={payment.paybill}
-              onChange={(e) => handleChange(e, "payments", "paybill")}
+              onChange={(e) =>
+                handleChange(e, "payments", "paybill", payment._id)
+              }
             />
             <label htmlFor={`accountNumber_${payment._id}`}>
               Account Number:
@@ -153,12 +164,20 @@ const CompanySettings = ({ settings, handleChange }) => {
               type="number"
               id={`accountNumber_${payment._id}`}
               value={payment.account_number}
-              onChange={(e) => handleChange(e, "payments", "account_number")}
+              onChange={(e) =>
+                handleChange(e, "payments", "account_number", payment._id)
+              }
             />
           </div>
         ))}
       </div>
+    </div>
+  );
+};
 
+const MailConfigSettings = ({ settings, handleChange }) => {
+  return (
+    <div className="settings-section-container">
       <h2 className="settings-section-title">Mail Configuration</h2>
       <div className="settings-section">
         <div className="form-group">
@@ -171,6 +190,15 @@ const CompanySettings = ({ settings, handleChange }) => {
           />
         </div>
         <div className="form-group">
+          <label htmlFor="mailAddress">Main Address:</label>
+          <input
+            type="email"
+            id="mailAddress"
+            value={settings.mailConfig.company_email}
+            onChange={(e) => handleChange(e, "mailConfig", "company_email")}
+          />
+        </div>
+        <div className="form-group">
           <label htmlFor="mailPassword">Mail Password:</label>
           <input
             type="password"
@@ -180,7 +208,13 @@ const CompanySettings = ({ settings, handleChange }) => {
           />
         </div>
       </div>
+    </div>
+  );
+};
 
+const SocialAccountsSettings = ({ settings, handleChange }) => {
+  return (
+    <div className="settings-section-container">
       <h2 className="settings-section-title">Social Accounts</h2>
       <div className="settings-section">
         <div className="form-group">
@@ -247,6 +281,95 @@ const CompanySettings = ({ settings, handleChange }) => {
           />
         </div>
       </div>
+    </div>
+  );
+};
+
+const CompanySettings = ({ settings, handleChange, handleFileChange }) => {
+  const [selectedSection, setSelectedSection] = useState("general");
+
+  const renderContent = () => {
+    switch (selectedSection) {
+      case "general":
+        return (
+          <GeneralSettings
+            settings={settings}
+            handleChange={handleChange}
+            handleFileChange={handleFileChange}
+          />
+        );
+      case "services":
+        return (
+          <ServicesSettings
+            settings={settings}
+            handleChange={handleChange}
+            selectedSection={selectedSection}
+            setSelectedSection={setSelectedSection}
+          />
+        );
+      case "payments":
+        return (
+          <PaymentsSettings settings={settings} handleChange={handleChange} />
+        );
+      case "mailConfig":
+        return (
+          <MailConfigSettings settings={settings} handleChange={handleChange} />
+        );
+      case "socialAccounts":
+        return (
+          <SocialAccountsSettings
+            settings={settings}
+            handleChange={handleChange}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="company-settings-wrapper">
+      {/* Sidebar content here */}
+      <div className="sidebar">
+        <a
+          href="#"
+          className={selectedSection === "general" ? "active" : ""}
+          onClick={() => setSelectedSection("general")}
+        >
+          General
+        </a>
+        <a
+          href="#"
+          className={selectedSection === "services" ? "active" : ""}
+          onClick={() => setSelectedSection("services")}
+        >
+          Services
+        </a>
+        <a
+          href="#"
+          className={selectedSection === "payments" ? "active" : ""}
+          onClick={() => setSelectedSection("payments")}
+        >
+          Payments
+        </a>
+        <a
+          href="#"
+          className={selectedSection === "mailConfig" ? "active" : ""}
+          onClick={() => setSelectedSection("mailConfig")}
+        >
+          Mail Configuration
+        </a>
+        <a
+          href="#"
+          className={selectedSection === "socialAccounts" ? "active" : ""}
+          onClick={() => setSelectedSection("socialAccounts")}
+        >
+          Social Accounts
+        </a>
+      </div>
+
+      {/* Render content based on selected section */}
+      <div className="company-settings-container">{renderContent()}</div>
     </div>
   );
 };

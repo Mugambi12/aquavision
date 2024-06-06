@@ -67,10 +67,10 @@
   align-items: center;
   padding: var(--fs-3) var(--fs-3) var(--fs-3);
   max-width: 100%;
-  background: var(--white);
+  background: var(--cultured);
   margin-bottom: var(--fs-3);
   border-radius: var(--radius-8);
-  box-sizing: border-box;
+  box-shadow: var(--shadow-1);
 }
 
 .chart-data-filter {

@@ -151,11 +151,11 @@
   margin-bottom: var(--fs-3);
 }
 
-.line-chart-container {
+.area-chart-container {
   flex-basis: 65%;
   overflow-x: auto;
   padding: var(--fs-3);
-  background: var(--white);
+  background: var(--cultured);
   border-radius: var(--radius-8);
   box-shadow: var(--shadow-1);
 }
@@ -164,7 +164,7 @@
   flex-basis: 35%;
   overflow-x: auto;
   padding: var(--fs-3);
-  background: var(--white);
+  background: var(--cultured);
   border-radius: var(--radius-8);
   box-shadow: var(--shadow-1);
 }
@@ -174,7 +174,7 @@
     flex-direction: column;
   }
 
-  .line-chart-container,
+  .area-chart-container,
   .doughnut-chart-container {
     flex-basis: 100%;
     padding: var(--fs-6);

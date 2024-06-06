@@ -1,6 +1,10 @@
 .add-invoice-form {
   display: flex;
   flex-direction: column;
+
+  padding: var(--fs-10);
+  margin: 0 auto;
+  border-radius: var(--radius-8);
 }
 
 .add-invoice-form label {
@@ -9,7 +13,7 @@
 
 .add-invoice-form input,
 .add-invoice-form select {
-  padding: 8px 10px;
+  padding: 10px var(--fs-5);
   margin-bottom: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;

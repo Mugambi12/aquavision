@@ -33,11 +33,30 @@ const Settings = () => {
     }, 5000); // 5000 milliseconds = 5 seconds
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        handleChange(
+          { target: { value: reader.result } },
+          "general",
+          "company_logo"
+        );
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <>
       <Navbar />
       <div className="main-container">
-        <CompanySettings settings={settings} handleChange={handleChange} />
+        <CompanySettings
+          settings={settings}
+          handleChange={handleChange}
+          handleFileChange={handleFileChange}
+        />
       </div>
     </>
   );

@@ -1,6 +1,6 @@
 const settingsData = {
   _id: 1,
-  company_logo: "path/to/logo.png",
+  company_logo: "https://fedskillstest.ct.digital/1.png",
   company_name: "Acme Corporation",
   company_address: "123 Main Street, Cityville",
   contact_number: "+1234567890",

@@ -28,7 +28,7 @@
 }
 
 .add-user-container input {
-  padding: var(--fs-10) var(--fs-5);
+  padding: 10px var(--fs-5);
   font-size: var(--fs-5);
   background: var(--cultured);
   width: 100%;

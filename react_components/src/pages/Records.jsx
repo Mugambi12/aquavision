@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar/Navbar";
-import Invoices from "../components/Records/Content/Invoices";
+import MainContent from "../components/Records/MainContent/MainContent";
 import Footer from "../components/Footer/Footer";
 import AddInvoiceForm from "../components/Records/AddInvoiceForm/AddInvoiceForm";
 import DeleteInvoice from "../components/Records/DeleteInvoice/DeleteInvoice";
@@ -154,7 +154,7 @@ const Records = () => {
     <>
       <Navbar />
       <div className="main-container">
-        <Invoices
+        <MainContent
           data={filteredData}
           selectedFilter={selectedFilter}
           setSelectedFilter={setSelectedFilter}

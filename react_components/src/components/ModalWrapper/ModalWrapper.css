@@ -1,19 +1,40 @@
 /* ModalWrapper.css */
+
+/* Add animation keyframes */
+@keyframes modalOpenAnimation {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes modalCloseAnimation {
+  from {
+    transform: translate(-50%, -50%);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
 .modal-wrapper {
   z-index: 10;
-  position: absolute;
+  position: fixed;
   min-width: 450px;
   top: 50%;
   left: 50%;
   right: auto;
   bottom: auto;
   margin-right: -50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -100%);
   background: var(--white);
   padding: 20px;
   border-radius: 10px;
   border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: modalOpenAnimation 0.5s forwards;
 }
 
 .modal-overlay {
@@ -53,4 +74,8 @@
   .modal-title {
     font-size: var(--fs-3);
   }
+}
+
+.modal-wrapper.modal-closing {
+  animation: modalCloseAnimation 0.5s forwards;
 }

@@ -123,7 +123,7 @@ const RevenueCharts = ({
     </div>
 
     <div className="revenue-charts-container">
-      <div className="line-chart-container">
+      <div className="area-chart-container">
         <h2 className="chart-header">Monthly Revenue Trends</h2>
         <ResponsiveContainer height={300}>
           <AreaChart
