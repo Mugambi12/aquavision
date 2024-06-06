@@ -1,32 +1,53 @@
-.add-user-form {
+.add-user-container {
+  padding: var(--fs-10);
+  margin: 0 auto;
+  border-radius: var(--radius-8);
+}
+
+.add-user-container .modal-title {
+  margin-bottom: var(--fs-1);
+  font-size: var(--fs-4);
+  color: var(--davys-gray);
+}
+
+.add-user-container .add-user-form {
   display: flex;
   flex-direction: column;
+  margin-top: var(--fs-10);
 }
 
-.add-user-form label {
-  margin-bottom: 10px;
+.add-user-container .form-group {
+  flex-basis: 50%;
+  margin-bottom: var(--fs-5);
 }
 
-.add-user-form input {
-  padding: 8px 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+.add-user-container label {
+  font-size: var(--fs-4);
+  color: var(--davys-gray);
   width: 100%;
-  box-sizing: border-box;
 }
 
-.add-user-form button {
-  padding: 8px 16px;
-  background: var(--blue-ryb);
-  color: var(--white);
+.add-user-container input {
+  padding: var(--fs-10) var(--fs-5);
+  font-size: var(--fs-5);
+  background: var(--cultured);
   width: 100%;
-  text-align: center;
   border: none;
-  border-radius: 5px;
+  border-radius: var(--radius-6);
+}
+
+.add-user-container .submit-button {
+  padding: var(--fs-10) var(--fs-5);
+  color: var(--white);
+  font-size: var(--fs-4);
+  width: fit-content;
+  background: var(--space-cadet);
+  align-self: flex-end;
+  border: none;
+  border-radius: var(--radius-8);
   cursor: pointer;
 }
 
-.add-user-form button:hover {
-  color: var(--color);
+.add-user-container .submit-button:hover {
+  background: var(--pacific-blue);
 }

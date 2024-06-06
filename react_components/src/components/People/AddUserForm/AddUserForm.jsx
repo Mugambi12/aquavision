@@ -19,33 +19,44 @@ const AddUserForm = ({ onSubmit }) => {
   };
 
   return (
-    <>
+    <div className="add-user-container">
       <h2 className="modal-title">Add New User</h2>
       <form onSubmit={handleSubmit} className="add-user-form">
-        <label>Full Name:</label>
-        <input
-          type="text"
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
-          required
-        />
-        <label>Gender:</label>
-        <input
-          type="text"
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-          required
-        />
-        <label>Age:</label>
-        <input
-          type="number"
-          value={age}
-          onChange={(e) => setAge(e.target.value)}
-          required
-        />
-        <button type="submit">Add User</button>
+        <div className="form-group">
+          <label htmlFor="fullName">Full Name:</label>
+          <input
+            type="text"
+            id="fullName"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="gender">Gender:</label>
+          <input
+            type="text"
+            id="gender"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="age">Age:</label>
+          <input
+            type="number"
+            id="age"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit" className="submit-button">
+          Add User
+        </button>
       </form>
-    </>
+    </div>
   );
 };
 

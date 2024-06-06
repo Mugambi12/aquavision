@@ -1,0 +1,54 @@
+/* CompanySettings.css */
+
+/* Styles specific to the CompanySettings component */
+.company-settings {
+  font-family: var(--ff-vietnam);
+  color: var(--onyx);
+}
+
+/* Styles for section titles within the CompanySettings component */
+.company-settings .settings-section-title {
+  font-size: var(--fs-2);
+  font-weight: var(--fw-600);
+  color: var(--imperial-red);
+  margin-bottom: 1rem;
+}
+
+/* Styles for sections within the CompanySettings component */
+.company-settings .settings-section {
+  margin-bottom: 2rem;
+}
+
+/* Styles for form groups within the CompanySettings component */
+.company-settings .form-group {
+  margin-bottom: 1rem;
+}
+
+/* Styles for labels within the CompanySettings component */
+.company-settings label {
+  display: block;
+  font-size: var(--fs-4);
+  color: var(--davys-gray);
+  margin-bottom: 0.5rem;
+}
+
+/* Styles for input fields and textareas within the CompanySettings component */
+.company-settings input,
+.company-settings textarea {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: var(--fs-5);
+  border: 1px solid var(--onyx);
+  border-radius: var(--radius-3);
+}
+
+/* Additional styling for specific input types */
+.company-settings input[type="number"],
+.company-settings input[type="email"],
+.company-settings input[type="tel"],
+.company-settings input[type="url"],
+.company-settings input[type="password"],
+.company-settings textarea {
+  padding: 0.5rem;
+  border-radius: var(--radius-3);
+}
