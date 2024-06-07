@@ -277,7 +277,7 @@ const RevenueTableContainer = ({
                 className="material-symbols-rounded"
                 onClick={() => toggleDropdown(rev._id)}
               >
-                {`${openDropdownId === rev._id ? "close" : "more_horiz"}`}
+                {`${openDropdownId === rev._id ? "close" : "more_vert"}`}
               </span>
               {openDropdownId === rev._id && (
                 <div className="revenue-options-dropdown">

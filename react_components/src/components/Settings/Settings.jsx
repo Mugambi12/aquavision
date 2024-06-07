@@ -1,12 +1,43 @@
 import React, { useState } from "react";
+import { useForm, useFieldArray } from "react-hook-form";
 import "./Settings.css";
-import { Controller } from "react-hook-form";
 
-const CompanySettings = ({ settingsData, control, onSubmit }) => {
+const CompanySettings = ({ settingsData, handleSaveSettings }) => {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: settingsData,
+  });
+
+  const {
+    fields: houseSectionsFields,
+    append: appendHouseSection,
+    remove: removeHouseSection,
+  } = useFieldArray({
+    control,
+    name: "services.house_sections",
+  });
+
+  const {
+    fields: paymentMethodsFields,
+    append: appendPaymentMethod,
+    remove: removePaymentMethod,
+  } = useFieldArray({
+    control,
+    name: "payments",
+  });
+
   const [activeTab, setActiveTab] = useState("company-profile");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
+  };
+
+  const onSubmit = async (data) => {
+    await handleSaveSettings(data); // Call the API and log form data
   };
 
   return (
@@ -15,424 +46,358 @@ const CompanySettings = ({ settingsData, control, onSubmit }) => {
       <div className="settings-card">
         <div className="settings-row">
           {/* Sidebar Column */}
-          <div className="settings-col-md-4">
+          <div className="settings-sidebar">
+            <div className="settings-company-logo">
+              <img src={settingsData.company_logo} alt="Company Logo" />
+              <h4 className="company-name">{settingsData.company_name}</h4>
+            </div>
+
             <div className="settings-nav">
               {/* Sidebar Navigation links */}
-              <a
-                className={`settings-nav-item ${
-                  activeTab === "company-profile" ? "active" : ""
-                }`}
-                href="#company-profile"
-                onClick={() => handleTabClick("company-profile")}
-              >
-                Company Profile
-              </a>
-              <a
-                className={`settings-nav-item ${
-                  activeTab === "services" ? "active" : ""
-                }`}
-                href="#services"
-                onClick={() => handleTabClick("services")}
-              >
-                Services
-              </a>
-              <a
-                className={`settings-nav-item ${
-                  activeTab === "payment-methods" ? "active" : ""
-                }`}
-                href="#payment-methods"
-                onClick={() => handleTabClick("payment-methods")}
-              >
-                Payment Methods
-              </a>
-              <a
-                className={`settings-nav-item ${
-                  activeTab === "email-settings" ? "active" : ""
-                }`}
-                href="#email-settings"
-                onClick={() => handleTabClick("email-settings")}
-              >
-                Email Settings
-              </a>
-              <a
-                className={`settings-nav-item ${
-                  activeTab === "social-media" ? "active" : ""
-                }`}
-                href="#social-media"
-                onClick={() => handleTabClick("social-media")}
-              >
-                Social Media
-              </a>
+              {[
+                "company-profile",
+                "services",
+                "payment-methods",
+                "email-settings",
+                "social-media",
+              ].map((tab) => (
+                <a
+                  key={tab}
+                  className={`settings-nav-item ${
+                    activeTab === tab ? "active" : ""
+                  }`}
+                  href={`#${tab}`}
+                  onClick={() => handleTabClick(tab)}
+                >
+                  {tab
+                    .replace("-", " ")
+                    .replace(/\b\w/g, (l) => l.toUpperCase())}
+                </a>
+              ))}
             </div>
           </div>
 
           {/* Content Column */}
-          <div className="settings-col-md-8">
-            <div className="settings-content">
-              {/* Form content */}
-              <form onSubmit={onSubmit}>
-                {/* Company Profile Tab */}
-                <div
-                  className={`settings-pane ${
-                    activeTab === "company-profile" ? "active" : ""
-                  }`}
-                  id="company-profile"
-                >
-                  <h5>Company Profile</h5>
-                  <div className="settings-form">
-                    <Controller
-                      name="company_name"
-                      control={control}
-                      defaultValue={settingsData.company_name}
-                      render={({ field }) => (
-                        <input
-                          {...field}
-                          type="text"
-                          className="settings-form-control"
-                          placeholder="Company Name"
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="industry"
-                      control={control}
-                      defaultValue={settingsData.industry}
-                      render={({ field }) => (
-                        <input
-                          {...field}
-                          type="text"
-                          className="settings-form-control"
-                          placeholder="Industry"
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="company_website_url"
-                      control={control}
-                      defaultValue={settingsData.company_website_url}
-                      render={({ field }) => (
-                        <input
-                          {...field}
-                          type="text"
-                          className="settings-form-control"
-                          placeholder="Website"
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="contact_email"
-                      control={control}
-                      defaultValue={settingsData.contact_email}
-                      render={({ field }) => (
-                        <input
-                          {...field}
-                          type="email"
-                          className="settings-form-control"
-                          placeholder="Contact Email"
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="company_description"
-                      control={control}
-                      defaultValue={settingsData.company_description}
-                      render={({ field }) => (
-                        <textarea
-                          {...field}
-                          className="settings-form-control"
-                          rows="5"
-                          placeholder="Description"
-                        />
-                      )}
-                    />
-                  </div>
-                  {/* Additional form content */}
+          <div className="settings-content">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              {/* Company Profile Tab */}
+              <div
+                className={`settings-pane ${
+                  activeTab === "company-profile" ? "active" : ""
+                }`}
+                id="company-profile"
+              >
+                <h5>Company Profile</h5>
+                <div className="settings-form">
+                  <label htmlFor="company_logo">Company Logo</label>
+                  <input
+                    type="file"
+                    {...register("company_logo", { required: true })}
+                  />
+                  {errors.company_logo && (
+                    <p className="error">Company Logo is required</p>
+                  )}
+
+                  <label htmlFor="company_name">Company Name</label>
+                  <input
+                    type="text"
+                    placeholder="Company Name"
+                    {...register("company_name", { required: true })}
+                  />
+                  {errors.company_name && (
+                    <p className="error">Company Name is required</p>
+                  )}
+
+                  <label htmlFor="company_address">Company Address</label>
+                  <input
+                    type="text"
+                    placeholder="Industry"
+                    {...register("industry", { required: true })}
+                  />
+                  {errors.industry && (
+                    <p className="error">Industry is required</p>
+                  )}
+
+                  <label htmlFor="company_website_url">Company Website</label>
+                  <input
+                    type="text"
+                    placeholder="Website"
+                    {...register("company_website_url", { required: true })}
+                  />
+                  {errors.company_website_url && (
+                    <p className="error">Website is required</p>
+                  )}
+
+                  <label htmlFor="contact_number">Contact Number</label>
+                  <input
+                    type="email"
+                    placeholder="Contact Email"
+                    {...register("contact_email", { required: true })}
+                  />
+                  {errors.contact_email && (
+                    <p className="error">Contact Email is required</p>
+                  )}
+
+                  <label htmlFor="company_description">
+                    Company Description
+                  </label>
+                  <textarea
+                    placeholder="Description"
+                    rows="5"
+                    {...register("company_description", { required: true })}
+                  />
+                  {errors.company_description && (
+                    <p className="error">Description is required</p>
+                  )}
                 </div>
+              </div>
 
-                {/* Services Tab */}
-                <div
-                  className={`settings-pane ${
-                    activeTab === "services" ? "active" : ""
-                  }`}
-                  id="services"
-                >
-                  <h5>Services</h5>
-                  <div className="settings-form">
-                    {/* Services form inputs */}
-                    <Controller
-                      name="unit_price"
-                      control={control}
-                      defaultValue={settingsData.services.unit_price}
-                      render={({ field }) => (
-                        <input
-                          {...field}
-                          type="number"
-                          className="settings-form-control"
-                          placeholder="Water Unit Price"
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="service_fee"
-                      control={control}
-                      defaultValue={settingsData.services.service_fee}
-                      render={({ field }) => (
-                        <input
-                          {...field}
-                          type="number"
-                          className="settings-form-control"
-                          placeholder="Monthly Standing Charge"
-                        />
-                      )}
-                    />
-                    {/* Additional input fields */}
-                  </div>
-                  {/* Additional form content */}
-                  <div className="settings-form">
-                    <h6>House Sections</h6>
-                    {settingsData.services.house_sections.map(
-                      (section, index) => (
-                        <div
-                          key={index}
-                          className="settings-form-group house-sections-list"
-                        >
-                          <Controller
-                            name={`section${index}`}
-                            control={control}
-                            defaultValue={section.section}
-                            render={({ field }) => (
-                              <input
-                                {...field}
-                                type="text"
-                                className="settings-form-control"
-                                placeholder="Section"
-                              />
-                            )}
-                          />
+              {/* Services Tab */}
+              <div
+                className={`settings-pane ${
+                  activeTab === "services" ? "active" : ""
+                }`}
+                id="services"
+              >
+                <h5>Services</h5>
+                <div className="settings-form">
+                  <label htmlFor="services.unit_price">Water Unit Price</label>
+                  <input
+                    type="number"
+                    placeholder="Water Unit Price"
+                    {...register("services.unit_price", { required: true })}
+                  />
+                  {errors.services?.unit_price && (
+                    <p className="error">Water Unit Price is required</p>
+                  )}
 
-                          <button
-                            type="button"
-                            className="settings-btn settings-btn-danger"
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      )
-                    )}
-                    <button
-                      type="button"
-                      className="settings-btn settings-btn-secondary"
-                    >
-                      Add Section
-                    </button>
-                  </div>
+                  <label htmlFor="services.service_fee">
+                    Monthly Standing Charge
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="Monthly Standing Charge"
+                    {...register("services.service_fee", { required: true })}
+                  />
+                  {errors.services?.service_fee && (
+                    <p className="error">Monthly Standing Charge is required</p>
+                  )}
                 </div>
+                <div className="settings-form">
+                  <h4>House Sections</h4>
+                  {houseSectionsFields.map((section, index) => (
+                    <div key={section.id}>
+                      <input
+                        type="text"
+                        placeholder="Section"
+                        {...register(
+                          `services.house_sections.${index}.section`,
+                          { required: true }
+                        )}
+                      />
+                      {errors.services?.house_sections?.[index]?.section && (
+                        <p className="error">Section is required</p>
+                      )}
 
-                {/* Payment Methods Tab */}
-                <div
-                  className={`settings-pane ${
-                    activeTab === "payment-methods" ? "active" : ""
-                  }`}
-                  id="payment-methods"
-                >
-                  <h5>Payment Methods</h5>
-                  <div className="settings-form">
-                    {/* Payment Methods form inputs */}
-                    {settingsData.payments.map((payment, index) => (
-                      <div key={index} className="settings-form-group">
-                        <div className="d-flex">
-                          <Controller
-                            name={`bank_name${index}`}
-                            control={control}
-                            defaultValue={payment.bank_name}
-                            render={({ field }) => (
-                              <input
-                                {...field}
-                                type="text"
-                                className="settings-form-control"
-                                placeholder="Name of the Bank"
-                              />
-                            )}
-                          />
-                          <Controller
-                            name={`paybill_number${index}`}
-                            control={control}
-                            defaultValue={payment.paybill_number}
-                            render={({ field }) => (
-                              <input
-                                {...field}
-                                type="text"
-                                className="settings-form-control"
-                                placeholder="Pay Bill Number"
-                              />
-                            )}
-                          />
-                          <Controller
-                            name={`account_number${index}`}
-                            control={control}
-                            defaultValue={payment.account_number}
-                            render={({ field }) => (
-                              <input
-                                {...field}
-                                type="text"
-                                className="settings-form-control"
-                                placeholder="Account Number"
-                              />
-                            )}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                    <Controller
-                      name="additional_info"
-                      control={control}
-                      defaultValue={settingsData.payments.additional_info}
-                      render={({ field }) => (
-                        <textarea
-                          {...field}
-                          className="settings-form-control"
-                          rows="3"
-                          placeholder="Additional Information"
-                        />
-                      )}
-                    />
-                  </div>
-                  {/* Additional form content */}
-                </div>
-
-                {/* Email Settings Tab */}
-                <div
-                  className={`settings-pane ${
-                    activeTab === "email-settings" ? "active" : ""
-                  }`}
-                  id="email-settings"
-                >
-                  <h5>Email Settings</h5>
-                  <div className="settings-form">
-                    {/* Email Settings form inputs */}
-                    <Controller
-                      name="mail_server"
-                      control={control}
-                      defaultValue={settingsData.mailConfig.mail_server}
-                      render={({ field }) => (
-                        <input
-                          {...field}
-                          type="text"
-                          className="settings-form-control"
-                          placeholder="Mail Server"
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="company_email"
-                      control={control}
-                      defaultValue={settingsData.mailConfig.company_email}
-                      render={({ field }) => (
-                        <input
-                          {...field}
-                          type="email"
-                          className="settings-form-control"
-                          placeholder="Email"
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="                    company_password"
-                      control={control}
-                      defaultValue={settingsData.mailConfig.company_password}
-                      render={({ field }) => (
-                        <input
-                          {...field}
-                          type="password"
-                          className="settings-form-control"
-                          placeholder="Email Password"
-                        />
-                      )}
-                    />
-                  </div>
-                  {/* Additional form content */}
-                </div>
-
-                {/* Social Media Tab */}
-                <div
-                  className={`settings-pane ${
-                    activeTab === "social-media" ? "active" : ""
-                  }`}
-                  id="social-media"
-                >
-                  <h5>Social Media</h5>
-                  <div className="settings-form">
-                    {/* Social Media form inputs */}
-                    <Controller
-                      name="twitter"
-                      control={control}
-                      defaultValue={settingsData.socialAccounts.twitter}
-                      render={({ field }) => (
-                        <input
-                          {...field}
-                          type="text"
-                          className="settings-form-control"
-                          placeholder="Twitter"
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="facebook"
-                      control={control}
-                      defaultValue={settingsData.socialAccounts.facebook}
-                      render={({ field }) => (
-                        <input
-                          {...field}
-                          type="text"
-                          className="settings-form-control"
-                          placeholder="Facebook"
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="linkedin"
-                      control={control}
-                      defaultValue={settingsData.socialAccounts.linkedin}
-                      render={({ field }) => (
-                        <input
-                          {...field}
-                          type="text"
-                          className="settings-form-control"
-                          placeholder="LinkedIn"
-                        />
-                      )}
-                    />
-                    <Controller
-                      name="instagram"
-                      control={control}
-                      defaultValue={settingsData.socialAccounts.instagram}
-                      render={({ field }) => (
-                        <input
-                          {...field}
-                          type="text"
-                          className="settings-form-control"
-                          placeholder="Instagram"
-                        />
-                      )}
-                    />
-                  </div>
-                  {/* Additional form content */}
-                </div>
-
-                {/* Submit and Cancel buttons */}
-                <div className="settings-pane-footer">
+                      <button
+                        type="button"
+                        className="settings-btn danger"
+                        onClick={() => removeHouseSection(index)}
+                      >
+                        <span className="material-symbols-rounded">delete</span>
+                      </button>
+                    </div>
+                  ))}
                   <button
-                    type="submit"
-                    className="settings-btn settings-btn-primary"
+                    type="button"
+                    className="settings-btn secondary"
+                    onClick={() => appendHouseSection({ section: "" })}
                   >
-                    Save changes
-                  </button>
-                  <button type="button" className="settings-btn">
-                    Cancel
+                    Add Section
                   </button>
                 </div>
-              </form>
-            </div>
+              </div>
+
+              {/* Payment Methods Tab */}
+              <div
+                className={`settings-pane ${
+                  activeTab === "payment-methods" ? "active" : ""
+                }`}
+                id="payment-methods"
+              >
+                <h5>Payment Methods</h5>
+                <div className="settings-form">
+                  {paymentMethodsFields.map((payment, index) => (
+                    <div key={payment.id} className="settings-form-group">
+                      <label htmlFor="bank_name">Bank Name</label>
+                      <input
+                        type="text"
+                        placeholder="Name of the Bank"
+                        {...register(`payments.${index}.bank_name`, {
+                          required: true,
+                        })}
+                      />
+                      {errors.payments?.[index]?.bank_name && (
+                        <p className="error">Bank Name is required</p>
+                      )}
+
+                      <label htmlFor="paybill_number">Pay Bill Number</label>
+                      <input
+                        type="text"
+                        placeholder="Pay Bill Number"
+                        {...register(`payments.${index}.paybill_number`, {
+                          required: true,
+                        })}
+                      />
+                      {errors.payments?.[index]?.paybill_number && (
+                        <p className="error">Pay Bill Number is required</p>
+                      )}
+
+                      <label htmlFor="account_number">Account Number</label>
+                      <input
+                        type="text"
+                        placeholder="Account Number"
+                        {...register(`payments.${index}.account_number`, {
+                          required: true,
+                        })}
+                      />
+                      {errors.payments?.[index]?.account_number && (
+                        <p className="error">Account Number is required</p>
+                      )}
+
+                      <button
+                        type="button"
+                        className="settings-btn danger"
+                        onClick={() => removePaymentMethod(index)}
+                        style={{ marginBottom: "1rem" }}
+                      >
+                        <span className="material-symbols-rounded">delete</span>
+                      </button>
+                    </div>
+                  ))}
+
+                  <button
+                    type="button"
+                    className="settings-btn secondary"
+                    onClick={() =>
+                      appendPaymentMethod({
+                        bank_name: "",
+                        paybill_number: "",
+                        account_number: "",
+                      })
+                    }
+                  >
+                    Add Payment Method
+                  </button>
+                </div>
+              </div>
+
+              {/* Email Settings Tab */}
+              <div
+                className={`settings-pane ${
+                  activeTab === "email-settings" ? "active" : ""
+                }`}
+                id="email-settings"
+              >
+                <h5>Email Settings</h5>
+                <div className="settings-form">
+                  <input
+                    type="text"
+                    placeholder="Mail Server"
+                    {...register("mailConfig.mail_server", {
+                      required: true,
+                    })}
+                  />
+                  {errors.mailConfig?.mail_server && (
+                    <p className="error">Mail Server is required</p>
+                  )}
+
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    {...register("mailConfig.company_email", {
+                      required: true,
+                    })}
+                  />
+                  {errors.mailConfig?.company_email && (
+                    <p className="error">Email is required</p>
+                  )}
+
+                  <input
+                    type="password"
+                    placeholder="Email Password"
+                    {...register("mailConfig.password", {
+                      required: true,
+                    })}
+                  />
+                  {errors.mailConfig?.password && (
+                    <p className="error">Email Password is required</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Social Media Tab */}
+              <div
+                className={`settings-pane ${
+                  activeTab === "social-media" ? "active" : ""
+                }`}
+                id="social-media"
+              >
+                <h5>Social Media</h5>
+                <div className="settings-form">
+                  <input
+                    type="text"
+                    placeholder="Twitter"
+                    {...register("socialAccounts.twitter", {
+                      required: true,
+                    })}
+                  />
+                  {errors.socialAccounts?.twitter && (
+                    <p className="error">Twitter is required</p>
+                  )}
+
+                  <input
+                    type="text"
+                    placeholder="Facebook"
+                    {...register("socialAccounts.facebook", {
+                      required: true,
+                    })}
+                  />
+                  {errors.socialAccounts?.facebook && (
+                    <p className="error">Facebook is required</p>
+                  )}
+
+                  <input
+                    type="text"
+                    placeholder="LinkedIn"
+                    {...register("socialAccounts.linkedin", {
+                      required: true,
+                    })}
+                  />
+                  {errors.socialAccounts?.linkedin && (
+                    <p className="error">LinkedIn is required</p>
+                  )}
+
+                  <input
+                    type="text"
+                    placeholder="Instagram"
+                    {...register("socialAccounts.instagram", {
+                      required: true,
+                    })}
+                  />
+                  {errors.socialAccounts?.instagram && (
+                    <p className="error">Instagram is required</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Submit and Cancel buttons */}
+              <div className="settings-pane-footer">
+                <button type="submit" className="settings-btn success">
+                  Save changes
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
