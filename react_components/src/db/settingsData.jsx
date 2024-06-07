@@ -38,7 +38,7 @@ const settingsData = {
   payments: [
     {
       bank_name: "Bank of America",
-      paybill: 123456789,
+      paybill_number: 123456789,
       account_number: 987654321,
     },
     // Add more payment methods if needed
