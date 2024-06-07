@@ -4,24 +4,19 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 20px;
   padding: 20px;
-  box-sizing: border-box;
 }
 
 .settings-title {
   margin-bottom: 20px;
   color: var(--davys-gray);
-  font-size: var(--fs-2);
+  font-size: var(--fs-1);
 }
 
 .settings-card {
   display: flex;
-  background: var(--white);
-  border-radius: var(--radius-6);
   overflow: hidden;
-  box-shadow: var(--shadow-1);
 }
 
 .settings-row {
@@ -32,14 +27,16 @@
 
 .settings-sidebar {
   flex: 1;
-  background: var(--onyx);
-  color: var(--white);
+  background: var(--davys-gray_12);
+  margin-right: 20px;
+  border-radius: var(--radius-8);
 }
 
 .settings-content {
   flex: 3;
   padding: 20px;
   background: var(--white);
+  border-radius: var(--radius-8);
 }
 
 .settings-company-logo {
@@ -71,7 +68,7 @@
   display: block;
   margin-bottom: 10px;
   padding: 10px;
-  color: var(--white);
+  color: var(--black);
   text-decoration: none;
   transition: background var(--transition);
 }
@@ -81,7 +78,7 @@
 }
 
 .settings-nav-item.active {
-  background: var(--onyx-2);
+  background: var(--cool-gray);
   border-radius: var(--radius-8);
 }
 

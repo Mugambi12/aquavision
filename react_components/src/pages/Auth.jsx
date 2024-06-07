@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../assets/styles/auth.css";
 import Login from "../components/Auth/Login/Login";
 import Register from "../components/Auth/Register/Register";
+import LoginForm from "../components/Auth/Login";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -11,7 +12,9 @@ const Auth = () => {
   };
 
   return (
-    <div className="auth-container">
+    <>
+      <LoginForm />
+      {/*
       {isLogin ? (
         <>
           <Login />
@@ -32,8 +35,9 @@ const Auth = () => {
             </button>
           </p>
         </>
-      )}
-    </div>
+          )}
+          */}
+    </>
   );
 };
 

@@ -37,7 +37,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
   };
 
   const onSubmit = async (data) => {
-    await handleSaveSettings(data); // Call the API and log form data
+    await handleSaveSettings(data);
   };
 
   return (
