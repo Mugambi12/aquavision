@@ -1,5 +1,6 @@
 // In Settings.js
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar/Navbar";
 import CompanySettings from "../components/Settings/Settings";
 import settingsData from "../db/settingsData";
@@ -18,6 +19,9 @@ const Settings = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Settings - Dakoke Springs</title>
+      </Helmet>
       <Navbar />
       <div className="main-container">
         <CompanySettings

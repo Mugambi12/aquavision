@@ -1,5 +1,6 @@
 // Transactions.js
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import "../assets/styles/transactions.css";
 import revenueData from "../db/revenue";
 import expensesData from "../db/expenses";
@@ -98,6 +99,9 @@ const Transactions = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Transactions - Dakoke Springs</title>
+      </Helmet>
       <Navbar />
       <div className="main-container">
         <Sidebar

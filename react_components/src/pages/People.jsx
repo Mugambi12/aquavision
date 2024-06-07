@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/People/Sidebar/Sidebar";
 import Main from "../components/People/Main/Main";
@@ -66,6 +67,9 @@ const People = () => {
 
   return (
     <>
+      <Helmet>
+        <title>People - Dakoke Springs</title>
+      </Helmet>
       <Navbar />
       <div className="main-container">
         <Sidebar

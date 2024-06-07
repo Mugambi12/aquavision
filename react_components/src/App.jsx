@@ -5,6 +5,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import "./assets/styles/index.css";
 import Spinner from "./components/Spinner/Spinner";
 import ErrorBoundary from "./ErrorCatcher/ErrorBoundary";
@@ -25,25 +26,30 @@ function App() {
   }, []);
 
   return (
-    <ErrorBoundary>
-      <Router>
-        <Suspense fallback={<Spinner />}>
-          {isRoutesLoaded && (
-            <Routes>
-              <Route path="/auth" element={<LazyAuthPage />} />
-              <Route path="/home" element={<LazyHomePage />} />
-              <Route path="/chats" element={<LazyChatsPage />} />
-              <Route path="/people" element={<LazyPeoplePage />} />
-              <Route path="/records" element={<LazyRecordsPage />} />
-              <Route path="/settings" element={<LazySettingsPage />} />
-              <Route path="/transactions" element={<LazyTransactionsPage />} />
+    <HelmetProvider>
+      <ErrorBoundary>
+        <Router>
+          <Suspense fallback={<Spinner />}>
+            {isRoutesLoaded && (
+              <Routes>
+                <Route path="/auth" element={<LazyAuthPage />} />
+                <Route path="/home" element={<LazyHomePage />} />
+                <Route path="/chats" element={<LazyChatsPage />} />
+                <Route path="/people" element={<LazyPeoplePage />} />
+                <Route path="/records" element={<LazyRecordsPage />} />
+                <Route path="/settings" element={<LazySettingsPage />} />
+                <Route
+                  path="/transactions"
+                  element={<LazyTransactionsPage />}
+                />
 
-              <Route path="*" element={<Navigate to="/auth" />} />
-            </Routes>
-          )}
-        </Suspense>
-      </Router>
-    </ErrorBoundary>
+                <Route path="*" element={<Navigate to="/auth" />} />
+              </Routes>
+            )}
+          </Suspense>
+        </Router>
+      </ErrorBoundary>
+    </HelmetProvider>
   );
 }
 

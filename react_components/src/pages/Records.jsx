@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar/Navbar";
 import MainContent from "../components/Records/MainContent/MainContent";
 import Footer from "../components/Footer/Footer";
@@ -91,38 +92,49 @@ const Records = () => {
     setProcessingInvoiceId(invoice.invoiceNo);
     console.log("Processing payment for invoice:", invoice);
 
-    try {
-      //      // Implement logic for API
-      //      // Example API call using fetch:
-      //      const response = await fetch("/api/pay-invoice", {
-      //        method: "POST",
-      //        headers: {
-      //          "Content-Type": "application/json",
-      //        },
-      //        body: JSON.stringify({ invoiceNo: invoice.invoiceNo }),
-      //      });
-      //
-      //      if (!response.ok) {
-      //        throw new Error("Payment failed");
-      //      }
-      //
-      //      const result = await response.json();
-      //      // Assuming the API response contains the updated invoice details
-      //      const updatedInvoice = { ...invoice, status: result.status };
-      //
-      //      const updatedData = invoiceData.map((inv) =>
-      //        inv.invoiceNo === updatedInvoice.invoiceNo ? updatedInvoice : inv
-      //      );
-      //
-      //      setFilteredData(updatedData);
-
-      console.log("Payment processed successfully.");
-      //setProcessingInvoiceId(null);
-    } catch (error) {
-      console.error("Error processing payment:", error);
-    } finally {
+    setTimeout(() => {
+      const updatedInvoice = { ...invoice, status: "paid" };
+      const updatedData = invoiceData.map((inv) =>
+        inv.invoiceNo === updatedInvoice.invoiceNo ? updatedInvoice : inv
+      );
+      setFilteredData(updatedData);
+      console.log("Processing payment for invoice:", invoice);
+      console.log("Payment made:", updatedInvoice);
       setProcessingInvoiceId(null);
-    }
+    }, 2000);
+
+    //    try {
+    //      //      // Implement logic for API
+    //      //      // Example API call using fetch:
+    //      //      const response = await fetch("/api/pay-invoice", {
+    //      //        method: "POST",
+    //      //        headers: {
+    //      //          "Content-Type": "application/json",
+    //      //        },
+    //      //        body: JSON.stringify({ invoiceNo: invoice.invoiceNo }),
+    //      //      });
+    //      //
+    //      //      if (!response.ok) {
+    //      //        throw new Error("Payment failed");
+    //      //      }
+    //      //
+    //      //      const result = await response.json();
+    //      //      // Assuming the API response contains the updated invoice details
+    //      //      const updatedInvoice = { ...invoice, status: result.status };
+    //      //
+    //      //      const updatedData = invoiceData.map((inv) =>
+    //      //        inv.invoiceNo === updatedInvoice.invoiceNo ? updatedInvoice : inv
+    //      //      );
+    //      //
+    //      //      setFilteredData(updatedData);
+    //
+    //      console.log("Payment processed successfully.");
+    //      //setProcessingInvoiceId(null);
+    //    } catch (error) {
+    //      console.error("Error processing payment:", error);
+    //    } finally {
+    //      setProcessingInvoiceId(null);
+    //    }
   };
 
   //  const handleInvoicePayment = (invoice) => {
@@ -152,6 +164,9 @@ const Records = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Records - Dakoke Springs</title>
+      </Helmet>
       <Navbar />
       <div className="main-container">
         <MainContent

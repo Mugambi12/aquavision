@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Chats/Sidebar/Sidebar";
 import ChatWindow from "../components/Chats/ChatWindow/ChatWindow";
@@ -13,6 +14,9 @@ const Chats = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Chats - Dakoke Springs</title>
+      </Helmet>
       <Navbar />
       <div className="general-chat-container">
         <Sidebar chats={chats} onChatSelect={handleChatSelection} />
