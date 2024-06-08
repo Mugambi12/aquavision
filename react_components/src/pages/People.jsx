@@ -12,6 +12,7 @@ import EditUserForm from "../components/People/EditUserForm/EditUserForm";
 const People = () => {
   const [people, setPeople] = useState([]);
   const [selectedPerson, setSelectedPerson] = useState(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editUserData, setEditUserData] = useState(null);
@@ -60,10 +61,16 @@ const People = () => {
 
   const handlePersonClick = (person) => {
     setSelectedPerson(person);
+    setIsSidebarOpen(false);
+  };
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
   const handleAddUser = (newUser) => {
     setPeople([...people, newUser]);
+    console.log("New user:", newUser);
     setIsModalOpen(false);
   };
 
@@ -83,10 +90,11 @@ const People = () => {
           people={people}
           onPersonClick={handlePersonClick}
           setIsModalOpen={setIsModalOpen}
+          isSidebarOpen={isSidebarOpen}
+          toggleSidebar={toggleSidebar}
         />
         <Main
           selectedPerson={selectedPerson}
-          setIsEditModalOpen={setIsEditModalOpen}
           onEditProfileClick={handleEditProfileClick}
         />
       </div>

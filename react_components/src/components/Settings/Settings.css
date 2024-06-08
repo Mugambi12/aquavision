@@ -27,7 +27,7 @@
 
 .settings-sidebar {
   flex: 1;
-  background: var(--davys-gray_12);
+  background: var(--white);
   margin-right: 20px;
   border-radius: var(--radius-8);
 }
@@ -43,7 +43,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin: 50px auto;
 }
 
 .settings-company-logo img {
@@ -70,16 +70,16 @@
   padding: 10px;
   color: var(--black);
   text-decoration: none;
+  border-radius: var(--radius-8);
   transition: background var(--transition);
 }
 
 .settings-nav-item:hover {
-  opacity: 0.8;
+  background: var(--blue-ryb_12);
 }
 
 .settings-nav-item.active {
-  background: var(--cool-gray);
-  border-radius: var(--radius-8);
+  background: var(--pacific-blue_12);
 }
 
 .settings-form {
@@ -99,7 +99,7 @@
   color: var(--davys-gray);
   opacity: 0.8;
   border: 1px solid var(--davys-gray_12);
-  border-radius: var(--radius-3);
+  border-radius: var(--radius-6);
 }
 
 .settings-form .error {
@@ -127,34 +127,32 @@
 }
 
 .settings-btn.secondary {
-  background: var(--pacific-blue);
-  color: var(--white);
+  background: var(--blue-ryb_12);
+  color: var(--black);
 }
 
 .settings-btn.secondary:hover {
-  opacity: 0.8;
-  color: var(--black);
+  background: var(--pacific-blue_12);
 }
 
 .settings-btn.danger {
   background: transparent;
-  color: var(--imperial-red);
+  color: var(--coral);
   margin-top: -20px;
 }
 
 .settings-btn.danger:hover {
-  opacity: 0.8;
-  color: var(--coral);
+  color: var(--imperial-red);
 }
 
 .settings-btn.success {
   background: var(--emerald);
-  color: var(--white);
+  color: var(--black);
 }
 
 .settings-btn.success:hover {
-  opacity: 0.8;
-  color: var(--black);
+  color: var(--white);
+  background: var(--pacific-blue);
 }
 
 .material-symbols-rounded {

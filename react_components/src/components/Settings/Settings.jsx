@@ -42,7 +42,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
 
   return (
     <div className="settings-container">
-      <h4 className="settings-title">{settingsData.company_name} Settings</h4>
+      <h4 className="settings-title">{settingsData.company_name}</h4>
       <div className="settings-card">
         <div className="settings-row">
           {/* Sidebar Column */}
@@ -301,6 +301,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
               >
                 <h5>Email Settings</h5>
                 <div className="settings-form">
+                  <label htmlFor="mailConfig.mail_server">Mail Server</label>
                   <input
                     type="text"
                     placeholder="Mail Server"
@@ -312,6 +313,9 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                     <p className="error">Mail Server is required</p>
                   )}
 
+                  <label htmlFor="mailConfig.company_email">
+                    Company Email
+                  </label>
                   <input
                     type="email"
                     placeholder="Email"
@@ -323,6 +327,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                     <p className="error">Email is required</p>
                   )}
 
+                  <label htmlFor="mailConfig.password">Email Password</label>
                   <input
                     type="password"
                     placeholder="Email Password"
@@ -345,6 +350,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
               >
                 <h5>Social Media</h5>
                 <div className="settings-form">
+                  <label htmlFor="socialAccounts.twitter">Twitter</label>
                   <input
                     type="text"
                     placeholder="Twitter"
@@ -356,6 +362,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                     <p className="error">Twitter is required</p>
                   )}
 
+                  <label htmlFor="socialAccounts.facebook">Facebook</label>
                   <input
                     type="text"
                     placeholder="Facebook"
@@ -367,6 +374,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                     <p className="error">Facebook is required</p>
                   )}
 
+                  <label htmlFor="socialAccounts.linkedin">LinkedIn</label>
                   <input
                     type="text"
                     placeholder="LinkedIn"
@@ -378,6 +386,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                     <p className="error">LinkedIn is required</p>
                   )}
 
+                  <label htmlFor="socialAccounts.instagram">Instagram</label>
                   <input
                     type="text"
                     placeholder="Instagram"

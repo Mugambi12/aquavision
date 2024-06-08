@@ -28,6 +28,7 @@
   .person-content {
     flex-direction: column;
     padding: 0 5px;
+    margin-top: 50px;
   }
 
   .person-content-left {

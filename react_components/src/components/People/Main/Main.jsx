@@ -264,9 +264,9 @@ const InvoicesDownload = ({ person }) => (
   </div>
 );
 
-const ProfileCard = ({ person, setIsEditModalOpen, onEditProfileClick }) => {
+const ProfileCard = ({ person, onEditProfileClick }) => {
   const handleEditClick = () => {
-    onEditProfileClick(person); // Pass the selected person's data to the parent component
+    onEditProfileClick(person);
   };
 
   return (
@@ -332,7 +332,7 @@ const ProfileCard = ({ person, setIsEditModalOpen, onEditProfileClick }) => {
   );
 };
 
-const Main = ({ selectedPerson, setIsEditModalOpen, onEditProfileClick }) => {
+const Main = ({ selectedPerson, onEditProfileClick }) => {
   return (
     <div className="row person-content">
       <div className="column person-content-left">
@@ -357,7 +357,6 @@ const Main = ({ selectedPerson, setIsEditModalOpen, onEditProfileClick }) => {
           <>
             <ProfileCard
               person={selectedPerson}
-              setIsEditModalOpen={setIsEditModalOpen}
               onEditProfileClick={onEditProfileClick}
             />
             <InvoicesDownload person={selectedPerson} />
