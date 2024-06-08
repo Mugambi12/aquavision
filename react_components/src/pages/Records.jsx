@@ -18,39 +18,24 @@ const Records = () => {
   const [isAddInvoiceModalOpen, setIsAddInvoiceModalOpen] = useState(false);
 
   useEffect(() => {
-    if (selectedFilter === "All") {
-      setFilteredData(invoiceData);
-    } else {
-      setFilteredData(
-        invoiceData.filter(
-          (invoice) =>
-            invoice.status.toLowerCase() === selectedFilter.toLowerCase()
-        )
+    let newFilteredData = invoiceData;
+    if (selectedFilter === "Paid") {
+      newFilteredData = invoiceData.filter(
+        (invoice) => invoice.status.toLowerCase() === "paid"
+      );
+    } else if (selectedFilter === "Unpaid") {
+      newFilteredData = invoiceData.filter(
+        (invoice) => invoice.status.toLowerCase() === "unpaid"
       );
     }
+    setFilteredData(newFilteredData);
   }, [selectedFilter]);
 
   const handleAddInvoice = async (newInvoice) => {
     console.log("New Invoice Added: ", newInvoice);
 
     try {
-      //      // Implement logic for API
-      //      const response = await fetch("/api/add-invoice", {
-      //        method: "POST",
-      //        headers: {
-      //          "Content-Type": "application/json",
-      //        },
-      //        body: JSON.stringify(newInvoice),
-      //      });
-      //
-      //      if (!response.ok) {
-      //        throw new Error("Failed to add invoice");
-      //      }
-      //
-      //      const result = await response.json();
-      //      // Assuming the API response contains the updated invoice list or the new invoice
-      //      setFilteredData((prevData) => [...prevData, result.newInvoice]);
-      //      console.log("Invoice added successfully:", result.newInvoice);
+      // Implement logic for API
       console.log("Invoice added successfully.");
     } catch (error) {
       console.error("Error adding invoice:", error);
@@ -63,23 +48,7 @@ const Records = () => {
     console.log("Deleting invoice:", selectedInvoice);
 
     try {
-      //      // Implement logic for API
-      //      const response = await fetch(
-      //        `/api/delete-invoice/${selectedInvoice.invoiceNo}`,
-      //        {
-      //          method: "DELETE",
-      //        }
-      //      );
-      //
-      //      if (!response.ok) {
-      //        throw new Error("Failed to delete invoice");
-      //      }
-      //
-      //      const result = await response.json();
-      //      // Assuming the API response confirms deletion
-      //      setFilteredData((prevData) =>
-      //        prevData.filter((inv) => inv.invoiceNo !== selectedInvoice.invoiceNo)
-      //      );
+      // Implement logic for API
       console.log("Invoice deleted successfully.");
     } catch (error) {
       console.error("Error deleting invoice:", error);
@@ -98,60 +67,10 @@ const Records = () => {
         inv.invoiceNo === updatedInvoice.invoiceNo ? updatedInvoice : inv
       );
       setFilteredData(updatedData);
-      console.log("Processing payment for invoice:", invoice);
       console.log("Payment made:", updatedInvoice);
       setProcessingInvoiceId(null);
     }, 2000);
-
-    //    try {
-    //      //      // Implement logic for API
-    //      //      // Example API call using fetch:
-    //      //      const response = await fetch("/api/pay-invoice", {
-    //      //        method: "POST",
-    //      //        headers: {
-    //      //          "Content-Type": "application/json",
-    //      //        },
-    //      //        body: JSON.stringify({ invoiceNo: invoice.invoiceNo }),
-    //      //      });
-    //      //
-    //      //      if (!response.ok) {
-    //      //        throw new Error("Payment failed");
-    //      //      }
-    //      //
-    //      //      const result = await response.json();
-    //      //      // Assuming the API response contains the updated invoice details
-    //      //      const updatedInvoice = { ...invoice, status: result.status };
-    //      //
-    //      //      const updatedData = invoiceData.map((inv) =>
-    //      //        inv.invoiceNo === updatedInvoice.invoiceNo ? updatedInvoice : inv
-    //      //      );
-    //      //
-    //      //      setFilteredData(updatedData);
-    //
-    //      console.log("Payment processed successfully.");
-    //      //setProcessingInvoiceId(null);
-    //    } catch (error) {
-    //      console.error("Error processing payment:", error);
-    //    } finally {
-    //      setProcessingInvoiceId(null);
-    //    }
   };
-
-  //  const handleInvoicePayment = (invoice) => {
-  //    setProcessingInvoiceId(invoice.invoiceNo);
-  //    // Implement logic for API
-  //
-  //    setTimeout(() => {
-  //      const updatedInvoice = { ...invoice, status: "paid" };
-  //      const updatedData = invoiceData.map((inv) =>
-  //        inv.invoiceNo === updatedInvoice.invoiceNo ? updatedInvoice : inv
-  //      );
-  //      setFilteredData(updatedData);
-  //      console.log("Processing payment for invoice:", invoice);
-  //      console.log("Payment made:", updatedInvoice);
-  //      setProcessingInvoiceId(null);
-  //    }, 2000);
-  //  };
 
   const openAddInvoiceModal = () => {
     setIsAddInvoiceModalOpen(true);

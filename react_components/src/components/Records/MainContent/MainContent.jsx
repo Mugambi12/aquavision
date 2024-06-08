@@ -74,7 +74,10 @@ const MainContent = ({
       </div>
 
       <div className="records-table-container">
-        <table id="invoiceTable" className="records-invoice-table display">
+        <table
+          id="invoiceTable"
+          className="records-invoice-table display nowrap"
+        >
           <thead>
             <tr>
               <th>Status</th>
