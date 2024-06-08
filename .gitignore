@@ -1,0 +1,4 @@
+venv/
+demo_development/
+live_server/
+__pycache__/
