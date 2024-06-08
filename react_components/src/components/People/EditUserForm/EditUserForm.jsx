@@ -27,9 +27,9 @@ const EditUserForm = ({ onSubmit, userData }) => {
   };
 
   return (
-    <div className="add-user-container">
+    <div className="edit-user-container">
       <h2 className="modal-title">Update Personal Info</h2>
-      <form onSubmit={handleSubmit} className="add-user-form">
+      <form onSubmit={handleSubmit} className="edit-user-form">
         <div className="form-group">
           <label htmlFor="fullName">Full Name:</label>
           <input
