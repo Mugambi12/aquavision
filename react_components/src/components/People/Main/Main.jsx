@@ -250,64 +250,6 @@ const PaymentHistory = ({ person }) => (
   </div>
 );
 
-const ProfileCard = ({ person }) => (
-  <div className="personal-profile-card">
-    <div className="personal-profile-info">
-      <div className="personal-profile-image">
-        <img src={person.profileImage} alt="Profile" />
-      </div>
-
-      <div className="personal-full-name">{person.fullName}</div>
-
-      <div className="personal-user-content-details">
-        <div className="d-flex personal-user-content-detail">
-          <span className="material-symbols-rounded icon">calendar_month</span>
-          <div className="column">
-            <span className="label">Date of Birth:</span>
-            <span className="value">{person.dateOfBirth}</span>
-          </div>
-        </div>
-        <div className="d-flex personal-user-content-detail">
-          <span className="material-symbols-rounded icon">{`${
-            person.gender === "Female" ? "female" : "male"
-          }`}</span>
-          <div className="column">
-            <span className="label">Gender:</span>
-            <span className="value">{person.gender}</span>
-          </div>
-        </div>
-        <div className="d-flex personal-user-content-detail">
-          <span className="material-symbols-rounded icon">phone</span>
-          <div className="column">
-            <span className="label">Contact Info:</span>
-            <span className="value">{person.phoneNumber}</span>
-          </div>
-        </div>
-        <div className="d-flex personal-user-content-detail">
-          <span className="material-symbols-rounded icon">
-            contact_emergency
-          </span>
-          <div className="column">
-            <span className="label">Emergency Contact:</span>
-            <span className="value">{person.emergencyContact}</span>
-          </div>
-        </div>
-        <div className="d-flex personal-user-content-detail">
-          <span className="material-symbols-rounded icon">
-            health_and_safety
-          </span>
-          <div className="column">
-            <span className="label">Insurance Provider:</span>
-            <span className="value">{person.insuranceType}</span>
-          </div>
-        </div>
-      </div>
-
-      <button className="personal-profile-button">Show more information</button>
-    </div>
-  </div>
-);
-
 const InvoicesDownload = ({ person }) => (
   <div className="content-card personal-content-invoice-download">
     <div className="title">Invoice Download</div>
@@ -322,7 +264,75 @@ const InvoicesDownload = ({ person }) => (
   </div>
 );
 
-const Main = ({ selectedPerson }) => {
+const ProfileCard = ({ person, setIsEditModalOpen, onEditProfileClick }) => {
+  const handleEditClick = () => {
+    onEditProfileClick(person); // Pass the selected person's data to the parent component
+  };
+
+  return (
+    <div className="personal-profile-card">
+      <div className="personal-profile-info">
+        <div className="personal-profile-image">
+          <img src={person.profileImage} alt="Profile" />
+        </div>
+
+        <div className="personal-full-name">{person.fullName}</div>
+
+        <div className="personal-user-content-details">
+          <div className="d-flex personal-user-content-detail">
+            <span className="material-symbols-rounded icon">
+              calendar_month
+            </span>
+            <div className="column">
+              <span className="label">Date of Birth:</span>
+              <span className="value">{person.dateOfBirth}</span>
+            </div>
+          </div>
+          <div className="d-flex personal-user-content-detail">
+            <span className="material-symbols-rounded icon">{`${
+              person.gender === "Female" ? "female" : "male"
+            }`}</span>
+            <div className="column">
+              <span className="label">Gender:</span>
+              <span className="value">{person.gender}</span>
+            </div>
+          </div>
+          <div className="d-flex personal-user-content-detail">
+            <span className="material-symbols-rounded icon">phone</span>
+            <div className="column">
+              <span className="label">Contact Info:</span>
+              <span className="value">{person.phoneNumber}</span>
+            </div>
+          </div>
+          <div className="d-flex personal-user-content-detail">
+            <span className="material-symbols-rounded icon">
+              contact_emergency
+            </span>
+            <div className="column">
+              <span className="label">Emergency Contact:</span>
+              <span className="value">{person.emergencyContact}</span>
+            </div>
+          </div>
+          <div className="d-flex personal-user-content-detail">
+            <span className="material-symbols-rounded icon">
+              health_and_safety
+            </span>
+            <div className="column">
+              <span className="label">Insurance Provider:</span>
+              <span className="value">{person.insuranceType}</span>
+            </div>
+          </div>
+        </div>
+
+        <button className="personal-profile-button" onClick={handleEditClick}>
+          Edit Profile Information
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const Main = ({ selectedPerson, setIsEditModalOpen, onEditProfileClick }) => {
   return (
     <div className="row person-content">
       <div className="column person-content-left">
@@ -345,7 +355,11 @@ const Main = ({ selectedPerson }) => {
       <div className="column person-content-right">
         {selectedPerson && (
           <>
-            <ProfileCard person={selectedPerson} />
+            <ProfileCard
+              person={selectedPerson}
+              setIsEditModalOpen={setIsEditModalOpen}
+              onEditProfileClick={onEditProfileClick}
+            />
             <InvoicesDownload person={selectedPerson} />
           </>
         )}

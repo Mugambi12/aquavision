@@ -1,13 +1,20 @@
+// People.js
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/People/Sidebar/Sidebar";
 import Main from "../components/People/Main/Main";
 import Footer from "../components/Footer/Footer";
+import ModalWrapper from "../components/ModalWrapper/ModalWrapper";
+import AddUserForm from "../components/People/AddUserForm/AddUserForm";
+import EditUserForm from "../components/People/EditUserForm/EditUserForm";
 
 const People = () => {
   const [people, setPeople] = useState([]);
   const [selectedPerson, setSelectedPerson] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editUserData, setEditUserData] = useState(null);
 
   const apiEndPoint = "https://fedskillstest.coalitiontechnologies.workers.dev";
   const credentials = "Y29hbGl0aW9uOnNraWxscy10ZXN0";
@@ -55,14 +62,14 @@ const People = () => {
     setSelectedPerson(person);
   };
 
-  const [newPeople, setNewPeople] = useState([
-    // initial people data
-  ]);
-
   const handleAddUser = (newUser) => {
-    setNewPeople([...newPeople, newUser]);
-    console.log("New user added:", newUser);
-    console.log("New people:", newPeople);
+    setPeople([...people, newUser]);
+    setIsModalOpen(false);
+  };
+
+  const handleEditProfileClick = (person) => {
+    setEditUserData(person);
+    setIsEditModalOpen(true);
   };
 
   return (
@@ -75,11 +82,35 @@ const People = () => {
         <Sidebar
           people={people}
           onPersonClick={handlePersonClick}
-          onAddUser={handleAddUser}
+          setIsModalOpen={setIsModalOpen}
         />
-        <Main selectedPerson={selectedPerson} />
+        <Main
+          selectedPerson={selectedPerson}
+          setIsEditModalOpen={setIsEditModalOpen}
+          onEditProfileClick={handleEditProfileClick}
+        />
       </div>
       <Footer />
+
+      <ModalWrapper
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
+        <AddUserForm onSubmit={handleAddUser} />
+      </ModalWrapper>
+
+      <ModalWrapper
+        isOpen={isEditModalOpen}
+        onRequestClose={() => setIsEditModalOpen(false)}
+      >
+        <EditUserForm
+          onSubmit={(editedUser) => {
+            console.log("Edited user:", editedUser);
+            setIsEditModalOpen(false);
+          }}
+          userData={editUserData}
+        />
+      </ModalWrapper>
     </>
   );
 };

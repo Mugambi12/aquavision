@@ -1,12 +1,9 @@
 // Sidebar.js
 import React, { useState, useEffect } from "react";
 import "./Sidebar.css";
-import ModalWrapper from "../../ModalWrapper/ModalWrapper";
-import AddUserForm from "../AddUserForm/AddUserForm";
 
-const Sidebar = ({ people, onPersonClick, onAddUser }) => {
+const Sidebar = ({ people, onPersonClick, setIsModalOpen }) => {
   const [selectedPerson, setSelectedPerson] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (!selectedPerson && people.length > 0) {
@@ -19,11 +16,6 @@ const Sidebar = ({ people, onPersonClick, onAddUser }) => {
   const handleClick = (person) => {
     setSelectedPerson(person);
     onPersonClick(person);
-  };
-
-  const handleAddUser = (newUser) => {
-    onAddUser(newUser);
-    setIsModalOpen(false);
   };
 
   return (
@@ -65,13 +57,6 @@ const Sidebar = ({ people, onPersonClick, onAddUser }) => {
           </li>
         ))}
       </ul>
-
-      <ModalWrapper
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
-      >
-        <AddUserForm onSubmit={handleAddUser} />
-      </ModalWrapper>
     </div>
   );
 };

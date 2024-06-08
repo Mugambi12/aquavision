@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import "./Register.css";
 
-const Register = ({ handleRegister }) => {
+const Register = ({ availableHouseSections, handleRegister }) => {
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
