@@ -1,41 +1,57 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import "./Login.css";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    const loginData = { username, password };
-    console.log("Logging in with", loginData);
+  const handleLogin = (data) => {
+    console.log("Logging in with", data);
     // Handle login logic here
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   return (
     <div className="login-container">
       <div className="login-card">
         <h2>Login</h2>
-        <form onSubmit={handleLogin}>
-          <div className="form-group">
+        <form onSubmit={handleSubmit(handleLogin)}>
+          <div className="login-form-group">
             <input
-              type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Username"
-              required
+              type="email"
+              {...register("email", { required: "Email is required" })}
+              placeholder="Email"
             />
+            {errors.email && (
+              <span className="error-message">{errors.email.message}</span>
+            )}
           </div>
-          <div className="form-group">
+          <div className="login-form-group">
             <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              type={showPassword ? "text" : "password"}
+              {...register("password", { required: "Password is required" })}
               placeholder="Password"
-              required
             />
+            {errors.password && (
+              <span className="error-message">{errors.password.message}</span>
+            )}
+            <button
+              type="button"
+              className="toggle-password"
+              onClick={togglePasswordVisibility}
+            >
+              <span className="material-symbols-rounded">
+                {showPassword ? "visibility_off" : "visibility"}
+              </span>
+            </button>
           </div>
           <button type="submit" className="login-button">
             Login
