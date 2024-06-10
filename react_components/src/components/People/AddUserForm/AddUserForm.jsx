@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import "./AddUserForm.css";
 
+const houseSections = ["A", "B", "C", "D", "E", "F"];
+
 const AddUserForm = ({ onSubmit }) => {
   const [fullName, setFullName] = useState("");
-  const [gender, setGender] = useState("");
-  const [age, setAge] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [houseSection, setHouseSection] = useState("");
+  const [houseNumber, setHouseNumber] = useState("");
+  const [role, setRole] = useState("basic");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,8 +17,12 @@ const AddUserForm = ({ onSubmit }) => {
       id: Date.now().toString(),
       profileImage: "default-profile.png",
       fullName,
-      gender,
-      age,
+      email,
+      phone,
+      houseSection,
+      houseNumber,
+      isAdmin: role === "admin",
+      isBasic: role === "basic",
     };
     onSubmit(newUser);
   };
@@ -27,31 +36,96 @@ const AddUserForm = ({ onSubmit }) => {
           <input
             type="text"
             id="fullName"
+            placeholder="Enter full name"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
           />
         </div>
+
         <div className="form-group">
-          <label htmlFor="gender">Gender:</label>
+          <label>Role:</label>
+          <div className="role-options">
+            <div>
+              <input
+                type="radio"
+                id="adminRole"
+                name="role"
+                value="admin"
+                checked={role === "admin"}
+                onChange={(e) => setRole(e.target.value)}
+              />
+              <label htmlFor="adminRole">Admin</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="basicRole"
+                name="role"
+                value="basic"
+                checked={role === "basic"}
+                onChange={(e) => setRole(e.target.value)}
+              />
+              <label htmlFor="basicRole">Basic</label>
+            </div>
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="houseSection">House Section:</label>
+          <select
+            id="houseSection"
+            value={houseSection}
+            onChange={(e) => setHouseSection(e.target.value)}
+            required
+          >
+            <option value="" disabled>
+              Select house section
+            </option>
+            {houseSections.map((section) => (
+              <option key={section} value={section}>
+                {section}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="houseNumber">House Number:</label>
           <input
             type="text"
-            id="gender"
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
+            id="houseNumber"
+            placeholder="Enter house number"
+            value={houseNumber}
+            onChange={(e) => setHouseNumber(e.target.value)}
             required
           />
         </div>
+
         <div className="form-group">
-          <label htmlFor="age">Age:</label>
+          <label htmlFor="email">Email:</label>
           <input
-            type="number"
-            id="age"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
+            type="email"
+            id="email"
+            placeholder="Enter email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
+
+        <div className="form-group">
+          <label htmlFor="phone">Phone:</label>
+          <input
+            type="tel"
+            id="phone"
+            placeholder="Enter phone number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+          />
+        </div>
+
         <button type="submit" className="submit-button">
           Add User
         </button>

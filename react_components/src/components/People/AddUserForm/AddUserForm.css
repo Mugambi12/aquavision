@@ -1,7 +1,9 @@
 .add-user-container {
-  padding: var(--fs-10);
+  padding: var(--radius-12);
   margin: 0 auto;
   border-radius: var(--radius-8);
+  max-width: 600px;
+  background: var(--light-gray);
 }
 
 .add-user-container .modal-title {
@@ -11,43 +13,78 @@
 }
 
 .add-user-container .add-user-form {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--fs-5);
   margin-top: var(--fs-10);
 }
 
+@media (max-width: 600px) {
+  .add-user-container .add-user-form {
+    grid-template-columns: 1fr;
+  }
+}
+
 .add-user-container .form-group {
-  flex-basis: 50%;
-  margin-bottom: var(--fs-5);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--fs-8);
 }
 
 .add-user-container label {
-  font-size: var(--fs-4);
+  font-size: var(--fs-8);
   color: var(--davys-gray);
-  width: 100%;
 }
 
-.add-user-container input {
-  padding: 10px var(--fs-5);
-  font-size: var(--fs-5);
-  background: var(--cultured);
+.add-user-container input,
+.add-user-container select {
+  padding: var(--radius-8) var(--radius-12);
+  font-size: var(--fs-6);
+  background: var(--white);
   width: 100%;
-  border: none;
+  color: var(--cool-gray);
+  margin-top: var(--radius-6);
+  border: 1px solid var(--cultured);
   border-radius: var(--radius-6);
 }
 
+.add-user-container .role-options {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--radius-6);
+}
+
+.add-user-container .role-options label {
+  font-size: var(--fs-10);
+  color: var(--davys-gray);
+}
+
 .add-user-container .submit-button {
-  padding: var(--fs-10) var(--fs-5);
+  padding: var(--radius-10) var(--radius-12);
   color: var(--white);
-  font-size: var(--fs-4);
-  width: fit-content;
+  font-size: var(--fs-5);
   background: var(--space-cadet);
-  align-self: flex-end;
   border: none;
+  text-align: center;
   border-radius: var(--radius-8);
   cursor: pointer;
+  grid-column: span 2;
 }
 
 .add-user-container .submit-button:hover {
   background: var(--pacific-blue);
+}
+
+@media (max-width: 600px) {
+  .add-user-container .form-group {
+    margin-bottom: var(--radius-3);
+  }
+
+  .add-user-container .role-options {
+    margin-top: var(--radius-3);
+  }
+
+  .add-user-container .submit-button {
+    grid-column: span 1;
+  }
 }

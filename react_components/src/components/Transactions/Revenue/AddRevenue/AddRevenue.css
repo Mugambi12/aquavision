@@ -1,47 +1,89 @@
-/* AddRevenue.css */
 .add-revenue-container {
-  padding: var(--fs-10);
+  padding: var(--radius-3) var(--radius-8) 0;
+  background: var(--white);
+  max-width: 700px;
+  max-height: 90vh;
   margin: 0 auto;
-  border-radius: var(--radius-8);
+  overflow-y: auto;
 }
 
-.add-revenue-container h2 {
+.modal-title {
   margin-bottom: var(--fs-1);
   font-size: var(--fs-4);
   color: var(--davys-gray);
 }
 
-.add-revenue-container form {
+.add-revenue-form {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
 }
 
-.add-revenue-container label {
-  margin-bottom: var(--fs-1);
-  font-size: var(--fs-4);
+.form-column {
+  flex: 1;
+  min-width: 300px;
+  padding: var(--radius-10) var(--radius-12);
+}
+
+.add-revenue-form label {
+  font-size: var(--fs-8);
   color: var(--davys-gray);
-  width: 100%;
+  margin-bottom: var(--radius-6);
 }
 
-.add-revenue-container input {
-  padding: var(--fs-10) var(--fs-5);
-  font-size: var(--fs-5);
-  background: var(--cultured);
+.add-revenue-form input,
+.add-revenue-form select,
+.add-revenue-form textarea {
+  padding: var(--radius-8) var(--radius-12);
+  font-size: var(--fs-6);
+  background: var(--white);
   width: 100%;
-  border: none;
-  border-radius: var(--radius-3);
+  color: var(--sonic-sliver);
+  margin-bottom: var(--radius-10);
+  border: 1px solid var(--cultured);
+  border-radius: var(--radius-6);
 }
 
-.add-revenue-container button {
-  padding: var(--fs-10) var(--fs-5);
-  background: var(--blue-ryb);
-  color: var(--white);
-  font-size: var(--fs-4);
+.add-revenue-form textarea {
+  height: 80px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--radius-10);
+}
+
+.cancel-btn,
+.submit-btn {
+  padding: var(--radius-8) var(--radius-12);
+  font-size: var(--fs-6);
   border: none;
   border-radius: var(--radius-6);
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-.add-revenue-container button:first-child {
+.cancel-btn {
+  background: var(--sonic-sliver);
+  color: var(--white);
+}
+
+.submit-btn {
+  color: var(--white);
   background: var(--space-cadet);
+}
+
+.cancel-btn:hover {
+  background: var(--davys-gray);
+}
+
+.submit-btn:hover {
+  background: var(--pacific-blue);
+}
+
+@media screen and (max-width: 768px) {
+  .add-revenue-form {
+    flex-direction: column;
+  }
 }

@@ -1,4 +1,3 @@
-// AddInvoiceForm.js
 import React, { useState, useMemo } from "react";
 import "./AddInvoiceForm.css";
 
@@ -57,7 +56,7 @@ const AddInvoiceForm = ({ onSubmit }) => {
   }, [selectedSection]);
 
   return (
-    <>
+    <div className="add-invoice-container">
       <h2 className="modal-title">Add New Invoice</h2>
       <form onSubmit={handleSubmit} className="add-invoice-form">
         <label>House Section:</label>
@@ -103,7 +102,7 @@ const AddInvoiceForm = ({ onSubmit }) => {
 
         <button type="submit">Add Invoice</button>
       </form>
-    </>
+    </div>
   );
 };
 

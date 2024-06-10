@@ -1,37 +1,61 @@
-.add-invoice-form {
-  display: flex;
-  flex-direction: column;
-
+.add-invoice-container {
   padding: var(--fs-10);
   margin: 0 auto;
   border-radius: var(--radius-8);
+  max-width: 600px;
+  background: var(--light-gray);
 }
 
-.add-invoice-form label {
-  margin-bottom: 10px;
+.add-invoice-container .modal-title {
+  margin-bottom: var(--fs-1);
+  font-size: var(--fs-4);
+  color: var(--davys-gray);
 }
 
-.add-invoice-form input,
-.add-invoice-form select {
-  padding: 10px var(--fs-5);
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+.add-invoice-container .add-invoice-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--fs-5);
+  margin-top: var(--fs-10);
+}
+
+.add-invoice-container label {
+  font-size: var(--fs-6);
+  color: var(--davys-gray);
+}
+
+.add-invoice-container input,
+.add-invoice-container select {
+  padding: var(--radius-8);
+  font-size: var(--fs-5);
+  background: var(--white);
   width: 100%;
-  box-sizing: border-box;
+  border: 1px solid var(--cultured);
+  border-radius: var(--radius-6);
 }
 
-.add-invoice-form button {
-  padding: 8px 16px;
-  background: var(--blue-ryb);
+.add-invoice-container button {
+  padding: var(--radius-10) var(--radius-12);
   color: var(--white);
-  width: 100%;
+  font-size: var(--fs-5);
   text-align: center;
+  width: 200%;
+  background: var(--space-cadet);
   border: none;
-  border-radius: 5px;
+  border-radius: var(--radius-8);
   cursor: pointer;
 }
 
-.add-invoice-form button:hover {
-  color: var(--color);
+.add-invoice-container button:hover {
+  background: var(--pacific-blue);
+}
+
+@media screen and (max-width: 768px) {
+  .add-invoice-container .add-invoice-form {
+    grid-template-columns: 1fr;
+  }
+
+  .add-invoice-container button {
+    width: 100%;
+  }
 }

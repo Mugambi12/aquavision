@@ -339,6 +339,10 @@ const Main = ({ selectedPerson, onEditProfileClick }) => {
         {selectedPerson && (
           <>
             <div className="content-card content-diagnosis-history">
+              <div className="selected-person-name">
+                {selectedPerson.fullName}, {selectedPerson.gender},{" "}
+                {selectedPerson.age}
+              </div>
               <div className="row personal-content-cards">
                 <WaterUsageCard person={selectedPerson} />
                 <BillingInformationCard person={selectedPerson} />

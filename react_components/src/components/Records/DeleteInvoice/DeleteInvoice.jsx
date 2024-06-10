@@ -12,16 +12,15 @@ const DeleteInvoice = ({ invoice, onSubmit }) => {
       {invoice && (
         <div className="delete-invoice-details">
           <p className="delete-invoice-info">
-            Are you sure you want to delete invoice number:{" "}
-            <strong>{invoice.invoiceNo}</strong>?
+            Are you sure you want to delete this invoice?
           </p>
           <p className="delete-invoice-info">This action cannot be undone.</p>
         </div>
       )}
 
-      <div className="delete-invoice-btn" onClick={handleDeleteInvoice}>
-        Delete
-      </div>
+      <button className="delete-invoice-btn" onClick={handleDeleteInvoice}>
+        Delete Invoice
+      </button>
     </div>
   );
 };

@@ -1,4 +1,3 @@
-// People.js
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar/Navbar";
@@ -9,6 +8,9 @@ import ModalWrapper from "../components/ModalWrapper/ModalWrapper";
 import AddUserForm from "../components/People/AddUserForm/AddUserForm";
 import EditUserForm from "../components/People/EditUserForm/EditUserForm";
 
+// Import your spinner component here
+import Spinner from "../components/Spinner/Spinner";
+
 const People = () => {
   const [people, setPeople] = useState([]);
   const [selectedPerson, setSelectedPerson] = useState(null);
@@ -16,6 +18,7 @@ const People = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editUserData, setEditUserData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const apiEndPoint = "https://fedskillstest.coalitiontechnologies.workers.dev";
   const credentials = "Y29hbGl0aW9uOnNraWxscy10ZXN0";
@@ -51,8 +54,10 @@ const People = () => {
         }));
 
         setPeople(transformedPeople);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching people data:", error);
+        setIsLoading(false);
       }
     };
 
@@ -85,19 +90,23 @@ const People = () => {
         <title>People - Dakoke Springs</title>
       </Helmet>
       <Navbar />
-      <div className="main-container">
-        <Sidebar
-          people={people}
-          onPersonClick={handlePersonClick}
-          setIsModalOpen={setIsModalOpen}
-          isSidebarOpen={isSidebarOpen}
-          toggleSidebar={toggleSidebar}
-        />
-        <Main
-          selectedPerson={selectedPerson}
-          onEditProfileClick={handleEditProfileClick}
-        />
-      </div>
+      {isLoading ? ( // Render spinner if loading
+        <Spinner />
+      ) : (
+        <div className="main-container">
+          <Sidebar
+            people={people}
+            onPersonClick={handlePersonClick}
+            setIsModalOpen={setIsModalOpen}
+            isSidebarOpen={isSidebarOpen}
+            toggleSidebar={toggleSidebar}
+          />
+          <Main
+            selectedPerson={selectedPerson}
+            onEditProfileClick={handleEditProfileClick}
+          />
+        </div>
+      )}
       <Footer />
 
       <ModalWrapper

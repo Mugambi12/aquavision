@@ -1,32 +1,85 @@
-/* DeleteRevenue.css */
 .delete-revenue-container {
-  padding: var(--fs-10);
+  padding: 20px;
+  background: var(--white);
+  max-width: 400px;
   margin: 0 auto;
-  border-radius: var(--radius-8);
+  text-align: center;
 }
 
-.delete-revenue-container h2 {
-  margin-bottom: var(--fs-1);
-  font-size: var(--fs-4);
+.delete-revenue-title {
+  font-size: var(--fs-3);
   color: var(--davys-gray);
+  margin-bottom: 20px;
 }
 
-.delete-revenue-container p {
-  margin-bottom: var(--fs-1);
+.delete-revenue-info {
   font-size: var(--fs-5);
-  color: var(--sonic-sliver);
+  color: var(--onyx);
+  margin-bottom: 10px;
 }
 
-.delete-revenue-container button {
-  padding: var(--fs-10) var(--fs-5);
-  background: var(--imperial-red);
+.delete-revenue-id {
+  font-size: var(--fs-5);
+  color: var(--imperial-red);
+  margin-bottom: 20px;
+}
+
+.delete-revenue-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.delete-revenue-buttons .cancel-button,
+.delete-revenue-buttons .confirm-button {
+  padding: 10px 20px;
+  font-size: var(--fs-5);
   color: var(--white);
-  font-size: var(--fs-4);
   border: none;
-  border-radius: var(--radius-6);
+  border-radius: var(--radius-8);
   cursor: pointer;
+  transition: background-color var(--transition);
 }
 
-.delete-revenue-container button:first-child {
-  background: var(--space-cadet);
+.delete-revenue-buttons .cancel-button {
+  background: var(--imperial-red);
+}
+
+.delete-revenue-buttons .confirm-button {
+  background: var(--davys-gray);
+}
+
+.delete-revenue-buttons .cancel-button:hover {
+  background: var(--sonic-sliver);
+}
+
+.delete-revenue-buttons .confirm-button:hover {
+  background: var(--pacific-blue);
+}
+
+@media screen and (max-width: 768px) {
+  .delete-revenue-container {
+    padding: 15px;
+    max-width: 90%;
+  }
+
+  .delete-revenue-title {
+    font-size: var(--fs-4);
+  }
+
+  .delete-revenue-info,
+  .delete-revenue-id {
+    font-size: var(--fs-6);
+  }
+
+  .delete-revenue-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .delete-revenue-buttons .cancel-button,
+  .delete-revenue-buttons .confirm-button {
+    width: 100%;
+    padding: 12px 0;
+  }
 }

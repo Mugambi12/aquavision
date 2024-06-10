@@ -1,32 +1,85 @@
-/* RefundRevenue.css */
 .refund-revenue-container {
-  padding: var(--fs-10);
+  padding: 20px;
+  background: var(--white);
+  max-width: 400px;
   margin: 0 auto;
-  border-radius: var(--radius-8);
+  text-align: center;
 }
 
-.refund-revenue-container h2 {
-  margin-bottom: var(--fs-1);
-  font-size: var(--fs-4);
+.refund-revenue-title {
+  font-size: var(--fs-3);
   color: var(--davys-gray);
+  margin-bottom: 20px;
 }
 
-.refund-revenue-container p {
-  margin-bottom: var(--fs-1);
+.refund-revenue-info {
   font-size: var(--fs-5);
-  color: var(--sonic-sliver);
+  color: var(--onyx);
+  margin-bottom: 10px;
 }
 
-.refund-revenue-container button {
-  padding: var(--fs-10) var(--fs-5);
-  background: var(--pacific-blue);
+.refund-revenue-id {
+  font-size: var(--fs-5);
+  color: var(--imperial-red);
+  margin-bottom: 20px;
+}
+
+.refund-revenue-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.refund-revenue-buttons .cancel-button,
+.refund-revenue-buttons .confirm-button {
+  padding: 10px 20px;
+  font-size: var(--fs-5);
   color: var(--white);
-  font-size: var(--fs-4);
   border: none;
   border-radius: var(--radius-6);
   cursor: pointer;
+  transition: background-color var(--transition);
 }
 
-.refund-revenue-container button:first-child {
+.refund-revenue-buttons .cancel-button {
+  background: var(--imperial-red);
+}
+
+.refund-revenue-buttons .confirm-button {
   background: var(--space-cadet);
+}
+
+.refund-revenue-buttons .cancel-button:hover {
+  background: var(--sonic-sliver);
+}
+
+.refund-revenue-buttons .confirm-button:hover {
+  background: var(--pacific-blue);
+}
+
+@media screen and (max-width: 768px) {
+  .refund-revenue-container {
+    padding: 15px;
+    max-width: 90%;
+  }
+
+  .refund-revenue-title {
+    font-size: var(--fs-4);
+  }
+
+  .refund-revenue-info,
+  .refund-revenue-id {
+    font-size: var(--fs-6);
+  }
+
+  .refund-revenue-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .refund-revenue-buttons .cancel-button,
+  .refund-revenue-buttons .confirm-button {
+    width: 100%;
+    padding: 12px 0;
+  }
 }

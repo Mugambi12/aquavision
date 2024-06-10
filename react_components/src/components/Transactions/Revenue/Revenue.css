@@ -23,7 +23,7 @@
 
 .revenue-header span.material-symbols-rounded {
   cursor: pointer;
-  font-size: var(--fs-2);
+  font-size: var(--fs-3);
   color: var(--space-cadet);
 }
 
@@ -42,27 +42,12 @@
 .cust-invoice {
   color: var(--pacific-blue);
   font-weight: var(--fw-600);
-  font-size: var(--fs-2);
+  font-size: var(--fs-4);
 }
 
 @media screen and (max-width: 768px) {
   .revenue-header {
     display: none;
-  }
-
-  .revenue-header-content {
-    flex-direction: column;
-    gap: var(--fs-3);
-  }
-
-  .revenue-invoice-info {
-    flex-direction: column;
-    gap: var(--fs-3);
-  }
-
-  .cust-invoice {
-    font-weight: var(--fw-500);
-    font-size: var(--fs-4);
   }
 }
 
@@ -104,6 +89,7 @@
 
 .charts-revenue-data-filter label {
   font-weight: var(--fw-500);
+  font-size: var(--fs-6);
   margin-right: var(--fs-1);
 }
 
@@ -111,7 +97,7 @@
 .charts-revenue-data-filter input[type="month"] {
   padding: var(--radius-3) var(--radius-8);
   margin: var(--radius-6);
-  font-size: inherit;
+  font-size: var(--fs-6);
   background: var(--white);
   width: 10vw;
   border: none;
@@ -145,16 +131,16 @@
 }
 
 .revenue-charts-container .chart-header {
-  font-size: var(--fs-4);
+  font-size: var(--fs-5);
   font-weight: var(--fw-600);
   color: var(--eerie-black);
-  margin-bottom: var(--fs-3);
+  margin-bottom: var(--fs-4);
 }
 
 .area-chart-container {
   flex-basis: 65%;
   overflow-x: auto;
-  padding: var(--fs-3);
+  padding: var(--fs-5);
   background: var(--cultured);
   border-radius: var(--radius-8);
   box-shadow: var(--shadow-1);
@@ -163,7 +149,7 @@
 .doughnut-chart-container {
   flex-basis: 35%;
   overflow-x: auto;
-  padding: var(--fs-3);
+  padding: var(--fs-5);
   background: var(--cultured);
   border-radius: var(--radius-8);
   box-shadow: var(--shadow-1);
@@ -187,7 +173,7 @@
 
 .revenue-table-container {
   margin-left: -270px;
-  padding: var(--fs-3);
+  padding: var(--fs-5);
   background: var(--white);
   border-radius: var(--radius-8);
   box-shadow: var(--shadow-1);

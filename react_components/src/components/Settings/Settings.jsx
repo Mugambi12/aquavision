@@ -42,7 +42,6 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
 
   return (
     <div className="settings-container">
-      <h4 className="settings-title">{settingsData.company_name}</h4>
       <div className="settings-card">
         <div className="settings-row">
           {/* Sidebar Column */}

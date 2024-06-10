@@ -1,46 +1,98 @@
 .add-expense-container {
-  padding: var(--fs-10);
+  padding: var(--radius-3) var(--radius-8) 0;
+  background: var(--white);
+  max-width: 700px;
+  max-height: 90vh;
   margin: 0 auto;
-  border-radius: var(--radius-8);
+  overflow-y: auto;
 }
 
-.add-expense-container h2 {
-  margin-bottom: var(--fs-1);
+.add-expense-title {
   font-size: var(--fs-4);
   color: var(--davys-gray);
+  margin-bottom: var(--fs-1);
 }
 
-.add-expense-container form {
+.add-expense-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1 1 calc(50% - 20px);
   display: flex;
   flex-direction: column;
 }
 
-.add-expense-container label {
-  margin-bottom: var(--fs-1);
-  font-size: var(--fs-4);
-  color: var(--davys-gray);
-  width: 100%;
-}
-
-.add-expense-container input {
-  padding: var(--fs-10) var(--fs-5);
+.form-group label {
   font-size: var(--fs-5);
-  background: var(--cultured);
-  width: 100%;
-  border: none;
-  border-radius: var(--radius-3);
+  color: var(--davys-gray);
+  margin-bottom: var(--radius-6);
 }
 
-.add-expense-container button {
-  padding: var(--fs-10) var(--fs-5);
-  background: var(--blue-ryb);
-  color: var(--white);
-  font-size: var(--fs-4);
+.form-group input,
+.form-group select {
+  padding: var(--radius-8) var(--radius-12);
+  font-size: var(--fs-6);
+  background: var(--white);
+  width: 100%;
+  color: var(--sonic-sliver);
+  margin-bottom: var(--radius-10);
+  border: 1px solid var(--cultured);
+  border-radius: var(--radius-6);
+}
+
+.error-message {
+  color: var(--imperial-red);
+  font-size: var(--fs-7);
+  margin-top: 5px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--radius-10);
+}
+
+.cancel-button,
+.submit-button {
+  padding: var(--radius-8) var(--radius-12);
+  font-size: var(--fs-6);
   border: none;
   border-radius: var(--radius-6);
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-.add-expense-container button:first-child {
+.cancel-button {
+  background: var(--imperial-red);
+}
+
+.submit-button {
   background: var(--space-cadet);
+}
+
+.cancel-button:hover {
+  background: var(--sonic-sliver);
+}
+
+.submit-button:hover {
+  background: var(--pacific-blue);
+}
+
+@media screen and (max-width: 768px) {
+  .add-expense-form {
+    flex-direction: column;
+  }
+
+  .form-group {
+    flex: 1 1 100%;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+  }
 }

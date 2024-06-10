@@ -3,62 +3,136 @@ import "./EditUserForm.css";
 
 const EditUserForm = ({ onSubmit, userData }) => {
   const [fullName, setFullName] = useState("");
-  const [gender, setGender] = useState("");
-  const [age, setAge] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [houseSection, setHouseSection] = useState("");
+  const [houseNumber, setHouseNumber] = useState("");
+  const [role, setRole] = useState("basic");
+  const [isActive, setIsActive] = useState(false);
 
-  // Update state with user data when userData prop changes
   useEffect(() => {
     if (userData) {
       setFullName(userData.fullName || "");
-      setGender(userData.gender || "");
-      setAge(userData.age || "");
+      setEmail(userData.email || "");
+      setPhone(userData.phone || "");
+      setHouseSection(userData.houseSection || "");
+      setHouseNumber(userData.houseNumber || "");
+      setRole(userData.adminRole ? "admin" : "basic");
+      setIsActive(userData.isActive || false);
     }
   }, [userData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const updatedUser = {
-      ...userData, // Preserve existing user data
+      ...userData,
       fullName,
-      gender,
-      age,
+      email,
+      phone,
+      houseSection,
+      houseNumber,
+      adminRole: role === "admin",
+      isActive,
     };
     onSubmit(updatedUser);
   };
 
   return (
     <div className="edit-user-container">
-      <h2 className="modal-title">Update Personal Info</h2>
+      <h2 className="modal-title">Update User Info</h2>
       <form onSubmit={handleSubmit} className="edit-user-form">
         <div className="form-group">
           <label htmlFor="fullName">Full Name:</label>
           <input
             type="text"
             id="fullName"
+            placeholder="Enter full name"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="gender">Gender:</label>
+          <label htmlFor="email">Email:</label>
           <input
-            type="text"
-            id="gender"
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
+            type="email"
+            id="email"
+            placeholder="Enter email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="age">Age:</label>
+          <label htmlFor="phone">Phone:</label>
           <input
-            type="number"
-            id="age"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
+            type="tel"
+            id="phone"
+            placeholder="Enter phone number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
             required
           />
+        </div>
+        <div className="form-group">
+          <label htmlFor="houseSection">House Section:</label>
+          <input
+            type="text"
+            id="houseSection"
+            placeholder="Enter house section"
+            value={houseSection}
+            onChange={(e) => setHouseSection(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="houseNumber">House Number:</label>
+          <input
+            type="text"
+            id="houseNumber"
+            placeholder="Enter house number"
+            value={houseNumber}
+            onChange={(e) => setHouseNumber(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Role:</label>
+          <div className="role-options">
+            <div>
+              <input
+                type="radio"
+                id="adminRole"
+                name="role"
+                value="admin"
+                checked={role === "admin"}
+                onChange={() => setRole("admin")}
+              />
+              <label htmlFor="adminRole">Admin</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="basicRole"
+                name="role"
+                value="basic"
+                checked={role === "basic"}
+                onChange={() => setRole("basic")}
+              />
+              <label htmlFor="basicRole">Basic</label>
+            </div>
+          </div>
+        </div>
+        <div className="form-group">
+          <label>Active:</label>
+          <label className="toggle-switch">
+            <input
+              type="checkbox"
+              checked={isActive}
+              onChange={() => setIsActive(!isActive)}
+            />
+            <span className="toggle-slider"></span>
+          </label>
         </div>
         <button type="submit" className="submit-button">
           Update User

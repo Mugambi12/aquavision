@@ -15,5 +15,8 @@ class DevelopmentConfig(Config):
 class ProductionConfig(Config):
     pass
 
+class StagingConfig(Config):
+    pass
+
 class TestingConfig(Config):
     pass

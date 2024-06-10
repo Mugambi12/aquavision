@@ -4,14 +4,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 0 20px;
-  padding: 20px;
-}
-
-.settings-title {
-  margin-bottom: 20px;
-  color: var(--davys-gray);
-  font-size: var(--fs-1);
+  margin: 0 calc(var(--radius-10) * 2);
+  padding: calc(var(--radius-10) * 2);
 }
 
 .settings-card {
@@ -28,13 +22,13 @@
 .settings-sidebar {
   flex: 1;
   background: var(--white);
-  margin-right: 20px;
+  margin-right: calc(var(--radius-10) * 2);
   border-radius: var(--radius-8);
 }
 
 .settings-content {
   flex: 3;
-  padding: 20px;
+  padding: calc(var(--radius-10) * 2);
   background: var(--white);
   border-radius: var(--radius-8);
 }
@@ -43,14 +37,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px auto;
+  margin: calc(var(--radius-10) * 5) auto var(--radius-10);
 }
 
 .settings-company-logo img {
-  width: 100px;
-  height: 100px;
+  width: calc(var(--radius-10) * 10);
+  height: calc(var(--radius-10) * 10);
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: var(--radius-10);
 }
 
 .company-name {
@@ -61,13 +55,13 @@
 }
 
 .settings-nav {
-  padding: 20px;
+  padding: calc(var(--radius-10) * 2);
 }
 
 .settings-nav-item {
   display: block;
-  margin-bottom: 10px;
-  padding: 10px;
+  margin-bottom: var(--radius-10);
+  padding: var(--radius-10) var(--radius-12);
   color: var(--black);
   text-decoration: none;
   border-radius: var(--radius-8);
@@ -83,33 +77,35 @@
 }
 
 .settings-form {
-  margin-bottom: 20px;
+  margin-bottom: calc(var(--radius-10) * 2);
 }
 
 .settings-form label {
-  font-size: var(--fs-5);
-  color: var(--onyx);
+  font-size: var(--fs-8);
+  color: var(--davys-gray);
+  margin-bottom: var(--radius-6);
 }
 
 .settings-form input,
 .settings-form textarea {
+  padding: var(--radius-8) var(--radius-12);
+  font-size: var(--fs-6);
+  background: var(--white);
   width: 100%;
-  padding: 8px 16px;
-  margin: 10px auto 20px;
-  color: var(--davys-gray);
-  opacity: 0.8;
-  border: 1px solid var(--davys-gray_12);
+  color: var(--sonic-sliver);
+  margin: var(--radius-8) auto calc(var(--radius-10) * 1.4);
+  border: 1px solid var(--cultured);
   border-radius: var(--radius-6);
 }
 
 .settings-form .error {
   color: var(--imperial-red);
   font-size: var(--fs-7);
-  margin-top: 5px;
+  margin-top: calc(var(--radius-10) * 0.5);
 }
 
 .settings-btn {
-  padding: 8px 16px;
+  padding: var(--radius-8) var(--radius-12);
   border: none;
   border-radius: var(--radius-3);
   cursor: pointer;
@@ -117,8 +113,8 @@
 }
 
 .settings-btn.primary {
-  background: var(--imperial-red);
   color: var(--white);
+  background: var(--imperial-red);
 }
 
 .settings-btn.primary:hover {
@@ -127,8 +123,8 @@
 }
 
 .settings-btn.secondary {
-  background: var(--blue-ryb_12);
   color: var(--black);
+  background: var(--blue-ryb_12);
 }
 
 .settings-btn.secondary:hover {
@@ -138,7 +134,7 @@
 .settings-btn.danger {
   background: transparent;
   color: var(--coral);
-  margin-top: -20px;
+  margin-top: calc(var(--radius-10) * -2);
 }
 
 .settings-btn.danger:hover {
@@ -146,12 +142,11 @@
 }
 
 .settings-btn.success {
-  background: var(--emerald);
-  color: var(--black);
+  color: var(--white);
+  background: var(--space-cadet);
 }
 
 .settings-btn.success:hover {
-  color: var(--white);
   background: var(--pacific-blue);
 }
 
