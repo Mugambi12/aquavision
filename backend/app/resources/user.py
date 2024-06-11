@@ -1,4 +1,4 @@
-# resources/user.py
+from flask import request
 from flask_restx import Namespace, Resource
 from ..models.users import User
 from ..schemas.users_serializer import user_serializer
@@ -11,17 +11,43 @@ class UserResource(Resource):
     def get(self):
         return User.get_all()
 
+    @api.expect(user_serializer)
+    @api.marshal_with(user_serializer)
     def post(self):
-        pass
+        data = request.get_json()
+
+        # Perform necessary validation here
+        if User.get_by(email=data.get('email')):
+            return {'message': 'User with this email already exists'}, 400
+        if User.get_by(phone_number=data.get('phone_number')):
+            return {'message': 'User with this phone number already exists'}, 400
+
+        new_user = User(**data)
+        new_user.save()
+        return new_user, 201
 
 @api.route('/<int:id>')
 class UserDetailResource(Resource):
     @api.marshal_with(user_serializer)
     def get(self, id):
-        return User.get_by_id(id)
+        user = User.get_by_id(id)
+        if not user:
+            return {'message': 'User not found'}, 404
+        return user
 
+    @api.expect(user_serializer)
+    @api.marshal_with(user_serializer)
     def put(self, id):
-        pass
+        data = request.get_json()
+        user = User.get_by_id(id)
+        if not user:
+            return {'message': 'User not found'}, 404
+        user.update(**data)
+        return user
 
     def delete(self, id):
-        pass
+        user = User.get_by_id(id)
+        if not user:
+            return {'message': 'User not found'}, 404
+        user.delete()
+        return {'message': 'User deleted'}, 200

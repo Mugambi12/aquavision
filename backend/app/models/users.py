@@ -22,9 +22,9 @@ class User(db.Model, BaseMixin):
 class User(db.Model, BaseMixin):
     __tablename__ = 'users'
 
-    username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=True)
     phone_number = db.Column(db.String, unique=True, nullable=False)
+    full_name = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
     house_section = db.Column(db.String, nullable=False)
     house_number = db.Column(db.String, nullable=False)
@@ -32,5 +32,5 @@ class User(db.Model, BaseMixin):
     is_active = db.Column(db.Boolean, nullable=False)
     is_admin = db.Column(db.Boolean, nullable=False)
     balance = db.Column(db.Float, nullable=False)
-    last_login = db.Column(db.DateTime, nullable=False)
-    last_logout = db.Column(db.DateTime, nullable=False)
+    last_login = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
+    last_logout = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())

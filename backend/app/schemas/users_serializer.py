@@ -4,7 +4,7 @@ from ..extensions.api import api
 user_serializer = api.model(
   'User', {
     'id': fields.Integer(),
-    'username': fields.String(),
+    'full_name': fields.String(),
     'email': fields.String(),
     'phone_number': fields.String(),
     'password': fields.String(),

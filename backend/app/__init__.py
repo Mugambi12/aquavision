@@ -10,6 +10,7 @@ from .models.users import User
 from .models.settings import Settings
 
 from .resources.user import api as user_api
+from .resources.settings import api as settings_api
 
 def create_app():
     app = Flask(__name__)
@@ -18,6 +19,7 @@ def create_app():
     api.init_app(app, doc='/doc', title='API', version='1.0', description='API Documentation')
     
     api.add_namespace(user_api, path='/users')
+    api.add_namespace(settings_api, path='/settings')
 
     @api.route('/hello')
     class HelloWorld(Resource):
