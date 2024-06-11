@@ -1,0 +1,70 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: var(--cultured);
+  padding: var(--fs-3);
+}
+
+.register-card {
+  background: var(--white);
+  padding: var(--fs-3);
+  border-radius: var(--radius-8);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.register-card h2 {
+  margin-bottom: var(--fs-3);
+  color: var(--blue-ryb);
+}
+
+.register-form-group {
+  margin-bottom: var(--fs-3);
+  position: relative;
+}
+
+.register-form-group input {
+  width: 100%;
+  font-size: var(--fs-6);
+  padding: 10px 16px;
+  background: var(--white);
+  border: 1px solid var(--davys-gray_12);
+  border-radius: var(--radius-8);
+  box-sizing: border-box;
+}
+
+.register-form-group .toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: var(--fs-6);
+}
+
+.register-button {
+  width: 100%;
+  padding: var(--fs-10);
+  background: var(--pacific-blue);
+  color: var(--white);
+  text-align: center;
+  border: none;
+  border-radius: var(--radius-8);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.register-button:hover {
+  background: var(--emerald);
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875em;
+  margin-top: 5px;
+}

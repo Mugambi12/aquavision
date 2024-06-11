@@ -1,0 +1,80 @@
+@keyframes modalOpenAnimation {
+  from {
+    transform: translate(-50%, -100%) scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes modalCloseAnimation {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-50%, -100%) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.modal-wrapper {
+  z-index: 10;
+  position: fixed;
+  min-width: 450px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%) scale(0.5);
+  background: var(--white);
+  padding: 20px;
+  border-radius: var(--radius-12);
+  border: none;
+  box-shadow: var(--shadow-1);
+  opacity: 0;
+  animation: modalOpenAnimation 0.6s forwards;
+}
+
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.modal-close {
+  position: absolute;
+  top: var(--radius-16);
+  right: var(--radius-16);
+  font-size: var(--fs-1);
+  font-weight: var(--fw-600);
+  color: var(--imperial-red);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-title {
+  font-size: var(--fs-4);
+  font-weight: var(--fw-600);
+  margin-bottom: var(--fs-3);
+}
+
+@media screen and (max-width: 768px) {
+  .modal-wrapper {
+    min-width: 80%;
+    padding: 10px;
+  }
+
+  .modal-title {
+    font-size: var(--fs-3);
+  }
+}
+
+.modal-wrapper.modal-closing {
+  animation: modalCloseAnimation 0.5s forwards;
+}

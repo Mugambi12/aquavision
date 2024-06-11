@@ -1,0 +1,222 @@
+/* Settings.css */
+
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 calc(var(--radius-10) * 2);
+  padding: calc(var(--radius-10) * 2);
+}
+
+.settings-card {
+  display: flex;
+  overflow: hidden;
+}
+
+.settings-row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.settings-sidebar {
+  flex: 1;
+  background: var(--white);
+  margin-right: calc(var(--radius-10) * 2);
+  border-radius: var(--radius-8);
+}
+
+.settings-content {
+  flex: 3;
+  padding: calc(var(--radius-10) * 2);
+  background: var(--white);
+  border-radius: var(--radius-8);
+}
+
+.settings-company-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: calc(var(--radius-10) * 5) auto var(--radius-10);
+}
+
+.settings-company-logo img {
+  width: calc(var(--radius-10) * 10);
+  height: calc(var(--radius-10) * 10);
+  border-radius: 50%;
+  margin-right: var(--radius-10);
+}
+
+.company-name {
+  font-size: var(--fs-4);
+  font-weight: var(--fw-600);
+  color: var(--cool-gray);
+  margin-top: 20px;
+}
+
+.settings-nav {
+  padding: calc(var(--radius-10) * 2);
+}
+
+.settings-nav-item {
+  display: block;
+  margin-bottom: var(--radius-10);
+  padding: var(--radius-10) var(--radius-12);
+  color: var(--black);
+  text-decoration: none;
+  border-radius: var(--radius-8);
+  transition: background var(--transition);
+}
+
+.settings-nav-item:hover {
+  background: var(--blue-ryb_12);
+}
+
+.settings-nav-item.active {
+  background: var(--pacific-blue_12);
+}
+
+.settings-form {
+  margin-bottom: calc(var(--radius-10) * 2);
+}
+
+.settings-form label {
+  font-size: var(--fs-8);
+  color: var(--davys-gray);
+  margin-bottom: var(--radius-6);
+}
+
+.settings-form input,
+.settings-form textarea {
+  padding: var(--radius-8) var(--radius-12);
+  font-size: var(--fs-6);
+  background: var(--white);
+  width: 100%;
+  color: var(--sonic-sliver);
+  margin: var(--radius-8) auto calc(var(--radius-10) * 1.4);
+  border: 1px solid var(--cultured);
+  border-radius: var(--radius-6);
+}
+
+.settings-form .error {
+  color: var(--imperial-red);
+  font-size: var(--fs-7);
+  margin-top: calc(var(--radius-10) * 0.5);
+}
+
+.settings-btn {
+  padding: var(--radius-8) var(--radius-12);
+  border: none;
+  border-radius: var(--radius-3);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.settings-btn.primary {
+  color: var(--white);
+  background: var(--imperial-red);
+}
+
+.settings-btn.primary:hover {
+  opacity: 0.8;
+  color: var(--black);
+}
+
+.settings-btn.secondary {
+  color: var(--black);
+  background: var(--blue-ryb_12);
+}
+
+.settings-btn.secondary:hover {
+  background: var(--pacific-blue_12);
+}
+
+.settings-btn.danger {
+  background: transparent;
+  color: var(--coral);
+  margin-top: calc(var(--radius-10) * -2);
+}
+
+.settings-btn.danger:hover {
+  color: var(--imperial-red);
+}
+
+.settings-btn.success {
+  color: var(--white);
+  background: var(--space-cadet);
+}
+
+.settings-btn.success:hover {
+  background: var(--pacific-blue);
+}
+
+.material-symbols-rounded {
+  font-size: 1.2rem;
+  margin-right: 5px;
+}
+
+.settings-pane {
+  display: none;
+}
+
+.settings-pane.active {
+  display: block;
+}
+
+.settings-pane h5 {
+  font-size: var(--fs-4);
+  margin-bottom: 20px;
+  color: var(--davys-gray);
+}
+
+.settings-pane-footer {
+  text-align: right;
+}
+
+@media screen and (max-width: 768px) {
+  .settings-container {
+    margin: 0;
+    padding: 5px;
+  }
+
+  .settings-card {
+    flex-direction: column;
+  }
+
+  .settings-sidebar {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .settings-content {
+    padding: 20px;
+  }
+
+  .settings-nav {
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+    padding: 0;
+  }
+
+  .settings-nav-item {
+    margin-right: 8px;
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .settings-form label {
+    font-size: 14px;
+  }
+
+  .settings-form input,
+  .settings-form textarea {
+    margin: 10px 0 20px;
+    font-size: 14px;
+  }
+
+  .settings-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

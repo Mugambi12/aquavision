@@ -1,0 +1,25 @@
+.auth-container {
+  width: fit-content;
+  margin: 0 auto;
+  padding: var(--fs-2);
+  text-align: center;
+  border-radius: var(--radius-5);
+}
+
+.auth-container p {
+  display: flex;
+  margin: var(--fs-4) 0;
+}
+
+.auth-container .toggle-auth-page {
+  background: none;
+  margin-left: var(--fs-5);
+  border: none;
+  color: var(--imperial-red);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.auth-container .toggle-auth-page:hover {
+  color: var(--pacific-blue);
+}

@@ -1,0 +1,431 @@
+/*-----------------------------------*\
+          #header
+  \*-----------------------------------*/
+
+.records-container {
+  width: 100%;
+  padding: 0 50px;
+}
+
+.records-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+}
+
+.records-header-content {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.records-cust-invoice {
+  color: var(--pacific-blue);
+  font-weight: var(--fw-500);
+  font-size: var(--fs-4);
+}
+
+.records-heading {
+  color: var(--davys-gray);
+  font-weight: var(--fw-400);
+  font-size: var(--fs-5);
+  margin-top: 10px;
+}
+
+.records-company {
+  color: var(--cool-gray);
+  font-size: var(--fs-8);
+  font-weight: var(--fw-500);
+  margin-top: 5px;
+}
+
+.records-progress-section,
+.records-members-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.records-label {
+  color: var(--cool-gray);
+  font-size: var(--fs-10);
+  font-weight: var(--fw-300);
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.records-progress {
+  width: 200px;
+  height: 6px;
+  background: var(--eerie-black);
+  border-radius: 20px;
+  position: relative;
+}
+
+.records-progress::after {
+  content: "";
+  height: 100%;
+  background: var(--pacific-blue);
+  width: 50%;
+  border-radius: 20px;
+  position: absolute;
+}
+
+.red {
+  background: var(--coral);
+}
+
+.blue {
+  background: var(--pacific-blue);
+}
+
+.purple {
+  background: var(--emerald);
+}
+
+.add {
+  border: 1px solid var(--davys-gray);
+}
+
+.records-download-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.records-download-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.download-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: var(--fs-16);
+  background: var(--cultured);
+}
+
+.download-button.red {
+  color: var(--coral);
+}
+
+.download-button.blue {
+  color: var(--pacific-blue);
+}
+
+.download-button.purple {
+  color: var(--emerald);
+}
+
+.download-button.red:hover {
+  color: #ff7c8c;
+}
+
+.download-button.blue:hover {
+  color: #65eb97;
+}
+
+.download-button.purple:hover {
+  color: #0056b3;
+}
+
+@media screen and (max-width: 768px) {
+  .records-download-section {
+    margin-top: 20px;
+  }
+
+  .download-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .records-header {
+    padding: 16px 0px;
+  }
+
+  .records-container {
+    padding: 0 20px;
+  }
+
+  .records-header-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .records-cust-invoice {
+    font-size: var(--fs-4);
+    text-align: center;
+  }
+
+  .records-heading {
+    font-size: var(--fs-3);
+    text-align: center;
+  }
+
+  .records-company {
+    font-size: var(--fs-6);
+    text-align: center;
+  }
+
+  .records-progress-section {
+    margin-top: 20px;
+  }
+
+  .records-progress {
+    width: 100%;
+  }
+}
+
+/*-----------------------------------*\
+          #menu
+  \*-----------------------------------*/
+
+.records-menu {
+  display: flex;
+}
+
+.records-menu span {
+  color: var(--cool-gray);
+  font-size: var(--fs-10);
+  padding: 10px 30px;
+  cursor: pointer;
+}
+
+.records-menu span:hover {
+  color: var(--davys-gray);
+}
+
+.records-menu span.records-active {
+  color: var(--pacific-blue);
+  border-bottom: 2px solid var(--pacific-blue);
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .records-menu {
+    padding-left: 0;
+    justify-content: space-around;
+  }
+}
+
+/*-----------------------------------*\
+        #records TABLE
+  \*-----------------------------------*/
+
+.records-table-container {
+  padding: 20px;
+  background: var(--white);
+  border-radius: var(--radius-6);
+  margin-top: 10px;
+}
+
+.records-invoice-table {
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  text-align: center;
+}
+
+.records-invoice-table th,
+.records-invoice-row {
+  height: 65px;
+  background: var(--white);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-500);
+  color: var(--davys-gray);
+}
+
+.records-status {
+  width: 10px;
+  height: 10px;
+  background: #ddd;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+.records-invoice-row .pay {
+  font-size: var(--fs-4);
+  color: var(--pacific-blue);
+  cursor: pointer;
+}
+
+.records-invoice-row .loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--emerald);
+  border-radius: 50%;
+  padding: 8px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.records-date-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.records-month {
+  font-size: var(--fs-10);
+  color: var(--cool-gray);
+  letter-spacing: 2px;
+}
+
+.records-date {
+  font-size: var(--fs-8);
+  color: var(--davys-gray);
+  letter-spacing: 4px;
+  line-height: 1.5;
+}
+
+.records-status-text {
+  text-align: center;
+}
+
+.records-amount {
+  text-align: center;
+}
+
+.records-amount .balance {
+  font-size: var(--fs-10);
+  color: var(--davys-gray);
+}
+
+.records-invoice-row .delete {
+  font-size: var(--fs-4);
+  color: var(--imperial-red);
+  cursor: pointer;
+}
+
+.unpaid-bg {
+  background: #ff7c8c;
+}
+
+.unpaid {
+  color: #ff7c8c;
+}
+
+.drafted-bg {
+  background: #c1c2cc;
+}
+
+.drafted {
+  color: #c1c2cc;
+}
+
+.paid-bg {
+  background: #65eb97;
+}
+
+.paid {
+  color: #65eb97;
+}
+
+@media screen and (max-width: 768px) {
+  .records-container {
+    padding: 0 5px;
+  }
+
+  .records-header {
+    padding: 16px 0px;
+  }
+
+  .records-table-container {
+    padding: 10px 0;
+  }
+
+  .records-invoice-table {
+    padding: 0 0px;
+  }
+
+  .records-invoice-row {
+    height: 50px;
+  }
+
+  .records-status {
+    margin-left: 5px;
+  }
+
+  .records-date-info {
+    align-items: flex-start;
+  }
+
+  .records-month {
+    font-size: var(--fs-8);
+  }
+
+  .records-date {
+    font-size: var(--fs-6);
+  }
+
+  .records-status-text {
+    text-align: left;
+  }
+}
+
+/*-----------------------------------*\
+          #records ADD INVOICE
+  \*-----------------------------------*/
+
+.records-add-invoice-container {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  right: var(--radius-12);
+  bottom: var(--radius-12);
+}
+
+.records-add-invoice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--radius-8);
+  color: var(--cultured);
+  background: var(--pacific-blue);
+  border-radius: 50% 50% var(--radius-6) var(--radius-6);
+  box-shadow: var(--shadow-1);
+  cursor: pointer;
+}
+
+.records-add-invoice .material-symbols-rounded {
+  font-size: var(--fs-1);
+}
+
+.records-invoice-label {
+  font-size: var(--fs-10);
+  font-weight: var(--fw-300);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: var(--fs-5);
+}
+
+@media screen and (max-width: 768px) {
+  .records-add-invoice-container {
+    padding: 20px 10px;
+  }
+
+  .records-add-invoice {
+    padding: 5px;
+  }
+
+  .records-add-invoice .material-symbols-rounded {
+    font-size: 30px;
+  }
+
+  .records-invoice-label {
+    display: none;
+  }
+}

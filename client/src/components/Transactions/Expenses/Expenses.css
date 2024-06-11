@@ -1,0 +1,167 @@
+/*==============================*/
+/* expenses header */
+/*==============================*/
+
+.expenses-header {
+  display: flex;
+  align-items: center;
+  padding: var(--fs-3);
+  background: var(--davys-gray_12);
+  border-radius: var(--radius-8);
+  box-shadow: var(--shadow-1);
+  margin-bottom: var(--fs-6);
+}
+
+.expenses-header span.material-symbols-rounded {
+  cursor: pointer;
+  font-size: var(--fs-3);
+  color: var(--space-cadet);
+}
+
+.expenses-header-content {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  margin: 0 var(--fs-5);
+}
+
+.expenses-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-title {
+  color: var(--pacific-blue);
+  font-weight: var(--fw-600);
+  font-size: var(--fs-4);
+}
+
+@media screen and (max-width: 768px) {
+  .expenses-header {
+    display: none;
+  }
+
+  .expenses-header-content {
+    flex-direction: column;
+    gap: var(--fs-4);
+  }
+
+  .expenses-info {
+    flex-direction: column;
+    gap: var(--fs-4);
+  }
+
+  .header-title {
+    font-weight: var(--fw-500);
+    font-size: var(--fs-4);
+  }
+}
+
+/*================================*/
+/* Expenses Chart */
+/*================================*/
+
+.expenses-area-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--fs-4);
+  max-width: 100%;
+  background: var(--cultured);
+  margin-bottom: var(--fs-3);
+  border-radius: var(--radius-8);
+  box-shadow: var(--shadow-1);
+}
+
+.chart-data-filter {
+  display: flex;
+  align-items: center;
+  margin-top: calc(var(--fs-6) * -5);
+  margin-bottom: var(--fs-3);
+  position: absolute;
+}
+
+.chart-data-filter label {
+  margin-right: var(--fs-8);
+  font-size: var(--fs-6);
+}
+
+.chart-data-filter select {
+  width: 150px;
+  padding: var(--radius-6);
+  font-size: var(--fs-6);
+  border-radius: var(--radius-8);
+  border: 1px solid var(--cultured);
+}
+
+.expenses-area-chart .area-chart {
+  width: 100%;
+  max-width: 1000px;
+}
+
+@media (max-width: 768px) {
+  .expenses-area-chart {
+    padding: var(--fs-5) 0;
+  }
+
+  .expenses-area-chart .area-chart {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-data-filter {
+    align-items: center;
+    margin-top: calc(var(--fs-6) * -1);
+  }
+
+  .chart-data-filter label,
+  .chart-data-filter select {
+    font-size: var(--fs-7);
+  }
+
+  .chart-data-filter select {
+    width: 40vw;
+  }
+}
+
+/*================================*/
+/* Expenses Table */
+/*================================*/
+
+.expenses-table-container {
+  margin-left: -270px;
+  padding: var(--fs-4);
+  background: var(--white);
+  border-radius: var(--radius-8);
+  box-shadow: var(--shadow-1);
+}
+
+.expenses-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 35px;
+}
+
+.expenses-table th,
+.expenses-table td {
+  height: 60px;
+  background: var(--white);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-500);
+  color: var(--davys-gray);
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .expenses-table-container {
+    margin-left: 0;
+    margin-top: var(--fs-3);
+  }
+
+  .expenses-table {
+    border-spacing: 0;
+  }
+}

@@ -1,0 +1,98 @@
+.edit-revenue-container {
+  padding: var(--radius-3) var(--radius-8) 0;
+  background: var(--white);
+  max-width: 700px;
+  max-height: 90vh;
+  margin: 0 auto;
+  overflow-y: auto;
+}
+
+.edit-revenue-title {
+  font-size: var(--fs-4);
+  color: var(--davys-gray);
+  margin-bottom: var(--fs-1);
+}
+
+.edit-revenue-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1 1 calc(50% - 20px);
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: var(--fs-5);
+  color: var(--davys-gray);
+  margin-bottom: var(--radius-6);
+}
+
+.form-group input,
+.form-group select {
+  padding: var(--radius-8) var(--radius-12);
+  font-size: var(--fs-6);
+  background: var(--white);
+  width: 100%;
+  color: var(--sonic-sliver);
+  margin-bottom: var(--radius-10);
+  border: 1px solid var(--cultured);
+  border-radius: var(--radius-6);
+}
+
+.error-message {
+  color: var(--imperial-red);
+  font-size: var(--fs-7);
+  margin-top: 5px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.cancel-button,
+.submit-button {
+  padding: var(--radius-8) var(--radius-12);
+  font-size: var(--fs-6);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-6);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cancel-button {
+  background: var(--imperial-red);
+}
+
+.submit-button {
+  background: var(--space-cadet);
+}
+
+.cancel-button:hover {
+  background: var(--sonic-sliver);
+}
+
+.submit-button:hover {
+  background: var(--pacific-blue);
+}
+
+@media screen and (max-width: 768px) {
+  .edit-revenue-form {
+    flex-direction: column;
+  }
+
+  .form-group {
+    flex: 1 1 100%;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
