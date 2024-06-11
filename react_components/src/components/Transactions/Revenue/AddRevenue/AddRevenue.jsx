@@ -101,6 +101,7 @@ const AddRevenue = ({ onSubmit }) => {
           <label>
             Description:
             <textarea
+              rows={8}
               name="description"
               placeholder="Enter description"
               value={newRevenue.description}
