@@ -12,25 +12,19 @@ const Header = () => {
     };
 
     const handleNavLinkClick = (event) => {
-      // Remove active class from all nav links
       navLinks.forEach((link) => link.classList.remove("active"));
 
-      // Add active class to the clicked link
       event.currentTarget.classList.add("active");
 
-      // Store the active link in local storage
       localStorage.setItem("activeLink", event.currentTarget.href);
     };
 
-    // Add event listener to toggle button
     navToggleBtn.addEventListener("click", toggleNav);
 
-    // Add event listener to each nav link
     navLinks.forEach((link) =>
       link.addEventListener("click", handleNavLinkClick)
     );
 
-    // On component mount, check local storage for active link
     const activeLink = localStorage.getItem("activeLink");
     if (activeLink) {
       const activeNavLink = [...navLinks].find(
@@ -40,7 +34,6 @@ const Header = () => {
         activeNavLink.classList.add("active");
       }
     } else {
-      // If no active link is stored, set the home link as active by default
       const homeLink = document.querySelector(".navbar-link[href='/home']");
       if (homeLink) {
         homeLink.classList.add("active");
@@ -142,7 +135,7 @@ const Header = () => {
               </li>
               {/* Profile */}
               <li>
-                <a href="#" className="header-profile">
+                <a href="#!" className="header-profile">
                   <figure className="profile-avatar">
                     <img
                       src="src/assets/images/static/profile.png"
