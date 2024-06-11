@@ -8,7 +8,7 @@ import {
 import { HelmetProvider } from "react-helmet-async";
 import "./assets/styles/index.css";
 import Spinner from "./components/Spinner/Spinner";
-import ErrorBoundary from "./ErrorCatcher/ErrorBoundary";
+import ErrorBoundary from "./errors/ErrorBoundary";
 
 const LazyAuthPage = React.lazy(() => import("./pages/Auth"));
 const LazyChatsPage = React.lazy(() => import("./pages/Chats"));
