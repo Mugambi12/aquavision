@@ -1,6 +1,8 @@
 from decouple import config
 import os
+
 from .default import Config
+
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 

@@ -1,20 +1,7 @@
-from flask import Flask
-from flask_restx import Api, Resource
-from app.config.development import DevelopmentConfig
+# run.py
+from app.main import create_app
 
-
-app = Flask(__name__)
-
-app.config.from_object(DevelopmentConfig)
-
-api = Api(app, doc='/docs')
-
-
-@api.route('/hello')
-class HelloWorld(Resource):
-    def get(self):
-        return {'hello': 'world'}
-    
+app = create_app()
 
 if __name__ == '__main__':
     app.run()
