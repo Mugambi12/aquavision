@@ -28,7 +28,7 @@ class BaseMixin:
 class BaseMixin:
     __tablename__ = None
 
-    id = db.Column(db.Integer, primary_key=True)
+    _id = db.Column(db.Integer, primary_key=True)
     deleted = db.Column(db.Boolean, nullable=False, default=False)
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
     updated_at = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
@@ -52,8 +52,8 @@ class BaseMixin:
         return cls.query.all()
 
     @classmethod
-    def get_by_id(cls, id):
-        return cls.query.get(id)
+    def get_by_id(cls, _id):
+        return cls.query.get(_id)
 
     @classmethod
     def get_by(cls, **kwargs):

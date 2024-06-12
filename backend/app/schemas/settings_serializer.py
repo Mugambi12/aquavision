@@ -3,7 +3,7 @@ from ..extensions.rest_api import api
 
 settings_serializer = api.model(
   'Settings', {
-    'id': fields.Integer(),
+    '_id': fields.Integer(),
     'company_logo': fields.String(),
     'company_name': fields.String(),
     'company_address': fields.String(),

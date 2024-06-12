@@ -10,15 +10,17 @@ from .models.users import User
 from .models.settings import Settings
 
 from .resources.user import api as user_api
+from .resources.chats import api as chats_api
 from .resources.settings import api as settings_api
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(DevelopmentConfig)
     db.init_app(app)
-    api.init_app(app, doc='/doc', title='API', version='1.0', description='API Documentation')
+    api.init_app(app, doc='/docs', title='API', version='1.0', description='API Documentation')
     
     api.add_namespace(user_api, path='/users')
+    api.add_namespace(chats_api, path='/chats')
     api.add_namespace(settings_api, path='/settings')
 
     @api.route('/hello')

@@ -23,27 +23,27 @@ class SettingsResource(Resource):
         return new_settings, 201
     
 
-@api.route('/<int:id>')
+@api.route('/<int:_id>')
 class SettingsDetailResource(Resource):
     @api.marshal_with(settings_serializer)
-    def get(self, id):
-        settings = Settings.get_by_id(id)
+    def get(self, _id):
+        settings = Settings.get_by_id(_id)
         if not settings:
             abort (404, 'Settings not found')
         return settings
 
     @api.expect(settings_serializer)
     @api.marshal_with(settings_serializer)
-    def put(self, id):
+    def put(self, _id):
         data = request.get_json()
-        settings = Settings.get_by_id(id)
+        settings = Settings.get_by_id(_id)
         if not settings:
             abort(404, 'Settings not found')
         settings.update(**data)
         return settings
 
-    def delete(self, id):
-        settings = Settings.get_by_id(id)
+    def delete(self, _id):
+        settings = Settings.get_by_id(_id)
         if not settings:
             abort(404, 'Settings not found')
         settings.delete()

@@ -26,27 +26,27 @@ class UserResource(Resource):
         new_user.save()
         return new_user, 201
 
-@api.route('/<int:id>')
+@api.route('/<int:_id>')
 class UserDetailResource(Resource):
     @api.marshal_with(user_serializer)
-    def get(self, id):
-        user = User.get_by_id(id)
+    def get(self, _id):
+        user = User.get_by_id(_id)
         if not user:
             abort(404, 'User not found')
         return user
 
     @api.expect(user_serializer)
     @api.marshal_with(user_serializer)
-    def put(self, id):
+    def put(self, _id):
         data = request.get_json()
-        user = User.get_by_id(id)
+        user = User.get_by_id(_id)
         if not user:
             abort(404, 'User not found')
         user.update(**data)
         return user
 
-    def delete(self, id):
-        user = User.get_by_id(id)
+    def delete(self, _id):
+        user = User.get_by_id(_id)
         if not user:
             abort(404, 'User not found')
         user.delete()

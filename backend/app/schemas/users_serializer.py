@@ -3,7 +3,7 @@ from ..extensions.rest_api import api
 
 user_serializer = api.model(
   'User', {
-    'id': fields.Integer(),
+    '_id': fields.Integer(),
     'full_name': fields.String(),
     'email': fields.String(),
     'phone_number': fields.String(),
