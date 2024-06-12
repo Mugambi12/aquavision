@@ -2,8 +2,8 @@ from ..extensions.database import db
 from .base import BaseMixin
 
 """
-class Payments(db.Model, BaseMixin):
-    __tablename__ = 'payments'
+class Payment(db.Model, BaseMixin):
+    __tablename__ = 'payment'
 
     user_id = int, nullable=False
     invoice_id = int, nullable=False
@@ -13,8 +13,8 @@ class Payments(db.Model, BaseMixin):
     payment_status = str, nullable=False
 """
 
-class Payments(db.Model, BaseMixin):
-    __tablename__ = 'payments'
+class Payment(db.Model, BaseMixin):
+    __tablename__ = 'payment'
 
     user_id = db.Column(db.Integer, nullable=False)
     invoice_id = db.Column(db.Integer, nullable=False)
