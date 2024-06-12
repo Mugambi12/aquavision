@@ -1,5 +1,5 @@
 from flask_restx import fields
-from ..extensions.api import api
+from ..extensions.rest_api import api
 
 settings_serializer = api.model(
   'Settings', {

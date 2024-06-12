@@ -4,7 +4,7 @@ from flask_restx import Resource
 
 from .config.development import DevelopmentConfig
 from .extensions.database import db
-from .extensions.api import api
+from .extensions.rest_api import api
 
 from .models.users import User
 from .models.settings import Settings
