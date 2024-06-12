@@ -6,6 +6,7 @@ from .config.development import DevelopmentConfig
 from .extensions.database import db
 from .extensions.rest_api import api
 from .extensions.migrate import migrate
+from .extensions.cors_extension import cors
 
 from .resources.user import api as user_api
 from .resources.sticky_note import api as sticky_note_api
@@ -22,6 +23,7 @@ def create_app():
     app.config.from_object(DevelopmentConfig)
     db.init_app(app)
     migrate.init_app(app, db)
+    cors.init_app(app)
     api.init_app(app, doc='/docs', title='API', version='2.0', description='Aqua Vision API Documentation')
     
     api.add_namespace(user_api, path='/users')
