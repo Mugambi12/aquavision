@@ -10,6 +10,7 @@ from .models.users import User
 from .models.settings import Settings
 
 from .resources.user import api as user_api
+from .resources.invoice import api as invoice_api
 from .resources.chats import api as chats_api
 from .resources.settings import api as settings_api
 
@@ -20,6 +21,7 @@ def create_app():
     api.init_app(app, doc='/docs', title='API', version='1.0', description='API Documentation')
     
     api.add_namespace(user_api, path='/users')
+    api.add_namespace(invoice_api, path='/invoices')
     api.add_namespace(chats_api, path='/chats')
     api.add_namespace(settings_api, path='/settings')
 
