@@ -2,3 +2,4 @@ sockets_server
 venv/
 live_server/
 __pycache__/
+schema-demo.jsx
