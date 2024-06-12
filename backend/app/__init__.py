@@ -11,6 +11,8 @@ from .models.settings import Settings
 
 from .resources.user import api as user_api
 from .resources.invoice import api as invoice_api
+from .resources.payment import api as payment_api
+from .resources.expense import api as expense_api
 from .resources.chats import api as chats_api
 from .resources.settings import api as settings_api
 
@@ -22,6 +24,8 @@ def create_app():
     
     api.add_namespace(user_api, path='/users')
     api.add_namespace(invoice_api, path='/invoices')
+    api.add_namespace(payment_api, path='/payments')
+    api.add_namespace(expense_api, path='/expenses')
     api.add_namespace(chats_api, path='/chats')
     api.add_namespace(settings_api, path='/settings')
 

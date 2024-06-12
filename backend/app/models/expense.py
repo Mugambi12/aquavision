@@ -2,8 +2,8 @@ from ..extensions.database import db
 from .base import BaseMixin
 
 """
-class Expenses(db.Model, BaseMixin):
-    __tablename__ = 'expenses'
+class Expense(db.Model, BaseMixin):
+    __tablename__ = 'expense'
 
     type = str, nullable=False
     vendor = str, nullable=False
@@ -13,11 +13,10 @@ class Expenses(db.Model, BaseMixin):
     payment_method = str, nullable=False
     payment_status = str, nullable=False
     transaction_id = str, nullable=True
-    status = str, nullable=False
 """
 
-class Expenses(db.Model, BaseMixin):
-    __tablename__ = 'expenses'
+class Expense(db.Model, BaseMixin):
+    __tablename__ = 'expense'
 
     type = db.Column(db.String, nullable=False)
     vendor = db.Column(db.String, nullable=False)
@@ -27,4 +26,3 @@ class Expenses(db.Model, BaseMixin):
     payment_method = db.Column(db.String, nullable=False)
     payment_status = db.Column(db.String, nullable=False)
     transaction_id = db.Column(db.String, nullable=True)
-    status = db.Column(db.String, nullable=False)

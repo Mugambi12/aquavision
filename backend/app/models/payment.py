@@ -1,3 +1,4 @@
+from datetime import datetime
 from ..extensions.database import db
 from .base import BaseMixin
 
@@ -18,7 +19,7 @@ class Payment(db.Model, BaseMixin):
 
     user_id = db.Column(db.Integer, nullable=False)
     invoice_id = db.Column(db.Integer, nullable=False)
-    payment_date = db.Column(db.DateTime, nullable=False)
+    payment_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     amount = db.Column(db.Float, nullable=False)
     payment_method = db.Column(db.String, nullable=False)
     payment_status = db.Column(db.String, nullable=False)
