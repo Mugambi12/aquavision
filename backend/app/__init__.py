@@ -5,8 +5,10 @@ from flask_restx import Resource
 from .config.development import DevelopmentConfig
 from .extensions.database import db
 from .extensions.rest_api import api
+from .extensions.migrate import migrate
 
 from .resources.user import api as user_api
+from .resources.sticky_note import api as sticky_note_api
 from .resources.invoice import api as invoice_api
 from .resources.payment import api as payment_api
 from .resources.expense import api as expense_api
@@ -19,9 +21,11 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(DevelopmentConfig)
     db.init_app(app)
+    migrate.init_app(app, db)
     api.init_app(app, doc='/docs', title='API', version='2.0', description='Aqua Vision API Documentation')
     
     api.add_namespace(user_api, path='/users')
+    api.add_namespace(sticky_note_api, path='/sticky_notes')
     api.add_namespace(invoice_api, path='/invoices')
     api.add_namespace(payment_api, path='/payments')
     api.add_namespace(expense_api, path='/expenses')
