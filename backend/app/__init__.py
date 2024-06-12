@@ -6,15 +6,14 @@ from .config.development import DevelopmentConfig
 from .extensions.database import db
 from .extensions.rest_api import api
 
-from .models.users import User
-from .models.settings import Settings
-
 from .resources.user import api as user_api
 from .resources.invoice import api as invoice_api
 from .resources.payment import api as payment_api
 from .resources.expense import api as expense_api
 from .resources.chats import api as chats_api
 from .resources.settings import api as settings_api
+
+from .utils.shell_context import make_shell_context
 
 def create_app():
     app = Flask(__name__)
@@ -34,13 +33,7 @@ def create_app():
         def get(self):
             return {'hello': 'world'}
 
-    @app.shell_context_processor
-    def make_shell_context():
-        return {
-            'db': db,
-            'User': User,
-            'Settings': Settings
-        }
+    app.shell_context_processor(make_shell_context)
 
     with app.app_context():
         db.create_all()
