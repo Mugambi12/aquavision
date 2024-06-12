@@ -2,7 +2,10 @@ from decouple import config
 from .default import Config
 
 class ProductionConfig(Config):
-  pass
+    SQLALCHEMY_DATABASE_URI = "sqlite:///production.sqlite3"
+    SQLALCHEMY_ECHO = False
+    DEBUG = False
+    PORT = 8080
 
 
     #TESTING = config('TESTING', cast=bool)
