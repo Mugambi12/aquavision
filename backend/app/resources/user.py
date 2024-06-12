@@ -1,5 +1,7 @@
 from flask import request, abort
 from flask_restx import Namespace, Resource
+from werkzeug.security import generate_password_hash
+
 from ..models.users import User
 from ..schemas.users_serializer import user_serializer
 
@@ -9,20 +11,24 @@ api = Namespace('users', description='User related operations')
 class UserResource(Resource):
     @api.marshal_with(user_serializer)
     def get(self):
-        return User.get_all()
+        users = User.get_all()
+        
+        for user in users:
+            user.password = None
+
+        return users, 200
 
     @api.expect(user_serializer)
     @api.marshal_with(user_serializer)
     def post(self):
         data = request.get_json()
 
-        # Perform necessary validation here
-        if User.get_by(email=data.get('email')):
-            abort(400, 'User with this email already exists')
         if User.get_by(phone_number=data.get('phone_number')):
             abort(400, 'User with this phone number already exists')
 
+        hashed_password = generate_password_hash(data.get('password'))
         new_user = User(**data)
+        new_user.password = hashed_password
         new_user.save()
         return new_user, 201
 
@@ -31,6 +37,7 @@ class UserDetailResource(Resource):
     @api.marshal_with(user_serializer)
     def get(self, _id):
         user = User.get_by_id(_id)
+        user.password = None
         if not user:
             abort(404, 'User not found')
         return user
@@ -42,7 +49,9 @@ class UserDetailResource(Resource):
         user = User.get_by_id(_id)
         if not user:
             abort(404, 'User not found')
+        hashed_password = generate_password_hash(data.get('password'))
         user.update(**data)
+        user.password = hashed_password
         return user
 
     def delete(self, _id):
