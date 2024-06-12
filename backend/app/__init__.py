@@ -19,7 +19,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(DevelopmentConfig)
     db.init_app(app)
-    api.init_app(app, doc='/docs', title='API', version='1.0', description='API Documentation')
+    api.init_app(app, doc='/docs', title='API', version='2.0', description='Aqua Vision API Documentation')
     
     api.add_namespace(user_api, path='/users')
     api.add_namespace(invoice_api, path='/invoices')
@@ -29,9 +29,9 @@ def create_app():
     api.add_namespace(settings_api, path='/settings')
 
     @api.route('/hello')
-    class HelloWorld(Resource):
+    class HelloAPI(Resource):
         def get(self):
-            return {'hello': 'world'}
+            return {'hello': 'Welcome to aqua vision api'}
 
     app.shell_context_processor(make_shell_context)
 
