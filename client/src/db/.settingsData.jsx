@@ -1,52 +1,45 @@
 const settingsData = {
   _id: 1,
   company_logo: "https://fedskillstest.ct.digital/1.png",
-  company_name: "Acme Corporation",
+  company_name: "Dakoke Springs",
   company_address: "123 Main Street, Cityville",
   contact_number: "+1234567890",
-  company_website_url: "https://www.acmecorp.com",
+  company_website_url: "https://www.dakokesprings.com",
   company_description:
-    "Acme Corporation is a leading provider of innovative solutions.",
+    "Dakoke Springs is a leading provider of quality water in the region.",
   services: {
-    unit_price: 100,
-    service_fee: 20,
+    unit_price: 300,
+    service_fee: 200,
     house_sections: [
       {
         _id: 1,
-        section: "Section A",
+        section: "Osupuko",
       },
       {
         _id: 2,
-        section: "Section B",
+        section: "Chui Lane",
       },
       {
         _id: 3,
-        section: "Section C",
+        section: "Villa",
       },
       {
         _id: 4,
-        section: "Section D",
-      },
-      {
-        _id: 5,
-        section: "Section E",
-      },
-
-      // Add more sections if needed
+        section: "Phase 3",
+      }
     ],
   },
   payments: [
     {
-      bank_name: "Bank of America",
+      bank_name: "Cooperative Bank",
       paybill_number: 123456789,
       account_number: 987654321,
     },
-    // Add more payment methods if needed
   ],
   mailConfig: {
     _id: 1,
     company_email: "info@acmecorp.com",
-    mail_server: "mail.acmecorp.com",
+    mail_server: "mail.gmail.com",
     password: "mail_password",
   },
   socialAccounts: {

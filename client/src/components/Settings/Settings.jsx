@@ -40,6 +40,8 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
     await handleSaveSettings(data);
   };
 
+  console.log('settingsData:', settingsData)
+
   return (
     <div className="settings-container">
       <div className="settings-card">

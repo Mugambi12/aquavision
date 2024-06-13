@@ -1,5 +1,7 @@
 from flask import request, abort
 from flask_restx import Namespace, Resource
+from datetime import datetime
+
 from ..models.chats import Chat
 from ..schemas.chat_serializer import chat_serializer
 
@@ -9,7 +11,17 @@ api = Namespace('chats', description='Chat related operations')
 class ChatResource(Resource):
     @api.marshal_with(chat_serializer)
     def get(self):
-        return Chat.get_all()
+        chats = Chat.get_all()
+
+        for chat in chats:
+            for message in chat.messages:
+                iso_timestamp = message['timestamp']
+                dt = datetime.fromisoformat(iso_timestamp.replace('Z', '+00:00'))
+                formatted_timestamp = dt.strftime('%I:%M %p')
+                message['timestamp'] = formatted_timestamp
+
+        return chats, 200
+
 
     @api.expect(chat_serializer)
     @api.marshal_with(chat_serializer)

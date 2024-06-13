@@ -1,4 +1,4 @@
-from flask import request, abort
+from flask import request, abort, jsonify
 from flask_restx import Namespace, Resource
 from ..models.settings import Settings
 from ..schemas.settings_serializer import settings_serializer
@@ -9,7 +9,8 @@ api = Namespace('settings', description='Settings related operations')
 class SettingsResource(Resource):
     @api.marshal_with(settings_serializer)
     def get(self):
-        return Settings.get_all()
+        settings = Settings.get_all()
+        return settings, 200
 
     @api.expect(settings_serializer)
     @api.marshal_with(settings_serializer)

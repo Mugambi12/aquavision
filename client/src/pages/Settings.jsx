@@ -1,11 +1,35 @@
 // In Settings.js
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar/Navbar";
 import CompanySettings from "../components/Settings/Settings";
-import settingsData from "../db/settingsData";
+import Spinner from "../components/Spinner/Spinner";
 
 const Settings = () => {
+  const [settingsData, setSettingsData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const fetchSettingsData = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/settings");
+      if (!response.ok) {
+        throw new Error("Failed to fetch settings");
+      }
+      const data = await response.json();
+      setSettingsData(data);
+      setLoading(false);
+      console.log("Settings data fetched successfully:", data);
+    } catch (error) {
+      console.error("Error fetching settings:", error);
+      // Handle error appropriately, e.g., show an error message to the user
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchSettingsData();
+  }, []);
+
   const callApiAndLogFormData = async (formData) => {
     try {
       // Make API call here using formData
@@ -17,17 +41,22 @@ const Settings = () => {
       // Handle error appropriately
     }
   };
+
   return (
     <>
       <Helmet>
-        <title>Settings - Dakoke Springs</title>
+        <title>Settings - {settingsData?.company_name || "Loading..."}</title>
       </Helmet>
       <Navbar />
       <div className="main-container">
-        <CompanySettings
-          settingsData={settingsData}
-          handleSaveSettings={callApiAndLogFormData}
-        />
+        {loading ? (
+          <Spinner /> 
+        ) : (
+          <CompanySettings
+            settingsData={settingsData}
+            handleSaveSettings={callApiAndLogFormData}
+          />
+        )}
       </div>
     </>
   );
