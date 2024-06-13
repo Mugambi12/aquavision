@@ -9,10 +9,10 @@ const Settings = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchSettingsData();
+    callApiAndFetchSettingsData();
   }, []);
 
-  const fetchSettingsData = async () => {
+  const callApiAndFetchSettingsData = async () => {
     try {
       const response = await fetch("/api/settings");
       if (!response.ok) {
@@ -28,7 +28,7 @@ const Settings = () => {
     }
   };
 
-  const callApiAndLogFormData = async (formData) => {
+  const callApiAndSaveSettings = async (formData) => {
     try {
       const response = await fetch("/api/settings", {
         method: "POST",
@@ -60,7 +60,7 @@ const Settings = () => {
         ) : (
           <CompanySettings
             settingsData={settingsData}
-            handleSaveSettings={callApiAndLogFormData}
+            handleSaveSettings={callApiAndSaveSettings}
           />
         )}
       </div>

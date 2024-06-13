@@ -1,26 +1,7 @@
 import React, { useState, useMemo } from "react";
 import "./AddInvoiceForm.css";
 
-const registeredActiveHouses = [
-  {
-    house_section: "Osupuko",
-    house_number: [1, 2, 3, 4, 5],
-  },
-  {
-    house_section: "Chui Lane",
-    house_number: [6, 7, 8, 9, 10],
-  },
-  {
-    house_section: "Villa",
-    house_number: [11, 12, 13, 14, 15],
-  },
-  {
-    house_section: "Phase 3",
-    house_number: [16, 17, 18, 19, 20],
-  },
-];
-
-const AddInvoiceForm = ({ onSubmit }) => {
+const AddInvoiceForm = ({ onSubmit, registeredActiveHouses }) => {
   const [selectedSection, setSelectedSection] = useState("");
   const [selectedHouseNumber, setSelectedHouseNumber] = useState("");
   const [meterReading, setMeterReading] = useState("");

@@ -22,6 +22,8 @@ const MainContent = ({
     };
   }, [data]);
 
+  console.log("Data:", data)
+
   return (
     <div className="records-container">
       <div className="records-header">
@@ -74,10 +76,8 @@ const MainContent = ({
       </div>
 
       <div className="records-table-container">
-        <table
-          id="invoiceTable"
-          className="records-invoice-table display nowrap"
-        >
+      <p>This is the data id: {data._id}</p>
+        <table id="invoiceTable" className="records-invoice-table display nowrap">
           <thead>
             <tr>
               <th>Status</th>
@@ -92,17 +92,17 @@ const MainContent = ({
             </tr>
           </thead>
           <tbody>
-            {data.map((invoice, index) => (
-              <tr className="records-invoice-row" key={index}>
+            {data.map((invoice) => (
+              <tr className="records-invoice-row" key={invoice._id}>
                 <td>
-                  <div className={`records-status ${invoice.status}-bg`}></div>
+                  <div className={`records-status ${invoice.payment_status}-bg`}></div>
                 </td>
                 <td>
-                  {processingInvoiceId === invoice.invoiceNo ? (
+                  {processingInvoiceId === invoice._id ? (
                     <span className="loader"></span>
                   ) : (
                     <>
-                      {invoice.status === "unpaid" && (
+                      {invoice.payment_status === "unpaid" && (
                         <span
                           className="material-symbols-rounded pay"
                           onClick={() => handleInvoicePayment(invoice)}
@@ -116,26 +116,26 @@ const MainContent = ({
                 <td>
                   <div className="records-date-info">
                     <span className="records-month">
-                      {new Date(invoice.date).toLocaleString("default", {
+                      {new Date(invoice.created_at).toLocaleString("default", {
                         month: "short",
                       })}
                     </span>
                     <span className="records-date">
-                      {new Date(invoice.date).getDate()}
+                      {new Date(invoice.created_at).getDate()}
                     </span>
                   </div>
                 </td>
-                <td>{invoice.invoiceNo}</td>
-                <td>{invoice.client}</td>
-                <td>{invoice.description}</td>
+                <td>{invoice._id}</td>
+                <td>{invoice.full_name}</td>
+                <td>{invoice.company_name}</td>
                 <td>
-                  <div className={`records-status-text ${invoice.status}`}>
-                    {invoice.statusText}
+                  <div className={`records-status-text ${invoice.payment_status}`}>
+                    {invoice.payment_status_text}
                   </div>
                 </td>
                 <td>
-                  <div className={`records-amount ${invoice.status}`}>
-                    <span>{invoice.amount}</span>
+                  <div className={`records-amount ${invoice.payment_status}`}>
+                    <span>{invoice.total_amount}</span>
                     <span className="balance">{invoice.balance}</span>
                   </div>
                 </td>
