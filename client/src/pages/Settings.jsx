@@ -11,7 +11,7 @@ const Settings = () => {
 
   const fetchSettingsData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/settings");
+      const response = await fetch("/api/settings");
       if (!response.ok) {
         throw new Error("Failed to fetch settings");
       }
@@ -19,6 +19,8 @@ const Settings = () => {
       setSettingsData(data);
       setLoading(false);
       console.log("Settings data fetched successfully:", data);
+      // log type of data to console
+      console.log("Type of data: ", typeof data);
     } catch (error) {
       console.error("Error fetching settings:", error);
       // Handle error appropriately, e.g., show an error message to the user

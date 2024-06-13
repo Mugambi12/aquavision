@@ -13,11 +13,14 @@ const Chats = () => {
   useEffect(() => {
     const fetchChats = async () => {
       try {
-        const response = await fetch("http://localhost:5000/chats");
+        const response = await fetch("/api/chats");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
+        console.log("Chats data fetched successfully:", data)
+        // log type of data to console
+        console.log("Type of data: ", typeof data);
         setChats(data);
         setLoading(false);
       } catch (error) {
