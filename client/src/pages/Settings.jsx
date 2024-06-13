@@ -1,4 +1,3 @@
-// In Settings.js
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar/Navbar";
@@ -9,6 +8,10 @@ const Settings = () => {
   const [settingsData, setSettingsData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    fetchSettingsData();
+  }, []);
+
   const fetchSettingsData = async () => {
     try {
       const response = await fetch("/api/settings");
@@ -18,26 +21,27 @@ const Settings = () => {
       const data = await response.json();
       setSettingsData(data);
       setLoading(false);
-      console.log("Settings data fetched successfully:", data);
-      // log type of data to console
-      console.log("Type of data: ", typeof data);
+      console.log("Settings data fetched successfully:");
     } catch (error) {
       console.error("Error fetching settings:", error);
-      // Handle error appropriately, e.g., show an error message to the user
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchSettingsData();
-  }, []);
-
   const callApiAndLogFormData = async (formData) => {
     try {
-      // Make API call here using formData
-      console.log("API call successful");
-      console.log("Form Data: ", formData);
-      // Return response if needed
+      const response = await fetch("/api/settings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to save settings");
+      }
+      console.log("Settings saved successfully");
+      window.location.reload();      
     } catch (error) {
       console.error("Error calling API:", error);
       // Handle error appropriately
@@ -52,7 +56,7 @@ const Settings = () => {
       <Navbar />
       <div className="main-container">
         {loading ? (
-          <Spinner /> 
+          <Spinner />
         ) : (
           <CompanySettings
             settingsData={settingsData}

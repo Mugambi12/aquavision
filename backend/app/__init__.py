@@ -8,13 +8,13 @@ from .extensions.rest_api import api
 from .extensions.migrate import migrate
 from .extensions.cors_extension import cors
 
-from .resources.user import api as user_api
-from .resources.sticky_note import api as sticky_note_api
-from .resources.invoice import api as invoice_api
-from .resources.payment import api as payment_api
-from .resources.expense import api as expense_api
-from .resources.chats import api as chats_api
-from .resources.settings import api as settings_api
+from .resources.user_api import api as user_api
+from .resources.sticky_note_api import api as sticky_note_api
+from .resources.invoice_api import api as invoice_api
+from .resources.payment_api import api as payment_api
+from .resources.expens_api import api as expense_api
+from .resources.chats_api import api as chats_api
+from .resources.settings_api import api as settings_api
 
 from .utils.shell_context import make_shell_context
 
