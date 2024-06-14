@@ -67,10 +67,12 @@ class InvoiceResource(Resource):
         data = request.get_json()
 
         # Perform necessary validation here
+        new_invoice = data
+        print("This is the new invoice", new_invoice)
 
-        new_invoice = Invoice(**data)
-        new_invoice.save()
-        return new_invoice, 201
+        #new_invoice = Invoice(**data)
+        #new_invoice.save()
+        return 201
 
 
 @api.route('/<int:_id>')
@@ -98,3 +100,28 @@ class InvoiceDetailResource(Resource):
             abort(404, 'Invoice not found')
         invoice.delete()
         return {'message': 'Invoice deleted'}, 200
+    
+@api.route('/<int:_id>/pay')
+class InvoicePaymentResource(Resource):
+    @api.marshal_with(invoice_serializer)
+    def post(self, _id):
+        data = request.get_json()
+
+        invoice = Invoice.get_by_id(_id)
+        if not invoice:
+            abort(404, 'Invoice not found')
+
+        user = User.get_by_id(invoice.user_id)
+        if not user:
+            abort(404, 'User not found')
+
+        if user.balance < invoice.total_amount:
+            abort(400, 'Insufficient balance')
+
+        user.balance -= invoice.total_amount
+        user.save()
+
+        invoice.payment_status = 'paid'
+        invoice.save()
+
+        return invoice, 200

@@ -9,17 +9,15 @@ const AddInvoiceForm = ({ onSubmit, registeredActiveHouses }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const timestamp = new Date().toLocaleString("en-US", {
-      timeZone: userTimezone,
-    });
+    //const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    //const timestamp = new Date().toLocaleString("en-US", {
+    //  timeZone: userTimezone,
+    //});
 
     const newInvoice = {
-      id: Date.now().toString(),
-      timestamp,
       house_section: selectedSection,
       house_number: selectedHouseNumber,
-      meter_reading: meterReading,
+      current_reading: meterReading,
     };
     onSubmit(newInvoice);
   };

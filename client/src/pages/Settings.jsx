@@ -20,10 +20,10 @@ const Settings = () => {
       }
       const data = await response.json();
       setSettingsData(data);
-      setLoading(false);
       console.log("Settings data fetched successfully:");
     } catch (error) {
       console.error("Error fetching settings:", error);
+    } finally {
       setLoading(false);
     }
   };

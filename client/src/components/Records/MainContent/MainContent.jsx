@@ -3,15 +3,7 @@ import DataTable from "datatables.net-dt";
 import "datatables.net-responsive-dt";
 import "./MainContent.css";
 
-const MainContent = ({
-  data,
-  selectedFilter,
-  setSelectedFilter,
-  processingInvoiceId,
-  handleInvoicePayment,
-  openDeleteInvoiceModal,
-  openAddInvoiceModal,
-}) => {
+const MainContent = ({ data, Filter, setFilter, processing, handlePayment, openPostModal, openViewModal, openDeleteModal }) => {
   useEffect(() => {
     const table = new DataTable("#invoiceTable", {
       responsive: true,
@@ -21,8 +13,6 @@ const MainContent = ({
       table.destroy();
     };
   }, [data]);
-
-  console.log("Data:", data)
 
   return (
     <div className="records-container">
@@ -55,40 +45,30 @@ const MainContent = ({
       </div>
 
       <div className="records-menu">
-        <span
-          className={selectedFilter === "All" ? "records-active" : ""}
-          onClick={() => setSelectedFilter("All")}
-        >
+        <span className={Filter === "all" ? "records-active" : ""} onClick={() => setFilter("all")}>
           All
         </span>
-        <span
-          className={selectedFilter === "Unpaid" ? "records-active" : ""}
-          onClick={() => setSelectedFilter("Unpaid")}
-        >
+        <span className={Filter === "unpaid" ? "records-active" : ""} onClick={() => setFilter("unpaid")}>
           Unpaid
         </span>
-        <span
-          className={selectedFilter === "Paid" ? "records-active" : ""}
-          onClick={() => setSelectedFilter("Paid")}
-        >
+        <span className={Filter === "paid" ? "records-active" : ""} onClick={() => setFilter("paid")}>
           Paid
         </span>
       </div>
 
       <div className="records-table-container">
-      <p>This is the data id: {data._id}</p>
         <table id="invoiceTable" className="records-invoice-table display nowrap">
           <thead>
             <tr>
               <th>Status</th>
-              <th>Action</th>
               <th>Date</th>
-              <th>Invoice No</th>
-              <th>Client</th>
-              <th>Description</th>
-              <th>Status Text</th>
+              <th>Full Name</th>
+              <th>Consumption</th>
               <th>Amount</th>
-              <th>Options</th>
+              <th>Balance</th>
+              <th>Action</th>
+              <th>View</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -98,52 +78,41 @@ const MainContent = ({
                   <div className={`records-status ${invoice.payment_status}-bg`}></div>
                 </td>
                 <td>
-                  {processingInvoiceId === invoice._id ? (
-                    <span className="loader"></span>
-                  ) : (
-                    <>
-                      {invoice.payment_status === "unpaid" && (
-                        <span
-                          className="material-symbols-rounded pay"
-                          onClick={() => handleInvoicePayment(invoice)}
-                        >
-                          payment
-                        </span>
-                      )}
-                    </>
-                  )}
-                </td>
-                <td>
                   <div className="records-date-info">
                     <span className="records-month">
-                      {new Date(invoice.created_at).toLocaleString("default", {
-                        month: "short",
-                      })}
+                      {new Date(invoice.created_at).toLocaleString("default", { month: "short" })}
                     </span>
                     <span className="records-date">
                       {new Date(invoice.created_at).getDate()}
                     </span>
                   </div>
                 </td>
-                <td>{invoice._id}</td>
                 <td>{invoice.full_name}</td>
-                <td>{invoice.company_name}</td>
-                <td>
-                  <div className={`records-status-text ${invoice.payment_status}`}>
-                    {invoice.payment_status_text}
-                  </div>
-                </td>
+                <td>{invoice.consumption}</td>
+                <td>{invoice.total_amount}</td>
                 <td>
                   <div className={`records-amount ${invoice.payment_status}`}>
-                    <span>{invoice.total_amount}</span>
-                    <span className="balance">{invoice.balance}</span>
+                    <span>{invoice.balance}</span>
                   </div>
                 </td>
                 <td>
-                  <span
-                    className="material-symbols-rounded delete"
-                    onClick={() => openDeleteInvoiceModal(invoice)}
-                  >
+                  {processing === invoice._id ? (
+                    <span className="loader"></span>
+                  ) : (
+                    invoice.payment_status === "unpaid" && (
+                      <span className="material-symbols-rounded pay" onClick={() => handlePayment(invoice)}>
+                        payment
+                      </span>
+                    )
+                  )}
+                </td>
+                <td>
+                  <span className="material-symbols-rounded view" onClick={() => openViewModal(invoice)}>
+                    visibility
+                  </span>
+                </td>
+                <td>
+                  <span className="material-symbols-rounded delete" onClick={() => openDeleteModal(invoice)}>
                     delete
                   </span>
                 </td>
@@ -154,7 +123,7 @@ const MainContent = ({
       </div>
 
       <div className="records-add-invoice-container">
-        <div className="records-add-invoice" onClick={openAddInvoiceModal}>
+        <div className="records-add-invoice" onClick={openPostModal}>
           <span className="material-symbols-rounded">add</span>
           <span className="records-invoice-label">Invoice</span>
         </div>

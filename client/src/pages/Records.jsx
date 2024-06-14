@@ -4,47 +4,47 @@ import Navbar from "../components/Navbar/Navbar";
 import MainContent from "../components/Records/MainContent/MainContent";
 import Footer from "../components/Footer/Footer";
 import AddInvoiceForm from "../components/Records/AddInvoiceForm/AddInvoiceForm";
+import ViewInvoice from "../components/Records/ViewInvoice/ViewInvoice";
 import DeleteInvoice from "../components/Records/DeleteInvoice/DeleteInvoice";
 import ModalWrapper from "../components/ModalWrapper/ModalWrapper";
 import { registeredActiveHouses } from "../db/.invoiceData";
+import Spinner from "../components/Spinner/Spinner";
+
+import { fetchInvoices, postInvoice, deleteInvoice, processInvoicePayment } from "../services/apiInvoices";
 
 const Records = () => {
   const [invoicesData, setInvoicesData] = useState([]);
-  const [selectedFilter, setSelectedFilter] = useState("All");
+  const [Filter, setFilter] = useState("all");
   const [filteredData, setFilteredData] = useState([]);
-  const [processingInvoiceId, setProcessingInvoiceId] = useState("");
   const [selectedInvoice, setSelectedInvoice] = useState(null);
-  const [isDeleteInvoiceModalOpen, setIsDeleteInvoiceModalOpen] = useState(false);
   const [isAddInvoiceModalOpen, setIsAddInvoiceModalOpen] = useState(false);
+  const [isViewInvoiceModalOpen, setIsViewInvoiceModalOpen] = useState(false);
+  const [isDeleteInvoiceModalOpen, setIsDeleteInvoiceModalOpen] = useState(false);
+  const [processing, setProcessing] = useState("");
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    let newFilteredData = invoicesData;
-    if (selectedFilter === "Paid") {
-      newFilteredData = invoicesData.filter(
-        (invoice) => invoice.status.toLowerCase() === "paid"
-      );
-    } else if (selectedFilter === "Unpaid") {
-      newFilteredData = invoicesData.filter(
-        (invoice) => invoice.status.toLowerCase() === "unpaid"
-      );
-    }
-    setFilteredData(newFilteredData);
-  }, [selectedFilter, invoicesData]);
 
   useEffect(() => {
     callApiAndGetInvoices();
   }, []);
 
+  useEffect(() => {
+    let newFilteredData = invoicesData;
+    if (Filter === "paid") {
+      newFilteredData = invoicesData.filter(
+        (invoice) => invoice.status === "paid"
+      );
+    } else if (Filter === "unpaid") {
+      newFilteredData = invoicesData.filter(
+        (invoice) => invoice.status === "unpaid"
+      );
+    }
+    setFilteredData(newFilteredData);
+  }, [Filter, invoicesData]);
+
   const callApiAndGetInvoices = async () => {
     try {
-      const response = await fetch("/api/invoices");
-      if (!response.ok) {
-        throw new Error("Failed to fetch invoices");
-      }
-      const data = await response.json();
+      const data = await fetchInvoices();
       setInvoicesData(data);
-      console.log("Invoices data fetched successfully:", data);
     } catch (error) {
       console.error("Error fetching invoices:", error);
     } finally {
@@ -53,13 +53,9 @@ const Records = () => {
   };
 
   const callApiAndPostInvoice = async (newInvoice) => {
-    console.log("New Invoice Added: ", newInvoice);
-
     try {
-      // Implement logic for API
-      // Assuming API call succeeds and returns updated data with new invoice
-      setInvoicesData([...invoicesData, newInvoice]);
-      setSelectedFilter("All");
+      const updatedData = await postInvoice(newInvoice);
+      setInvoicesData(updatedData);
       console.log("Invoice added successfully.");
     } catch (error) {
       console.error("Error adding invoice:", error);
@@ -69,13 +65,9 @@ const Records = () => {
   };
 
   const callApiAndDeleteInvoice = async () => {
-    console.log("Deleting invoice:", selectedInvoice);
-
     try {
-      // Implement logic for API
-      // Assuming API call succeeds and returns updated data without deleted invoice
-      setInvoicesData(invoicesData.filter(invoice => invoice.invoiceNo !== selectedInvoice.invoiceNo));
-      setSelectedFilter("All");
+      const updatedData = await deleteInvoice(selectedInvoice._id);
+      setInvoicesData(updatedData);
       console.log("Invoice deleted successfully.");
     } catch (error) {
       console.error("Error deleting invoice:", error);
@@ -85,25 +77,30 @@ const Records = () => {
   };
 
   const callApiAndProcessInvoicePayment = async (invoice) => {
-    setProcessingInvoiceId(invoice.invoiceNo);
+    setProcessing(invoice._id);
     console.log("Processing payment for invoice:", invoice);
 
-    setTimeout(() => {
-      //const updatedInvoice = { ...invoice, status: "paid" };
-      //const updatedData = invoicesData.map((inv) =>
-      //  inv.invoiceNo === updatedInvoice.invoiceNo ? updatedInvoice : inv
-      //);
-      //setInvoicesData(updatedData);
-      setSelectedFilter("All");
-      setProcessingInvoiceId(null);
-    }, 2000);
+    try {
+      const updatedData = await processInvoicePayment(invoice._id);
+      setInvoicesData(updatedData);
+      console.log("Payment processed successfully.");
+    } catch (error) {
+      console.error("Error processing payment:", error);
+    } finally {
+      setProcessing(null);
+    }
   };
 
-  const openAddInvoiceModal = () => {
+  const openPostModal = () => {
     setIsAddInvoiceModalOpen(true);
   };
 
-  const openDeleteInvoiceModal = (invoice) => {
+  const openViewModal = (invoice) => {
+    setSelectedInvoice(invoice);
+    setIsViewInvoiceModalOpen(true);
+  };
+
+  const openDeleteModal = (invoice) => {
     setSelectedInvoice(invoice);
     setIsDeleteInvoiceModalOpen(true);
   };
@@ -115,18 +112,36 @@ const Records = () => {
       </Helmet>
       <Navbar />
       <div className="main-container">
-        <MainContent
-          data={filteredData}
-          selectedFilter={selectedFilter}
-          setSelectedFilter={setSelectedFilter}
-          processingInvoiceId={processingInvoiceId}
-          handleInvoicePayment={callApiAndProcessInvoicePayment}
-          openDeleteInvoiceModal={openDeleteInvoiceModal}
-          openAddInvoiceModal={openAddInvoiceModal}
-          loading={loading}
-        />
+        {loading ? (
+          <Spinner />
+        ) : (
+          <MainContent
+            data={invoicesData}
+            Filter={Filter}
+            setFilter={setFilter}
+            processing={processing}
+            handlePayment={callApiAndProcessInvoicePayment}
+            openViewModal={openViewModal}
+            openDeleteModal={openDeleteModal}
+            openPostModal={openPostModal}
+          />
+        )}
       </div>
       <Footer />
+
+
+      <ModalWrapper
+        isOpen={isAddInvoiceModalOpen}
+        onRequestClose={() => setIsAddInvoiceModalOpen(false)}
+      >
+        <AddInvoiceForm onSubmit={callApiAndPostInvoice} registeredActiveHouses={registeredActiveHouses} />
+      </ModalWrapper>
+      <ModalWrapper
+        isOpen={isViewInvoiceModalOpen}
+        onRequestClose={() => setIsViewInvoiceModalOpen(false)}
+      >
+        <ViewInvoice invoice={selectedInvoice} />
+      </ModalWrapper>
       <ModalWrapper
         isOpen={isDeleteInvoiceModalOpen}
         onRequestClose={() => setIsDeleteInvoiceModalOpen(false)}
@@ -135,12 +150,6 @@ const Records = () => {
           invoice={selectedInvoice}
           onSubmit={callApiAndDeleteInvoice}
         />
-      </ModalWrapper>
-      <ModalWrapper
-        isOpen={isAddInvoiceModalOpen}
-        onRequestClose={() => setIsAddInvoiceModalOpen(false)}
-      >
-        <AddInvoiceForm onSubmit={callApiAndPostInvoice} registeredActiveHouses={registeredActiveHouses} />
       </ModalWrapper>
     </>
   );

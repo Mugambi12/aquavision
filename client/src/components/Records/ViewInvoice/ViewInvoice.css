@@ -1,0 +1,36 @@
+.view-invoice-container {
+  font-family: var(--ff-vietnam);
+  padding: 20px;
+}
+
+.view-invoice-title {
+  font-size: var(--fs-3);
+  font-weight: var(--fw-600);
+  color: var(--onyx);
+  margin-bottom: var(--fs-4);
+}
+
+.view-invoice-details p {
+  font-size: var(--fs-5);
+  font-weight: var(--fw-400);
+  color: var(--davys-gray);
+  margin: 0.5rem 0;
+}
+
+.view-invoice-details strong {
+  font-weight: var(--fw-600);
+}
+
+@media screen and (max-width: 768px) {
+  .view-invoice-container {
+    padding: 10px;
+  }
+
+  .view-invoice-title {
+    font-size: var(--fs-4);
+  }
+
+  .view-invoice-details p {
+    font-size: var(--fs-6);
+  }
+}
