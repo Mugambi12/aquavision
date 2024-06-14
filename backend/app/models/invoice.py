@@ -30,3 +30,8 @@ class Invoice(db.Model, BaseMixin):
     service_fee = db.Column(db.Float, nullable=False)
     total_amount = db.Column(db.Float, nullable=False)
     payment_status = db.Column(db.String, nullable=False)
+
+    # Help me with a method to get the latest invoice for a user by user_id
+    @classmethod
+    def get_latest_invoice(cls, user_id):
+        return cls.query.filter_by(user_id=user_id).order_by(cls.created_at.desc()).first()

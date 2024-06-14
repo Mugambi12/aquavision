@@ -67,22 +67,21 @@ class InvoiceListResource(Resource):
         }
         return invoice_data
 
+
+
 @api.route('/post')
 class InvoiceCreateResource(Resource):
     @api.expect(invoice_serializer)
-    @api.marshal_with(invoice_serializer)
+    @api.marshal_with(invoice_serializer, code=201)
     def post(self):
         try:
             data = request.get_json()
-
             self._validate_fields(data)
-
             new_invoice = self._prepare_invoice_data(data)
-
+            
             # Save the invoice to the database
-            new_invoice_obj = Invoice(**new_invoice)
-            new_invoice_obj.save()
-
+            new_invoice_obj = self._save_invoice(new_invoice)
+            
             # Update user balance
             user_id = new_invoice['user_id']
             user = User.get_by_id(user_id)
@@ -102,7 +101,6 @@ class InvoiceCreateResource(Resource):
             logging.error(f"An error occurred: {e}")
             abort(500, "An internal error occurred")
 
-
     def _validate_fields(self, data):
         required_fields = ['house_section', 'house_number', 'current_reading']
         for field in required_fields:
@@ -114,18 +112,28 @@ class InvoiceCreateResource(Resource):
             'house_section': data['house_section'],
             'house_number': data['house_number'],
             'current_reading': float(data['current_reading']),
-            'user_id': 1  # Assuming a user_id is being assigned for now
+            'user_id': 10  # Assuming a user_id is being assigned for now
         }
 
         settings = Settings.get_all()
+        if not settings:
+            raise ValueError("Settings not found")
+        
         latest_settings = settings[-1]
-
         services = latest_settings.services
         unit_price = float(services['unit_price'])
         service_fee = float(services['service_fee'])
 
-        previous_reading = float(data.get('previous_reading', 0))
-        consumption = new_invoice['current_reading'] - previous_reading
+        latest_invoice = Invoice.get_latest_invoice(new_invoice['user_id'])
+        previous_reading = latest_invoice.current_reading if latest_invoice else 0
+
+        print("This is previous reading's current reading:", previous_reading)
+        print("This is previous reading's current reading:", previous_reading, new_invoice['current_reading'])
+
+        if latest_invoice:
+            consumption = new_invoice['current_reading'] - previous_reading
+        else:
+            consumption = new_invoice['current_reading']
 
         new_invoice.update({
             'unit_price': unit_price,
@@ -141,6 +149,7 @@ class InvoiceCreateResource(Resource):
     def _save_invoice(self, new_invoice):
         new_invoice_obj = Invoice(**new_invoice)
         new_invoice_obj.save()
+        return new_invoice_obj
 
 @api.route('/<int:_id>/delete')
 class InvoiceDetailResource(Resource):
@@ -149,6 +158,16 @@ class InvoiceDetailResource(Resource):
             invoice = Invoice.get_by_id(_id)
             if not invoice:
                 abort(404, 'Invoice not found')
+
+            if invoice.payment_status == 'paid':
+                abort(400, 'Cannot delete a paid invoice')
+
+            user = User.get_by_id(invoice.user_id)
+            if not user:
+                abort(404, 'User not found')
+
+            user.balance -= invoice.total_amount
+            user.save()
 
             invoice.delete()
             return {'message': 'Invoice deleted'}, 200

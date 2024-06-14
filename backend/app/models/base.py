@@ -56,5 +56,9 @@ class BaseMixin:
         return cls.query.get(_id)
 
     @classmethod
+    def get_by_user_id(cls, user_id):
+        return cls.query.get(user_id)
+
+    @classmethod
     def get_by(cls, **kwargs):
         return cls.query.filter_by(**kwargs).first()
