@@ -3,7 +3,16 @@ import DataTable from "datatables.net-dt";
 import "datatables.net-responsive-dt";
 import "./MainContent.css";
 
-const MainContent = ({ data, Filter, setFilter, processing, handlePayment, openPostModal, openViewModal, openDeleteModal }) => {
+const MainContent = ({
+  data,
+  Filter,
+  setFilter,
+  processing,
+  handlePayment,
+  openPostModal,
+  openViewModal,
+  openDeleteModal,
+}) => {
   useEffect(() => {
     const table = new DataTable("#invoiceTable", {
       responsive: true,
@@ -45,19 +54,31 @@ const MainContent = ({ data, Filter, setFilter, processing, handlePayment, openP
       </div>
 
       <div className="records-menu">
-        <span className={Filter === "all" ? "records-active" : ""} onClick={() => setFilter("all")}>
+        <span
+          className={Filter === "all" ? "records-active" : ""}
+          onClick={() => setFilter("all")}
+        >
           All
         </span>
-        <span className={Filter === "unpaid" ? "records-active" : ""} onClick={() => setFilter("unpaid")}>
+        <span
+          className={Filter === "unpaid" ? "records-active" : ""}
+          onClick={() => setFilter("unpaid")}
+        >
           Unpaid
         </span>
-        <span className={Filter === "paid" ? "records-active" : ""} onClick={() => setFilter("paid")}>
+        <span
+          className={Filter === "paid" ? "records-active" : ""}
+          onClick={() => setFilter("paid")}
+        >
           Paid
         </span>
       </div>
 
       <div className="records-table-container">
-        <table id="invoiceTable" className="records-invoice-table display nowrap">
+        <table
+          id="invoiceTable"
+          className="records-invoice-table display nowrap"
+        >
           <thead>
             <tr>
               <th>Status</th>
@@ -75,12 +96,16 @@ const MainContent = ({ data, Filter, setFilter, processing, handlePayment, openP
             {data.map((invoice) => (
               <tr className="records-invoice-row" key={invoice._id}>
                 <td>
-                  <div className={`records-status ${invoice.payment_status}-bg`}></div>
+                  <div
+                    className={`records-status ${invoice.payment_status}-bg`}
+                  ></div>
                 </td>
                 <td>
                   <div className="records-date-info">
                     <span className="records-month">
-                      {new Date(invoice.created_at).toLocaleString("default", { month: "short" })}
+                      {new Date(invoice.created_at).toLocaleString("default", {
+                        month: "short",
+                      })}
                     </span>
                     <span className="records-date">
                       {new Date(invoice.created_at).getDate()}
@@ -100,19 +125,28 @@ const MainContent = ({ data, Filter, setFilter, processing, handlePayment, openP
                     <span className="loader"></span>
                   ) : (
                     invoice.payment_status === "unpaid" && (
-                      <span className="material-symbols-rounded pay" onClick={() => handlePayment(invoice)}>
+                      <span
+                        className="material-symbols-rounded pay"
+                        onClick={() => handlePayment(invoice)}
+                      >
                         payment
                       </span>
                     )
                   )}
                 </td>
                 <td>
-                  <span className="material-symbols-rounded view" onClick={() => openViewModal(invoice)}>
+                  <span
+                    className="material-symbols-rounded view"
+                    onClick={() => openViewModal(invoice)}
+                  >
                     visibility
                   </span>
                 </td>
                 <td>
-                  <span className="material-symbols-rounded delete" onClick={() => openDeleteModal(invoice)}>
+                  <span
+                    className="material-symbols-rounded delete"
+                    onClick={() => openDeleteModal(invoice)}
+                  >
                     delete
                   </span>
                 </td>

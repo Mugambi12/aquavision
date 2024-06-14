@@ -10,7 +10,12 @@ import ModalWrapper from "../components/ModalWrapper/ModalWrapper";
 import { registeredActiveHouses } from "../db/.invoiceData";
 import Spinner from "../components/Spinner/Spinner";
 
-import { fetchInvoices, postInvoice, deleteInvoice, processInvoicePayment } from "../services/apiInvoices";
+import {
+  fetchInvoices,
+  postInvoice,
+  deleteInvoice,
+  processInvoicePayment,
+} from "../services/apiInvoices";
 
 const Records = () => {
   const [invoicesData, setInvoicesData] = useState([]);
@@ -19,7 +24,8 @@ const Records = () => {
   const [selectedInvoice, setSelectedInvoice] = useState(null);
   const [isAddInvoiceModalOpen, setIsAddInvoiceModalOpen] = useState(false);
   const [isViewInvoiceModalOpen, setIsViewInvoiceModalOpen] = useState(false);
-  const [isDeleteInvoiceModalOpen, setIsDeleteInvoiceModalOpen] = useState(false);
+  const [isDeleteInvoiceModalOpen, setIsDeleteInvoiceModalOpen] =
+    useState(false);
   const [processing, setProcessing] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -129,12 +135,14 @@ const Records = () => {
       </div>
       <Footer />
 
-
       <ModalWrapper
         isOpen={isAddInvoiceModalOpen}
         onRequestClose={() => setIsAddInvoiceModalOpen(false)}
       >
-        <AddInvoiceForm onSubmit={callApiAndPostInvoice} registeredActiveHouses={registeredActiveHouses} />
+        <AddInvoiceForm
+          onSubmit={callApiAndPostInvoice}
+          registeredActiveHouses={registeredActiveHouses}
+        />
       </ModalWrapper>
       <ModalWrapper
         isOpen={isViewInvoiceModalOpen}
