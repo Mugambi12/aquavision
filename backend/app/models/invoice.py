@@ -6,6 +6,8 @@ class Invoice(db.Model, BaseMixin):
     __tablename__ = 'invoice_entries'
 
     user_id = int, nullable=False
+    house_section = str, nullable=False
+    house_number = str, nullable=False
     previous_reading = float, nullable=False
     current_reading = float, nullable=False
     consumption = float, nullable=False
@@ -19,6 +21,8 @@ class Invoice(db.Model, BaseMixin):
     __tablename__ = 'invoice_entries'
 
     user_id = db.Column(db.Integer, nullable=False)
+    house_section = db.Column(db.String, nullable=True)
+    house_number = db.Column(db.String, nullable=True)
     previous_reading = db.Column(db.Float, nullable=False)
     current_reading = db.Column(db.Float, nullable=False)
     consumption = db.Column(db.Float, nullable=False)

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar/Navbar";
-import MainContent from "../components/Records/MainContent/MainContent";
+import InvoiceManagement from "../components/Records/InvoiceManagement/InvoiceManagement";
 import Footer from "../components/Footer/Footer";
-import AddInvoiceForm from "../components/Records/AddInvoiceForm/AddInvoiceForm";
+import AddInvoice from "../components/Records/AddInvoice/AddInvoice";
 import ViewInvoice from "../components/Records/ViewInvoice/ViewInvoice";
 import DeleteInvoice from "../components/Records/DeleteInvoice/DeleteInvoice";
 import ModalWrapper from "../components/ModalWrapper/ModalWrapper";
@@ -117,29 +117,31 @@ const Records = () => {
         <title>Records - Dakoke Springs</title>
       </Helmet>
       <Navbar />
-      <div className="main-container">
-        {loading ? (
-          <Spinner />
-        ) : (
-          <MainContent
-            data={invoicesData}
-            Filter={Filter}
-            setFilter={setFilter}
-            processing={processing}
-            handlePayment={callApiAndProcessInvoicePayment}
-            openViewModal={openViewModal}
-            openDeleteModal={openDeleteModal}
-            openPostModal={openPostModal}
-          />
-        )}
-      </div>
-      <Footer />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <div className="main-container">
+            <InvoiceManagement
+              data={invoicesData}
+              Filter={Filter}
+              setFilter={setFilter}
+              processing={processing}
+              handlePayment={callApiAndProcessInvoicePayment}
+              openViewModal={openViewModal}
+              openDeleteModal={openDeleteModal}
+              openPostModal={openPostModal}
+            />
+          </div>
+          <Footer />
+        </>
+      )}
 
       <ModalWrapper
         isOpen={isAddInvoiceModalOpen}
         onRequestClose={() => setIsAddInvoiceModalOpen(false)}
       >
-        <AddInvoiceForm
+        <AddInvoice
           onSubmit={callApiAndPostInvoice}
           registeredActiveHouses={registeredActiveHouses}
         />

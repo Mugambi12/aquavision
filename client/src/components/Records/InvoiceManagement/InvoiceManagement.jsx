@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import DataTable from "datatables.net-dt";
 import "datatables.net-responsive-dt";
-import "./MainContent.css";
+import "./InvoiceManagement.css";
 
-const MainContent = ({
+const InvoiceManagement = ({
   data,
   Filter,
   setFilter,
@@ -166,4 +166,4 @@ const MainContent = ({
   );
 };
 
-export default MainContent;
+export default InvoiceManagement;

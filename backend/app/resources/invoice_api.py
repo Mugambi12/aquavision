@@ -38,6 +38,8 @@ class InvoiceResource(Resource):
                     '_id': invoice._id,
                     'company_name': company_info.company_name,
                     'user_id': invoice.user_id,
+                    'house_section': invoice.house_section,
+                    'house_number': invoice.house_number,
                     'full_name': user.full_name,
                     'previous_reading': invoice.previous_reading,
                     'current_reading': invoice.current_reading,
@@ -52,6 +54,8 @@ class InvoiceResource(Resource):
                     'created_at': invoice.created_at,
                 }
                 response_data.append(invoice_data)
+                
+            response_data.reverse()
 
             return response_data, 200
 
@@ -59,20 +63,65 @@ class InvoiceResource(Resource):
             logging.error(f"An error occurred: {e}")
             abort(500, "An internal error occurred")
 
-
-
     @api.expect(invoice_serializer)
     @api.marshal_with(invoice_serializer)
     def post(self):
         data = request.get_json()
 
-        # Perform necessary validation here
-        new_invoice = data
+        print("This is the data from client", data)
+
+        # Validate required fields
+        required_fields = ['house_section', 'house_number', 'current_reading']
+        for field in required_fields:
+            if field not in data:
+                abort(400, f"'{field}' is a required field")
+
+        new_invoice = {
+            'house_section': data['house_section'],
+            'house_number': data['house_number'],
+            'current_reading': float(data['current_reading'])  # Ensure it's a float
+        }
         print("This is the new invoice", new_invoice)
 
-        #new_invoice = Invoice(**data)
-        #new_invoice.save()
-        return 201
+        new_invoice['user_id'] = 1  # Assuming a user_id is being assigned for now
+
+        # Get settings from database
+        settings = Settings.get_all()
+        if not settings:
+            abort(404, "No settings found")
+
+        # Ensure settings and services are not empty
+        latest_setting = settings[-1]
+        if not hasattr(latest_setting, 'services') or not latest_setting.services:
+            abort(404, "No services found in the settings")
+
+        services = latest_setting.services
+        unit_price = float(services['unit_price'])
+        service_fee = float(services['service_fee'])
+
+        # Ensure previous_reading is present and calculate consumption
+        previous_reading = float(data.get('previous_reading', 0))
+
+        consumption = new_invoice['current_reading'] - previous_reading
+
+        # Calculate total amount
+        new_invoice['unit_price'] = unit_price
+        new_invoice['service_fee'] = service_fee
+        new_invoice['total_amount'] = consumption * unit_price + service_fee
+
+        new_invoice['previous_reading'] = previous_reading
+        new_invoice['consumption'] = consumption
+        new_invoice['payment_status'] = data.get('payment_status', 'unpaid')
+
+        print("This is the final invoice", new_invoice)
+
+        # Save the invoice to the database
+        new_invoice_obj = Invoice(**new_invoice)
+        new_invoice_obj.save()
+
+        return new_invoice_obj, 201
+
+
 
 
 @api.route('/<int:_id>')

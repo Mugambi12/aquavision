@@ -8,6 +8,8 @@ invoice_serializer = api.model(
         '_id': fields.String(),
         'company_name': fields.String(),
         'user_id': fields.Integer(),
+        'house_section': fields.String(),
+        'house_number': fields.String(),
         'full_name': fields.String(),
         'previous_reading': fields.Float(),
         'current_reading': fields.Float(),
