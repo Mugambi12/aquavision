@@ -55,7 +55,7 @@ const Records = () => {
   const callApiAndPostInvoice = async (newInvoice) => {
     try {
       const updatedData = await postInvoice(newInvoice);
-      setInvoicesData(updatedData);
+      //setInvoicesData(updatedData);
       console.log("Invoice added successfully.");
     } catch (error) {
       console.error("Error adding invoice:", error);
