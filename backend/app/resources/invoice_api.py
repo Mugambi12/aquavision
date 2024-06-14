@@ -67,8 +67,6 @@ class InvoiceListResource(Resource):
         }
         return invoice_data
 
-
-
 @api.route('/post')
 class InvoiceCreateResource(Resource):
     @api.expect(invoice_serializer)
