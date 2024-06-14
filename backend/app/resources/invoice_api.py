@@ -4,7 +4,6 @@ from ..models.users import User
 from ..models.invoice import Invoice
 from ..models.settings import Settings
 from ..schemas.invoice_serializer import invoice_serializer
-from datetime import datetime
 import logging
 
 api = Namespace('invoices', description='Invoice related operations')
