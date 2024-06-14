@@ -1,7 +1,7 @@
 // src/api/apiInvoices.js
 
 export const fetchInvoices = async () => {
-  const response = await fetch("/api/invoices");
+  const response = await fetch("/api/invoices/get");
   if (!response.ok) {
     throw new Error("Failed to fetch invoices");
   }
@@ -9,7 +9,7 @@ export const fetchInvoices = async () => {
 };
 
 export const postInvoice = async (newInvoice) => {
-  const response = await fetch("/api/invoices", {
+  const response = await fetch("/api/invoices/post", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -22,8 +22,8 @@ export const postInvoice = async (newInvoice) => {
   return await response.json();
 };
 
-export const deleteInvoice = async (invoiceNo) => {
-  const response = await fetch(`/api/invoices/${invoiceNo}`, {
+export const deleteInvoice = async (invoice_id) => {
+  const response = await fetch(`/api/invoices/${invoice_id}/delete`, {
     method: "DELETE",
   });
   if (!response.ok) {
@@ -32,8 +32,8 @@ export const deleteInvoice = async (invoiceNo) => {
   return await response.json();
 };
 
-export const processInvoicePayment = async (invoiceNo) => {
-  const response = await fetch(`/api/invoices/${invoiceNo}/pay`, {
+export const processInvoicePayment = async (invoice_id) => {
+  const response = await fetch(`/api/invoices/${invoice_id}/pay`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

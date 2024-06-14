@@ -62,6 +62,7 @@ const Records = () => {
     try {
       const updatedData = await postInvoice(newInvoice);
       //setInvoicesData(updatedData);
+      window.location.reload();
       console.log("Invoice added successfully.");
     } catch (error) {
       console.error("Error adding invoice:", error);
@@ -73,7 +74,8 @@ const Records = () => {
   const callApiAndDeleteInvoice = async () => {
     try {
       const updatedData = await deleteInvoice(selectedInvoice._id);
-      setInvoicesData(updatedData);
+      //setInvoicesData(updatedData);
+      window.location.reload();
       console.log("Invoice deleted successfully.");
     } catch (error) {
       console.error("Error deleting invoice:", error);
