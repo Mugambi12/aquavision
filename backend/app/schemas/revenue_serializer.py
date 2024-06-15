@@ -1,8 +1,8 @@
 from flask_restx import fields
 from ..extensions.rest_api import api
 
-payment_serializer = api.model(
-  'Payment', {
+revenue_serializer = api.model(
+  'Revenue', {
     '_id': fields.String(),
     'user_id': fields.Integer(),
     'invoice_id': fields.Integer(),

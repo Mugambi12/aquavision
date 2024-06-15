@@ -11,7 +11,7 @@ from .extensions.cors_extension import cors
 from .resources.user_api import api as user_api
 from .resources.sticky_note_api import api as sticky_note_api
 from .resources.invoice_api import api as invoice_api
-from .resources.payment_api import api as payment_api
+from .resources.revenue_api import api as payment_api
 from .resources.expens_api import api as expense_api
 from .resources.chats_api import api as chats_api
 from .resources.settings_api import api as settings_api
