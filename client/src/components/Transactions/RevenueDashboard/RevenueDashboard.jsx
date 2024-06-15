@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Revenue.css";
+import "./RevenueDashboard.css";
 import {
   AreaChart,
   Area,
@@ -316,7 +316,7 @@ const RevenueTableContainer = ({
   </div>
 );
 
-const Revenue = ({
+const RevenueDashboard = ({
   revenue,
   openDeleteRevenueModal,
   openEditRevenueModal,
@@ -420,4 +420,4 @@ const Revenue = ({
   );
 };
 
-export default Revenue;
+export default RevenueDashboard;

@@ -41,7 +41,7 @@ const Settings = () => {
         throw new Error("Failed to save settings");
       }
       console.log("Settings saved successfully");
-      window.location.reload();      
+      window.location.reload();
     } catch (error) {
       console.error("Error calling API:", error);
       // Handle error appropriately
@@ -59,7 +59,7 @@ const Settings = () => {
           <Spinner />
         ) : (
           <CompanySettings
-            settingsData={settingsData}
+            settings={settingsData}
             handleSaveSettings={callApiAndSaveSettings}
           />
         )}

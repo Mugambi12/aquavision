@@ -1,6 +1,6 @@
-// Sidebar.js
+// TransactionSidebar.js
 import React from "react";
-import "./Sidebar.css";
+import "./TransactionSidebar.css";
 
 const customers = [
   { name: "John Doe", house: "Osupuko, 77", amount: 1000 },
@@ -9,7 +9,7 @@ const customers = [
   { name: "Jane Smith", house: "Phase 3, 77", amount: 1200 },
 ];
 
-const Sidebar = ({
+const TransactionSidebar = ({
   toggleView,
   currentView,
   openAddRevenueModal,
@@ -96,4 +96,4 @@ const Sidebar = ({
   );
 };
 
-export default Sidebar;
+export default TransactionSidebar;

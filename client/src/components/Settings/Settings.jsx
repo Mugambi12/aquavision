@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import "./Settings.css";
 
-const CompanySettings = ({ settingsData, handleSaveSettings }) => {
+const CompanySettings = ({ settings, handleSaveSettings }) => {
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm({
-    defaultValues: settingsData,
+    defaultValues: settings,
   });
 
   const {
@@ -47,8 +47,8 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
           {/* Sidebar Column */}
           <div className="settings-sidebar">
             <div className="settings-company-logo">
-              <img src={settingsData.company_logo} alt="Company Logo" />
-              <h4 className="company-name">{settingsData.company_name}</h4>
+              <img src={settings.company_logo} alt="Company Logo" />
+              <h4 className="company-name">{settings.company_name}</h4>
             </div>
 
             <div className="settings-nav">
@@ -92,7 +92,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                   <input
                     type="text" // Updated to type text
                     {...register("company_logo", { required: true })}
-                    defaultValue={settingsData.company_logo} // Use defaultValue
+                    defaultValue={settings.company_logo} // Use defaultValue
                   />
                   {errors.company_logo && (
                     <p className="error">Company Logo is required</p>
@@ -103,7 +103,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                     type="text"
                     placeholder="Company Name"
                     {...register("company_name", { required: true })}
-                    defaultValue={settingsData.company_name} // Use defaultValue
+                    defaultValue={settings.company_name} // Use defaultValue
                   />
                   {errors.company_name && (
                     <p className="error">Company Name is required</p>
@@ -114,7 +114,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                     type="text"
                     placeholder="Company Address" // Updated placeholder
                     {...register("company_address", { required: true })}
-                    defaultValue={settingsData.company_address} // Use defaultValue
+                    defaultValue={settings.company_address} // Use defaultValue
                   />
                   {errors.company_address && (
                     <p className="error">Company Address is required</p>
@@ -125,7 +125,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                     type="text"
                     placeholder="Company Website" // Updated placeholder
                     {...register("company_website_url", { required: true })}
-                    defaultValue={settingsData.company_website_url} // Use defaultValue
+                    defaultValue={settings.company_website_url} // Use defaultValue
                   />
                   {errors.company_website_url && (
                     <p className="error">Company Website is required</p>
@@ -136,18 +136,20 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                     type="text"
                     placeholder="Contact Number" // Updated placeholder
                     {...register("contact_number", { required: true })}
-                    defaultValue={settingsData.contact_number} // Use defaultValue
+                    defaultValue={settings.contact_number} // Use defaultValue
                   />
                   {errors.contact_number && (
                     <p className="error">Contact Number is required</p>
                   )}
 
-                  <label htmlFor="company_description">Company Description</label>
+                  <label htmlFor="company_description">
+                    Company Description
+                  </label>
                   <textarea
                     placeholder="Company Description"
                     rows="5"
                     {...register("company_description", { required: true })}
-                    defaultValue={settingsData.company_description} // Use defaultValue
+                    defaultValue={settings.company_description} // Use defaultValue
                   />
                   {errors.company_description && (
                     <p className="error">Company Description is required</p>
@@ -169,24 +171,26 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                     type="number"
                     placeholder="Water Unit Price"
                     {...register("services.unit_price", { required: true })}
-                    defaultValue={settingsData.services?.unit_price} // Use defaultValue
+                    defaultValue={settings.services?.unit_price} // Use defaultValue
                   />
                   {errors.services?.unit_price && (
                     <p className="error">Water Unit Price is required</p>
                   )}
 
-                  <label htmlFor="services.service_fee">Monthly Standing Charge</label>
+                  <label htmlFor="services.service_fee">
+                    Monthly Standing Charge
+                  </label>
                   <input
                     type="number"
                     placeholder="Monthly Standing Charge"
                     {...register("services.service_fee", { required: true })}
-                    defaultValue={settingsData.services?.service_fee} // Use defaultValue
+                    defaultValue={settings.services?.service_fee} // Use defaultValue
                   />
                   {errors.services?.service_fee && (
                     <p className="error">Monthly Standing Charge is required</p>
                   )}
                 </div>
-                
+
                 <div className="settings-form">
                   <h4>House Sections</h4>
                   {houseSectionsFields.map((section, index) => (
@@ -234,7 +238,9 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                 <div className="settings-form">
                   {paymentMethodsFields.map((payment, index) => (
                     <div key={payment.id} className="settings-form-group">
-                      <label htmlFor={`payments[${index}].bank_name`}>Bank Name</label>
+                      <label htmlFor={`payments[${index}].bank_name`}>
+                        Bank Name
+                      </label>
                       <input
                         type="text"
                         placeholder="Bank Name"
@@ -247,7 +253,9 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                         <p className="error">Bank Name is required</p>
                       )}
 
-                      <label htmlFor={`payments[${index}].paybill_number`}>Pay Bill Number</label>
+                      <label htmlFor={`payments[${index}].paybill_number`}>
+                        Pay Bill Number
+                      </label>
                       <input
                         type="text"
                         placeholder="Pay Bill Number"
@@ -260,7 +268,9 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                         <p className="error">Pay Bill Number is required</p>
                       )}
 
-                      <label htmlFor={`payments[${index}].account_number`}>Account Number</label>
+                      <label htmlFor={`payments[${index}].account_number`}>
+                        Account Number
+                      </label>
                       <input
                         type="text"
                         placeholder="Account Number"
@@ -316,20 +326,22 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                     {...register("mailConfig.mail_server", {
                       required: true,
                     })}
-                    defaultValue={settingsData.mailConfig?.mail_server} // Use defaultValue
+                    defaultValue={settings.mailConfig?.mail_server} // Use defaultValue
                   />
                   {errors.mailConfig?.mail_server && (
                     <p className="error">Mail Server is required</p>
                   )}
 
-                  <label htmlFor="mailConfig.company_email">Company Email</label>
+                  <label htmlFor="mailConfig.company_email">
+                    Company Email
+                  </label>
                   <input
                     type="email"
                     placeholder="Company Email"
                     {...register("mailConfig.company_email", {
                       required: true,
                     })}
-                    defaultValue={settingsData.mailConfig?.company_email} // Use defaultValue
+                    defaultValue={settings.mailConfig?.company_email} // Use defaultValue
                   />
                   {errors.mailConfig?.company_email && (
                     <p className="error">Company Email is required</p>
@@ -342,7 +354,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                     {...register("mailConfig.password", {
                       required: true,
                     })}
-                    defaultValue={settingsData.mailConfig?.password} // Use defaultValue
+                    defaultValue={settings.mailConfig?.password} // Use defaultValue
                   />
                   {errors.mailConfig?.password && (
                     <p className="error">Email Password is required</p>
@@ -366,7 +378,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                     {...register("socialAccounts.twitter", {
                       required: true,
                     })}
-                    defaultValue={settingsData.socialAccounts?.twitter} // Use defaultValue
+                    defaultValue={settings.socialAccounts?.twitter} // Use defaultValue
                   />
                   {errors.socialAccounts?.twitter && (
                     <p className="error">Twitter is required</p>
@@ -379,7 +391,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                     {...register("socialAccounts.facebook", {
                       required: true,
                     })}
-                    defaultValue={settingsData.socialAccounts?.facebook} // Use defaultValue
+                    defaultValue={settings.socialAccounts?.facebook} // Use defaultValue
                   />
                   {errors.socialAccounts?.facebook && (
                     <p className="error">Facebook is required</p>
@@ -392,7 +404,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                     {...register("socialAccounts.linkedin", {
                       required: true,
                     })}
-                    defaultValue={settingsData.socialAccounts?.linkedin} // Use defaultValue
+                    defaultValue={settings.socialAccounts?.linkedin} // Use defaultValue
                   />
                   {errors.socialAccounts?.linkedin && (
                     <p className="error">LinkedIn is required</p>
@@ -405,7 +417,7 @@ const CompanySettings = ({ settingsData, handleSaveSettings }) => {
                     {...register("socialAccounts.instagram", {
                       required: true,
                     })}
-                    defaultValue={settingsData.socialAccounts?.instagram} // Use defaultValue
+                    defaultValue={settings.socialAccounts?.instagram} // Use defaultValue
                   />
                   {errors.socialAccounts?.instagram && (
                     <p className="error">Instagram is required</p>

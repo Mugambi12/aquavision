@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import DataTable from "datatables.net-dt";
 import "datatables.net-responsive-dt";
-import "./Expenses.css";
+import "./ExpenseDashboard.css";
 
 const ExpensesHeader = ({ openAddExpenseModal }) => (
   <div className="expenses-header">
@@ -151,7 +151,7 @@ const ExpensesTable = ({ expenses }) => (
   </div>
 );
 
-const Expenses = ({ expenses, openAddExpenseModal }) => {
+const ExpenseDashboard = ({ expenses, openAddExpenseModal }) => {
   useEffect(() => {
     const table = new DataTable("#expensesTable", { responsive: true });
     return () => {
@@ -168,4 +168,4 @@ const Expenses = ({ expenses, openAddExpenseModal }) => {
   );
 };
 
-export default Expenses;
+export default ExpenseDashboard;

@@ -21,7 +21,7 @@
 
 .settings-sidebar {
   flex: 1;
-  background: var(--white);
+  background: var(--cool-gray);
   margin-right: calc(var(--radius-10) * 2);
   border-radius: var(--radius-8);
 }
