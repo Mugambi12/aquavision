@@ -59,7 +59,8 @@
 }
 
 .settings-nav-item {
-  display: block;
+  display: flex;
+  align-items: center;
   margin-bottom: var(--radius-10);
   padding: var(--radius-10) var(--radius-12);
   color: var(--black);
@@ -74,6 +75,15 @@
 
 .settings-nav-item.active {
   background: var(--pacific-blue_12);
+}
+
+.settings-nav-item .material-symbols-rounded {
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+.settings-nav-item .nav-label {
+  display: inline;
 }
 
 .settings-form {
@@ -183,8 +193,13 @@
     flex-direction: column;
   }
 
+  .settings-row {
+    flex-direction: column;
+  }
+
   .settings-sidebar {
     margin-right: 0;
+    padding: var(--radius-10) var(--radius-16);
     margin-bottom: 20px;
   }
 
@@ -194,15 +209,22 @@
 
   .settings-nav {
     display: flex;
-    overflow-x: auto;
     width: 100%;
     padding: 0;
+    justify-content: space-between;
   }
 
   .settings-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-right: 8px;
     font-size: 14px;
     padding: 5px;
+  }
+
+  .settings-nav-item .nav-label {
+    display: none;
   }
 
   .settings-form label {

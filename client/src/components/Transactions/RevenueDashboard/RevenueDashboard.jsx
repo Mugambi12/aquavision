@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
 import "./RevenueDashboard.css";
+import React, { useEffect, useState } from "react";
+import DataTable from "datatables.net-dt";
+import "datatables.net-responsive-dt";
 import {
   ResponsiveContainer,
   AreaChart,
@@ -13,8 +15,6 @@ import {
   Pie,
   Cell,
 } from "recharts";
-import DataTable from "datatables.net-dt";
-import "datatables.net-responsive-dt";
 
 // Define colors for the PieChart
 const COLORS = ["#8884d8", "#a4de6c", "#ffc658", "#82ca9d", "#ff8042"];
@@ -111,8 +111,8 @@ const RevenueCharts = ({
           onChange={handleStatusChange}
         >
           <option value="all">All</option>
-          <option className="received" value="Received">
-            Received
+          <option className="completed" value="Completed">
+            Completed
           </option>
           <option className="cancelled" value="Cancelled">
             Cancelled
@@ -121,66 +121,73 @@ const RevenueCharts = ({
       </div>
     </div>
 
-    {/* Container for AreaChart and PieChart */}
-    <div className="revenue-charts-container">
-      {/* AreaChart */}
-      <div className="area-chart-container">
-        <h2 className="chart-header">Monthly Revenue Trends</h2>
-        <ResponsiveContainer height={300}>
-          <AreaChart
-            data={filteredRevenue}
-            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-          >
-            <defs>
-              <linearGradient id="areaColor" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <XAxis dataKey="month" type="category" />
-            <YAxis type="number" />
-            <CartesianGrid strokeDasharray="0.5 0.5" />
-            <Tooltip />
-            <Legend wrapperStyle={{ fontSize: "14px" }} />
-            <Area
-              dataKey="revenue"
-              type="monotone"
-              stroke="#8884d8"
-              fillOpacity={1}
-              fill="url(#areaColor)"
-              activeDot={{ r: 8 }}
-            />
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
-
-      {/* PieChart */}
-      <div className="doughnut-chart-container">
-        <h2 className="chart-header">Revenue by Payment Method</h2>
-        <ResponsiveContainer height={300}>
-          <PieChart>
-            <Pie
-              data={paymentMethodData}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              label={renderCustomizedLabel}
-              outerRadius={80}
-              fill="#8884d8"
-              dataKey="value"
+    {/* Conditionally render charts only if there is data */}
+    {filteredRevenue.length > 0 && paymentMethodData.length > 0 && (
+      <div className="revenue-charts-container">
+        {/* AreaChart */}
+        <div className="area-chart-container">
+          <h2 className="chart-header">Monthly Revenue Trends</h2>
+          <ResponsiveContainer height={300}>
+            <AreaChart
+              data={filteredRevenue}
+              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
             >
-              {paymentMethodData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
-            </Pie>
-            <Legend wrapperStyle={{ fontSize: "14px" }} />
-          </PieChart>
-        </ResponsiveContainer>
+              <defs>
+                <linearGradient id="areaColor" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <XAxis dataKey="month" type="category" />
+              <YAxis type="number" />
+              <CartesianGrid strokeDasharray="0.5 0.5" />
+              <Tooltip />
+              <Legend wrapperStyle={{ fontSize: "14px" }} />
+              <Area
+                dataKey="revenue"
+                type="monotone"
+                stroke="#8884d8"
+                fillOpacity={1}
+                fill="url(#areaColor)"
+                activeDot={{ r: 8 }}
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* PieChart */}
+        <div className="doughnut-chart-container">
+          <h2 className="chart-header">Revenue by Payment Method</h2>
+          <ResponsiveContainer height={300}>
+            <PieChart>
+              <Pie
+                data={paymentMethodData}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={renderCustomizedLabel}
+                outerRadius={80}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {paymentMethodData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+              <Legend wrapperStyle={{ fontSize: "14px" }} />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
       </div>
-    </div>
+    )}
+
+    {/* Optionally, you can add a message or alternative content when there's no data */}
+    {(filteredRevenue.length === 0 || paymentMethodData.length === 0) && (
+      <p>No data available</p>
+    )}
   </div>
 );
 
@@ -194,7 +201,7 @@ const RevenueTableContainer = ({
   openRefundRevenueModal,
 }) => (
   <div className="revenue-table-container">
-    <table id="revenueTable" className="revenue-table display">
+    <table id="revenueTable" className="revenue-table display nowrap">
       <thead>
         <tr>
           <th>#ID</th>

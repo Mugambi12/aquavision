@@ -5,8 +5,8 @@ import "./Invoice.css";
 
 const InvoiceManagement = ({
   data,
-  Filter,
-  setFilter,
+  /*Filter,*/
+  /*setFilter,*/
   processing,
   handlePayment,
   openPostModal,
@@ -55,20 +55,20 @@ const InvoiceManagement = ({
 
       <div className="records-menu">
         <span
-          className={Filter === "all" ? "records-active" : ""}
-          onClick={() => setFilter("all")}
+        /*className={Filter === "all" ? "records-active" : ""}
+          onClick={() => setFilter("all")}*/
         >
           All
         </span>
         <span
-          className={Filter === "unpaid" ? "records-active" : ""}
-          onClick={() => setFilter("unpaid")}
+        /*className={Filter === "unpaid" ? "records-active" : ""}
+          onClick={() => setFilter("unpaid")}*/
         >
           Unpaid
         </span>
         <span
-          className={Filter === "paid" ? "records-active" : ""}
-          onClick={() => setFilter("paid")}
+        /*className={Filter === "paid" ? "records-active" : ""}
+          onClick={() => setFilter("paid")}*/
         >
           Paid
         </span>

@@ -23,7 +23,7 @@ export const postInvoice = async (newInvoice) => {
 };
 
 export const deleteInvoice = async (invoice_id) => {
-  const response = await fetch(`/api/invoices/${invoice_id}/delete`, {
+  const response = await fetch(`/api/invoices/delete/${invoice_id}`, {
     method: "DELETE",
   });
   if (!response.ok) {
@@ -32,16 +32,24 @@ export const deleteInvoice = async (invoice_id) => {
   return await response.json();
 };
 
-export const processInvoicePayment = async (invoice_id) => {
-  const response = await fetch(`/api/invoices/${invoice_id}/pay`, {
+export const processInvoicePayment = async (invoice) => {
+  console.log("Processing payment for invoice:", invoice);
+  const invoicePaymentData = {
+    invoice_id: invoice._id,
+    user_id: invoice.user_id,
+  };
+
+  const response = await fetch(`/api/invoices/pay/${invoice_id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ status: "paid" }),
+    body: JSON.stringify(invoicePaymentData),
   });
+
   if (!response.ok) {
     throw new Error("Failed to process payment");
   }
+
   return await response.json();
 };

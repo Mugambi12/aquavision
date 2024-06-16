@@ -148,7 +148,7 @@ class InvoiceCreateResource(Resource):
         new_invoice_obj.save()
         return new_invoice_obj
 
-@api.route('/<int:_id>/delete')
+@api.route('/delete/<int:_id>')
 class InvoiceDetailResource(Resource):
     def delete(self, _id):
         try:
@@ -173,40 +173,46 @@ class InvoiceDetailResource(Resource):
             logging.error(f"An error occurred: {e}")
             abort(500, "An internal error occurred")
 
-@api.route('/<int:_id>/pay')
+@api.route('/pay/<int:_id>')
 class InvoicePaymentResource(Resource):
     @api.marshal_with(invoice_serializer)
     def post(self, _id):
-        try:
-            data = request.get_json()
-
-            invoice = Invoice.get_by_id(_id)
-            if not invoice:
-                abort(404, 'Invoice not found')
-
-            user = User.get_by_id(invoice.user_id)
-            if not user:
-                abort(404, 'User not found')
-
-            self._validate_payment(user, invoice)
-
-            self._process_payment(user, invoice)
-
-            return invoice, 200
-
-        except ValueError as e:
-            abort(400, str(e))
-        except Exception as e:
-            logging.error(f"An error occurred: {e}")
-            abort(500, "An internal error occurred")
-
-    def _validate_payment(self, user, invoice):
-        if user.balance < invoice.total_amount:
-            raise ValueError('Insufficient balance')
-
-    def _process_payment(self, user, invoice):
-        user.balance -= invoice.total_amount
-        user.save()
-
-        invoice.payment_status = 'paid'
-        invoice.save()
+        invoice = Invoice.get_by_id(_id)
+        print("This is the invoice from the API EndPoint:", invoice)
+        return invoice, 200
+    
+#        try:
+#            data = request.get_json()
+#
+#            print("This is the data:", data)
+#
+#            invoice = Invoice.get_by_id(_id)
+#            if not invoice:
+#                abort(404, 'Invoice not found')
+#
+#            user = User.get_by_id(invoice.user_id)
+#            if not user:
+#                abort(404, 'User not found')
+#
+#            self._validate_payment(user, invoice)
+#
+#            self._process_payment(user, invoice)
+#
+#            return data, 200
+#
+#        except ValueError as e:
+#            abort(400, str(e))
+#        except Exception as e:
+#            logging.error(f"An error occurred: {e}")
+#            abort(500, "An internal error occurred")
+#
+#    def _validate_payment(self, user, invoice):
+#        if user.balance < invoice.total_amount:
+#            raise ValueError('Insufficient balance')
+#
+#    def _process_payment(self, user, invoice):
+#        user.balance -= invoice.total_amount
+#        user.save()
+#
+#        invoice.payment_status = 'paid'
+#        invoice.save()

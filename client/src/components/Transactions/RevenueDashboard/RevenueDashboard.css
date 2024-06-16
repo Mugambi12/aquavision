@@ -79,7 +79,7 @@
   align-items: center;
 }
 
-.revenue-charts .charts-revenue-data-filter .filter .received {
+.revenue-charts .charts-revenue-data-filter .filter .completed {
   color: var(--emerald);
 }
 
@@ -211,7 +211,7 @@
   color: #82ca9d;
 }
 
-.revenue-table .Received {
+.revenue-table .completed {
   color: #82ca9d;
 }
 
