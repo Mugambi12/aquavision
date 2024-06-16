@@ -30,9 +30,10 @@
   gap: 10px;
 }
 
-.delete-revenue-buttons .cancel-button,
 .delete-revenue-buttons .confirm-button {
   padding: 10px 20px;
+  width: 80%;
+  margin: 0 auto;
   font-size: var(--fs-5);
   color: var(--white);
   border: none;
@@ -41,16 +42,9 @@
   transition: background-color var(--transition);
 }
 
-.delete-revenue-buttons .cancel-button {
-  background: var(--imperial-red);
-}
-
 .delete-revenue-buttons .confirm-button {
-  background: var(--davys-gray);
-}
-
-.delete-revenue-buttons .cancel-button:hover {
-  background: var(--sonic-sliver);
+  background: var(--imperial-red);
+  text-align: center;
 }
 
 .delete-revenue-buttons .confirm-button:hover {

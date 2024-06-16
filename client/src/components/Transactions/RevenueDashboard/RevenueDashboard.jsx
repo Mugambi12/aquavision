@@ -16,10 +16,11 @@ import {
 import DataTable from "datatables.net-dt";
 import "datatables.net-responsive-dt";
 
+// Define colors for the PieChart
 const COLORS = ["#8884d8", "#a4de6c", "#ffc658", "#82ca9d", "#ff8042"];
 
+// Function to transform revenue data based on filters
 const transformData = (revenue, filters) => {
-  // Filter revenue data based on filters
   const filteredData = revenue.filter((rev) => {
     const revDate = new Date(rev.payment_date);
     const revYear = revDate.getFullYear().toString();
@@ -29,15 +30,12 @@ const transformData = (revenue, filters) => {
     return statusMatch && yearMatch;
   });
 
-  // Group by month and sum amounts for the line chart
+  // Calculate monthly revenue for the AreaChart
   const monthlyRevenue = filteredData.reduce((acc, rev) => {
     const month = new Date(rev.payment_date).toLocaleString("default", {
       month: "short",
     });
-    if (!acc[month]) {
-      acc[month] = 0;
-    }
-    acc[month] += rev.amount;
+    acc[month] = (acc[month] || 0) + rev.amount;
     return acc;
   }, {});
 
@@ -46,12 +44,9 @@ const transformData = (revenue, filters) => {
     revenue: monthlyRevenue[month],
   }));
 
-  // Group by payment method and sum amounts for the pie chart
+  // Calculate payment method data for the PieChart
   const paymentMethodData = filteredData.reduce((acc, rev) => {
-    if (!acc[rev.payment_method]) {
-      acc[rev.payment_method] = 0;
-    }
-    acc[rev.payment_method] += rev.amount;
+    acc[rev.payment_method] = (acc[rev.payment_method] || 0) + rev.amount;
     return acc;
   }, {});
 
@@ -63,6 +58,7 @@ const transformData = (revenue, filters) => {
   return { lineChartData, pieChartData };
 };
 
+// Component for the RevenueHeader
 const RevenueHeader = ({ openAddRevenueModal }) => (
   <div className="revenue-header">
     <span className="material-symbols-rounded">arrow_left</span>
@@ -77,6 +73,7 @@ const RevenueHeader = ({ openAddRevenueModal }) => (
   </div>
 );
 
+// Component for the RevenueCharts
 const RevenueCharts = ({
   filteredRevenue,
   paymentMethodData,
@@ -88,6 +85,7 @@ const RevenueCharts = ({
 }) => (
   <div className="revenue-charts">
     <div className="charts-revenue-data-filter">
+      {/* Year filter */}
       <div className="filter">
         <label htmlFor="filter">Year:</label>
         <select
@@ -104,6 +102,7 @@ const RevenueCharts = ({
         </select>
       </div>
 
+      {/* Status filter */}
       <div className="filter">
         <label htmlFor="filter">Status:</label>
         <select
@@ -122,7 +121,9 @@ const RevenueCharts = ({
       </div>
     </div>
 
+    {/* Container for AreaChart and PieChart */}
     <div className="revenue-charts-container">
+      {/* AreaChart */}
       <div className="area-chart-container">
         <h2 className="chart-header">Monthly Revenue Trends</h2>
         <ResponsiveContainer height={300}>
@@ -153,6 +154,7 @@ const RevenueCharts = ({
         </ResponsiveContainer>
       </div>
 
+      {/* PieChart */}
       <div className="doughnut-chart-container">
         <h2 className="chart-header">Revenue by Payment Method</h2>
         <ResponsiveContainer height={300}>
@@ -182,6 +184,7 @@ const RevenueCharts = ({
   </div>
 );
 
+// Component for the RevenueTableContainer
 const RevenueTableContainer = ({
   revenue,
   openDropdownId,
@@ -207,6 +210,7 @@ const RevenueTableContainer = ({
       <tbody>
         {revenue.map((rev) => (
           <tr key={rev._id}>
+            {/* Table rows */}
             <td
               className={`revenue-table-row ${
                 rev.payment_status === "Cancelled" ? "Cancelled" : ""
@@ -272,6 +276,7 @@ const RevenueTableContainer = ({
               </span>
               {openDropdownId === rev._id && (
                 <div className="revenue-options-dropdown">
+                  {/* Dropdown options */}
                   <button
                     className="revenue-option"
                     onClick={() => openEditRevenueModal(rev)}
@@ -307,6 +312,7 @@ const RevenueTableContainer = ({
   </div>
 );
 
+// Main component for the RevenueDashboard
 const RevenueDashboard = ({
   revenue,
   openDeleteRevenueModal,
@@ -320,11 +326,12 @@ const RevenueDashboard = ({
   const [availableYears, setAvailableYears] = useState([]);
   const [openDropdownId, setOpenDropdownId] = useState(null);
 
+  // Update data when revenue or filters change
   useEffect(() => {
     const years = new Set(
       revenue.map((rev) => new Date(rev.payment_date).getFullYear().toString())
     );
-    setAvailableYears(Array.from(years));
+    setAvailableYears(["", ...Array.from(years)]);
 
     // Transform data based on filters
     const { lineChartData, pieChartData } = transformData(revenue, filters);
@@ -333,6 +340,7 @@ const RevenueDashboard = ({
     setPaymentMethodData(pieChartData);
   }, [revenue, filters]);
 
+  // Initialize DataTable on component mount
   useEffect(() => {
     const table = new DataTable("#revenueTable", {
       responsive: true,
@@ -343,10 +351,7 @@ const RevenueDashboard = ({
     };
   }, []);
 
-  const toggleDropdown = (id) => {
-    setOpenDropdownId(openDropdownId === id ? null : id);
-  };
-
+  // Handle year filter change
   const handleYearChange = (e) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -354,6 +359,7 @@ const RevenueDashboard = ({
     }));
   };
 
+  // Handle status filter change
   const handleStatusChange = (e) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -361,6 +367,12 @@ const RevenueDashboard = ({
     }));
   };
 
+  // Toggle dropdown for options in table
+  const toggleDropdown = (id) => {
+    setOpenDropdownId(openDropdownId === id ? null : id);
+  };
+
+  // Render customized label for PieChart
   const renderCustomizedLabel = ({
     cx,
     cy,
@@ -387,9 +399,13 @@ const RevenueDashboard = ({
     );
   };
 
+  // Return the main RevenueDashboard component
   return (
     <div id="revenue" className="revenue-container">
+      {/* Header component */}
       <RevenueHeader openAddRevenueModal={openAddRevenueModal} />
+
+      {/* Charts component */}
       <RevenueCharts
         filteredRevenue={filteredRevenue}
         paymentMethodData={paymentMethodData}
@@ -399,6 +415,8 @@ const RevenueDashboard = ({
         handleStatusChange={handleStatusChange}
         renderCustomizedLabel={renderCustomizedLabel}
       />
+
+      {/* Table component */}
       <RevenueTableContainer
         revenue={revenue}
         openDropdownId={openDropdownId}

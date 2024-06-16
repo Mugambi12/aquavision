@@ -113,8 +113,8 @@ class PaymentCreateResource(Resource):
         )
         new_payment.save()
         return new_payment, 201
-
-@api.route('/<int:_id>/update')
+    
+@api.route('/update/<int:_id>')
 class PaymentUpdateResource(Resource):
     @api.expect(revenue_serializer)
     @api.marshal_with(revenue_serializer)
@@ -124,9 +124,21 @@ class PaymentUpdateResource(Resource):
         if not payment:
             abort(404, 'Payment not found')
         payment.update(**data)
-        return payment
-
-@api.route('/<int:_id>/delete')
+        return payment, 200
+    
+@api.route('/refund/<int:_id>')
+class PaymentRefundResource(Resource):
+    @api.expect(revenue_serializer)
+    @api.marshal_with(revenue_serializer)
+    def put(self, _id):
+        data = request.get_json()
+        payment = Revenue.get_by_id(_id)
+        if not payment:
+            abort(404, 'Payment not found')
+        payment.update(**data)
+        return payment, 200
+    
+@api.route('/delete/<int:_id>')
 class PaymentDeleteResource(Resource):
     def delete(self, _id):
         payment = Revenue.get_by_id(_id)

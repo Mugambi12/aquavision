@@ -41,7 +41,7 @@ const Settings = () => {
         throw new Error("Failed to save settings");
       }
       console.log("Settings saved successfully");
-      window.location.reload();
+      callApiAndFetchSettingsData();
     } catch (error) {
       console.error("Error calling API:", error);
       // Handle error appropriately

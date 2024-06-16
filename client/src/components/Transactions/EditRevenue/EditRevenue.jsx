@@ -20,15 +20,15 @@ const EditRevenue = ({ revenue, onSubmit }) => {
       <h2 className="edit-revenue-title">Edit Revenue</h2>
       <form onSubmit={handleSubmit(onSubmitForm)} className="edit-revenue-form">
         <div className="form-group">
-          <label htmlFor="customer">Customer Name</label>
+          <label htmlFor="full_name">Customer Name</label>
           <input
             type="text"
-            id="customer"
-            placeholder="Customer name"
-            {...register("customer", { required: "Customer name is required" })}
+            id="full_name"
+            placeholder="Full name"
+            {...register("full_name", { required: "Full name is required" })}
           />
-          {errors.customer && (
-            <p className="error-message">{errors.customer.message}</p>
+          {errors.full_name && (
+            <p className="error-message">{errors.full_name.message}</p>
           )}
         </div>
 
@@ -46,14 +46,16 @@ const EditRevenue = ({ revenue, onSubmit }) => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="date">Date</label>
+          <label htmlFor="payment_date">Payment Date</label>
           <input
             type="date"
-            id="date"
-            {...register("date", { required: "Date is required" })}
+            id="payment_date"
+            {...register("payment_date", {
+              required: "Payment date is required",
+            })}
           />
-          {errors.date && (
-            <p className="error-message">{errors.date.message}</p>
+          {errors.payment_date && (
+            <p className="error-message">{errors.payment_date.message}</p>
           )}
         </div>
 
@@ -88,28 +90,17 @@ const EditRevenue = ({ revenue, onSubmit }) => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="description">Description</label>
+          <label htmlFor="payment_status">Payment Status</label>
           <input
             type="text"
-            id="description"
-            placeholder="Description"
-            {...register("description")}
+            id="payment_status"
+            placeholder="Payment sStatus"
+            {...register("payment_status", {
+              required: "Payment status is required",
+            })}
           />
-          {errors.payment_method && (
-            <p className="error-message">{errors.payment_method.message}</p>
-          )}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="status">Status</label>
-          <input
-            type="text"
-            id="status"
-            placeholder="Status"
-            {...register("status", { required: "Status is required" })}
-          />
-          {errors.status && (
-            <p className="error-message">{errors.status.message}</p>
+          {errors.payment_status && (
+            <p className="error-message">{errors.payment_status.message}</p>
           )}
         </div>
 

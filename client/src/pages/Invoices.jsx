@@ -43,7 +43,7 @@ const RevenueManagement = () => {
       await postRevenue(newRevenue);
       console.log("Revenue added successfully.");
       setIsAddRevenueModalOpen(false);
-      callApiAndGetRevenue(); // Refresh revenue data after adding new revenue
+      callApiAndGetRevenue();
     } catch (error) {
       console.error("Error adding revenue:", error);
     }
