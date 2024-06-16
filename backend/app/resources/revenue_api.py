@@ -57,9 +57,38 @@ class PaymentUsersListResource(Resource):
 class PaymentListResource(Resource):
     @api.marshal_with(revenue_serializer)
     def get(self):
-        payments = Revenue.get_all()
-        return payments, 200
+        users = User.get_all()
+        user_map = {user._id: user for user in users}
 
+        payments = Revenue.get_all()
+
+        payment_data = []
+
+        for payment in payments:
+            if payment.user_id in user_map:
+                user = user_map[payment.user_id]
+                payment_data.append({
+                    '_id': payment._id,
+                    'source': payment.source,
+                    'user_id': payment.user_id,
+                    'full_name': user.full_name,
+                    'house_section': user.house_section,
+                    'house_number': user.house_number,
+                    'invoice_id': payment.invoice_id,
+                    'amount': payment.amount,
+                    'payment_method': payment.payment_method,
+                    'payment_status': payment.payment_status,
+                    'transaction_id': payment.transaction_id,
+                    'phone_number': payment.phone_number,
+                    'payment_date': payment.payment_date,
+                    'created_at': payment.created_at,
+                    'updated_at': payment.updated_at,
+                    'deleted_at': payment.deleted_at
+                })
+
+                payment_data.reverse()
+
+        return payment_data, 200
 
 @api.route('/post')
 class PaymentCreateResource(Resource):
@@ -85,7 +114,6 @@ class PaymentCreateResource(Resource):
         new_payment.save()
         return new_payment, 201
 
-    
 @api.route('/<int:_id>/update')
 class PaymentUpdateResource(Resource):
     @api.expect(revenue_serializer)
