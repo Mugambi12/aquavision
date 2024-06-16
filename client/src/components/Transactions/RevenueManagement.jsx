@@ -1,6 +1,5 @@
 // components/Transactions/RevenueManagement.jsx
-import React, { useState } from "react";
-import revenueData from "../../db/revenue";
+import React, { useEffect, useState } from "react";
 import RevenueDashboard from "./RevenueDashboard/RevenueDashboard";
 import DeleteRevenue from "./DeleteRevenue/DeleteRevenue";
 import EditRevenue from "./EditRevenue/EditRevenue";
@@ -10,62 +9,79 @@ import ModalWrapper from "../ModalWrapper/ModalWrapper";
 import { fetchRevenue, postRevenue } from "../../services/apiRevenue";
 
 const RevenueManagement = () => {
+  const [revenueData, setRevenueData] = useState([]);
   const [selectedRevenue, setSelectedRevenue] = useState(null);
-  const [isDeleteRevenueModalOpen, setIsDeleteRevenueModalOpen] =
-    useState(false);
-  const [isEditRevenueModalOpen, setIsEditRevenueModalOpen] = useState(false);
-  const [isRefundRevenueModalOpen, setIsRefundRevenueModalOpen] =
-    useState(false);
-  const [isAddRevenueModalOpen, setIsAddRevenueModalOpen] = useState(false);
+  const [isDeleteRevenueModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditRevenueModalOpen, setIsEditModalOpen] = useState(false);
+  const [isRefundRevenueModalOpen, setIsRefundModalOpen] = useState(false);
+  const [isAddRevenueModalOpen, setIsCreateModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const openDeleteRevenueModal = (revenue) => {
     setSelectedRevenue(revenue);
-    setIsDeleteRevenueModalOpen(true);
+    setIsDeleteModalOpen(true);
   };
 
   const openEditRevenueModal = (revenue) => {
     setSelectedRevenue(revenue);
-    setIsEditRevenueModalOpen(true);
+    setIsEditModalOpen(true);
   };
 
   const openRefundRevenueModal = (revenue) => {
     setSelectedRevenue(revenue);
-    setIsRefundRevenueModalOpen(true);
+    setIsRefundModalOpen(true);
   };
 
   const openAddRevenueModal = () => {
-    setIsAddRevenueModalOpen(true);
+    setIsCreateModalOpen(true);
+  };
+
+  useEffect(() => {
+    callApiAndGetRevenue();
+  }, []);
+
+  const callApiAndGetRevenue = async () => {
+    try {
+      setLoading(true);
+      const data = await fetchRevenue();
+      setRevenueData(data);
+    } catch (error) {
+      console.error("Error fetching Revenue:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const callApiAndPostRevenue = async (newRevenue) => {
     try {
-      const updatedData = await postRevenue(newRevenue);
-      window.location.reload();
-      console.log("Adding revenue:", newRevenue);
+      await postRevenue(newRevenue);
       console.log("Revenue added successfully.");
+
+      //setRevenueData([newRevenue, ...revenueData]);
+      callApiAndGetRevenue();
     } catch (error) {
       console.error("Error adding invoice:", error);
     } finally {
-      setIsAddRevenueModalOpen(false);
+      setIsCreateModalOpen(false);
     }
   };
 
   const handleEditRevenue = (editedRevenue) => {
     console.log("Editing revenue:", editedRevenue);
     console.log("Revenue updated successfully.");
-    setIsEditRevenueModalOpen(false);
+    setIsEditModalOpen(false);
   };
 
   const handleRefundRevenue = () => {
     console.log("Refunding revenue:", selectedRevenue);
     console.log("Revenue refunded successfully.");
-    setIsRefundRevenueModalOpen(false);
+    setIsRefundModalOpen(false);
   };
 
   const handleDeleteRevenue = async () => {
     console.log("Deleting revenue:", selectedRevenue);
     console.log("Revenue deleted successfully.");
-    setIsDeleteRevenueModalOpen(false);
+    setIsDeleteModalOpen(false);
   };
 
   return (
@@ -80,7 +96,7 @@ const RevenueManagement = () => {
 
       <ModalWrapper
         isOpen={isDeleteRevenueModalOpen}
-        onRequestClose={() => setIsDeleteRevenueModalOpen(false)}
+        onRequestClose={() => setIsDeleteModalOpen(false)}
       >
         <DeleteRevenue
           revenue={selectedRevenue}
@@ -90,14 +106,14 @@ const RevenueManagement = () => {
 
       <ModalWrapper
         isOpen={isEditRevenueModalOpen}
-        onRequestClose={() => setIsEditRevenueModalOpen(false)}
+        onRequestClose={() => setIsEditModalOpen(false)}
       >
         <EditRevenue revenue={selectedRevenue} onSubmit={handleEditRevenue} />
       </ModalWrapper>
 
       <ModalWrapper
         isOpen={isRefundRevenueModalOpen}
-        onRequestClose={() => setIsRefundRevenueModalOpen(false)}
+        onRequestClose={() => setIsRefundModalOpen(false)}
       >
         <RefundRevenue
           revenue={selectedRevenue}
@@ -107,7 +123,7 @@ const RevenueManagement = () => {
 
       <ModalWrapper
         isOpen={isAddRevenueModalOpen}
-        onRequestClose={() => setIsAddRevenueModalOpen(false)}
+        onRequestClose={() => setIsCreateModalOpen(false)}
       >
         <AddRevenue onSubmit={callApiAndPostRevenue} />
       </ModalWrapper>

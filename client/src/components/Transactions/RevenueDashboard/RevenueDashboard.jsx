@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./RevenueDashboard.css";
 import {
+  ResponsiveContainer,
   AreaChart,
   Area,
   XAxis,
@@ -11,7 +12,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  ResponsiveContainer,
 } from "recharts";
 import DataTable from "datatables.net-dt";
 import "datatables.net-responsive-dt";
@@ -21,17 +21,17 @@ const COLORS = ["#8884d8", "#a4de6c", "#ffc658", "#82ca9d", "#ff8042"];
 const transformData = (revenue, filters) => {
   // Filter revenue data based on filters
   const filteredData = revenue.filter((rev) => {
-    const revDate = new Date(rev.date);
+    const revDate = new Date(rev.payment_date);
     const revYear = revDate.getFullYear().toString();
     const statusMatch =
-      filters.status === "all" || rev.status === filters.status;
+      filters.status === "all" || rev.payment_status === filters.status;
     const yearMatch = !filters.year || revYear === filters.year;
     return statusMatch && yearMatch;
   });
 
   // Group by month and sum amounts for the line chart
   const monthlyRevenue = filteredData.reduce((acc, rev) => {
-    const month = new Date(rev.date).toLocaleString("default", {
+    const month = new Date(rev.payment_date).toLocaleString("default", {
       month: "short",
     });
     if (!acc[month]) {
@@ -196,63 +196,55 @@ const RevenueTableContainer = ({
         <tr>
           <th>#ID</th>
           <th>Date</th>
-          <th>Customer_Name</th>
-          <th>Transaction_ID</th>
-          <th>Payment_Method</th>
-          <th>Description</th>
+          <th>Customer Name</th>
+          <th>Transaction ID</th>
+          <th>Payment Method</th>
           <th>Amount</th>
           <th>Status</th>
           <th>Options</th>
         </tr>
       </thead>
       <tbody>
-        {revenue.map((rev, index) => (
+        {revenue.map((rev) => (
           <tr key={rev._id}>
             <td
               className={`revenue-table-row ${
-                rev.status === "Cancelled" ? "Cancelled" : ""
+                rev.payment_status === "Cancelled" ? "Cancelled" : ""
               }`}
             >
               #{rev._id}
             </td>
             <td
               className={`revenue-table-row ${
-                rev.status === "Cancelled" ? "Cancelled" : ""
+                rev.payment_status === "Cancelled" ? "Cancelled" : ""
               }`}
             >
-              {new Date(rev.date).toLocaleDateString()}
+              {new Date(rev.payment_date).toLocaleDateString()}
             </td>
             <td
               className={`revenue-table-row ${
-                rev.status === "Cancelled" ? "Cancelled" : ""
+                rev.payment_status === "Cancelled" ? "Cancelled" : ""
               }`}
             >
-              {rev.customer}
+              {rev.full_name}
             </td>
             <td
               className={`revenue-table-row ${
-                rev.status === "Cancelled" ? "Cancelled" : ""
+                rev.payment_status === "Cancelled" ? "Cancelled" : ""
               }`}
             >
               {rev.transaction_id}
             </td>
             <td
               className={`revenue-table-row ${
-                rev.status === "Cancelled" ? "Cancelled" : ""
+                rev.payment_status === "Cancelled" ? "Cancelled" : ""
               }`}
             >
               {rev.payment_method}
             </td>
             <td
               className={`revenue-table-row ${
-                rev.status === "Cancelled" ? "Cancelled" : ""
-              }`}
-            >
-              {rev.description}
-            </td>
-            <td
-              className={`revenue-table-row ${
-                rev.status === "Cancelled" ? "Cancelled" : ""
+                rev.payment_status === "Cancelled" ? "Cancelled" : ""
               }`}
             >
               {rev.amount.toLocaleString("en-US", {
@@ -262,12 +254,11 @@ const RevenueTableContainer = ({
             </td>
             <td
               className={`revenue-table-row ${
-                rev.status === "Cancelled" ? "Cancelled" : ""
+                rev.payment_status === "Cancelled" ? "Cancelled" : ""
               }`}
             >
-              {rev.status}
+              {rev.payment_status}
             </td>
-
             <td
               className={`revenue-table-row options ${
                 openDropdownId === rev._id ? "active" : ""
@@ -277,7 +268,7 @@ const RevenueTableContainer = ({
                 className="material-symbols-rounded"
                 onClick={() => toggleDropdown(rev._id)}
               >
-                {`${openDropdownId === rev._id ? "close" : "more_vert"}`}
+                {openDropdownId === rev._id ? "close" : "more_vert"}
               </span>
               {openDropdownId === rev._id && (
                 <div className="revenue-options-dropdown">
@@ -331,7 +322,7 @@ const RevenueDashboard = ({
 
   useEffect(() => {
     const years = new Set(
-      revenue.map((rev) => new Date(rev.date).getFullYear().toString())
+      revenue.map((rev) => new Date(rev.payment_date).getFullYear().toString())
     );
     setAvailableYears(Array.from(years));
 
@@ -340,7 +331,7 @@ const RevenueDashboard = ({
 
     setFilteredRevenue(lineChartData);
     setPaymentMethodData(pieChartData);
-  }, [filters]);
+  }, [revenue, filters]);
 
   useEffect(() => {
     const table = new DataTable("#revenueTable", {

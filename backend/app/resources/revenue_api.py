@@ -86,7 +86,7 @@ class PaymentListResource(Resource):
                     'deleted_at': payment.deleted_at
                 })
 
-                payment_data.reverse()
+        payment_data.reverse()
 
         return payment_data, 200
 

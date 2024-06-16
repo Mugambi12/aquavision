@@ -1,170 +1,128 @@
-import React, { useState, useEffect } from "react";
-import { Helmet } from "react-helmet-async";
-import { registeredActiveHouses } from "../db/.invoiceData";
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
-import ModalWrapper from "../components/ModalWrapper/ModalWrapper";
-import InvoiceManagement from "../components/InvoiceManagement/Invoice/Invoice";
-import AddInvoice from "../components/InvoiceManagement/AddInvoice/AddInvoice";
-import ViewInvoice from "../components/InvoiceManagement/ViewInvoice/ViewInvoice";
-import DeleteInvoice from "../components/InvoiceManagement/DeleteInvoice/DeleteInvoice";
-import Spinner from "../components/Spinner/Spinner";
-
+import React, { useEffect, useState } from "react";
+import RevenueDashboard from "./RevenueDashboard/RevenueDashboard";
+import DeleteRevenue from "./DeleteRevenue/DeleteRevenue";
+import EditRevenue from "./EditRevenue/EditRevenue";
+import RefundRevenue from "./RefundRevenue/RefundRevenue";
+import AddRevenue from "./AddRevenue/AddRevenue";
+import ModalWrapper from "../ModalWrapper/ModalWrapper";
 import {
-  fetchInvoices,
-  postInvoice,
-  deleteInvoice,
-  processInvoicePayment,
-} from "../services/apiInvoices";
+  fetchRevenue,
+  postRevenue,
+  deleteRevenue,
+} from "../../services/apiRevenue";
+import Spinner from "../Spinner/Spinner";
 
-const Invoices = () => {
-  const [invoicesData, setInvoicesData] = useState([]);
-  const [Filter, setFilter] = useState("all");
-  const [filteredData, setFilteredData] = useState([]);
-  const [selectedInvoice, setSelectedInvoice] = useState(null);
-  const [isAddInvoiceModalOpen, setIsAddInvoiceModalOpen] = useState(false);
-  const [isViewInvoiceModalOpen, setIsViewInvoiceModalOpen] = useState(false);
-  const [isDeleteInvoiceModalOpen, setIsDeleteInvoiceModalOpen] =
+const RevenueManagement = () => {
+  const [revenueData, setRevenueData] = useState([]);
+  const [selectedRevenue, setSelectedRevenue] = useState(null);
+  const [isDeleteRevenueModalOpen, setIsDeleteRevenueModalOpen] =
     useState(false);
-  const [processing, setProcessing] = useState("");
+  const [isEditRevenueModalOpen, setIsEditRevenueModalOpen] = useState(false);
+  const [isRefundRevenueModalOpen, setIsRefundRevenueModalOpen] =
+    useState(false);
+  const [isAddRevenueModalOpen, setIsAddRevenueModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    callApiAndGetInvoices();
+    callApiAndGetRevenue();
   }, []);
 
-  useEffect(() => {
-    let newFilteredData = invoicesData;
-    if (Filter === "paid") {
-      newFilteredData = invoicesData.filter(
-        (invoice) => invoice.status === "paid"
-      );
-    } else if (Filter === "unpaid") {
-      newFilteredData = invoicesData.filter(
-        (invoice) => invoice.status === "unpaid"
-      );
-    }
-    setFilteredData(newFilteredData);
-  }, [Filter, invoicesData]);
-
-  const callApiAndGetInvoices = async () => {
+  const callApiAndGetRevenue = async () => {
     try {
-      const data = await fetchInvoices();
-      setInvoicesData(data);
+      const data = await fetchRevenue();
+      setRevenueData(data);
     } catch (error) {
-      console.error("Error fetching invoices:", error);
+      console.error("Error fetching Revenue:", error);
     } finally {
       setLoading(false);
     }
   };
 
-  const callApiAndPostInvoice = async (newInvoice) => {
+  const callApiAndPostRevenue = async (newRevenue) => {
     try {
-      const updatedData = await postInvoice(newInvoice);
-      //setInvoicesData(updatedData);
-      window.location.reload();
-      console.log("Invoice added successfully.");
+      await postRevenue(newRevenue);
+      console.log("Revenue added successfully.");
+      setIsAddRevenueModalOpen(false);
+      callApiAndGetRevenue(); // Refresh revenue data after adding new revenue
     } catch (error) {
-      console.error("Error adding invoice:", error);
-    } finally {
-      setIsAddInvoiceModalOpen(false);
+      console.error("Error adding revenue:", error);
     }
   };
 
-  const callApiAndDeleteInvoice = async () => {
+  const callApiAndDeleteRevenue = async (revenueId) => {
     try {
-      const updatedData = await deleteInvoice(selectedInvoice._id);
-      //setInvoicesData(updatedData);
-      window.location.reload();
-      console.log("Invoice deleted successfully.");
+      await deleteRevenue(revenueId);
+      console.log("Revenue deleted successfully.");
+      setIsDeleteRevenueModalOpen(false);
+      callApiAndGetRevenue();
     } catch (error) {
-      console.error("Error deleting invoice:", error);
-    } finally {
-      setIsDeleteInvoiceModalOpen(false);
+      console.error("Error deleting revenue:", error);
     }
   };
 
-  const callApiAndProcessInvoicePayment = async (invoice) => {
-    setProcessing(invoice._id);
-    console.log("Processing payment for invoice:", invoice);
-
-    try {
-      const updatedData = await processInvoicePayment(invoice._id);
-      setInvoicesData(updatedData);
-      console.log("Payment processed successfully.");
-    } catch (error) {
-      console.error("Error processing payment:", error);
-    } finally {
-      setProcessing(null);
-    }
+  const openAddModal = () => {
+    setIsAddRevenueModalOpen(true);
   };
 
-  const openPostModal = () => {
-    setIsAddInvoiceModalOpen(true);
+  const openRefundModal = (revenue) => {
+    setSelectedRevenue(revenue);
+    setIsRefundRevenueModalOpen(true);
   };
 
-  const openViewModal = (invoice) => {
-    setSelectedInvoice(invoice);
-    setIsViewInvoiceModalOpen(true);
+  const openEditModal = (revenue) => {
+    setSelectedRevenue(revenue);
+    setIsEditRevenueModalOpen(true);
   };
 
-  const openDeleteModal = (invoice) => {
-    setSelectedInvoice(invoice);
-    setIsDeleteInvoiceModalOpen(true);
+  const openDeleteModal = (revenue) => {
+    setSelectedRevenue(revenue);
+    setIsDeleteRevenueModalOpen(true);
   };
 
   return (
     <>
-      <Helmet>
-        <title>Invoices - Dakoke Springs</title>
-      </Helmet>
-      <Navbar />
       {loading ? (
         <Spinner />
       ) : (
         <>
-          <div className="main-container">
-            <InvoiceManagement
-              data={invoicesData}
-              Filter={Filter}
-              setFilter={setFilter}
-              processing={processing}
-              handlePayment={callApiAndProcessInvoicePayment}
-              openViewModal={openViewModal}
-              openDeleteModal={openDeleteModal}
-              openPostModal={openPostModal}
+          <RevenueDashboard
+            data={revenueData}
+            openDeleteModal={openDeleteModal}
+            openEditModal={openEditModal}
+            openRefundModal={openRefundModal}
+            openAddModal={openAddModal}
+          />
+          <ModalWrapper
+            isOpen={isAddRevenueModalOpen}
+            onRequestClose={() => setIsAddRevenueModalOpen(false)}
+          >
+            <AddRevenue onSubmit={callApiAndPostRevenue} />
+          </ModalWrapper>
+          <ModalWrapper
+            isOpen={isEditRevenueModalOpen}
+            onRequestClose={() => setIsEditRevenueModalOpen(false)}
+          >
+            <EditRevenue revenue={selectedRevenue} />
+          </ModalWrapper>
+          <ModalWrapper
+            isOpen={isDeleteRevenueModalOpen}
+            onRequestClose={() => setIsDeleteRevenueModalOpen(false)}
+          >
+            <DeleteRevenue
+              revenue={selectedRevenue}
+              onSubmit={() => callApiAndDeleteRevenue(selectedRevenue._id)}
             />
-          </div>
-          <Footer />
+          </ModalWrapper>
+          <ModalWrapper
+            isOpen={isRefundRevenueModalOpen}
+            onRequestClose={() => setIsRefundRevenueModalOpen(false)}
+          >
+            <RefundRevenue revenue={selectedRevenue} />
+          </ModalWrapper>
         </>
       )}
-
-      <ModalWrapper
-        isOpen={isAddInvoiceModalOpen}
-        onRequestClose={() => setIsAddInvoiceModalOpen(false)}
-      >
-        <AddInvoice
-          onSubmit={callApiAndPostInvoice}
-          registeredActiveHouses={registeredActiveHouses}
-        />
-      </ModalWrapper>
-      <ModalWrapper
-        isOpen={isViewInvoiceModalOpen}
-        onRequestClose={() => setIsViewInvoiceModalOpen(false)}
-      >
-        <ViewInvoice invoice={selectedInvoice} />
-      </ModalWrapper>
-      <ModalWrapper
-        isOpen={isDeleteInvoiceModalOpen}
-        onRequestClose={() => setIsDeleteInvoiceModalOpen(false)}
-      >
-        <DeleteInvoice
-          invoice={selectedInvoice}
-          onSubmit={callApiAndDeleteInvoice}
-        />
-      </ModalWrapper>
     </>
   );
 };
 
-export default Invoices;
+export default RevenueManagement;
