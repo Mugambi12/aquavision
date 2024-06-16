@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import Navbar from "../components/Navbar/Navbar";
-import InvoiceManagement from "../components/Records/InvoiceManagement/InvoiceManagement";
-import Footer from "../components/Footer/Footer";
-import AddInvoice from "../components/Records/AddInvoice/AddInvoice";
-import ViewInvoice from "../components/Records/ViewInvoice/ViewInvoice";
-import DeleteInvoice from "../components/Records/DeleteInvoice/DeleteInvoice";
-import ModalWrapper from "../components/ModalWrapper/ModalWrapper";
 import { registeredActiveHouses } from "../db/.invoiceData";
+import Navbar from "../components/Navbar/Navbar";
+import Footer from "../components/Footer/Footer";
+import ModalWrapper from "../components/ModalWrapper/ModalWrapper";
+import InvoiceManagement from "../components/InvoiceManagement/Invoice/Invoice";
+import AddInvoice from "../components/InvoiceManagement/AddInvoice/AddInvoice";
+import ViewInvoice from "../components/InvoiceManagement/ViewInvoice/ViewInvoice";
+import DeleteInvoice from "../components/InvoiceManagement/DeleteInvoice/DeleteInvoice";
 import Spinner from "../components/Spinner/Spinner";
 
 import {
@@ -17,7 +17,7 @@ import {
   processInvoicePayment,
 } from "../services/apiInvoices";
 
-const Records = () => {
+const Invoices = () => {
   const [invoicesData, setInvoicesData] = useState([]);
   const [Filter, setFilter] = useState("all");
   const [filteredData, setFilteredData] = useState([]);
@@ -116,7 +116,7 @@ const Records = () => {
   return (
     <>
       <Helmet>
-        <title>Records - Dakoke Springs</title>
+        <title>Invoices - Dakoke Springs</title>
       </Helmet>
       <Navbar />
       {loading ? (
@@ -167,4 +167,4 @@ const Records = () => {
   );
 };
 
-export default Records;
+export default Invoices;

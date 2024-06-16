@@ -28,7 +28,7 @@
   left: 50%;
   transform: translate(-50%, -100%) scale(0.5);
   background: var(--white);
-  padding: 20px;
+  padding: var(--radius-16) var(--radius-3);
   border-radius: var(--radius-12);
   border: none;
   box-shadow: var(--shadow-1);

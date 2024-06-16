@@ -7,6 +7,7 @@ import EditRevenue from "./EditRevenue/EditRevenue";
 import RefundRevenue from "./RefundRevenue/RefundRevenue";
 import AddRevenue from "./AddRevenue/AddRevenue";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
+import { fetchRevenue, postRevenue } from "../../services/apiRevenue";
 
 const RevenueManagement = () => {
   const [selectedRevenue, setSelectedRevenue] = useState(null);
@@ -36,10 +37,17 @@ const RevenueManagement = () => {
     setIsAddRevenueModalOpen(true);
   };
 
-  const handleDeleteRevenue = async () => {
-    console.log("Deleting revenue:", selectedRevenue);
-    console.log("Revenue deleted successfully.");
-    setIsDeleteRevenueModalOpen(false);
+  const callApiAndPostRevenue = async (newRevenue) => {
+    try {
+      const updatedData = await postRevenue(newRevenue);
+      window.location.reload();
+      console.log("Adding revenue:", newRevenue);
+      console.log("Revenue added successfully.");
+    } catch (error) {
+      console.error("Error adding invoice:", error);
+    } finally {
+      setIsAddRevenueModalOpen(false);
+    }
   };
 
   const handleEditRevenue = (editedRevenue) => {
@@ -54,10 +62,10 @@ const RevenueManagement = () => {
     setIsRefundRevenueModalOpen(false);
   };
 
-  const handleAddRevenue = (newRevenue) => {
-    console.log("Adding revenue:", newRevenue);
-    console.log("Revenue added successfully.");
-    setIsAddRevenueModalOpen(false);
+  const handleDeleteRevenue = async () => {
+    console.log("Deleting revenue:", selectedRevenue);
+    console.log("Revenue deleted successfully.");
+    setIsDeleteRevenueModalOpen(false);
   };
 
   return (
@@ -101,7 +109,7 @@ const RevenueManagement = () => {
         isOpen={isAddRevenueModalOpen}
         onRequestClose={() => setIsAddRevenueModalOpen(false)}
       >
-        <AddRevenue onSubmit={handleAddRevenue} />
+        <AddRevenue onSubmit={callApiAndPostRevenue} />
       </ModalWrapper>
     </>
   );

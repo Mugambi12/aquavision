@@ -14,7 +14,7 @@ const LazyAuthPage = React.lazy(() => import("./pages/Auth"));
 const LazyChatsPage = React.lazy(() => import("./pages/Chats"));
 const LazyHomePage = React.lazy(() => import("./pages/Home"));
 const LazyPeoplePage = React.lazy(() => import("./pages/People"));
-const LazyRecordsPage = React.lazy(() => import("./pages/Records"));
+const LazyInvoicesPage = React.lazy(() => import("./pages/Invoices"));
 const LazySettingsPage = React.lazy(() => import("./pages/Settings"));
 const LazyTransactionsPage = React.lazy(() => import("./pages/Transactions"));
 
@@ -36,7 +36,7 @@ function App() {
                 <Route path="/home" element={<LazyHomePage />} />
                 <Route path="/chats" element={<LazyChatsPage />} />
                 <Route path="/people" element={<LazyPeoplePage />} />
-                <Route path="/records" element={<LazyRecordsPage />} />
+                <Route path="/invoices" element={<LazyInvoicesPage />} />
                 <Route path="/settings" element={<LazySettingsPage />} />
                 <Route
                   path="/transactions"

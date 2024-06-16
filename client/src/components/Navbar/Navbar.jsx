@@ -85,13 +85,13 @@ const Header = () => {
                   <span>People</span>
                 </a>
               </li>
-              {/* Records */}
+              {/* Invoices */}
               <li>
-                <a href="/records" className="navbar-link icon-box">
+                <a href="/invoices" className="navbar-link icon-box">
                   <span className="material-symbols-rounded icon">
                     schedule
                   </span>
-                  <span>Records</span>
+                  <span>Invoices</span>
                 </a>
               </li>
               {/* Transactions */}

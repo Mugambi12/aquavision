@@ -31,20 +31,15 @@
 }
 
 .add-revenue-form input,
-.add-revenue-form select,
-.add-revenue-form textarea {
+.add-revenue-form select {
   padding: var(--radius-8) var(--radius-12);
   font-size: var(--fs-6);
   background: var(--white);
   width: 100%;
   color: var(--sonic-sliver);
-  margin-bottom: var(--radius-10);
+  margin: var(--radius-8) auto var(--radius-12);
   border: 1px solid var(--cultured);
   border-radius: var(--radius-6);
-}
-
-.add-revenue-form textarea {
-  height: 80px;
 }
 
 .form-actions {
@@ -54,28 +49,21 @@
   padding: var(--radius-10);
 }
 
-.cancel-btn,
 .submit-btn {
-  padding: var(--radius-8) var(--radius-12);
+  width: 100%;
+  padding: var(--radius-10) var(--radius-12);
   font-size: var(--fs-6);
+  text-align: center;
+  margin-top: var(--radius-10);
   border: none;
   border-radius: var(--radius-6);
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
-.cancel-btn {
-  background: var(--sonic-sliver);
-  color: var(--white);
-}
-
 .submit-btn {
   color: var(--white);
   background: var(--space-cadet);
-}
-
-.cancel-btn:hover {
-  background: var(--davys-gray);
 }
 
 .submit-btn:hover {

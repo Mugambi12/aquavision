@@ -1,396 +1,396 @@
 [
-{
-  "type": "group",
-  "participants": [
-    {
-      "_id": 1,
-      "name": "Alice Johnson",
-      "status": "Online",
-      "profileImage": "https://fedskillstest.ct.digital/1.png"
-    },
-    {
-      "_id": 3,
-      "name": "You",
-      "status": "Offline",
-      "profileImage": "https://fedskillstest.ct.digital/3.png"
-    }
-  ],
-  "messages": [
-    {
-      "_id": 1,
-      "sender": "You",
-      "content": "Hi, how are you?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 2,
-      "sender": "Alice Johnson",
-      "content": "I'm good, thank you.",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 3,
-      "sender": "You",
-      "content": "What have you been up to lately?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 4,
-      "sender": "Alice Johnson",
-      "content": "Just working on some projects. How about you?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 5,
-      "sender": "You",
-      "content": "Same here. Got any exciting plans for the weekend?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 6,
-      "sender": "Alice Johnson",
-      "content": "Not really, just taking it easy. How about you?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 7,
-      "sender": "You",
-      "content": "Maybe catch up on some reading and go for a hike.",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 8,
-      "sender": "Alice Johnson",
-      "content": "That sounds nice. I might do something similar.",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 9,
-      "sender": "You",
-      "content": "Great minds think alike!",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 10,
-      "sender": "Alice Johnson",
-      "content": "Haha, indeed!",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": false
-    }
-  ]
-},
-{
-  "type": "private",
-  "participants": [
-    {
-      "_id": 2,
-      "name": "Bob Smith",
-      "status": "Online",
-      "profileImage": "https://fedskillstest.ct.digital/2.png"
-    },
-    {
-      "_id": 3,
-      "name": "You",
-      "status": "Online",
-      "profileImage": "https://fedskillstest.ct.digital/3.png"
-    }
-  ],
-  "messages": [
-    {
-      "_id": 1,
-      "sender": "You",
-      "content": "Hey Bob, how's it going?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 2,
-      "sender": "Bob Smith",
-      "content": "Hey! I'm doing well, thanks. How about you?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 3,
-      "sender": "You",
-      "content": "Not too bad, just busy with work. Have any exciting plans for the weekend?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 4,
-      "sender": "Bob Smith",
-      "content": "Not really, just chilling at home. Maybe catch up on some movies. How about you?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 5,
-      "sender": "You",
-      "content": "Sounds relaxing. I'm thinking of going for a hike and doing some reading.",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 6,
-      "sender": "Bob Smith",
-      "content": "Nice! That sounds like a great way to unwind.",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    }
-  ]
-},
-{
-  "type": "private",
-  "participants": [
-    {
-      "_id": 4,
-      "name": "Emma Davis",
-      "status": "Online",
-      "profileImage": "https://fedskillstest.ct.digital/4.png"
-    },
-    {
-      "_id": 3,
-      "name": "You",
-      "status": "Online",
-      "profileImage": "https://fedskillstest.ct.digital/3.png"
-    }
-  ],
-  "messages": [
-    {
-      "_id": 1,
-      "sender": "You",
-      "content": "Hi Emma! How's your day going?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 2,
-      "sender": "Emma Davis",
-      "content": "Hey! It's going pretty well, thanks for asking. How about you?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 3,
-      "sender": "You",
-      "content": "Not bad, just tackling some tasks. Any plans for the weekend?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 4,
-      "sender": "Emma Davis",
-      "content": "I'm meeting some friends for brunch and then probably just relaxing. How about you?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 5,
-      "sender": "You",
-      "content": "I might go for a hike and catch up on some reading.",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 6,
-      "sender": "Emma Davis",
-      "content": "That sounds lovely! Enjoy your weekend.",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    }
-  ]
-},
-{
-  "type": "private",
-  "participants": [
-    {
-      "_id": 5,
-      "name": "David Lee",
-      "status": "Offline",
-      "profileImage": "https://fedskillstest.ct.digital/5.png"
-    },
-    {
-      "_id": 3,
-      "name": "You",
-      "status": "Online",
-      "profileImage": "https://fedskillstest.ct.digital/3.png"
-    }
-  ],
-  "messages": [
-    {
-      "_id": 1,
-      "sender": "You",
-      "content": "Hey David, how's everything going?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 2,
-      "sender": "David Lee",
-      "content": "Hey! Everything's good on my end, thanks. How about you?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 3,
-      "sender": "You",
-      "content": "Pretty good, just staying busy. Any plans for the weekend?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 4,
-      "sender": "David Lee",
-      "content": "Not much planned, probably just relax and catch up on some shows. How about you?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 5,
-      "sender": "You",
-      "content": "Thinking of going for a hike and doing some reading.",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 6,
-      "sender": "David Lee",
-      "content": "Sounds like a nice way to unwind. Enjoy!",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    }
-  ]
-},
-{
-  "type": "private",
-  "participants": [
-    {
-      "_id": 6,
-      "name": "Grace Brown",
-      "status": "Offline",
-      "profileImage": "https://fedskillstest.ct.digital/6.png"
-    },
-    {
-      "_id": 3,
-      "name": "You",
-      "status": "Online",
-      "profileImage": "https://fedskillstest.ct.digital/3.png"
-    }
-  ],
-  "messages": [
-    {
-      "_id": 1,
-      "sender": "You",
-      "content": "Hi Grace! How are you doing?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 2,
-      "sender": "Grace Brown",
-      "content": "Hey! I'm doing well, thanks. How about you?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 3,
-      "sender": "You",
-      "content": "I'm good, just keeping busy. Any plans for the weekend?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 4,
-      "sender": "Grace Brown",
-      "content": "Not much planned, just relaxing. How about you?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 5,
-      "sender": "You",
-      "content": "Thinking of going for a hike and catching up on some reading.",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 6,
-      "sender": "Grace Brown",
-      "content": "Sounds like a nice way to spend the weekend.",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    }
-  ]
-},
-{
-  "type": "private",
-  "participants": [
-    {
-      "_id": 7,
-      "name": "Henry Wilson",
-      "status": "Offline",
-      "profileImage": "https://fedskillstest.ct.digital/7.png"
-    },
-    {
-      "_id": 3,
-      "name": "You",
-      "status": "Online",
-      "profileImage": "https://fedskillstest.ct.digital/3.png"
-    }
-  ],
-  "messages": [
-    {
-      "_id": 1,
-      "sender": "You",
-      "content": "Hi Henry! How are you doing?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 2,
-      "sender": "Henry Wilson",
-      "content": "Hey! I'm doing well, thanks. How about you?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 3,
-      "sender": "You",
-      "content": "I'm good, just keeping busy. Any plans for the weekend?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 4,
-      "sender": "Henry Wilson",
-      "content": "Not much planned, just relaxing. How about you?",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 5,
-      "sender": "You",
-      "content": "Thinking of going for a hike and catching up on some reading.",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    },
-    {
-      "_id": 6,
-      "sender": "Henry Wilson",
-      "content": "Sounds like a nice way to spend the weekend.",
-      "timestamp": "2024-06-11T10:20:30Z",
-      "is_read": true
-    }
-  ]
-}
+  {
+    "type": "group",
+    "participants": [
+      {
+        "_id": 1,
+        "name": "Alice Johnson",
+        "status": "Online",
+        "profileImage": "https://fedskillstest.ct.digital/1.png"
+      },
+      {
+        "_id": 3,
+        "name": "You",
+        "status": "Offline",
+        "profileImage": "https://fedskillstest.ct.digital/3.png"
+      }
+    ],
+    "messages": [
+      {
+        "_id": 1,
+        "sender": "You",
+        "content": "Hi, how are you?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 2,
+        "sender": "Alice Johnson",
+        "content": "I'm good, thank you.",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 3,
+        "sender": "You",
+        "content": "What have you been up to lately?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 4,
+        "sender": "Alice Johnson",
+        "content": "Just working on some projects. How about you?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 5,
+        "sender": "You",
+        "content": "Same here. Got any exciting plans for the weekend?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 6,
+        "sender": "Alice Johnson",
+        "content": "Not really, just taking it easy. How about you?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 7,
+        "sender": "You",
+        "content": "Maybe catch up on some reading and go for a hike.",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 8,
+        "sender": "Alice Johnson",
+        "content": "That sounds nice. I might do something similar.",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 9,
+        "sender": "You",
+        "content": "Great minds think alike!",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 10,
+        "sender": "Alice Johnson",
+        "content": "Haha, indeed!",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": false
+      }
+    ]
+  },
+  {
+    "type": "private",
+    "participants": [
+      {
+        "_id": 2,
+        "name": "Bob Smith",
+        "status": "Online",
+        "profileImage": "https://fedskillstest.ct.digital/2.png"
+      },
+      {
+        "_id": 3,
+        "name": "You",
+        "status": "Online",
+        "profileImage": "https://fedskillstest.ct.digital/3.png"
+      }
+    ],
+    "messages": [
+      {
+        "_id": 1,
+        "sender": "You",
+        "content": "Hey Bob, how's it going?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 2,
+        "sender": "Bob Smith",
+        "content": "Hey! I'm doing well, thanks. How about you?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 3,
+        "sender": "You",
+        "content": "Not too bad, just busy with work. Have any exciting plans for the weekend?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 4,
+        "sender": "Bob Smith",
+        "content": "Not really, just chilling at home. Maybe catch up on some movies. How about you?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 5,
+        "sender": "You",
+        "content": "Sounds relaxing. I'm thinking of going for a hike and doing some reading.",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 6,
+        "sender": "Bob Smith",
+        "content": "Nice! That sounds like a great way to unwind.",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      }
+    ]
+  },
+  {
+    "type": "private",
+    "participants": [
+      {
+        "_id": 4,
+        "name": "Emma Davis",
+        "status": "Online",
+        "profileImage": "https://fedskillstest.ct.digital/4.png"
+      },
+      {
+        "_id": 3,
+        "name": "You",
+        "status": "Online",
+        "profileImage": "https://fedskillstest.ct.digital/3.png"
+      }
+    ],
+    "messages": [
+      {
+        "_id": 1,
+        "sender": "You",
+        "content": "Hi Emma! How's your day going?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 2,
+        "sender": "Emma Davis",
+        "content": "Hey! It's going pretty well, thanks for asking. How about you?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 3,
+        "sender": "You",
+        "content": "Not bad, just tackling some tasks. Any plans for the weekend?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 4,
+        "sender": "Emma Davis",
+        "content": "I'm meeting some friends for brunch and then probably just relaxing. How about you?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 5,
+        "sender": "You",
+        "content": "I might go for a hike and catch up on some reading.",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 6,
+        "sender": "Emma Davis",
+        "content": "That sounds lovely! Enjoy your weekend.",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      }
+    ]
+  },
+  {
+    "type": "private",
+    "participants": [
+      {
+        "_id": 5,
+        "name": "David Lee",
+        "status": "Offline",
+        "profileImage": "https://fedskillstest.ct.digital/5.png"
+      },
+      {
+        "_id": 3,
+        "name": "You",
+        "status": "Online",
+        "profileImage": "https://fedskillstest.ct.digital/3.png"
+      }
+    ],
+    "messages": [
+      {
+        "_id": 1,
+        "sender": "You",
+        "content": "Hey David, how's everything going?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 2,
+        "sender": "David Lee",
+        "content": "Hey! Everything's good on my end, thanks. How about you?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 3,
+        "sender": "You",
+        "content": "Pretty good, just staying busy. Any plans for the weekend?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 4,
+        "sender": "David Lee",
+        "content": "Not much planned, probably just relax and catch up on some shows. How about you?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 5,
+        "sender": "You",
+        "content": "Thinking of going for a hike and doing some reading.",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 6,
+        "sender": "David Lee",
+        "content": "Sounds like a nice way to unwind. Enjoy!",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      }
+    ]
+  },
+  {
+    "type": "private",
+    "participants": [
+      {
+        "_id": 6,
+        "name": "Grace Brown",
+        "status": "Offline",
+        "profileImage": "https://fedskillstest.ct.digital/6.png"
+      },
+      {
+        "_id": 3,
+        "name": "You",
+        "status": "Online",
+        "profileImage": "https://fedskillstest.ct.digital/3.png"
+      }
+    ],
+    "messages": [
+      {
+        "_id": 1,
+        "sender": "You",
+        "content": "Hi Grace! How are you doing?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 2,
+        "sender": "Grace Brown",
+        "content": "Hey! I'm doing well, thanks. How about you?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 3,
+        "sender": "You",
+        "content": "I'm good, just keeping busy. Any plans for the weekend?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 4,
+        "sender": "Grace Brown",
+        "content": "Not much planned, just relaxing. How about you?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 5,
+        "sender": "You",
+        "content": "Thinking of going for a hike and catching up on some reading.",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 6,
+        "sender": "Grace Brown",
+        "content": "Sounds like a nice way to spend the weekend.",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      }
+    ]
+  },
+  {
+    "type": "private",
+    "participants": [
+      {
+        "_id": 7,
+        "name": "Henry Wilson",
+        "status": "Offline",
+        "profileImage": "https://fedskillstest.ct.digital/7.png"
+      },
+      {
+        "_id": 3,
+        "name": "You",
+        "status": "Online",
+        "profileImage": "https://fedskillstest.ct.digital/3.png"
+      }
+    ],
+    "messages": [
+      {
+        "_id": 1,
+        "sender": "You",
+        "content": "Hi Henry! How are you doing?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 2,
+        "sender": "Henry Wilson",
+        "content": "Hey! I'm doing well, thanks. How about you?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 3,
+        "sender": "You",
+        "content": "I'm good, just keeping busy. Any plans for the weekend?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 4,
+        "sender": "Henry Wilson",
+        "content": "Not much planned, just relaxing. How about you?",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 5,
+        "sender": "You",
+        "content": "Thinking of going for a hike and catching up on some reading.",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      },
+      {
+        "_id": 6,
+        "sender": "Henry Wilson",
+        "content": "Sounds like a nice way to spend the weekend.",
+        "timestamp": "2024-06-11T10:20:30Z",
+        "is_read": true
+      }
+    ]
+  }
 ]
