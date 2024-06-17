@@ -7,3 +7,17 @@ export const fetchExpenses = async () => {
   }
   return await response.json();
 };
+
+export const postExpense = async (expense) => {
+  const response = await fetch("/api/expenses/create", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(expense),
+  });
+  if (!response.ok) {
+    throw new Error("Failed to create expense");
+  }
+  return await response.json();
+};

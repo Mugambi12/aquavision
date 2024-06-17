@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import request, abort
 from flask_restx import Namespace, Resource
 from ..models.expense import Expense
@@ -10,11 +11,8 @@ class ExpenseListResource(Resource):
     @api.marshal_with(expense_serializer)
     def get(self):
         expenses = Expense.get_all()
-        # Append date in data by using created_at attribute in expenses in the format of 'YYYY-MM-DD'
-        for expense in expenses:
-            expense.date = expense.created_at.strftime('%Y-%m-%d')
-
         return expenses, 200
+
 
 @api.route('/create')
 class ExpenseCreateResource(Resource):
@@ -23,13 +21,28 @@ class ExpenseCreateResource(Resource):
     def post(self):
         data = request.get_json()
 
-        print('data', data)
+        date_str = data.get('date')
+        date_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
 
-        # Perform necessary validation here
+        new_expense = {
+            'type': data.get('type'),
+            'date': date_obj,
+            'vendor': data.get('vendor').title(),
+            'amount': data.get('amount'),
+            'description': data.get('description').title(),
+            'approval_status': data.get('approval_status'),
+            'payment_method': data.get('payment_method').title(),
+            'payment_status': data.get('payment_status'),
+            'transaction_id': data.get('transaction_id')
+        }
 
-        new_expense = Expense(**data)
+        print('This is the new expense:', new_expense)
+
+        new_expense = Expense(**new_expense)
         new_expense.save()
-        return new_expense, 201
+
+        return {'message': 'Expense created successfully'}, 201
+    
 
 @api.route('/get/<int:_id>')
 class ExpenseResource(Resource):

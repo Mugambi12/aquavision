@@ -9,7 +9,7 @@ expense_serializer = api.model(
     'vendor': fields.String(),
     'amount': fields.Float(),
     'description': fields.String(),
-    'status': fields.String(),
+    'approval_status': fields.String(),
     'payment_method': fields.String(),
     'payment_status': fields.String(),
     'transaction_id': fields.String(),

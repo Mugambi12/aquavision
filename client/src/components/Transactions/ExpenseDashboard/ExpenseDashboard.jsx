@@ -119,31 +119,31 @@ const ExpensesTable = ({ expenses }) => (
     <table id="expensesTable" className="expenses-table display">
       <thead>
         <tr>
-          <th>#ID</th>
+          <th>ID</th>
           <th>Date</th>
-          <th>Type</th>
-          <th>Vendor</th>
+          <th>Merchant Name</th>
+          <th>Expense Type</th>
           <th>Description</th>
           <th>Payment Method</th>
           <th>Payment Status</th>
           <th>Transaction ID</th>
           <th>Amount</th>
-          <th>Status</th>
+          <th>Approval Status</th>
         </tr>
       </thead>
       <tbody>
-        {expenses.map((expense, index) => (
+        {expenses.reverse().map((expense, index) => (
           <tr key={expense._id}>
             <td>#{expense._id}</td>
             <td>{expense.date}</td>
-            <td>{expense.type}</td>
             <td>{expense.vendor}</td>
+            <td>{expense.type}</td>
             <td>{expense.description}</td>
             <td>{expense.payment_method}</td>
             <td>{expense.payment_status}</td>
             <td>{expense.transaction_id}</td>
-            <td>{expense.amount}</td>
-            <td>{expense.status}</td>
+            <td>KSh. {expense.amount}</td>
+            <td>{expense.approval_status}</td>
           </tr>
         ))}
       </tbody>
