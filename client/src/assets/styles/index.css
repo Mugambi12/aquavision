@@ -136,8 +136,9 @@ textarea,
 input:focus,
 select:focus,
 textarea:focus {
-  font: inherit;
-  background: none;
+  font-size: var(--fs-6);
+  background: var(--white);
+  color: var(--black);
   outline: none;
   cursor: pointer;
 }

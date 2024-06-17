@@ -145,13 +145,6 @@ const AddExpense = ({ onSubmit }) => {
         </div>
 
         <div className="button-group">
-          <button
-            type="button"
-            className="cancel-button"
-            onClick={() => onSubmit(null)}
-          >
-            Cancel
-          </button>
           <button type="submit" className="submit-button">
             Add Expense
           </button>

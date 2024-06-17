@@ -4,6 +4,7 @@
   max-width: 700px;
   max-height: 90vh;
   margin: 0 auto;
+  padding: var(--radius-8) var(--radius-16);
   overflow-y: auto;
 }
 
@@ -26,9 +27,9 @@
 }
 
 .form-group label {
-  font-size: var(--fs-5);
+  font-size: var(--fs-8);
   color: var(--davys-gray);
-  margin-bottom: var(--radius-6);
+  margin-bottom: var(--radius-3);
 }
 
 .form-group input,
@@ -36,9 +37,8 @@
   padding: var(--radius-8) var(--radius-12);
   font-size: var(--fs-6);
   background: var(--white);
-  width: 100%;
   color: var(--sonic-sliver);
-  margin-bottom: var(--radius-10);
+  margin: var(--radius-6) auto var(--radius-12);
   border: 1px solid var(--cultured);
   border-radius: var(--radius-6);
 }
@@ -53,29 +53,23 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: var(--radius-10);
+  padding: var(--radius-16);
 }
 
-.cancel-button,
 .submit-button {
   padding: var(--radius-8) var(--radius-12);
   font-size: var(--fs-6);
+  width: 80%;
+  margin: auto;
+  text-align: center;
   border: none;
-  border-radius: var(--radius-6);
+  border-radius: var(--radius-8);
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
-.cancel-button {
-  background: var(--imperial-red);
-}
-
 .submit-button {
   background: var(--space-cadet);
-}
-
-.cancel-button:hover {
-  background: var(--sonic-sliver);
 }
 
 .submit-button:hover {

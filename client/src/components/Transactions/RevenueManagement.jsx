@@ -6,6 +6,7 @@ import EditRevenue from "./EditRevenue/EditRevenue";
 import RefundRevenue from "./RefundRevenue/RefundRevenue";
 import AddRevenue from "./AddRevenue/AddRevenue";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
+import Spinner from "../Spinner/Spinner";
 import {
   fetchRevenue,
   postRevenue,
@@ -108,13 +109,17 @@ const RevenueManagement = () => {
 
   return (
     <>
-      <RevenueDashboard
-        revenue={revenueData}
-        openDeleteRevenueModal={openDeleteRevenueModal}
-        openEditRevenueModal={openEditRevenueModal}
-        openRefundRevenueModal={openRefundRevenueModal}
-        openAddRevenueModal={openAddRevenueModal}
-      />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <RevenueDashboard
+          revenue={revenueData}
+          openDeleteRevenueModal={openDeleteRevenueModal}
+          openEditRevenueModal={openEditRevenueModal}
+          openRefundRevenueModal={openRefundRevenueModal}
+          openAddRevenueModal={openAddRevenueModal}
+        />
+      )}
 
       <ModalWrapper
         isOpen={isDeleteRevenueModalOpen}

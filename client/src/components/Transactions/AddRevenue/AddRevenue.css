@@ -4,6 +4,7 @@
   max-width: 700px;
   max-height: 90vh;
   margin: 0 auto;
+  padding: var(--radius-8) var(--radius-16);
   overflow-y: auto;
 }
 
