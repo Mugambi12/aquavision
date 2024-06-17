@@ -1,15 +1,32 @@
 // components/Transactions/ExpensesManagement.jsx
-import React, { useState } from "react";
-import expensesData from "../../db/expenses";
+import React, { useEffect, useState } from "react";
+//import expensesData from "../../db/expenses";
 import ExpenseDashboard from "./ExpenseDashboard/ExpenseDashboard";
 import AddExpense from "./AddExpense/AddExpense";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
+import { fetchExpenses } from "../../services/apiExpenses";
+import Spinner from "../Spinner/Spinner";
 
 const ExpensesManagement = () => {
   const [isAddExpenseModalOpen, setIsAddExpenseModalOpen] = useState(false);
+  const [expensesData, setExpensesData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const openAddExpenseModal = () => {
-    setIsAddExpenseModalOpen(true);
+  useEffect(() => {
+    callApiAndFetchExpenses();
+  }, []);
+
+  const callApiAndFetchExpenses = async () => {
+    try {
+      setLoading(true);
+      const expenses = await fetchExpenses();
+      setExpensesData(expenses);
+    } catch (error) {
+      console.error("Failed to fetch expenses", error);
+    } finally {
+      setLoading(false);
+      console.log("Expenses fetched successfully.");
+    }
   };
 
   const handleAddExpense = (newExpense) => {
@@ -18,12 +35,20 @@ const ExpensesManagement = () => {
     setIsAddExpenseModalOpen(false);
   };
 
+  const openAddExpenseModal = () => {
+    setIsAddExpenseModalOpen(true);
+  };
+
   return (
     <>
-      <ExpenseDashboard
-        expenses={expensesData}
-        openAddExpenseModal={openAddExpenseModal}
-      />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <ExpenseDashboard
+          expenses={expensesData}
+          openAddExpenseModal={openAddExpenseModal}
+        />
+      )}
 
       <ModalWrapper
         isOpen={isAddExpenseModalOpen}

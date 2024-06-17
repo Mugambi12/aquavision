@@ -5,6 +5,7 @@ expense_serializer = api.model(
   'Expense', {
     '_id': fields.String(),
     'type': fields.String(),
+    'date': fields.String(),
     'vendor': fields.String(),
     'amount': fields.Float(),
     'description': fields.String(),

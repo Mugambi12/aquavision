@@ -17,12 +17,12 @@ import {
 
 const RevenueManagement = () => {
   const [revenueData, setRevenueData] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [selectedRevenue, setSelectedRevenue] = useState(null);
   const [isEditRevenueModalOpen, setIsEditModalOpen] = useState(false);
   const [isRefundRevenueModalOpen, setIsRefundModalOpen] = useState(false);
   const [isAddRevenueModalOpen, setIsCreateModalOpen] = useState(false);
   const [isDeleteRevenueModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     callApiAndGetRevenue();
