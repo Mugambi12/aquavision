@@ -26,7 +26,7 @@
 .add-revenue-form label {
   font-size: var(--fs-8);
   color: var(--davys-gray);
-  margin-bottom: var(--radius-6);
+  margin-bottom: var(--radius-3);
 }
 
 .add-revenue-form input,

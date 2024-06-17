@@ -144,7 +144,7 @@ const AddExpense = ({ onSubmit }) => {
           )}
         </div>
 
-        <div className="button-group">
+        <div className="form-group">
           <button type="submit" className="submit-button">
             Add Expense
           </button>

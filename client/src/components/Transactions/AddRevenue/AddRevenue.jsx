@@ -88,132 +88,135 @@ const AddRevenue = ({ onSubmit }) => {
             onSubmit={handleSubmit(onSubmitForm)}
             className="add-revenue-form"
           >
-            <div className="form-column">
-              <label>
-                Customer Name:
-                <select {...register("user_id", { required: true })}>
-                  <option value="" disabled>
-                    Select customer
+            <div className="form-group">
+              <label htmlFor="user_id">Customer Name:</label>
+              <select id="user_id" {...register("user_id", { required: true })}>
+                <option value="" disabled>
+                  Select customer
+                </option>
+                {usersListData.map((user) => (
+                  <option key={user._id} value={user._id}>
+                    {user.full_name}, {user.house_section}, {user.house_number}
                   </option>
-                  {usersListData.map((user) => (
-                    <option key={user._id} value={user._id}>
-                      {user.full_name}, {user.house_section},{" "}
-                      {user.house_number}
-                    </option>
-                  ))}
-                </select>
-                {errors.user_id && (
-                  <span className="error">Customer is required</span>
-                )}
-              </label>
-
-              <label>
-                Amount:
-                <input
-                  type="number"
-                  {...register("amount", { required: true })}
-                  placeholder="Enter amount"
-                />
-                {errors.amount && (
-                  <span className="error">Amount is required</span>
-                )}
-              </label>
-
-              <label>
-                Payment Date:
-                <input
-                  type="date"
-                  {...register("payment_date", { required: true })}
-                  placeholder="Enter payment date"
-                />
-                {errors.payment_date && (
-                  <span className="error">Payment date is required</span>
-                )}
-              </label>
-
-              <label>
-                Transaction ID:
-                <input
-                  type="text"
-                  {...register("transaction_id", { required: true })}
-                  placeholder="Enter transaction ID"
-                />
-                {errors.transaction_id && (
-                  <span className="error">Transaction ID is required</span>
-                )}
-              </label>
+                ))}
+              </select>
+              {errors.user_id && (
+                <p className="error-message">Customer is required</p>
+              )}
             </div>
 
-            <div className="form-column">
-              <label>
-                Unpaid Invoices:
-                <select {...register("invoice_id", { required: true })}>
-                  <option value="" disabled>
-                    Select invoice
-                  </option>
-                  {unpaidInvoicesList.map((invoice) => (
-                    <option key={invoice._id} value={invoice._id}>
-                      {invoice.house_section}, {invoice.house_number},{" "}
-                      {invoice.total_amount}
-                    </option>
-                  ))}
-                </select>
-                {errors.invoice_id && (
-                  <span className="error">Invoice is required</span>
-                )}
-              </label>
-
-              <label>
-                Payment Method:
-                <input
-                  type="text"
-                  {...register("payment_method", { required: true })}
-                  placeholder="Enter payment method"
-                />
-                {errors.payment_method && (
-                  <span className="error">Payment method is required</span>
-                )}
-              </label>
-
-              <label>
-                Phone Number:
-                <input
-                  type="text"
-                  {...register("phone_number", { required: true })}
-                  placeholder="Enter phone number"
-                />
-                {errors.phone_number && (
-                  <span className="error">Phone number is required</span>
-                )}
-              </label>
-
-              <label>
-                Status:
-                <div className="d-flex">
-                  <label>
-                    <input
-                      type="radio"
-                      {...register("payment_status", { required: true })}
-                      value="Completed"
-                    />
-                    Completed
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      {...register("payment_status", { required: true })}
-                      value="Cancelled"
-                    />
-                    Cancelled
-                  </label>
-                </div>
-                {errors.payment_status && (
-                  <span className="error">Status is required</span>
-                )}
-              </label>
+            <div className="form-group">
+              <label htmlFor="amount">Amount:</label>
+              <input
+                id="amount"
+                type="number"
+                {...register("amount", { required: true })}
+                placeholder="Enter amount"
+              />
+              {errors.amount && (
+                <p className="error-message">Amount is required</p>
+              )}
             </div>
 
-            <div className="form-actions">
+            <div className="form-group">
+              <label htmlFor="payment_date">Payment Date:</label>
+              <input
+                id="payment_date"
+                type="date"
+                {...register("payment_date", { required: true })}
+                placeholder="Enter payment date"
+              />
+              {errors.payment_date && (
+                <p className="error-message">Payment date is required</p>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="transaction_id">Transaction ID:</label>
+              <input
+                id="transaction_id"
+                type="text"
+                {...register("transaction_id", { required: true })}
+                placeholder="Enter transaction ID"
+              />
+              {errors.transaction_id && (
+                <p className="error-message">Transaction ID is required</p>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="invoice_id">Unpaid Invoices:</label>
+              <select
+                id="invoice_id"
+                {...register("invoice_id", { required: true })}
+              >
+                <option value="" disabled>
+                  Select invoice
+                </option>
+                {unpaidInvoicesList.map((invoice) => (
+                  <option key={invoice._id} value={invoice._id}>
+                    {invoice.house_section}, {invoice.house_number},{" "}
+                    {invoice.total_amount}
+                  </option>
+                ))}
+              </select>
+              {errors.invoice_id && (
+                <p className="error-message">Invoice is required</p>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="payment_method">Payment Method:</label>
+              <input
+                id="payment_method"
+                type="text"
+                {...register("payment_method", { required: true })}
+                placeholder="Enter payment method"
+              />
+              {errors.payment_method && (
+                <p className="error-message">Payment method is required</p>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="phone_number">Phone Number:</label>
+              <input
+                id="phone_number"
+                type="text"
+                {...register("phone_number", { required: true })}
+                placeholder="Enter phone number"
+              />
+              {errors.phone_number && (
+                <p className="error-message">Phone number is required</p>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="payment_status">Status:</label>
+              <div className="d-flex">
+                <label>
+                  <input
+                    type="radio"
+                    {...register("payment_status", { required: true })}
+                    value="Completed"
+                  />
+                  Completed
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    {...register("payment_status", { required: true })}
+                    value="Cancelled"
+                  />
+                  Cancelled
+                </label>
+              </div>
+              {errors.payment_status && (
+                <p className="error-message">Status is required</p>
+              )}
+            </div>
+
+            <div className="form-group">
               <button
                 type="submit"
                 className="submit-btn"
