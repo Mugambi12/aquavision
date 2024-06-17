@@ -7,8 +7,11 @@ import ModalWrapper from "../ModalWrapper/ModalWrapper";
 import Spinner from "../Spinner/Spinner";
 import { fetchExpenses } from "../../resources/apiExpenses";
 
-const ExpensesManagement = () => {
-  const [isAddExpenseModalOpen, setIsAddExpenseModalOpen] = useState(false);
+const ExpensesManagement = ({
+  openAddExpenseModal,
+  isAddExpenseModalOpen,
+  setIsAddExpenseModalOpen,
+}) => {
   const [expensesData, setExpensesData] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -33,10 +36,6 @@ const ExpensesManagement = () => {
     console.log("Adding expense:", newExpense);
     console.log("Expense added successfully.");
     setIsAddExpenseModalOpen(false);
-  };
-
-  const openAddExpenseModal = () => {
-    setIsAddExpenseModalOpen(true);
   };
 
   return (

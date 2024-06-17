@@ -15,12 +15,15 @@ import {
   refundRevenue,
 } from "../../resources/apiRevenue";
 
-const RevenueManagement = () => {
+const RevenueManagement = ({
+  openAddRevenueModal,
+  isAddRevenueModalOpen,
+  setIsCreateModalOpen,
+}) => {
   const [revenueData, setRevenueData] = useState([]);
   const [selectedRevenue, setSelectedRevenue] = useState(null);
   const [isEditRevenueModalOpen, setIsEditModalOpen] = useState(false);
   const [isRefundRevenueModalOpen, setIsRefundModalOpen] = useState(false);
-  const [isAddRevenueModalOpen, setIsCreateModalOpen] = useState(false);
   const [isDeleteRevenueModalOpen, setIsDeleteModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -88,18 +91,14 @@ const RevenueManagement = () => {
     }
   };
 
-  const openAddRevenueModal = () => {
-    setIsCreateModalOpen(true);
+  const openRefundRevenueModal = (revenue) => {
+    setSelectedRevenue(revenue);
+    setIsRefundModalOpen(true);
   };
 
   const openEditRevenueModal = (revenue) => {
     setSelectedRevenue(revenue);
     setIsEditModalOpen(true);
-  };
-
-  const openRefundRevenueModal = (revenue) => {
-    setSelectedRevenue(revenue);
-    setIsRefundModalOpen(true);
   };
 
   const openDeleteRevenueModal = (revenue) => {

@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   padding: var(--fs-3);
-  background: var(--davys-gray_12);
+  background: var(--white);
   border-radius: var(--radius-8);
   box-shadow: var(--shadow-1);
   margin-bottom: var(--fs-3);
@@ -69,7 +69,7 @@
   align-items: center;
   justify-content: space-around;
   margin-bottom: var(--fs-10);
-  background: var(--davys-gray_12);
+  background: var(--white);
   color: var(--black);
   border-radius: var(--radius-8);
 }
@@ -98,7 +98,7 @@
   padding: var(--radius-3) var(--radius-8);
   margin: var(--radius-6);
   font-size: var(--fs-6);
-  background: var(--white);
+  background: var(--cultured);
   width: 10vw;
   border: none;
   border-radius: var(--radius-8);
@@ -141,7 +141,7 @@
   flex-basis: 65%;
   overflow-x: auto;
   padding: var(--fs-5);
-  background: var(--cultured);
+  background: var(--white);
   border-radius: var(--radius-8);
   box-shadow: var(--shadow-1);
 }
@@ -150,7 +150,7 @@
   flex-basis: 35%;
   overflow-x: auto;
   padding: var(--fs-5);
-  background: var(--cultured);
+  background: var(--white);
   border-radius: var(--radius-8);
   box-shadow: var(--shadow-1);
 }

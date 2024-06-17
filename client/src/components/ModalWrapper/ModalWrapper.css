@@ -20,15 +20,23 @@
   }
 }
 
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
 .modal-wrapper {
   z-index: 10;
   position: fixed;
+  max-width: 700px;
   min-width: 450px;
+  max-height: 85vh;
+  overflow-y: auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -100%) scale(0.5);
   background: var(--white);
-  padding: var(--radius-16) var(--radius-3);
+  padding: var(--radius-16) var(--radius-10);
   border-radius: var(--radius-12);
   border: none;
   box-shadow: var(--shadow-1);
@@ -66,8 +74,14 @@
 
 @media screen and (max-width: 768px) {
   .modal-wrapper {
-    min-width: 80%;
-    padding: 10px;
+    min-width: 90%;
+    max-height: 80vh;
+    padding: var(--radius-12) var(--radius-3);
+  }
+
+  .modal-close {
+    top: var(--radius-12);
+    right: var(--radius-12);
   }
 
   .modal-title {

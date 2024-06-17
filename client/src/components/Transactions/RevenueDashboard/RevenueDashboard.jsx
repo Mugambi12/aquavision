@@ -19,6 +19,21 @@ import {
 // Define colors for the PieChart
 const COLORS = ["#8884d8", "#a4de6c", "#ffc658", "#82ca9d", "#ff8042"];
 
+// Component for the RevenueHeader
+const RevenueHeader = ({ openAddRevenueModal }) => (
+  <div className="revenue-header">
+    <span className="material-symbols-rounded">arrow_left</span>
+    <div className="revenue-header-content">
+      <div className="revenue-invoice-info">
+        <span className="cust-invoice">Revenue</span>
+      </div>
+    </div>
+    <span className="material-symbols-rounded" onClick={openAddRevenueModal}>
+      add
+    </span>
+  </div>
+);
+
 // Function to transform revenue data based on filters
 const transformData = (revenue, filters) => {
   const filteredData = revenue.filter((rev) => {
@@ -57,21 +72,6 @@ const transformData = (revenue, filters) => {
 
   return { lineChartData, pieChartData };
 };
-
-// Component for the RevenueHeader
-const RevenueHeader = ({ openAddRevenueModal }) => (
-  <div className="revenue-header">
-    <span className="material-symbols-rounded">arrow_left</span>
-    <div className="revenue-header-content">
-      <div className="revenue-invoice-info">
-        <span className="cust-invoice">Revenue</span>
-      </div>
-    </div>
-    <span className="material-symbols-rounded" onClick={openAddRevenueModal}>
-      add
-    </span>
-  </div>
-);
 
 // Component for the RevenueCharts
 const RevenueCharts = ({

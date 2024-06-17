@@ -13,6 +13,8 @@ import { fetchUnpaidInvoice } from "../resources/apiRevenue";
 const Transactions = () => {
   const [showRevenue, setShowRevenue] = useState(true);
   const [unpaidInvoiceData, setUnpaidInvoiceData] = useState([]);
+  const [isAddRevenueModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isAddExpenseModalOpen, setIsAddExpenseModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -40,8 +42,20 @@ const Transactions = () => {
   }, []);
 
   const toggleView = (view) => {
-    setShowRevenue(view === "revenue");
-    localStorage.setItem("transactionsView", view);
+    setLoading(true);
+    setTimeout(() => {
+      setShowRevenue(view === "revenue");
+      localStorage.setItem("transactionsView", view);
+      setLoading(false);
+    }, 500); // Adjust delay as needed
+  };
+
+  const openAddRevenueModal = () => {
+    setIsCreateModalOpen(true);
+  };
+
+  const openAddExpenseModal = () => {
+    setIsAddExpenseModalOpen(true);
   };
 
   return (
@@ -56,12 +70,25 @@ const Transactions = () => {
         <>
           <div className="main-container">
             <TransactionSidebar
+              openAddRevenueModal={openAddRevenueModal}
               unpaidInvoice={unpaidInvoiceData}
               toggleView={toggleView}
               currentView={showRevenue ? "revenue" : "expenses"}
             />
             <div className="transactions-content">
-              {showRevenue ? <RevenueManagement /> : <ExpensesManagement />}
+              {showRevenue ? (
+                <RevenueManagement
+                  openAddRevenueModal={openAddRevenueModal}
+                  isAddRevenueModalOpen={isAddRevenueModalOpen}
+                  setIsCreateModalOpen={setIsCreateModalOpen}
+                />
+              ) : (
+                <ExpensesManagement
+                  openAddExpenseModal={openAddExpenseModal}
+                  isAddExpenseModalOpen={isAddExpenseModalOpen}
+                  setIsAddExpenseModalOpen={setIsAddExpenseModalOpen}
+                />
+              )}
             </div>
           </div>
           <Footer />

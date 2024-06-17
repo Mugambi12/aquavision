@@ -7,7 +7,7 @@
   height: fit-content;
   margin: 0 18px;
   padding: 0;
-  background: var(--davys-gray_12);
+  background: var(--white);
   border-radius: var(--radius-16);
   box-shadow: var(--shadow-1);
 }
@@ -25,7 +25,7 @@
     width: calc(100% - (var(--radius-10) * 2));
     margin: 0 0 0 var(--radius-10);
     margin-bottom: var(--fs-8);
-    background: transparent;
+    background: var(--white);
   }
 
   .mobile-transactions-sidebar {
@@ -33,7 +33,7 @@
     align-items: center;
     justify-content: space-between;
     padding: var(--fs-4);
-    background: var(--davys-gray_12);
+    background: var(--cultured);
     border-radius: var(--radius-8);
     margin-bottom: 20px;
   }
@@ -75,12 +75,12 @@
   font-weight: var(--fw-600);
   margin-bottom: var(--fs-5);
   color: var(--eerie-black);
+  background: var(--white);
   display: flex;
   align-items: center;
   gap: var(--radius-6);
   padding: 10px;
   border-radius: var(--radius-8);
-  background: var(--pacific-blue_12);
 }
 
 .transactions-sidebar-actions .transactions-sidebar-header .header-icon {
@@ -149,7 +149,7 @@
   font-size: var(--fs-6);
   font-weight: var(--fw-600);
   color: var(--eerie-black);
-  background: var(--cultured);
+  background: var(--white);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -170,9 +170,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 0;
-  padding: var(--fs-5);
+  padding: var(--radius-6) var(--radius-10);
   margin: var(--radius-6) 0;
-  background: var(--coral_12);
+  background: var(--pacific-blue_12);
   border-radius: var(--radius-16);
 }
 

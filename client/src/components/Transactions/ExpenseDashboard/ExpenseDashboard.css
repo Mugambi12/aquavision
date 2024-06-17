@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   padding: var(--fs-3);
-  background: var(--davys-gray_12);
+  background: var(--white);
   border-radius: var(--radius-8);
   box-shadow: var(--shadow-1);
   margin-bottom: var(--fs-6);
@@ -67,7 +67,7 @@
   align-items: center;
   padding: var(--fs-4);
   max-width: 100%;
-  background: var(--cultured);
+  background: var(--white);
   margin-bottom: var(--fs-3);
   border-radius: var(--radius-8);
   box-shadow: var(--shadow-1);
@@ -90,6 +90,7 @@
   width: 150px;
   padding: var(--radius-6);
   font-size: var(--fs-6);
+  background: var(--cultured);
   border-radius: var(--radius-8);
   border: 1px solid var(--cultured);
 }
