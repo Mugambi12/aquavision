@@ -20,7 +20,7 @@ import {
 const COLORS = ["#8884d8", "#a4de6c", "#ffc658", "#82ca9d", "#ff8042"];
 
 // Component for the RevenueHeader
-const RevenueHeader = ({ openAddRevenueModal }) => (
+const RevenueHeader = ({ openCreateRevenueModal }) => (
   <div className="revenue-header">
     <span className="material-symbols-rounded">arrow_left</span>
     <div className="revenue-header-content">
@@ -28,7 +28,7 @@ const RevenueHeader = ({ openAddRevenueModal }) => (
         <span className="cust-invoice">Revenue</span>
       </div>
     </div>
-    <span className="material-symbols-rounded" onClick={openAddRevenueModal}>
+    <span className="material-symbols-rounded" onClick={openCreateRevenueModal}>
       add
     </span>
   </div>
@@ -325,7 +325,7 @@ const RevenueDashboard = ({
   openDeleteRevenueModal,
   openEditRevenueModal,
   openRefundRevenueModal,
-  openAddRevenueModal,
+  openCreateRevenueModal,
 }) => {
   const [filteredRevenue, setFilteredRevenue] = useState([]);
   const [paymentMethodData, setPaymentMethodData] = useState([]);
@@ -410,7 +410,7 @@ const RevenueDashboard = ({
   return (
     <div id="revenue" className="revenue-container">
       {/* Header component */}
-      <RevenueHeader openAddRevenueModal={openAddRevenueModal} />
+      <RevenueHeader openCreateRevenueModal={openCreateRevenueModal} />
 
       {/* Charts component */}
       <RevenueCharts

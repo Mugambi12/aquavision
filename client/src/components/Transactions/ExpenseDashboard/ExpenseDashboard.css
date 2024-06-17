@@ -108,6 +108,7 @@
   .expenses-area-chart .area-chart {
     max-width: 100%;
     margin: 0;
+    margin-top: calc(var(--fs-3) * 2);
     padding: 0;
   }
 }
@@ -115,7 +116,7 @@
 @media (max-width: 480px) {
   .chart-data-filter {
     align-items: center;
-    margin-top: calc(var(--fs-6) * -1);
+    margin-top: calc(var(--radius-3) * -1);
   }
 
   .chart-data-filter label,

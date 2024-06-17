@@ -14,7 +14,7 @@ const AddRevenue = ({ onSubmit }) => {
     formState: { errors },
   } = useForm();
   const [loading, setLoading] = useState(true);
-  const [submitting, setSubmitting] = useState(false); // Separate state for form submission
+  const [submitting, setSubmitting] = useState(false);
   const [usersListData, setUsersListData] = useState([]);
   const [unpaidInvoicesList, setUnpaidInvoicesList] = useState([]);
 
@@ -50,12 +50,12 @@ const AddRevenue = ({ onSubmit }) => {
     } catch (error) {
       console.error("Error fetching users list:", error);
     } finally {
-      setLoading(false); // Ensure loading state is set to false after data fetching
+      setLoading(false);
     }
   };
 
   const onSubmitForm = async (data) => {
-    setSubmitting(true); // Set submitting state to true when form is being submitted
+    setSubmitting(true);
     try {
       const formattedData = {
         user_id: data.user_id,
@@ -68,12 +68,12 @@ const AddRevenue = ({ onSubmit }) => {
         phone_number: data.phone_number,
       };
 
-      await onSubmit(formattedData); // Assuming onSubmit is an async function
-      reset(); // Reset form after successful submission
+      await onSubmit(formattedData);
+      reset();
     } catch (error) {
       console.error("Error submitting form:", error);
     } finally {
-      setSubmitting(false); // Set submitting state back to false after submission attempt
+      setSubmitting(false);
     }
   };
 
@@ -124,6 +124,7 @@ const AddRevenue = ({ onSubmit }) => {
                 <input
                   type="date"
                   {...register("payment_date", { required: true })}
+                  placeholder="Enter payment date"
                 />
                 {errors.payment_date && (
                   <span className="error">Payment date is required</span>

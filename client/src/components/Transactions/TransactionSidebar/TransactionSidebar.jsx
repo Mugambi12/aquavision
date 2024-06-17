@@ -6,8 +6,8 @@ const TransactionSidebar = ({
   unpaidInvoice,
   toggleView,
   currentView,
-  openAddRevenueModal,
-  openAddExpenseModal,
+  openCreateRevenueModal,
+  openCreateExpenseModal,
 }) => {
   return (
     <div className="transactions-sidebar">
@@ -22,8 +22,8 @@ const TransactionSidebar = ({
           className="material-symbols-rounded icon-segment"
           onClick={() =>
             currentView === "revenue"
-              ? openAddRevenueModal()
-              : openAddExpenseModal()
+              ? openCreateRevenueModal()
+              : openCreateExpenseModal()
           }
         >
           add

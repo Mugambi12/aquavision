@@ -12,7 +12,7 @@ import DataTable from "datatables.net-dt";
 import "datatables.net-responsive-dt";
 import "./ExpenseDashboard.css";
 
-const ExpensesHeader = ({ openAddExpenseModal }) => (
+const ExpensesHeader = ({ openCreateExpenseModal }) => (
   <div className="expenses-header">
     <span className="material-symbols-rounded">arrow_left</span>
     <div className="expenses-header-content">
@@ -20,7 +20,7 @@ const ExpensesHeader = ({ openAddExpenseModal }) => (
         <span className="header-title">Expenses</span>
       </div>
     </div>
-    <span className="material-symbols-rounded" onClick={openAddExpenseModal}>
+    <span className="material-symbols-rounded" onClick={openCreateExpenseModal}>
       add
     </span>
   </div>
@@ -151,7 +151,7 @@ const ExpensesTable = ({ expenses }) => (
   </div>
 );
 
-const ExpenseDashboard = ({ expenses, openAddExpenseModal }) => {
+const ExpenseDashboard = ({ expenses, openCreateExpenseModal }) => {
   useEffect(() => {
     const table = new DataTable("#expensesTable", { responsive: true });
     return () => {
@@ -161,7 +161,7 @@ const ExpenseDashboard = ({ expenses, openAddExpenseModal }) => {
 
   return (
     <>
-      <ExpensesHeader openAddExpenseModal={openAddExpenseModal} />
+      <ExpensesHeader openCreateExpenseModal={openCreateExpenseModal} />
       <ExpensesAreaChart expenses={expenses} />
       <ExpensesTable expenses={expenses} />
     </>

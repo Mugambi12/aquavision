@@ -13,8 +13,9 @@ import { fetchUnpaidInvoice } from "../resources/apiRevenue";
 const Transactions = () => {
   const [showRevenue, setShowRevenue] = useState(true);
   const [unpaidInvoiceData, setUnpaidInvoiceData] = useState([]);
-  const [isAddRevenueModalOpen, setIsCreateModalOpen] = useState(false);
-  const [isAddExpenseModalOpen, setIsAddExpenseModalOpen] = useState(false);
+  const [isCreateRevenueModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isCreateExpenseModalOpen, setIsCreateExpenseModalOpen] =
+    useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -50,12 +51,12 @@ const Transactions = () => {
     }, 500); // Adjust delay as needed
   };
 
-  const openAddRevenueModal = () => {
+  const openCreateRevenueModal = () => {
     setIsCreateModalOpen(true);
   };
 
-  const openAddExpenseModal = () => {
-    setIsAddExpenseModalOpen(true);
+  const openCreateExpenseModal = () => {
+    setIsCreateExpenseModalOpen(true);
   };
 
   return (
@@ -70,7 +71,8 @@ const Transactions = () => {
         <>
           <div className="main-container">
             <TransactionSidebar
-              openAddRevenueModal={openAddRevenueModal}
+              openCreateRevenueModal={openCreateRevenueModal}
+              openCreateExpenseModal={openCreateExpenseModal}
               unpaidInvoice={unpaidInvoiceData}
               toggleView={toggleView}
               currentView={showRevenue ? "revenue" : "expenses"}
@@ -78,15 +80,15 @@ const Transactions = () => {
             <div className="transactions-content">
               {showRevenue ? (
                 <RevenueManagement
-                  openAddRevenueModal={openAddRevenueModal}
-                  isAddRevenueModalOpen={isAddRevenueModalOpen}
+                  openCreateRevenueModal={openCreateRevenueModal}
+                  isCreateRevenueModalOpen={isCreateRevenueModalOpen}
                   setIsCreateModalOpen={setIsCreateModalOpen}
                 />
               ) : (
                 <ExpensesManagement
-                  openAddExpenseModal={openAddExpenseModal}
-                  isAddExpenseModalOpen={isAddExpenseModalOpen}
-                  setIsAddExpenseModalOpen={setIsAddExpenseModalOpen}
+                  openCreateExpenseModal={openCreateExpenseModal}
+                  isCreateExpenseModalOpen={isCreateExpenseModalOpen}
+                  setIsCreateExpenseModalOpen={setIsCreateExpenseModalOpen}
                 />
               )}
             </div>

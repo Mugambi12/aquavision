@@ -8,9 +8,9 @@ import Spinner from "../Spinner/Spinner";
 import { fetchExpenses } from "../../resources/apiExpenses";
 
 const ExpensesManagement = ({
-  openAddExpenseModal,
-  isAddExpenseModalOpen,
-  setIsAddExpenseModalOpen,
+  openCreateExpenseModal,
+  isCreateExpenseModalOpen,
+  setIsCreateExpenseModalOpen,
 }) => {
   const [expensesData, setExpensesData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -35,7 +35,7 @@ const ExpensesManagement = ({
   const handleAddExpense = (newExpense) => {
     console.log("Adding expense:", newExpense);
     console.log("Expense added successfully.");
-    setIsAddExpenseModalOpen(false);
+    setIsCreateExpenseModalOpen(false);
   };
 
   return (
@@ -45,13 +45,13 @@ const ExpensesManagement = ({
       ) : (
         <ExpenseDashboard
           expenses={expensesData}
-          openAddExpenseModal={openAddExpenseModal}
+          openCreateExpenseModal={openCreateExpenseModal}
         />
       )}
 
       <ModalWrapper
-        isOpen={isAddExpenseModalOpen}
-        onRequestClose={() => setIsAddExpenseModalOpen(false)}
+        isOpen={isCreateExpenseModalOpen}
+        onRequestClose={() => setIsCreateExpenseModalOpen(false)}
       >
         <AddExpense onSubmit={handleAddExpense} />
       </ModalWrapper>

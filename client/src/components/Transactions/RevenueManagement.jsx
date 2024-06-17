@@ -16,8 +16,8 @@ import {
 } from "../../resources/apiRevenue";
 
 const RevenueManagement = ({
-  openAddRevenueModal,
-  isAddRevenueModalOpen,
+  openCreateRevenueModal,
+  isCreateRevenueModalOpen,
   setIsCreateModalOpen,
 }) => {
   const [revenueData, setRevenueData] = useState([]);
@@ -116,7 +116,7 @@ const RevenueManagement = ({
           openDeleteRevenueModal={openDeleteRevenueModal}
           openEditRevenueModal={openEditRevenueModal}
           openRefundRevenueModal={openRefundRevenueModal}
-          openAddRevenueModal={openAddRevenueModal}
+          openCreateRevenueModal={openCreateRevenueModal}
         />
       )}
 
@@ -151,7 +151,7 @@ const RevenueManagement = ({
       </ModalWrapper>
 
       <ModalWrapper
-        isOpen={isAddRevenueModalOpen}
+        isOpen={isCreateRevenueModalOpen}
         onRequestClose={() => setIsCreateModalOpen(false)}
       >
         <AddRevenue onSubmit={callApiAndPostRevenue} />
