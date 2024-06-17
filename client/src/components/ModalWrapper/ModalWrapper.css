@@ -28,7 +28,7 @@
 .modal-wrapper {
   z-index: 10;
   position: fixed;
-  max-width: 700px;
+  max-width: 900px;
   min-width: 450px;
   max-height: 85vh;
   overflow-y: auto;

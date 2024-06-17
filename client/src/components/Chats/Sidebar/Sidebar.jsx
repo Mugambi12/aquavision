@@ -25,6 +25,7 @@ const Sidebar = ({ chats, onChatSelect }) => {
           <span className="material-symbols-rounded">person_search</span>
         </div>
       </div>
+
       <div className={`chats-sidebar ${showContacts ? "show-contacts" : ""}`}>
         <div className="d-flex">
           <h2>Chats</h2>

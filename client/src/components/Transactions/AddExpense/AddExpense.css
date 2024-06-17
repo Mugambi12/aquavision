@@ -1,9 +1,10 @@
 .add-expense-container {
-  padding: var(--radius-3) var(--radius-8) 0;
   background: var(--white);
   margin: 0 auto;
-  padding: var(--radius-8) var(--radius-16);
+  padding: var(--radius-8);
   overflow-y: auto;
+  max-width: 600px;
+  border-radius: var(--radius-8);
 }
 
 .add-expense-title {
@@ -15,28 +16,28 @@
 .add-expense-form {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: var(--radius-8);
 }
 
 .form-group {
   flex: 1 1 calc(50% - 20px);
-  display: flex;
-  flex-direction: column;
 }
 
 .form-group label {
   font-size: var(--fs-8);
   color: var(--davys-gray);
   margin-bottom: var(--radius-3);
+  display: block;
 }
 
 .form-group input,
 .form-group select {
-  padding: var(--radius-8) var(--radius-12);
+  padding: var(--radius-8);
   font-size: var(--fs-6);
   background: var(--white);
   color: var(--sonic-sliver);
-  margin: var(--radius-6) auto var(--radius-12);
+  width: 100%;
+  margin: var(--radius-6) 0 var(--radius-12);
   border: 1px solid var(--cultured);
   border-radius: var(--radius-6);
 }
@@ -50,24 +51,20 @@
 .button-group {
   display: flex;
   justify-content: space-between;
-  width: 100%;
   padding: var(--radius-16);
 }
 
 .submit-button {
-  padding: var(--radius-8) var(--radius-12);
+  padding: var(--radius-10) var(--radius-12);
   font-size: var(--fs-6);
-  width: 80%;
-  margin: auto;
   text-align: center;
   border: none;
-  border-radius: var(--radius-8);
+  border-radius: var(--radius-6);
   cursor: pointer;
   transition: background 0.3s ease;
-}
-
-.submit-button {
+  color: var(--white);
   background: var(--space-cadet);
+  width: 100%;
 }
 
 .submit-button:hover {

@@ -5,7 +5,7 @@ import ExpenseDashboard from "./ExpenseDashboard/ExpenseDashboard";
 import AddExpense from "./AddExpense/AddExpense";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
 import Spinner from "../Spinner/Spinner";
-import { fetchExpenses } from "../../resources/apiExpenses";
+import { fetchExpenses, postExpense } from "../../resources/apiExpenses";
 
 const ExpensesManagement = ({
   openCreateExpenseModal,
@@ -14,6 +14,7 @@ const ExpensesManagement = ({
 }) => {
   const [expensesData, setExpensesData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     callApiAndFetchExpenses();
@@ -32,10 +33,19 @@ const ExpensesManagement = ({
     }
   };
 
-  const handleAddExpense = (newExpense) => {
-    console.log("Adding expense:", newExpense);
-    console.log("Expense added successfully.");
-    setIsCreateExpenseModalOpen(false);
+  const callApiAndPostExpense = async (newExpense) => {
+    try {
+      setSubmitting(true);
+      await postExpense(newExpense);
+      callApiAndFetchExpenses();
+      console.log("Expense added successfully.");
+      console.log("New expense data", newExpense);
+    } catch (error) {
+      console.error("Error adding expense:", error);
+    } finally {
+      setSubmitting(false);
+      setIsCreateExpenseModalOpen(false);
+    }
   };
 
   return (
@@ -53,7 +63,7 @@ const ExpensesManagement = ({
         isOpen={isCreateExpenseModalOpen}
         onRequestClose={() => setIsCreateExpenseModalOpen(false)}
       >
-        <AddExpense onSubmit={handleAddExpense} />
+        <AddExpense onSubmit={callApiAndPostExpense} submitting={submitting} />
       </ModalWrapper>
     </>
   );

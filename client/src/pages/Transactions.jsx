@@ -26,7 +26,7 @@ const Transactions = () => {
     try {
       setLoading(true);
       const data = await fetchUnpaidInvoice();
-      console.log("Unpaid Invoice Data:", data);
+      console.log("Fetched unpaid invoices successfully.");
       setUnpaidInvoiceData(data);
     } catch (error) {
       console.error("Error fetching Unpaid Invoice:", error);
@@ -44,11 +44,11 @@ const Transactions = () => {
 
   const toggleView = (view) => {
     setLoading(true);
-    setTimeout(() => {
-      setShowRevenue(view === "revenue");
-      localStorage.setItem("transactionsView", view);
-      setLoading(false);
-    }, 500); // Adjust delay as needed
+    //setTimeout(() => {
+    setShowRevenue(view === "revenue");
+    localStorage.setItem("transactionsView", view);
+    setLoading(false);
+    //}, 1000);
   };
 
   const openCreateRevenueModal = () => {

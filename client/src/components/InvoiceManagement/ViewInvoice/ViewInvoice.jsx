@@ -7,11 +7,11 @@ const ViewInvoice = ({ invoice }) => {
   return (
     <div className="view-invoice-container">
       <h2 className="view-invoice-title">
-        Viewing Invoice {invoice.full_name}
+        Viewing Invoice of {invoice.full_name}
       </h2>
       <div className="view-invoice-details">
         <p>
-          <strong>ID:</strong> {invoice._id}
+          <strong>InvoiceID:</strong> {invoice._id}
         </p>
         <p>
           <strong>Full Name:</strong> {invoice.full_name}
