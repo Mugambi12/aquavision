@@ -79,7 +79,7 @@ const TransactionSidebar = ({
                       {customer.house_section}, {customer.house_number}
                     </span>
                     <span className="customer-amount">
-                      Amount: ${customer.total_amount}
+                      Ksh. {customer.total_amount}
                     </span>
                   </div>
                 </li>
