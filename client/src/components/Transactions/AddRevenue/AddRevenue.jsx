@@ -4,7 +4,7 @@ import "./AddRevenue.css";
 import {
   fetchUnpaidInvoice,
   fetchActiveUsersList,
-} from "../../../services/apiRevenue";
+} from "../../../resources/apiRevenue";
 
 const AddRevenue = ({ onSubmit }) => {
   const {

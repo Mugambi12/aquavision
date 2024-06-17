@@ -18,9 +18,7 @@ const Chats = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log("Chats data fetched successfully:", data)
-        // log type of data to console
-        console.log("Type of data: ", typeof data);
+        console.log("Chats data fetched successfully:");
         setChats(data);
         setLoading(false);
       } catch (error) {

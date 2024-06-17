@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import ExpenseDashboard from "./ExpenseDashboard/ExpenseDashboard";
 import AddExpense from "./AddExpense/AddExpense";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
-import { fetchExpenses } from "../../services/apiExpenses";
 import Spinner from "../Spinner/Spinner";
+import { fetchExpenses } from "../../resources/apiExpenses";
 
 const ExpensesManagement = () => {
   const [isAddExpenseModalOpen, setIsAddExpenseModalOpen] = useState(false);

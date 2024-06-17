@@ -15,7 +15,7 @@ import {
   postInvoice,
   deleteInvoice,
   processInvoicePayment,
-} from "../services/apiInvoices";
+} from "../resources/apiInvoices";
 
 const Records = () => {
   const [invoicesData, setInvoicesData] = useState([]);

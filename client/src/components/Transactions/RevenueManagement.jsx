@@ -13,7 +13,7 @@ import {
   deleteRevenue,
   updateRevenue,
   refundRevenue,
-} from "../../services/apiRevenue";
+} from "../../resources/apiRevenue";
 
 const RevenueManagement = () => {
   const [revenueData, setRevenueData] = useState([]);
@@ -25,10 +25,10 @@ const RevenueManagement = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    callApiAndGetRevenue();
+    callApiAndFetchRevenue();
   }, []);
 
-  const callApiAndGetRevenue = async () => {
+  const callApiAndFetchRevenue = async () => {
     try {
       setLoading(true);
       const data = await fetchRevenue();
@@ -44,7 +44,7 @@ const RevenueManagement = () => {
     try {
       await postRevenue(newRevenue);
       console.log("Revenue added successfully.");
-      callApiAndGetRevenue();
+      callApiAndFetchRevenue();
     } catch (error) {
       console.error("Error adding invoice:", error);
     } finally {
@@ -56,7 +56,7 @@ const RevenueManagement = () => {
     try {
       await updateRevenue(editedRevenue);
       console.log("Revenue updated successfully.");
-      callApiAndGetRevenue();
+      callApiAndFetchRevenue();
     } catch (error) {
       console.error("Error updating revenue:", error);
     } finally {
@@ -68,7 +68,7 @@ const RevenueManagement = () => {
     try {
       await refundRevenue(selectedRevenue._id);
       console.log("Revenue refunded successfully.");
-      callApiAndGetRevenue();
+      callApiAndFetchRevenue();
     } catch (error) {
       console.error("Error refunding revenue:", error);
     } finally {
@@ -80,7 +80,7 @@ const RevenueManagement = () => {
     try {
       await deleteRevenue(selectedRevenue._id);
       console.log("Revenue deleted successfully.");
-      callApiAndGetRevenue();
+      callApiAndFetchRevenue();
     } catch (error) {
       console.error("Error deleting revenue:", error);
     } finally {
