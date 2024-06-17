@@ -2,14 +2,8 @@
 import React from "react";
 import "./TransactionSidebar.css";
 
-const customers = [
-  { name: "John Doe", house: "Osupuko, 77", amount: 1000 },
-  { name: "Jane Doe", house: "Nairobi, 77", amount: 2500 },
-  { name: "John Smith", house: "Chui Lane, 77", amount: 500 },
-  { name: "Jane Smith", house: "Phase 3, 77", amount: 1200 },
-];
-
 const TransactionSidebar = ({
+  unpaidInvoice,
   toggleView,
   currentView,
   openAddRevenueModal,
@@ -77,13 +71,15 @@ const TransactionSidebar = ({
           <ul className="transactions-sidebar-due-payments">
             <h2 className="due-payments-title">Due Payments</h2>
             <div className="due-payments">
-              {customers.map((customer, index) => (
+              {unpaidInvoice.map((customer, index) => (
                 <li key={index} className="customer">
                   <div className="customer-info">
-                    <span className="customer-name">{customer.name}</span>
-                    <span className="customer-house">{customer.house}</span>
+                    <span className="customer-name">{customer.full_name}</span>
+                    <span className="customer-house">
+                      {customer.house_section}, {customer.house_number}
+                    </span>
                     <span className="customer-amount">
-                      Amount: ${customer.amount}
+                      Amount: ${customer.total_amount}
                     </span>
                   </div>
                 </li>

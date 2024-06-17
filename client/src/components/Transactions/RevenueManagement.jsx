@@ -16,12 +16,12 @@ import {
 
 const RevenueManagement = () => {
   const [revenueData, setRevenueData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [selectedRevenue, setSelectedRevenue] = useState(null);
-  const [isDeleteRevenueModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditRevenueModalOpen, setIsEditModalOpen] = useState(false);
   const [isRefundRevenueModalOpen, setIsRefundModalOpen] = useState(false);
   const [isAddRevenueModalOpen, setIsCreateModalOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isDeleteRevenueModalOpen, setIsDeleteModalOpen] = useState(false);
 
   useEffect(() => {
     callApiAndGetRevenue();
@@ -43,8 +43,6 @@ const RevenueManagement = () => {
     try {
       await postRevenue(newRevenue);
       console.log("Revenue added successfully.");
-
-      //setRevenueData([newRevenue, ...revenueData]);
       callApiAndGetRevenue();
     } catch (error) {
       console.error("Error adding invoice:", error);
@@ -57,11 +55,6 @@ const RevenueManagement = () => {
     try {
       await updateRevenue(editedRevenue);
       console.log("Revenue updated successfully.");
-
-      // const updatedRevenueData = revenueData.map((revenue) =>
-      //   revenue._id === editedRevenue._id ? editedRevenue : revenue
-      // );
-      // setRevenueData(updatedRevenueData);
       callApiAndGetRevenue();
     } catch (error) {
       console.error("Error updating revenue:", error);
@@ -74,13 +67,6 @@ const RevenueManagement = () => {
     try {
       await refundRevenue(selectedRevenue._id);
       console.log("Revenue refunded successfully.");
-
-      // const refundedRevenueData = revenueData.map((revenue) =>
-      //   revenue._id === selectedRevenue._id
-      //     ? { ...selectedRevenue, payment_status: "Refunded" }
-      //     : revenue
-      // );
-      // setRevenueData(refundedRevenueData);
       callApiAndGetRevenue();
     } catch (error) {
       console.error("Error refunding revenue:", error);
@@ -93,11 +79,6 @@ const RevenueManagement = () => {
     try {
       await deleteRevenue(selectedRevenue._id);
       console.log("Revenue deleted successfully.");
-
-      // const updatedRevenueData = revenueData.filter(
-      //   (revenue) => revenue._id !== selectedRevenue._id
-      // );
-      // setRevenueData(updatedRevenueData);
       callApiAndGetRevenue();
     } catch (error) {
       console.error("Error deleting revenue:", error);

@@ -15,32 +15,27 @@ api = Namespace('payments', description='Payment related operations')
 class PaymentUnpaidInvoicesListResource(Resource):
     @api.marshal_with(invoice_serializer, as_list=True)
     def get(self):
-        try:            
+        try:
             invoices = Invoice.query.all()
-            unpaid_invoices = []
-
-            # Filter out unpaid invoices
-            for invoice in invoices:
-                if invoice.payment_status != 'paid':
-                    unpaid_invoices.append(invoice)
-
-            response_data = []
-
-            # Build response data for unpaid invoices
-            for invoice in unpaid_invoices:
-                invoice_data = {
+            users = User.get_all()
+            user_dict = {user._id: user.full_name for user in users}
+            
+            unpaid_invoices = [
+                {
                     '_id': invoice._id,
+                    'full_name': user_dict.get(invoice.user_id, 'Unknown'),
                     'user_id': invoice.user_id,
                     'house_section': invoice.house_section,
                     'house_number': invoice.house_number,
                     'total_amount': invoice.total_amount
                 }
-                response_data.append(invoice_data)
+                for invoice in invoices if invoice.payment_status != 'paid'
+            ]
             
-            return response_data, 200
+            return unpaid_invoices, 200
         except Exception as e:
             logging.error(e)
-            return {'message': 'An error occurred while fetching unpaid invoices'}, 500        
+            return {'message': 'An error occurred while fetching unpaid invoices'}, 500      
 
 @api.route('/get/users')
 class PaymentUsersListResource(Resource):

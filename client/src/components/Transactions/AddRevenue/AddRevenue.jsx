@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import "./AddRevenue.css";
 import {
-  fetchUnpaidInvoicesList,
+  fetchUnpaidInvoice,
   fetchActiveUsersList,
 } from "../../../services/apiRevenue";
 
@@ -36,7 +36,7 @@ const AddRevenue = ({ onSubmit }) => {
 
   const callApiAndGetUnpaidInvoicesList = async () => {
     try {
-      const data = await fetchUnpaidInvoicesList();
+      const data = await fetchUnpaidInvoice();
       setUnpaidInvoicesList(data);
     } catch (error) {
       console.error("Error fetching unpaid invoices list:", error);

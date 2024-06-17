@@ -1,15 +1,35 @@
 // pages/Transactions.jsx
+import "../assets/styles/transactions.css";
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import "../assets/styles/transactions.css";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
 import TransactionSidebar from "../components/Transactions/TransactionSidebar/TransactionSidebar";
 import RevenueManagement from "../components/Transactions/RevenueManagement";
 import ExpensesManagement from "../components/Transactions/ExpensesManagement";
+import { fetchUnpaidInvoice } from "../services/apiRevenue";
 
 const Transactions = () => {
   const [showRevenue, setShowRevenue] = useState(true);
+  const [unpaidInvoiceData, setUnpaidInvoiceData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    callApiAndGetUnpaidInvoice();
+  }, []);
+
+  const callApiAndGetUnpaidInvoice = async () => {
+    try {
+      setLoading(true);
+      const data = await fetchUnpaidInvoice();
+      console.log("Unpaid Invoice Data:", data);
+      setUnpaidInvoiceData(data);
+    } catch (error) {
+      console.error("Error fetching Unpaid Invoice:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     const storedView = localStorage.getItem("transactionsView");
@@ -31,6 +51,7 @@ const Transactions = () => {
       <Navbar />
       <div className="main-container">
         <TransactionSidebar
+          unpaidInvoice={unpaidInvoiceData}
           toggleView={toggleView}
           currentView={showRevenue ? "revenue" : "expenses"}
         />

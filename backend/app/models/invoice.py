@@ -35,3 +35,7 @@ class Invoice(db.Model, BaseMixin):
     @classmethod
     def get_latest_invoice(cls, user_id):
         return cls.query.filter_by(user_id=user_id).order_by(cls.created_at.desc()).first()
+    
+    @classmethod
+    def get_unpaid_invoices(cls):
+        return cls.query.filter_by(payment_status='unpaid').all()

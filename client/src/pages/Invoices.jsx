@@ -118,23 +118,25 @@ const Records = () => {
         <title>Records - Dakoke Springs</title>
       </Helmet>
       <Navbar />
-      <div className="main-container">
-        {loading ? (
-          <Spinner />
-        ) : (
-          <InvoiceManagement
-            data={invoicesData}
-            /*Filter={Filter}*/
-            /*setFilter={setFilter}*/
-            processing={processing}
-            handlePayment={callApiAndProcessInvoicePayment}
-            openPostModal={openPostModal}
-            openViewModal={openViewModal}
-            openDeleteModal={openDeleteModal}
-          />
-        )}
-      </div>
-      <Footer />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <div className="main-container">
+            <InvoiceManagement
+              data={invoicesData}
+              /*Filter={Filter}*/
+              /*setFilter={setFilter}*/
+              processing={processing}
+              handlePayment={callApiAndProcessInvoicePayment}
+              openPostModal={openPostModal}
+              openViewModal={openViewModal}
+              openDeleteModal={openDeleteModal}
+            />
+          </div>
+          <Footer />
+        </>
+      )}
 
       <ModalWrapper
         isOpen={isPostModalOpen}

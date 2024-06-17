@@ -1,6 +1,6 @@
 // src/api/apiRevenue.js
 
-export const fetchUnpaidInvoicesList = async () => {
+export const fetchUnpaidInvoice = async () => {
   const response = await fetch("/api/payments/get/unpaid-invoices");
   if (!response.ok) {
     throw new Error("Failed to fetch revenue");
