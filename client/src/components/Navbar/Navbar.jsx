@@ -127,7 +127,7 @@ const Header = () => {
               </li>
               {/* Logout */}
               <li>
-                <a href="/auth" className="navbar-icons icon-box">
+                <a href="/login" className="navbar-icons icon-box">
                   <span className="material-symbols-rounded icon logout">
                     power_settings_new
                   </span>

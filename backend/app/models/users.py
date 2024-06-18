@@ -34,3 +34,6 @@ class User(db.Model, BaseMixin):
     balance = db.Column(db.Float, nullable=False)
     last_login = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
     last_logout = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
+
+    def get_by_email(email):
+        return User.query.filter_by(email=email).first()

@@ -10,14 +10,19 @@ import "./assets/styles/index.css";
 import Spinner from "./components/Spinner/Spinner";
 import ErrorBoundary from "./errors/ErrorBoundary";
 
-const LazyAuthPage = React.lazy(() => import("./pages/Auth"));
-const LazyChatsPage = React.lazy(() => import("./pages/Chats"));
-const LazyHomePage = React.lazy(() => import("./pages/Home"));
-const LazyPeoplePage = React.lazy(() => import("./pages/People"));
-const LazyInvoicesPage = React.lazy(() => import("./pages/Invoices"));
-const LazySettingsPage = React.lazy(() => import("./pages/Settings"));
-const LazyTransactionsPage = React.lazy(() => import("./pages/Transactions"));
-const LazyLogin = React.lazy(() => import("./pages/LoginAuth"));
+const LazyChatsPage = React.lazy(() => import("./pages/ChatsPage"));
+const LazyHomePage = React.lazy(() => import("./pages/HomePage"));
+const LazyPeoplePage = React.lazy(() => import("./pages/PeoplePage"));
+const LazyInvoicesPage = React.lazy(() => import("./pages/InvoicesPage"));
+const LazySettingsPage = React.lazy(() => import("./pages/SettingsPage"));
+const LazyTransactionsPage = React.lazy(() =>
+  import("./pages/TransactionsPage")
+);
+
+const LazyLoginPage = React.lazy(() => import("./pages/LoginPage"));
+const LazyForgotPasswordPage = React.lazy(() =>
+  import("./pages/ForgotPasswordPage")
+);
 
 function App() {
   const [isRoutesLoaded, setIsRoutesLoaded] = useState(false);
@@ -33,8 +38,6 @@ function App() {
           <Suspense fallback={<Spinner />}>
             {isRoutesLoaded && (
               <Routes>
-                <Route path="/login" element={<LazyLogin />} />
-                <Route path="/auth" element={<LazyAuthPage />} />
                 <Route path="/home" element={<LazyHomePage />} />
                 <Route path="/chats" element={<LazyChatsPage />} />
                 <Route path="/people" element={<LazyPeoplePage />} />
@@ -44,7 +47,13 @@ function App() {
                   path="/transactions"
                   element={<LazyTransactionsPage />}
                 />
-                <Route path="*" element={<Navigate to="/auth" />} />
+                <Route path="*" element={<Navigate to="/login" />} />
+
+                <Route path="/login" element={<LazyLoginPage />} />
+                <Route
+                  path="/forgot-password"
+                  element={<LazyForgotPasswordPage />}
+                />
               </Routes>
             )}
           </Suspense>

@@ -7,7 +7,7 @@ from ..schemas.login_serializer import register_serializer, login_serializer
 
 api = Namespace('login', description='Login related operations')
 
-@api.route('/')
+@api.route('/login')
 class LoginResource(Resource):
     @api.expect(login_serializer)
     @api.marshal_with(register_serializer)
@@ -26,3 +26,15 @@ class LoginResource(Resource):
 class LogoutResource(Resource):
     def post(self):
         pass
+
+
+@api.route('/forgot-password')
+class ForgotPasswordResource(Resource):
+    def post(self):
+        data = request.get_json()
+        print('This is the data', data)
+        #email = data.get('email')
+        #user = User.get_by_email(email)
+        #if not user:
+        #    abort(404, 'User not found')
+        return {'message': 'Password reset link sent to your email'}, 200
