@@ -114,42 +114,47 @@ const ExpensesAreaChart = ({ expenses }) => {
   );
 };
 
-const ExpensesTable = ({ expenses }) => (
-  <div className="expenses-table-container">
-    <table id="expensesTable" className="expenses-table display">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Date</th>
-          <th>Merchant Name</th>
-          <th>Expense Type</th>
-          <th>Description</th>
-          <th>Payment Method</th>
-          <th>Payment Status</th>
-          <th>Transaction ID</th>
-          <th>Amount</th>
-          <th>Approval Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {expenses.reverse().map((expense, index) => (
-          <tr key={expense._id}>
-            <td>#{expense._id}</td>
-            <td>{expense.date}</td>
-            <td>{expense.vendor}</td>
-            <td>{expense.type}</td>
-            <td>{expense.description}</td>
-            <td>{expense.payment_method}</td>
-            <td>{expense.payment_status}</td>
-            <td>{expense.transaction_id}</td>
-            <td>KSh. {expense.amount}</td>
-            <td>{expense.approval_status}</td>
+const ExpensesTable = ({ expenses }) => {
+  return (
+    <div className="expenses-table-container">
+      <table id="expensesTable" className="expenses-table display">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Merchant Name</th>
+            <th>Expense Type</th>
+            <th>Description</th>
+            <th>Payment Method</th>
+            <th>Payment Status</th>
+            <th>Transaction ID</th>
+            <th>Amount</th>
+            <th>Approval Status</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-);
+        </thead>
+        <tbody>
+          {expenses
+            .slice()
+            .reverse()
+            .map((expense, index) => (
+              <tr key={expense._id}>
+                <td>#{expense._id}</td>
+                <td>{expense.date}</td>
+                <td>{expense.vendor}</td>
+                <td>{expense.type}</td>
+                <td>{expense.description}</td>
+                <td>{expense.payment_method}</td>
+                <td>{expense.payment_status}</td>
+                <td>{expense.transaction_id}</td>
+                <td>KSh. {expense.amount}</td>
+                <td>{expense.approval_status}</td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
 const ExpenseDashboard = ({ expenses, openCreateExpenseModal }) => {
   useEffect(() => {

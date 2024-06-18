@@ -17,6 +17,7 @@ const LazyPeoplePage = React.lazy(() => import("./pages/People"));
 const LazyInvoicesPage = React.lazy(() => import("./pages/Invoices"));
 const LazySettingsPage = React.lazy(() => import("./pages/Settings"));
 const LazyTransactionsPage = React.lazy(() => import("./pages/Transactions"));
+const LazyLogin = React.lazy(() => import("./pages/LoginAuth"));
 
 function App() {
   const [isRoutesLoaded, setIsRoutesLoaded] = useState(false);
@@ -32,6 +33,7 @@ function App() {
           <Suspense fallback={<Spinner />}>
             {isRoutesLoaded && (
               <Routes>
+                <Route path="/login" element={<LazyLogin />} />
                 <Route path="/auth" element={<LazyAuthPage />} />
                 <Route path="/home" element={<LazyHomePage />} />
                 <Route path="/chats" element={<LazyChatsPage />} />
@@ -42,7 +44,6 @@ function App() {
                   path="/transactions"
                   element={<LazyTransactionsPage />}
                 />
-
                 <Route path="*" element={<Navigate to="/auth" />} />
               </Routes>
             )}
