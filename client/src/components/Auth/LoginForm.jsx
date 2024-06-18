@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import "./LoginForm.css";
 
 const LoginForm = () => {
@@ -61,9 +62,9 @@ const LoginForm = () => {
 
         <button type="submit">Login</button>
       </form>
-      <a href="/forgot-password" className="forgot-password-link">
-        Forgot Password?
-      </a>
+      <p>
+        <Link to="/forgot-password">Back to Login</Link>
+      </p>
     </div>
   );
 };

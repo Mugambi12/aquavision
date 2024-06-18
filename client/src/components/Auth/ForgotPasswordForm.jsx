@@ -1,10 +1,9 @@
-// ForgotPasswordForm.jsx
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import "./ForgotPasswordForm.css";
 
 const ForgotPasswordForm = ({ callApiAndResetPassword }) => {
-  // Receive callApiAndResetPassword as prop
   const {
     register,
     handleSubmit,
@@ -12,7 +11,7 @@ const ForgotPasswordForm = ({ callApiAndResetPassword }) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    callApiAndResetPassword(data.email); // Call the API function with email data
+    callApiAndResetPassword(data.email);
   };
 
   return (
@@ -35,6 +34,11 @@ const ForgotPasswordForm = ({ callApiAndResetPassword }) => {
         {errors.email && <p className="error">{errors.email.message}</p>}
         <button type="submit">Reset Password</button>
       </form>
+      <p>
+        <Link to="/login" className="forgot-password-link">
+          Back to Login
+        </Link>
+      </p>
     </div>
   );
 };

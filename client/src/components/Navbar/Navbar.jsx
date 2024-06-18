@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Header = () => {
@@ -51,14 +52,12 @@ const Header = () => {
   return (
     <header className="header" data-header>
       <div className="container">
-        {/* Logo */}
         <h1>
-          <a href="#" className="logo">
+          <Link to="/" className="logo">
             Dashboard
-          </a>
+          </Link>
         </h1>
 
-        {/* Menu Toggle Button */}
         <button
           className="menu-toggle-btn icon-box"
           data-menu-toggle-btn
@@ -67,75 +66,65 @@ const Header = () => {
           <span className="material-symbols-rounded icon">menu</span>
         </button>
 
-        {/* Navigation Menu */}
         <nav className="navbar">
           <div className="container">
             <ul className="navbar-list">
-              {/* Home */}
               <li>
-                <a href="/home" className="navbar-link icon-box">
+                <Link to="/home" className="navbar-link icon-box">
                   <span className="material-symbols-rounded icon">apps</span>
                   <span>Home</span>
-                </a>
+                </Link>
               </li>
-              {/* People */}
               <li>
-                <a href="/people" className="navbar-link icon-box">
+                <Link to="/people" className="navbar-link icon-box">
                   <span className="material-symbols-rounded icon">people</span>
                   <span>People</span>
-                </a>
+                </Link>
               </li>
-              {/* Invoices */}
               <li>
-                <a href="/invoices" className="navbar-link icon-box">
+                <Link to="/invoices" className="navbar-link icon-box">
                   <span className="material-symbols-rounded icon">
                     schedule
                   </span>
                   <span>Invoices</span>
-                </a>
+                </Link>
               </li>
-              {/* Transactions */}
               <li>
-                <a href="/transactions" className="navbar-link icon-box">
+                <Link to="/transactions" className="navbar-link icon-box">
                   <span className="material-symbols-rounded icon">
                     attach_money
                   </span>
                   <span>Transactions</span>
-                </a>
+                </Link>
               </li>
-              {/* Chats */}
               <li>
-                <a href="/chats" className="navbar-link icon-box">
+                <Link to="/chats" className="navbar-link icon-box">
                   <span className="material-symbols-rounded icon">forum</span>
                   <span>Chats</span>
-                </a>
+                </Link>
               </li>
             </ul>
 
-            {/* User Actions */}
             <ul className="user-action-list">
-              {/* Settings */}
               <li>
-                <a
-                  href="/settings"
+                <Link
+                  to="/settings"
                   className="navbar-link navbar-icons icon-box"
                 >
                   <span className="material-symbols-rounded icon">
                     settings
                   </span>
-                </a>
+                </Link>
               </li>
-              {/* Logout */}
               <li>
-                <a href="/login" className="navbar-icons icon-box">
+                <Link to="/login" className="navbar-icons icon-box">
                   <span className="material-symbols-rounded icon logout">
                     power_settings_new
                   </span>
-                </a>
+                </Link>
               </li>
-              {/* Profile */}
               <li>
-                <a href="#!" className="header-profile">
+                <Link to="#!" className="header-profile">
                   <figure className="profile-avatar">
                     <img
                       src="src/assets/images/static/profile.png"
@@ -148,7 +137,7 @@ const Header = () => {
                     <p className="profile-title">Elizabeth Smith</p>
                     <p className="profile-subtitle">Admin</p>
                   </div>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

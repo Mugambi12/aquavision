@@ -8,16 +8,14 @@ import { postForgotPassword } from "../resources/apiLogin";
 const ForgotPasswordPage = () => {
   const callApiAndResetPassword = async (email) => {
     try {
-      await postForgotPassword(email);
-
-      const data = await response.json();
-      console.log(data);
-      if (response.ok) {
-        alert(data.message);
-        window.location.href = "/login";
-      }
+      const response = await postForgotPassword(email);
+      console.log(response); // Log the response from the API
+      alert(response.message); // Show the message from the response
+      window.location.href = "/login";
     } catch (error) {
       console.error("Error resetting password:", error);
+      // Handle any errors that occur during the API call
+      // For example, you can display an error message to the user
     }
   };
 

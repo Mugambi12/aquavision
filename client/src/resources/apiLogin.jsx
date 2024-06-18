@@ -1,5 +1,5 @@
 export const postForgotPassword = async (email) => {
-  const response = await fetch("/api/login/forgot-password", {
+  const response = await fetch("/api/auth/forgot-password", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

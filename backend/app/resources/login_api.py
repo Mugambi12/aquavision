@@ -3,14 +3,14 @@ from flask_restx import Namespace, Resource
 from werkzeug.security import check_password_hash
 
 from ..models.users import User
-from ..schemas.login_serializer import register_serializer, login_serializer
+from ..schemas.auth_serializer import login_serializer, forgot_password_serializer
 
 api = Namespace('login', description='Login related operations')
 
 @api.route('/login')
 class LoginResource(Resource):
     @api.expect(login_serializer)
-    @api.marshal_with(register_serializer)
+    @api.marshal_with(login_serializer)
     def post(self):
         data = request.get_json()
         email = data.get('email')
@@ -30,11 +30,13 @@ class LogoutResource(Resource):
 
 @api.route('/forgot-password')
 class ForgotPasswordResource(Resource):
+    @api.expect(forgot_password_serializer)
+    @api.marshal_with(forgot_password_serializer, code=201)
     def post(self):
         data = request.get_json()
         print('This is the data', data)
-        #email = data.get('email')
-        #user = User.get_by_email(email)
-        #if not user:
-        #    abort(404, 'User not found')
+        email = data.email
+        user = User.get_by_email(email)
+        if not user:
+            abort(404, 'User not found')
         return {'message': 'Password reset link sent to your email'}, 200

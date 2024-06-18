@@ -8,6 +8,7 @@ from .extensions.rest_api import api
 from .extensions.migrate import migrate
 from .extensions.cors_extension import cors
 
+from .resources.login_api import api as login_api
 from .resources.user_api import api as user_api
 from .resources.sticky_note_api import api as sticky_note_api
 from .resources.invoice_api import api as invoice_api
@@ -26,6 +27,7 @@ def create_app():
     cors.init_app(app)
     api.init_app(app, doc='/docs', title='API', version='2.0', description='Aqua Vision API Documentation')
     
+    api.add_namespace(login_api, path='/auth')
     api.add_namespace(user_api, path='/users')
     api.add_namespace(sticky_note_api, path='/sticky_notes')
     api.add_namespace(invoice_api, path='/invoices')

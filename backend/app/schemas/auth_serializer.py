@@ -15,3 +15,9 @@ login_serializer = api.model(
     'password': fields.String()
   }
 )
+
+forgot_password_serializer = api.model(
+  'ForgotPassword', {
+    'email': fields.String()
+  }
+)
