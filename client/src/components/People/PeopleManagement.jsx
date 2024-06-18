@@ -8,7 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import "./Main.css";
+import "./PeopleManagement.css";
 
 const getLatestEntry = (entries) => {
   if (!entries || entries.length === 0) return null;
@@ -332,7 +332,7 @@ const ProfileCard = ({ person, onEditProfileClick }) => {
   );
 };
 
-const Main = ({ selectedPerson, onEditProfileClick }) => {
+const PeopleManagement = ({ selectedPerson, onEditProfileClick }) => {
   return (
     <div className="row person-content">
       <div className="column person-content-left">
@@ -371,4 +371,4 @@ const Main = ({ selectedPerson, onEditProfileClick }) => {
   );
 };
 
-export default Main;
+export default PeopleManagement;

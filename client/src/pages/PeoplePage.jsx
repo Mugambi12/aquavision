@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar/Navbar";
-import Sidebar from "../components/People/Sidebar/Sidebar";
-import Main from "../components/People/Main/Main";
 import Footer from "../components/Footer/Footer";
 import ModalWrapper from "../components/ModalWrapper/ModalWrapper";
-import AddUserForm from "../components/People/AddUserForm/AddUserForm";
-import EditUserForm from "../components/People/EditUserForm/EditUserForm";
+import PeopleManagement from "../components/People/PeopleManagement";
+import Sidebar from "../components/People/Sidebar";
+import AddUserForm from "../components/People/AddUserForm";
+import EditUserForm from "../components/People/EditUserForm";
 
 // Import your spinner component here
 import Spinner from "../components/Spinner/Spinner";
@@ -101,7 +101,7 @@ const People = () => {
             isSidebarOpen={isSidebarOpen}
             toggleSidebar={toggleSidebar}
           />
-          <Main
+          <PeopleManagement
             selectedPerson={selectedPerson}
             onEditProfileClick={handleEditProfileClick}
           />

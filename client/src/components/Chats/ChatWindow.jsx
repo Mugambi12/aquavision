@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./ChatWindow.css";
-import Header from "../Header/Header";
+import Header from "./Header";
 
 const ChatWindow = ({ chat }) => {
   const chatWindowRef = useRef(null);

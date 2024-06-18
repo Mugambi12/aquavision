@@ -23,9 +23,9 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(DevelopmentConfig)
     db.init_app(app)
-    migrate.init_app(app, db)
-    cors.init_app(app)
     api.init_app(app)
+    cors.init_app(app)
+    migrate.init_app(app, db)
     
     api.add_namespace(login_api, path='/auth')
     api.add_namespace(user_api, path='/users')

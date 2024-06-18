@@ -35,9 +35,7 @@ const ForgotPasswordForm = ({ callApiAndResetPassword }) => {
         <button type="submit">Reset Password</button>
       </form>
       <p>
-        <Link to="/login" className="forgot-password-link">
-          Back to Login
-        </Link>
+        <Link to="/login">Back to Login</Link>
       </p>
     </div>
   );

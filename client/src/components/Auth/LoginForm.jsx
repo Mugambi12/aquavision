@@ -63,7 +63,9 @@ const LoginForm = () => {
         <button type="submit">Login</button>
       </form>
       <p>
-        <Link to="/forgot-password">Back to Login</Link>
+        <Link to="/forgot-password" className="forgot-password-link">
+          Forgot your password?
+        </Link>
       </p>
     </div>
   );

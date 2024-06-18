@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar/Navbar";
-import InvoiceManagement from "../components/InvoiceManagement/Invoice/Invoice";
 import Footer from "../components/Footer/Footer";
-import AddInvoice from "../components/InvoiceManagement/AddInvoice/AddInvoice";
-import ViewInvoice from "../components/InvoiceManagement/ViewInvoice/ViewInvoice";
-import DeleteInvoice from "../components/InvoiceManagement/DeleteInvoice/DeleteInvoice";
+import InvoiceManagement from "../components/Invoices/InvoiceManagement";
+import AddInvoice from "../components/Invoices/AddInvoice";
+import ViewInvoice from "../components/Invoices/ViewInvoice";
+import DeleteInvoice from "../components/Invoices/DeleteInvoice";
 import ModalWrapper from "../components/ModalWrapper/ModalWrapper";
 import { registeredActiveHouses } from "../db/.invoiceData";
 import Spinner from "../components/Spinner/Spinner";
