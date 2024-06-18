@@ -1,12 +1,24 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
 import "../assets/styles/LoginAuth.css";
+import loginImg from "../assets/images/static/login-page-image.jpg";
 
 const LoginAuth = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const onSubmit = (data) => {
+    console.log(data);
+    // Handle login logic here
   };
 
   return (
@@ -17,7 +29,7 @@ const LoginAuth = () => {
       <div className="login-content">
         <div className="image-container">
           <img
-            src="https://media.istockphoto.com/id/1368151370/photo/user-typing-login-and-password-cyber-security-concept.jpg?s=1024x1024&w=is&k=20&c=DDQn_dYm4qaOcMBuelgjfGM6xjvHZdHQ_Y08BhvsqaU="
+            src={loginImg}
             alt="Login Background"
             className="background-image"
           />
@@ -25,7 +37,7 @@ const LoginAuth = () => {
         <div className="login-form">
           <h1>Login</h1>
           {/* Login Form */}
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <label htmlFor="phone_number">
               <span className="material-symbols-rounded label-icon">phone</span>
               Phone Number:
@@ -33,10 +45,14 @@ const LoginAuth = () => {
             <input
               type="tel"
               id="phone_number"
-              name="phone_number"
               placeholder="Enter phone number"
-              required
+              {...register("phone_number", {
+                required: "Phone number is required",
+              })}
             />
+            {errors.phone_number && (
+              <p className="error">{errors.phone_number.message}</p>
+            )}
 
             <label htmlFor="password">
               <span className="material-symbols-rounded label-icon">lock</span>
@@ -46,9 +62,8 @@ const LoginAuth = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 id="password"
-                name="password"
                 placeholder="Enter password"
-                required
+                {...register("password", { required: "Password is required" })}
               />
               <span
                 className="material-symbols-rounded password-toggle"
@@ -57,6 +72,9 @@ const LoginAuth = () => {
                 {showPassword ? "visibility_off" : "visibility"}
               </span>
             </div>
+            {errors.password && (
+              <p className="error">{errors.password.message}</p>
+            )}
 
             <button type="submit">Login</button>
           </form>

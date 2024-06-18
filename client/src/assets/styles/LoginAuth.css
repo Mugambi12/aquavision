@@ -139,7 +139,7 @@
 }
 
 .login-form label {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
   align-self: flex-start;
   margin-left: 1rem;
   position: relative;
@@ -149,8 +149,8 @@
   width: 80%;
   padding: 0.75rem;
   font-size: var(--fs-6);
-  margin-bottom: 1.5rem;
   color: var(--sonic-sliver);
+  margin-bottom: 2rem;
   border: 1px solid var(--pacific-blue_12);
   border-radius: var(--radius-6);
 }
@@ -174,15 +174,23 @@
   cursor: pointer;
 }
 
+.login-form .error {
+  color: var(--imperial-red);
+  font-size: var(--fs-8);
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+}
+
 .login-form button {
   width: 80%;
   padding: 0.75rem;
-  margin: 3rem auto 1rem;
+  margin: 2rem auto 1rem;
   font-size: var(--fs-5);
   background: var(--space-cadet);
   color: var(--white);
   text-align: center;
   border: none;
+  border-radius: var(--radius-6);
   cursor: pointer;
   transition: background-color var(--transition);
 }
