@@ -25,7 +25,7 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     cors.init_app(app)
-    api.init_app(app, doc='/docs', title='API', version='2.0', description='Aqua Vision API Documentation')
+    api.init_app(app)
     
     api.add_namespace(login_api, path='/auth')
     api.add_namespace(user_api, path='/users')
