@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import "./EditRevenue.css";
 
-const EditRevenue = ({ revenue, onSubmit }) => {
+const EditRevenue = ({ revenue, onSubmit, submitting }) => {
   const {
     register,
     handleSubmit,
@@ -108,7 +108,7 @@ const EditRevenue = ({ revenue, onSubmit }) => {
 
         <div className="button-group">
           <button type="submit" className="submit-button">
-            Save Changes
+            {submitting ? "Submitting..." : "Save Changes"}
           </button>
         </div>
       </form>

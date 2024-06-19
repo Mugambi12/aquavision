@@ -52,6 +52,7 @@
 .button-group {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
   width: 100%;
 }
 
@@ -59,14 +60,12 @@
   padding: var(--radius-8) var(--radius-12);
   font-size: var(--fs-6);
   color: var(--white);
+  background: var(--space-cadet);
+  text-align: center;
   border: none;
   border-radius: var(--radius-6);
   cursor: pointer;
   transition: background 0.3s ease;
-}
-
-.submit-button {
-  background: var(--space-cadet);
 }
 
 .submit-button:hover {

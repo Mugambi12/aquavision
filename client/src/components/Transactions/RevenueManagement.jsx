@@ -14,6 +14,7 @@ import {
   updateRevenue,
   refundRevenue,
 } from "../../resources/apiRevenue";
+import { set } from "react-hook-form";
 
 const RevenueManagement = ({
   openCreateRevenueModal,
@@ -26,6 +27,7 @@ const RevenueManagement = ({
   const [isRefundRevenueModalOpen, setIsRefundModalOpen] = useState(false);
   const [isDeleteRevenueModalOpen, setIsDeleteModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     callApiAndFetchRevenue();
@@ -45,48 +47,56 @@ const RevenueManagement = ({
 
   const callApiAndPostRevenue = async (newRevenue) => {
     try {
+      setSubmitting(true);
       await postRevenue(newRevenue);
       console.log("Revenue added successfully.");
       callApiAndFetchRevenue();
     } catch (error) {
       console.error("Error adding invoice:", error);
     } finally {
+      setSubmitting(false);
       setIsCreateModalOpen(false);
     }
   };
 
   const callApiAndUpdateRevenue = async (editedRevenue) => {
     try {
+      setSubmitting(true);
       await updateRevenue(editedRevenue);
       console.log("Revenue updated successfully.");
       callApiAndFetchRevenue();
     } catch (error) {
       console.error("Error updating revenue:", error);
     } finally {
+      setSubmitting(false);
       setIsEditModalOpen(false);
     }
   };
 
   const callApiAndRefundRevenue = async () => {
     try {
+      setSubmitting(true);
       await refundRevenue(selectedRevenue._id);
       console.log("Revenue refunded successfully.");
       callApiAndFetchRevenue();
     } catch (error) {
       console.error("Error refunding revenue:", error);
     } finally {
+      setSubmitting(false);
       setIsRefundModalOpen(false);
     }
   };
 
   const callApiAndDeleteRevenue = async () => {
     try {
+      setSubmitting(true);
       await deleteRevenue(selectedRevenue._id);
       console.log("Revenue deleted successfully.");
       callApiAndFetchRevenue();
     } catch (error) {
       console.error("Error deleting revenue:", error);
     } finally {
+      setSubmitting(false);
       setIsDeleteModalOpen(false);
     }
   };
@@ -121,13 +131,10 @@ const RevenueManagement = ({
       )}
 
       <ModalWrapper
-        isOpen={isDeleteRevenueModalOpen}
-        onRequestClose={() => setIsDeleteModalOpen(false)}
+        isOpen={isCreateRevenueModalOpen}
+        onRequestClose={() => setIsCreateModalOpen(false)}
       >
-        <DeleteRevenue
-          revenue={selectedRevenue}
-          onSubmit={callApiAndDeleteRevenue}
-        />
+        <AddRevenue onSubmit={callApiAndPostRevenue} />
       </ModalWrapper>
 
       <ModalWrapper
@@ -137,6 +144,7 @@ const RevenueManagement = ({
         <EditRevenue
           revenue={selectedRevenue}
           onSubmit={callApiAndUpdateRevenue}
+          submitting={submitting}
         />
       </ModalWrapper>
 
@@ -147,14 +155,19 @@ const RevenueManagement = ({
         <RefundRevenue
           revenue={selectedRevenue}
           onSubmit={callApiAndRefundRevenue}
+          submitting={submitting}
         />
       </ModalWrapper>
 
       <ModalWrapper
-        isOpen={isCreateRevenueModalOpen}
-        onRequestClose={() => setIsCreateModalOpen(false)}
+        isOpen={isDeleteRevenueModalOpen}
+        onRequestClose={() => setIsDeleteModalOpen(false)}
       >
-        <AddRevenue onSubmit={callApiAndPostRevenue} />
+        <DeleteRevenue
+          revenue={selectedRevenue}
+          onSubmit={callApiAndDeleteRevenue}
+          submitting={submitting}
+        />
       </ModalWrapper>
     </>
   );

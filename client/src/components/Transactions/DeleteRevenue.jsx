@@ -1,7 +1,7 @@
 import React from "react";
 import "./DeleteRevenue.css";
 
-const DeleteRevenue = ({ revenue, onSubmit }) => {
+const DeleteRevenue = ({ revenue, onSubmit, submitting }) => {
   return (
     <div className="delete-revenue-container">
       <h2 className="delete-revenue-title">Delete Revenue</h2>
@@ -11,7 +11,7 @@ const DeleteRevenue = ({ revenue, onSubmit }) => {
       <p className="delete-revenue-id">ID: {revenue.transaction_id}</p>
       <div className="delete-revenue-buttons">
         <button className="confirm-button" onClick={onSubmit}>
-          Confirm Delete
+          {submitting ? "Submitting..." : "Confirm Delete"}
         </button>
       </div>
     </div>

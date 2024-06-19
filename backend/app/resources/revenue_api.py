@@ -109,6 +109,32 @@ class PaymentCreateResource(Resource):
     
 @api.route('/update/<int:_id>')
 class PaymentUpdateResource(Resource):
+#amount: 4510,
+#created_at: "2024-06-15T22:07:18",
+#deleted_at: "2024-06-15T22:07:18",
+#full_name: "Bob Brown",
+#house_number: "401",
+#house_section: "D",
+#invoice_id: 5,
+#payment_date: "2024-06-16",
+#payment_method: "Cash",
+#payment_status: "Completed",
+#phone_number: "1234567890",
+#source: "Cash",
+#transaction_id: "RX12345",
+#updated_at: "2024-06-15T22:07:18",
+#user_id: 5,
+#_id: "1"
+
+#source = db.Column(db.String, nullable=False)
+#user_id = db.Column(db.Integer, nullable=False)
+#invoice_id = db.Column(db.Integer, nullable=False)
+#amount = db.Column(db.Float, nullable=False)
+#payment_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+#transaction_id = db.Column(db.String, nullable=False)
+#payment_method = db.Column(db.String, nullable=False)
+#payment_status = db.Column(db.String, nullable=False)
+#phone_number = db.Column(db.String, nullable=False)
     @api.expect(revenue_serializer)
     @api.marshal_with(revenue_serializer)
     def put(self, _id):
@@ -116,8 +142,21 @@ class PaymentUpdateResource(Resource):
         payment = Revenue.get_by_id(_id)
         if not payment:
             abort(404, 'Payment not found')
-        payment.update(**data)
-        return payment, 200
+        #payment.update(**data)
+        #return payment, 200
+        updated_payment = Revenue(
+            source=data['source'],
+            user_id=data['user_id'],
+            invoice_id=data['invoice_id'],
+            amount=data['amount'],
+            payment_date=data['payment_date'],
+            transaction_id=data['transaction_id'],
+            payment_method=data['payment_method'],
+            payment_status=data['payment_status'],
+            phone_number=data['phone_number']
+        )
+        updated_payment.save()
+        return updated_payment, 200
     
 @api.route('/refund/<int:_id>')
 class PaymentRefundResource(Resource):
