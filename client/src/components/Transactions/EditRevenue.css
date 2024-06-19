@@ -55,7 +55,6 @@
   width: 100%;
 }
 
-.cancel-button,
 .submit-button {
   padding: var(--radius-8) var(--radius-12);
   font-size: var(--fs-6);
@@ -66,16 +65,8 @@
   transition: background 0.3s ease;
 }
 
-.cancel-button {
-  background: var(--imperial-red);
-}
-
 .submit-button {
   background: var(--space-cadet);
-}
-
-.cancel-button:hover {
-  background: var(--sonic-sliver);
 }
 
 .submit-button:hover {

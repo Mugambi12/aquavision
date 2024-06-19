@@ -1,10 +1,10 @@
 // components/Transactions/RevenueManagement.jsx
 import React, { useEffect, useState } from "react";
-import RevenueDashboard from "./RevenueDashboard/RevenueDashboard";
-import DeleteRevenue from "./DeleteRevenue/DeleteRevenue";
-import EditRevenue from "./EditRevenue/EditRevenue";
-import RefundRevenue from "./RefundRevenue/RefundRevenue";
-import AddRevenue from "./AddRevenue/AddRevenue";
+import RevenueDashboard from "./RevenueDashboard";
+import DeleteRevenue from "./DeleteRevenue";
+import EditRevenue from "./EditRevenue";
+import RefundRevenue from "./RefundRevenue";
+import AddRevenue from "./AddRevenue";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
 import Spinner from "../Spinner/Spinner";
 import {

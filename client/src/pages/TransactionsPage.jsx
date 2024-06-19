@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
-import TransactionSidebar from "../components/Transactions/TransactionSidebar/TransactionSidebar";
+import TransactionSidebar from "../components/Transactions/TransactionSidebar";
 import RevenueManagement from "../components/Transactions/RevenueManagement";
 import ExpensesManagement from "../components/Transactions/ExpensesManagement";
 import Spinner from "../components/Spinner/Spinner";

@@ -13,6 +13,8 @@ const EditRevenue = ({ revenue, onSubmit }) => {
 
   const onSubmitForm = (data) => {
     onSubmit(data);
+
+    console.log("This is the form data: ", data);
   };
 
   return (
@@ -105,13 +107,6 @@ const EditRevenue = ({ revenue, onSubmit }) => {
         </div>
 
         <div className="button-group">
-          <button
-            type="button"
-            className="cancel-button"
-            onClick={() => onSubmit(null)}
-          >
-            Cancel
-          </button>
           <button type="submit" className="submit-button">
             Save Changes
           </button>
