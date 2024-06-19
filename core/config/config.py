@@ -41,3 +41,4 @@ class MailConfig:
     MAIL_PASSWORD = config('MAIL_PASSWORD')
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
+    
