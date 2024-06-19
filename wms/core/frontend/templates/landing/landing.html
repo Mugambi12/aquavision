@@ -1,0 +1,400 @@
+{% extends "base.html" %} {% block content %}
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+  var Tawk_API = Tawk_API || {},
+    Tawk_LoadStart = new Date();
+  (function () {
+    var s1 = document.createElement("script"),
+      s0 = document.getElementsByTagName("script")[0];
+    s1.async = true;
+    s1.src = "https://embed.tawk.to/6601d893a0c6737bd12482c7/1hprjc0lb";
+    s1.charset = "UTF-8";
+    s1.setAttribute("crossorigin", "*");
+    s0.parentNode.insertBefore(s1, s0);
+  })();
+</script>
+<!--End of Tawk.to Script-->
+
+<!-- #HOME SECTION -->
+<section
+  id="home"
+  class="container-fluid text-center py-5 bg-success bg-opacity-10"
+>
+  <div class="row align-items-center py-3">
+    <div class="col-lg-6 offset-lg-1">
+      <div class="text-lg-start p-3">
+        <p class="lead mb-2">Welcome to,</p>
+        <h1 class="display-6 fw-bold mb-3 text-info">
+          {{ company_name | title }} Water Services
+        </h1>
+        <p class="lead mb-4">
+          Dive into a world of clean, refreshing water solutions designed to
+          quench your thirst for sustainability.
+        </p>
+        <a href="#services" class="btn btn-lg btn-info mt-4"
+          >Explore Our Services</a
+        >
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      <img
+        src="{{ url_for('static', filename='images/landing/image_2.png') }}"
+        alt="Home section image"
+        class="img-fluid"
+        style="max-width: 100%; height: 400px"
+      />
+    </div>
+  </div>
+</section>
+
+<!-- #ABOUT SECTION -->
+<section id="about" class="container-fluid py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-5 text-center">
+        <img
+          src="{{ url_for('static', filename='images/landing/about-1.png') }}"
+          alt="About section image"
+          class="img-fluid rounded"
+          style="max-width: 100%; height: auto"
+        />
+      </div>
+
+      <div class="col-lg-7">
+        <div class="text-center text-lg-start p-3">
+          <h2 class="h1 mt-5 mb-4 text-primary">
+            About {{ company_name | title }}
+          </h2>
+          <p class="lead">
+            {{ company_name | title }} is dedicated to providing clean and
+            accessible water solutions for everyone, ensuring a healthier and
+            more sustainable future.
+          </p>
+          <p>
+            Our mission is to deliver innovative and eco-friendly water
+            management systems while upholding principles of integrity and
+            community engagement.
+          </p>
+          <p>
+            Join us in our journey toward a brighter, water-secure future for
+            generations to come.
+          </p>
+          <a href="#how-it-works" class="btn btn-outline-primary">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- #SERVICES SECTION -->
+<section id="services" class="container-fluid py-5 bg-success bg-opacity-10">
+  <div class="container mb-5">
+    <h2 class="h1 mt-4 mb-5 text-center text-primary">Our Services</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col">
+        <div class="card border-0 shadow bg-danger bg-opacity-50">
+          <div class="card-body text-center">
+            <h5 class="card-title">Water Supply</h5>
+            <p class="card-text">
+              Reliable and continuous water supply to meet your daily personal
+              and household needs.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card border-0 shadow bg-warning bg-opacity-50">
+          <div class="card-body text-center">
+            <h5 class="card-title">Water Quality Testing</h5>
+            <p class="card-text">
+              Ensuring the purity and safety of the water we provide through
+              regular testing.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card border-0 shadow bg-info bg-opacity-50">
+          <div class="card-body text-center">
+            <h5 class="card-title">Community Outreach</h5>
+            <p class="card-text">
+              Engaging with the community to promote water conservation and
+              education.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- #HOW IT WORKS SECTION -->
+<section id="how-it-works" class="container-fluid py-5">
+  <h2 class="h1 text-center mt-4 mb-5 text-primary">How It Works</h2>
+  <div class="container">
+    <!-- Water Piping -->
+    <div class="row mt-3 mb-3 align-items-center">
+      <div class="col-lg-5 col-md-6 order-md-2">
+        <img
+          src="{{ url_for('static', filename='images/landing/how-it-works/img-1.png') }}"
+          class="card-img-top img-fluid"
+          alt="Water Piping"
+        />
+      </div>
+      <div class="col-lg-7 col-md-6 order-md-1 mt-md-0 mt-3">
+        <h3 class="card-title mb-3">Water Piping to Homes</h3>
+        <p class="card-text">
+          Our water piping system ensures a reliable and continuous supply of
+          clean water directly to your home's taps. Here's how it works:
+        </p>
+        <ul class="list-unstyled">
+          <li>
+            Installation of high-quality pipes from the water source to your
+            home
+          </li>
+          <li>Regular maintenance to ensure optimal performance</li>
+          <li>24/7 monitoring to detect and address any issues promptly</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottled Water -->
+    <div class="row mt-3 mb-3 align-items-center">
+      <div class="col-lg-5 col-md-6">
+        <img
+          src="{{ url_for('static', filename='images/landing/how-it-works/img-2.png') }}"
+          class="card-img-top img-fluid"
+          alt="Bottled Water"
+        />
+      </div>
+      <div class="col-lg-7 col-md-6 mt-md-0 mt-3">
+        <h3 class="card-title mb-3">Bottled (Packed) Water</h3>
+        <p class="card-text">
+          Our bottled water service provides convenient access to clean and safe
+          drinking water. Here's how it works:
+        </p>
+        <ul class="list-unstyled">
+          <li>Purification of water to meet strict quality standards</li>
+          <li>Bottling and packaging in eco-friendly materials</li>
+          <li>Delivery to your doorstep at your preferred schedule</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Water Can Refilling -->
+    <div class="row mt-3 mb-3 align-items-center">
+      <div class="col-lg-5 col-md-6 order-md-2">
+        <img
+          src="{{ url_for('static', filename='images/landing/how-it-works/img-3.png') }}"
+          class="card-img-top img-fluid"
+          alt="Water Can Refilling"
+        />
+      </div>
+      <div class="col-lg-7 col-md-6 order-md-1 mt-md-0 mt-3">
+        <h3 class="card-title mb-3">Water Can Refilling</h3>
+        <p class="card-text">
+          Refilling your home consumption water cans is easy and hassle-free
+          with our service. Here's how it works:
+        </p>
+        <ul class="list-unstyled">
+          <li>Bring your empty water cans to our designated refill station</li>
+          <li>
+            Our staff will sanitize the cans and refill them with purified water
+          </li>
+          <li>Secure packaging to prevent spillage during transportation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- #CONTACT SECTION -->
+<section id="contact" class="container-fluid py-5 bg-light">
+  <div class="container p-3">
+    <h2 class="text-center h1 text-primary mt-2 mb-5">Get in Touch</h2>
+    <div class="row">
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="contact-details p-4 p-lg-5 rounded">
+          <h4 class="fw-bold text-info mb-4">Contact Information</h4>
+          <div class="contact-info">
+            <p class="lead">Visit us at:</p>
+            <address class="fst-italics text-muted mb-4">
+              {{ company_name | title }}<br />
+              {{ company_address }}
+            </address>
+            <p class="mb-3 text-muted">+{{ contact_number }}</p>
+            <p class="mb-0 text-muted">{{ company_email }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8">
+        <div class="contact-form p-4 p-lg-5 rounded">
+          <form id="contactForm">
+            <div id="flashMessages"></div>
+            <!-- CSRF Token -->
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+            <div class="mb-3">
+              {{ form.name.label }} {{ form.name(class="form-control",
+              placeholder="Write your full name") }}
+            </div>
+            <div class="mb-3">
+              {{ form.email.label }} {{ form.email(class="form-control",
+              placeholder="Write your email address") }}
+            </div>
+            <div class="mb-3">
+              {{ form.message.label }} {{ form.message(class="form-control",
+              placeholder="Write your message here", rows=5) }}
+            </div>
+            <a
+              type="button"
+              id="sendMessageBtn"
+              class="btn btn-outline-primary"
+            >
+              Send Message
+            </a>
+          </form>
+
+          <script>
+            document
+              .getElementById("sendMessageBtn")
+              .addEventListener("click", function () {
+                var form = document.getElementById("contactForm");
+                var formData = new FormData(form);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "{{ url_for('landing.submit_message') }}");
+                xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token() }}");
+                xhr.onreadystatechange = function () {
+                  if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                      var response = JSON.parse(xhr.responseText);
+                      var flashDiv = document.getElementById("flashMessages");
+
+                      // Remove existing messages
+                      while (flashDiv.firstChild) {
+                        flashDiv.removeChild(flashDiv.firstChild);
+                      }
+
+                      var messageDiv = document.createElement("div");
+                      messageDiv.className = "alert alert-success";
+                      messageDiv.textContent = response.message;
+                      flashDiv.appendChild(messageDiv);
+
+                      // Clear form fields
+                      form.reset();
+                    } else {
+                      var errorDiv = document.createElement("div");
+                      errorDiv.className = "alert alert-danger";
+                      errorDiv.textContent =
+                        "An error occurred. Please try again.";
+                      var flashDiv = document.getElementById("flashMessages");
+
+                      // Remove existing messages
+                      while (flashDiv.firstChild) {
+                        flashDiv.removeChild(flashDiv.firstChild);
+                      }
+
+                      flashDiv.appendChild(errorDiv);
+                    }
+                  }
+                };
+                xhr.send(formData);
+              });
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- #TESTIMONIALS SECTION -->
+<section id="testimonials" class="container-fluid py-5 bg-info bg-opacity-10">
+  <div class="container">
+    <h2 class="h1 text-center text-primary mt-4 mb-5">Testimonials</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-5">
+      <!-- Testimonial 1 -->
+      <div class="col mb-3">
+        <div class="card bg-transparent border-0 shadow-sm h-100">
+          <div class="card-body">
+            <p class="card-text">
+              "Thanks to {{ company_name | title }}, our community now has
+              access to clean water every day. Their innovative solutions have
+              transformed our lives."
+            </p>
+          </div>
+          <div
+            class="card-footer border-0 d-flex align-items-center justify-content-between"
+          >
+            <div class="profile-image">
+              <img
+                src="{{ url_for('static', filename='images/landing/testimonials/img-1.png') }}"
+                alt="profile image"
+                class="rounded-circle"
+                style="width: 40px; height: 40px"
+              />
+            </div>
+            <div class="text-muted mb-0 ms-2">John Doe</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="col mb-3">
+        <div class="card bg-transparent border-0 shadow-sm h-100">
+          <div class="card-body">
+            <p class="card-text">
+              "The impact of {{ company_name | title }}'s water solutions on our
+              community cannot be overstated. We no longer face water scarcity,
+              thanks to their exceptional efforts."
+            </p>
+          </div>
+          <div
+            class="card-footer border-0 d-flex align-items-center justify-content-between"
+          >
+            <div class="profile-image">
+              <img
+                src="{{ url_for('static', filename='images/landing/testimonials/img-2.png') }}"
+                alt="profile image"
+                class="rounded-circle"
+                style="width: 40px; height: 40px"
+              />
+            </div>
+            <div class="text-muted mb-0 ms-2">Jane Smith</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="col mb-3">
+        <div class="card bg-transparent border-0 shadow-sm h-100">
+          <div class="card-body">
+            <p class="card-text">
+              "With {{ company_name | title }}, our community now enjoys clean
+              water every day. Their dedication to excellence has truly made a
+              difference."
+            </p>
+          </div>
+          <div
+            class="card-footer border-0 d-flex align-items-center justify-content-between"
+          >
+            <div class="profile-image">
+              <img
+                src="{{ url_for('static', filename='images/landing/testimonials/img-3.png') }}"
+                alt="profile image"
+                class="rounded-circle"
+                style="width: 40px; height: 40px"
+              />
+            </div>
+            <div class="text-muted mb-0 ms-2">Alex Johnson</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
