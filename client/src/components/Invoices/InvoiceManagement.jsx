@@ -82,7 +82,7 @@ const InvoiceManagement = ({
           <thead>
             <tr>
               <th>Status</th>
-              <th>User ID</th>
+              {/*<th>User ID</th>*/}
               <th>Date</th>
               <th>Full Name</th>
               <th>Consumption</th>
@@ -101,7 +101,7 @@ const InvoiceManagement = ({
                     className={`records-status ${invoice.payment_status}-bg`}
                   ></div>
                 </td>
-                <td>{invoice.user_id}</td>
+                {/*<td>{invoice.user_id}</td>*/}
                 <td>
                   <div className="records-date-info">
                     <span className="records-month">

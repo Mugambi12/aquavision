@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import "./AddRevenue.css";
 import {
   fetchUnpaidInvoice,
   fetchActiveUsersList,
 } from "../../resources/apiRevenue";
+import "./AddRevenue.css";
 
 const AddRevenue = ({ onSubmit }) => {
   const {
