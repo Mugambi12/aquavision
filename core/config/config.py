@@ -10,8 +10,8 @@ class Config:
     SECRET_KEY = config('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     CSRF_SESSION_KEY = config('CSRF_SESSION_KEY')
-    PORT = config('PORT')
-    HOST = config('HOST')
+    PORT = config('PORT', default=5000, cast=int)
+    HOST = config('HOST', default='localhost')
 
 class DevelopmentConfig(Config):
     DEBUG = True
@@ -41,4 +41,3 @@ class MailConfig:
     MAIL_PASSWORD = config('MAIL_PASSWORD')
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
-    

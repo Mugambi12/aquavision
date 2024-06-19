@@ -1,2 +1,4 @@
 venv/
 __pycache__/
+dev.sqlite3-shm
+dev.sqlite3-wal
