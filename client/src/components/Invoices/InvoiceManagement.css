@@ -387,7 +387,7 @@
   display: flex;
   justify-content: flex-end;
   position: fixed;
-  right: var(--radius-12);
+  right: var(--radius-8);
   bottom: var(--radius-12);
 }
 
@@ -398,13 +398,15 @@
   padding: var(--radius-8);
   color: var(--cultured);
   background: var(--pacific-blue);
-  border-radius: 50% 50% var(--radius-6) var(--radius-6);
+  border-radius: var(--radius-16) var(--radius-16) var(--radius-3)
+    var(--radius-3);
   box-shadow: var(--shadow-1);
   cursor: pointer;
 }
 
 .records-add-invoice .material-symbols-rounded {
   font-size: var(--fs-1);
+  padding-left: var(--radius-3);
 }
 
 .records-invoice-label {
@@ -416,10 +418,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  .records-add-invoice-container {
-    padding: 20px 10px;
-  }
-
   .records-add-invoice {
     padding: 5px;
   }

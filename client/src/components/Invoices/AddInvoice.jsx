@@ -1,23 +1,17 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
+import { useForm } from "react-hook-form";
 import "./AddInvoice.css";
 
 const AddInvoiceForm = ({ onSubmit, activeHousesData }) => {
-  const [selectedSection, setSelectedSection] = useState("");
-  const [selectedHouseNumber, setSelectedHouseNumber] = useState("");
-  const [meterReading, setMeterReading] = useState("");
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
-  console.log("This is the active houses data:", activeHousesData);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const newInvoice = {
-      house_section: selectedSection,
-      house_number: selectedHouseNumber,
-      current_reading: meterReading,
-    };
-    onSubmit(newInvoice);
-  };
+  const selectedSection = watch("house_section", "");
 
   const houseSections = useMemo(
     () => activeHousesData.map((house) => house.house_section),
@@ -31,15 +25,26 @@ const AddInvoiceForm = ({ onSubmit, activeHousesData }) => {
     return section ? JSON.parse(section.house_number) : [];
   }, [selectedSection, activeHousesData]);
 
+  const onSubmitForm = (data) => {
+    onSubmit({
+      house_section: data.house_section,
+      house_number: data.house_number,
+      current_reading: data.current_reading,
+    });
+  };
+
   return (
     <div className="add-invoice-container">
       <h2 className="modal-title">Add New Invoice</h2>
-      <form onSubmit={handleSubmit} className="add-invoice-form">
+      <form onSubmit={handleSubmit(onSubmitForm)} className="add-invoice-form">
         <label>House Section:</label>
         <select
-          value={selectedSection}
-          onChange={(e) => setSelectedSection(e.target.value)}
-          required
+          {...register("house_section", { required: true })}
+          onChange={(e) => {
+            setValue("house_section", e.target.value);
+            setValue("house_number", "");
+          }}
+          defaultValue=""
         >
           <option value="" disabled>
             Select section
@@ -50,13 +55,15 @@ const AddInvoiceForm = ({ onSubmit, activeHousesData }) => {
             </option>
           ))}
         </select>
+        {errors.house_section && (
+          <p className="error">This field is required</p>
+        )}
 
         <label>House Number:</label>
         <select
-          value={selectedHouseNumber}
-          onChange={(e) => setSelectedHouseNumber(e.target.value)}
-          required
+          {...register("house_number", { required: true })}
           disabled={!selectedSection}
+          defaultValue=""
         >
           <option value="" disabled>
             Select number
@@ -67,14 +74,17 @@ const AddInvoiceForm = ({ onSubmit, activeHousesData }) => {
             </option>
           ))}
         </select>
+        {errors.house_number && <p className="error">This field is required</p>}
 
         <label>Meter Reading:</label>
         <input
           type="number"
-          value={meterReading}
-          onChange={(e) => setMeterReading(e.target.value)}
-          required
+          placeholder="Enter meter reading"
+          {...register("current_reading", { required: true })}
         />
+        {errors.current_reading && (
+          <p className="error">This field is required</p>
+        )}
 
         <button type="submit">Add Invoice</button>
       </form>
