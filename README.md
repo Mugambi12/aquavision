@@ -26,16 +26,16 @@ Here are some visual examples of the system's key features:
 
 ### Dashboard
 
-![Dashboard](./wms/core/frontend/static/images/readme/dashboard.png)
+![Dashboard](./frontend/static/images/readme/dashboard.png)
 _The system dashboard provides an overview of water usage and management activities._
 
 ### Mobile Application
 
-![Mobile Home](./wms/core/frontend/static/images/readme/mobile-1.png)
+![Mobile Home](./frontend/static/images/readme/mobile-1.png)
 
 _The mobile application's home screen offers quick access to essential controls and information._
 
-![Mobile Detail](./wms/core/frontend/static/images/readme/mobile-2.png)
+![Mobile Detail](./frontend/static/images/readme/mobile-2.png)
 
 _Users can access detailed information and manage specific settings through the mobile app._
 
@@ -118,8 +118,7 @@ Ensure you have the following prerequisites installed on your system:
 
 5. **Contribute (optional):** Contributions are welcome! Fork the repository, make changes, and submit a pull request.
 
-
-### licence 
+### licence
 
 - Licenced under MIT
 
