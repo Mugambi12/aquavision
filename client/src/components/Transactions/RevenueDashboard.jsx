@@ -87,7 +87,7 @@ const RevenueCharts = ({
     <div className="charts-revenue-data-filter">
       {/* Year filter */}
       <div className="filter">
-        <label htmlFor="filter">Year:</label>
+        <label htmlFor="date-filter">Year:</label>
         <select
           id="date-filter"
           value={filters.year}
@@ -104,7 +104,7 @@ const RevenueCharts = ({
 
       {/* Status filter */}
       <div className="filter">
-        <label htmlFor="filter">Status:</label>
+        <label htmlFor="status-filter">Status:</label>
         <select
           id="status-filter"
           value={filters.status}
@@ -199,125 +199,136 @@ const RevenueTableContainer = ({
   openDeleteRevenueModal,
   openEditRevenueModal,
   openRefundRevenueModal,
-}) => (
-  <div className="revenue-table-container">
-    <table id="revenueTable" className="revenue-table display nowrap">
-      <thead>
-        <tr>
-          <th>#ID</th>
-          <th>Date</th>
-          <th>Customer Name</th>
-          <th>Transaction ID</th>
-          <th>Payment Method</th>
-          <th>Amount</th>
-          <th>Status</th>
-          <th>Options</th>
-        </tr>
-      </thead>
-      <tbody>
-        {revenue.map((rev) => (
-          <tr key={rev._id}>
-            {/* Table rows */}
-            <td
-              className={`revenue-table-row ${
-                rev.payment_status === "Cancelled" ? "Cancelled" : ""
-              }`}
-            >
-              #{rev._id}
-            </td>
-            <td
-              className={`revenue-table-row ${
-                rev.payment_status === "Cancelled" ? "Cancelled" : ""
-              }`}
-            >
-              {new Date(rev.payment_date).toLocaleDateString()}
-            </td>
-            <td
-              className={`revenue-table-row ${
-                rev.payment_status === "Cancelled" ? "Cancelled" : ""
-              }`}
-            >
-              {rev.full_name}
-            </td>
-            <td
-              className={`revenue-table-row ${
-                rev.payment_status === "Cancelled" ? "Cancelled" : ""
-              }`}
-            >
-              {rev.transaction_id}
-            </td>
-            <td
-              className={`revenue-table-row ${
-                rev.payment_status === "Cancelled" ? "Cancelled" : ""
-              }`}
-            >
-              {rev.payment_method}
-            </td>
-            <td
-              className={`revenue-table-row ${
-                rev.payment_status === "Cancelled" ? "Cancelled" : ""
-              }`}
-            >
-              {rev.amount.toLocaleString("en-US", {
-                style: "currency",
-                currency: "USD",
-              })}
-            </td>
-            <td
-              className={`revenue-table-row ${
-                rev.payment_status === "Cancelled" ? "Cancelled" : ""
-              }`}
-            >
-              {rev.payment_status}
-            </td>
-            <td
-              className={`revenue-table-row options ${
-                openDropdownId === rev._id ? "active" : ""
-              }`}
-            >
-              <span
-                className="material-symbols-rounded"
-                onClick={() => toggleDropdown(rev._id)}
-              >
-                {openDropdownId === rev._id ? "close" : "more_vert"}
-              </span>
-              {openDropdownId === rev._id && (
-                <div className="revenue-options-dropdown">
-                  {/* Dropdown options */}
-                  <button
-                    className="revenue-option"
-                    onClick={() => openEditRevenueModal(rev)}
-                  >
-                    <span className="material-symbols-rounded edit">edit</span>
-                    <span className="dropdown-option-label edit">Edit</span>
-                  </button>
-                  <button
-                    className="revenue-option"
-                    onClick={() => openRefundRevenueModal(rev)}
-                  >
-                    <span className="material-symbols-rounded refund">
-                      money_off
-                    </span>
-                    <span className="dropdown-option-label refund">Refund</span>
-                  </button>
-                  <button
-                    className="revenue-option"
-                    onClick={() => openDeleteRevenueModal(rev)}
-                  >
-                    <span className="material-symbols-rounded delete">
-                      delete
-                    </span>
-                    <span className="dropdown-option-label delete">Delete</span>
-                  </button>
-                </div>
-              )}
-            </td>
+}) => {
+  // Sort the revenue array by payment_date in descending order
+  const sortedRevenue = [...revenue].sort(
+    (a, b) => new Date(b.payment_date) - new Date(a.payment_date)
+  );
+
+  return (
+    <div className="revenue-table-container">
+      <table id="revenueTable" className="revenue-table display nowrap">
+        <thead>
+          <tr>
+            <th>#ID</th>
+            <th>Date</th>
+            <th>Customer Name</th>
+            <th>Transaction ID</th>
+            <th>Payment Method</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Options</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-);
+        </thead>
+        <tbody>
+          {sortedRevenue.map((rev) => (
+            <tr key={rev._id}>
+              <td
+                className={`revenue-table-row ${
+                  rev.payment_status === "Cancelled" ? "Cancelled" : ""
+                }`}
+              >
+                #{rev._id}
+              </td>
+              <td
+                className={`revenue-table-row ${
+                  rev.payment_status === "Cancelled" ? "Cancelled" : ""
+                }`}
+              >
+                {new Date(rev.payment_date).toLocaleDateString()}
+              </td>
+              <td
+                className={`revenue-table-row ${
+                  rev.payment_status === "Cancelled" ? "Cancelled" : ""
+                }`}
+              >
+                {rev.full_name}
+              </td>
+              <td
+                className={`revenue-table-row ${
+                  rev.payment_status === "Cancelled" ? "Cancelled" : ""
+                }`}
+              >
+                {rev.transaction_id}
+              </td>
+              <td
+                className={`revenue-table-row ${
+                  rev.payment_status === "Cancelled" ? "Cancelled" : ""
+                }`}
+              >
+                {rev.payment_method}
+              </td>
+              <td
+                className={`revenue-table-row ${
+                  rev.payment_status === "Cancelled" ? "Cancelled" : ""
+                }`}
+              >
+                {rev.amount.toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                })}
+              </td>
+              <td
+                className={`revenue-table-row ${
+                  rev.payment_status === "Cancelled" ? "Cancelled" : ""
+                }`}
+              >
+                {rev.payment_status}
+              </td>
+              <td
+                className={`revenue-table-row options ${
+                  openDropdownId === rev._id ? "active" : ""
+                }`}
+              >
+                <span
+                  className="material-symbols-rounded"
+                  onClick={() => toggleDropdown(rev._id)}
+                >
+                  {openDropdownId === rev._id ? "close" : "more_vert"}
+                </span>
+                {openDropdownId === rev._id && (
+                  <div className="revenue-options-dropdown">
+                    <button
+                      className="revenue-option"
+                      onClick={() => openEditRevenueModal(rev)}
+                    >
+                      <span className="material-symbols-rounded edit">
+                        edit
+                      </span>
+                      <span className="dropdown-option-label edit">Edit</span>
+                    </button>
+                    <button
+                      className="revenue-option"
+                      onClick={() => openRefundRevenueModal(rev)}
+                    >
+                      <span className="material-symbols-rounded refund">
+                        money_off
+                      </span>
+                      <span className="dropdown-option-label refund">
+                        Refund
+                      </span>
+                    </button>
+                    <button
+                      className="revenue-option"
+                      onClick={() => openDeleteRevenueModal(rev)}
+                    >
+                      <span className="material-symbols-rounded delete">
+                        delete
+                      </span>
+                      <span className="dropdown-option-label delete">
+                        Delete
+                      </span>
+                    </button>
+                  </div>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
 // Main component for the RevenueDashboard
 const RevenueDashboard = ({
@@ -335,10 +346,14 @@ const RevenueDashboard = ({
 
   // Update data when revenue or filters change
   useEffect(() => {
-    const years = new Set(
-      revenue.map((rev) => new Date(rev.payment_date).getFullYear().toString())
-    );
-    setAvailableYears(["", ...Array.from(years)]);
+    const years = Array.from(
+      new Set(
+        revenue.map((rev) =>
+          new Date(rev.payment_date).getFullYear().toString()
+        )
+      )
+    ).sort(); // Ensure years are unique and sorted
+    setAvailableYears(["", ...years]);
 
     // Transform data based on filters
     const { lineChartData, pieChartData } = transformData(revenue, filters);
