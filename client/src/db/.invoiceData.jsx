@@ -204,7 +204,7 @@ const invoiceData = [
   // Add more invoices as needed
 ];
 
-const registeredActiveHouses = [
+const activeHousesData = [
   {
     house_section: "Osupuko",
     house_number: [1, 2, 3, 4, 5],
@@ -223,4 +223,4 @@ const registeredActiveHouses = [
   },
 ];
 
-export { invoiceData, registeredActiveHouses };
+export { invoiceData, activeHousesData };

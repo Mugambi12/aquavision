@@ -7,10 +7,9 @@ import AddInvoice from "../components/Invoices/AddInvoice";
 import ViewInvoice from "../components/Invoices/ViewInvoice";
 import DeleteInvoice from "../components/Invoices/DeleteInvoice";
 import ModalWrapper from "../components/ModalWrapper/ModalWrapper";
-import { registeredActiveHouses } from "../db/.invoiceData";
 import Spinner from "../components/Spinner/Spinner";
-
 import {
+  fetchActiveHouses,
   fetchInvoices,
   postInvoice,
   deleteInvoice,
@@ -18,36 +17,35 @@ import {
 } from "../resources/apiInvoices";
 
 const InvoiceRecords = () => {
+  const [loading, setLoading] = useState(false);
   const [invoicesData, setInvoicesData] = useState([]);
-  /*const [Filter, setFilter] = useState("All");*/
-  /*const [filteredData, setFilteredData] = useState([]);*/
+  const [activeHousesData, setActiveHousesData] = useState([]);
   const [processing, setProcessing] = useState("");
   const [selectedInvoice, setSelectedInvoice] = useState(null);
   const [isPostModalOpen, setIsPostModalOpen] = useState(false);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     callApiAndGetInvoices();
+    callApiAndFetchActiveHouses();
   }, []);
 
-  /*useEffect(() => {
-    let newFilteredData = invoicesData;
-    if (Filter === "Paid") {
-      newFilteredData = invoicesData.filter(
-        (invoice) => invoice.status.toLowerCase() === "paid"
-      );
-    } else if (Filter === "Unpaid") {
-      newFilteredData = invoicesData.filter(
-        (invoice) => invoice.status.toLowerCase() === "unpaid"
-      );
+  const callApiAndFetchActiveHouses = async () => {
+    try {
+      setLoading(true);
+      const data = await fetchActiveHouses();
+      setActiveHousesData(data);
+    } catch (error) {
+      console.error("Error fetching active houses:", error);
+    } finally {
+      setLoading(false);
     }
-    setFilteredData(newFilteredData);
-  }, [Filter, invoicesData]);*/
+  };
 
   const callApiAndGetInvoices = async () => {
     try {
+      setLoading(true);
       const data = await fetchInvoices();
       setInvoicesData(data);
     } catch (error) {
@@ -59,6 +57,7 @@ const InvoiceRecords = () => {
 
   const callApiAndPostInvoice = async (newInvoice) => {
     try {
+      setProcessing(true);
       await postInvoice(newInvoice);
       callApiAndGetInvoices();
 
@@ -66,6 +65,7 @@ const InvoiceRecords = () => {
     } catch (error) {
       console.error("Error adding invoice:", error);
     } finally {
+      setProcessing(false);
       setIsPostModalOpen(false);
     }
   };
@@ -125,8 +125,6 @@ const InvoiceRecords = () => {
           <div className="main-container">
             <InvoiceManagement
               data={invoicesData}
-              /*Filter={Filter}*/
-              /*setFilter={setFilter}*/
               processing={processing}
               handlePayment={callApiAndProcessInvoicePayment}
               openPostModal={openPostModal}
@@ -144,7 +142,7 @@ const InvoiceRecords = () => {
       >
         <AddInvoice
           onSubmit={callApiAndPostInvoice}
-          registeredActiveHouses={registeredActiveHouses}
+          activeHousesData={activeHousesData}
         />
       </ModalWrapper>
       <ModalWrapper

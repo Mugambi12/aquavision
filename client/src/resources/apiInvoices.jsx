@@ -1,7 +1,22 @@
 // src/api/apiInvoices.js
 
+const BASE_URL = "/api/invoices";
+
+const handleFetchResponse = async (response) => {
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "An error occurred");
+  }
+  return response.json();
+};
+
+export const fetchActiveHouses = async () => {
+  const response = await fetch(`${BASE_URL}/active-houses`);
+  return handleFetchResponse(response);
+};
+
 export const fetchInvoices = async () => {
-  const response = await fetch("/api/invoices/get");
+  const response = await fetch("/api/invoices/invoice-list");
   if (!response.ok) {
     throw new Error("Failed to fetch invoices");
   }

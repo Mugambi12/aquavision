@@ -1,18 +1,15 @@
 import React, { useState, useMemo } from "react";
 import "./AddInvoice.css";
 
-const AddInvoiceForm = ({ onSubmit, registeredActiveHouses }) => {
+const AddInvoiceForm = ({ onSubmit, activeHousesData }) => {
   const [selectedSection, setSelectedSection] = useState("");
   const [selectedHouseNumber, setSelectedHouseNumber] = useState("");
   const [meterReading, setMeterReading] = useState("");
 
+  console.log("This is the active houses data:", activeHousesData);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    //const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    //const timestamp = new Date().toLocaleString("en-US", {
-    //  timeZone: userTimezone,
-    //});
 
     const newInvoice = {
       house_section: selectedSection,
@@ -23,16 +20,16 @@ const AddInvoiceForm = ({ onSubmit, registeredActiveHouses }) => {
   };
 
   const houseSections = useMemo(
-    () => registeredActiveHouses.map((house) => house.house_section),
-    []
+    () => activeHousesData.map((house) => house.house_section),
+    [activeHousesData]
   );
 
   const houseNumbers = useMemo(() => {
-    const section = registeredActiveHouses.find(
+    const section = activeHousesData.find(
       (house) => house.house_section === selectedSection
     );
-    return section ? section.house_number : [];
-  }, [selectedSection]);
+    return section ? JSON.parse(section.house_number) : [];
+  }, [selectedSection, activeHousesData]);
 
   return (
     <div className="add-invoice-container">

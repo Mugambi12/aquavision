@@ -26,3 +26,10 @@ invoice_serializer = api.model(
         'deleted_at': fields.DateTime(),
     }
 )
+
+active_houses_serializer = api.model(
+  'User', {
+    'house_section': fields.String(),
+    'house_number': fields.String()
+  }
+)

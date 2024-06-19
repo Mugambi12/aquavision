@@ -3,12 +3,48 @@ from flask_restx import Namespace, Resource, fields
 from ..models.users import User
 from ..models.invoice import Invoice
 from ..models.settings import Settings
-from ..schemas.invoice_serializer import invoice_serializer
+from ..schemas.invoice_serializer import invoice_serializer, active_houses_serializer
 import logging
 
 api = Namespace('invoices', description='Invoice related operations')
 
-@api.route('/get')
+@api.route('/active-houses')
+class ActiveHousesResource(Resource):
+    @api.marshal_with(active_houses_serializer)
+    def get(self):
+        try:
+            users = User.get_all()
+            if not users:
+                abort(404, "No users found")
+
+            active_houses = {}
+
+            for user in users:
+                if user.is_active:
+                    house_section = user.house_section
+                    house_number = int(user.house_number)
+                    
+                    if house_section not in active_houses:
+                        active_houses[house_section] = []
+                    
+                    active_houses[house_section].append(house_number)
+
+            # Transform the dictionary into the desired list format
+            result = [
+                {
+                    'house_section': section,
+                    'house_number': sorted(numbers)
+                }
+                for section, numbers in active_houses.items()
+            ]
+
+            return result, 200
+        
+        except Exception as e:
+            logging.error(f"An error occurred: {e}")
+            abort(500, "An internal error occurred")
+
+@api.route('/invoice-list')
 class InvoiceListResource(Resource):
     @api.marshal_with(invoice_serializer)
     def get(self):
