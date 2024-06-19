@@ -7,62 +7,72 @@ import PeopleManagement from "../components/People/PeopleManagement";
 import Sidebar from "../components/People/Sidebar";
 import AddUserForm from "../components/People/AddUserForm";
 import EditUserForm from "../components/People/EditUserForm";
-
-// Import your spinner component here
 import Spinner from "../components/Spinner/Spinner";
 
+import { fetchHouseSections, getUsers } from "../resources/apiPeople";
+
 const People = () => {
-  const [people, setPeople] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [peopleData, setPeopleData] = useState([]);
+  const [houseSections, setHouseSections] = useState([]);
+  const [editUserData, setEditUserData] = useState(null);
   const [selectedPerson, setSelectedPerson] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [editUserData, setEditUserData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const apiEndPoint = "https://fedskillstest.coalitiontechnologies.workers.dev";
-  const credentials = "Y29hbGl0aW9uOnNraWxscy10ZXN0";
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(apiEndPoint, {
-          headers: {
-            Authorization: `Basic ${credentials}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        const transformedPeople = data.map((person, index) => ({
-          id: index + 1,
-          fullName: person.name,
-          gender: person.gender,
-          age: person.age,
-          profileImage: person.profile_picture,
-          dateOfBirth: person.date_of_birth,
-          phoneNumber: person.phone_number,
-          emergencyContact: person.emergency_contact,
-          insuranceType: person.insurance_type,
-          diagnosisHistory: person.diagnosis_history,
-          diagnosticList: person.diagnostic_list,
-          labResults: person.lab_results,
-        }));
-
-        setPeople(transformedPeople);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching people data:", error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
+    callApiAndGetUsers();
+    callApiAndGetHouseSections();
   }, []);
+
+  const callApiAndGetUsers = async () => {
+    try {
+      setIsLoading(true);
+      const data = await getUsers();
+
+      const transformedPeople = data.map((person, index) => ({
+        id: index + 1,
+        fullName: person.name,
+        gender: person.gender,
+        age: person.age,
+        profileImage: person.profile_picture,
+        dateOfBirth: person.date_of_birth,
+        phoneNumber: person.phone_number,
+        emergencyContact: person.emergency_contact,
+        insuranceType: person.insurance_type,
+        diagnosisHistory: person.diagnosis_history,
+        diagnosticList: person.diagnostic_list,
+        labResults: person.lab_results,
+      }));
+
+      setPeopleData(transformedPeople);
+    } catch (error) {
+      console.error("Error fetching people data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const callApiAndGetHouseSections = async () => {
+    try {
+      const data = await fetchHouseSections();
+      setHouseSections(data);
+    } catch (error) {
+      console.error("Error fetching house sections:", error);
+    }
+  };
+
+  const callApiAndPostUser = (newUser) => {
+    try {
+      console.log("New user:", newUser);
+      callApiAndGetUsers();
+    } catch (error) {
+      console.error("Error posting new user:", error);
+    } finally {
+      setIsCreateModalOpen(false);
+    }
+  };
 
   const handlePersonClick = (person) => {
     setSelectedPerson(person);
@@ -71,12 +81,6 @@ const People = () => {
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const handleAddUser = (newUser) => {
-    setPeople([...people, newUser]);
-    console.log("New user:", newUser);
-    setIsModalOpen(false);
   };
 
   const handleEditProfileClick = (person) => {
@@ -90,30 +94,35 @@ const People = () => {
         <title>People - Dakoke Springs</title>
       </Helmet>
       <Navbar />
-      {isLoading ? ( // Render spinner if loading
+      {isLoading ? (
         <Spinner />
       ) : (
-        <div className="main-container">
-          <Sidebar
-            people={people}
-            onPersonClick={handlePersonClick}
-            setIsModalOpen={setIsModalOpen}
-            isSidebarOpen={isSidebarOpen}
-            toggleSidebar={toggleSidebar}
-          />
-          <PeopleManagement
-            selectedPerson={selectedPerson}
-            onEditProfileClick={handleEditProfileClick}
-          />
-        </div>
+        <>
+          <div className="main-container">
+            <Sidebar
+              people={peopleData}
+              onPersonClick={handlePersonClick}
+              setIsCreateModalOpen={setIsCreateModalOpen}
+              isSidebarOpen={isSidebarOpen}
+              toggleSidebar={toggleSidebar}
+            />
+            <PeopleManagement
+              selectedPerson={selectedPerson}
+              onEditProfileClick={handleEditProfileClick}
+            />
+          </div>
+          <Footer />
+        </>
       )}
-      <Footer />
 
       <ModalWrapper
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
+        isOpen={isCreateModalOpen}
+        onRequestClose={() => setIsCreateModalOpen(false)}
       >
-        <AddUserForm onSubmit={handleAddUser} />
+        <AddUserForm
+          onSubmit={callApiAndPostUser}
+          houseSections={houseSections}
+        />
       </ModalWrapper>
 
       <ModalWrapper

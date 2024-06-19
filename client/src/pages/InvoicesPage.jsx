@@ -17,7 +17,7 @@ import {
   processInvoicePayment,
 } from "../resources/apiInvoices";
 
-const Records = () => {
+const InvoiceRecords = () => {
   const [invoicesData, setInvoicesData] = useState([]);
   /*const [Filter, setFilter] = useState("All");*/
   /*const [filteredData, setFilteredData] = useState([]);*/
@@ -166,4 +166,4 @@ const Records = () => {
   );
 };
 
-export default Records;
+export default InvoiceRecords;

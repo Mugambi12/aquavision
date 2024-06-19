@@ -21,3 +21,10 @@ user_serializer = api.model(
     'deleted_at': fields.DateTime()
   }
 )
+
+house_section_serializer = api.model(
+  'HouseSection', {
+    '_id': fields.Integer(),
+    'services': fields.Raw(),
+  }
+)

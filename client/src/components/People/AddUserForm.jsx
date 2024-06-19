@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "./AddUserForm.css";
 
-const houseSections = ["A", "B", "C", "D", "E", "F"];
-
-const AddUserForm = ({ onSubmit }) => {
+const AddUserForm = ({ onSubmit, houseSections }) => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -82,9 +80,9 @@ const AddUserForm = ({ onSubmit }) => {
             <option value="" disabled>
               Select house section
             </option>
-            {houseSections.map((section) => (
-              <option key={section} value={section}>
-                {section}
+            {houseSections.services.house_sections.map((section) => (
+              <option key={section._id} value={section.section}>
+                {section.section}
               </option>
             ))}
           </select>

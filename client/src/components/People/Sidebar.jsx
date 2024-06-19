@@ -5,7 +5,7 @@ import "./Sidebar.css";
 const Sidebar = ({
   people,
   onPersonClick,
-  setIsModalOpen,
+  setIsCreateModalOpen,
   isSidebarOpen,
   toggleSidebar,
 }) => {
@@ -35,7 +35,7 @@ const Sidebar = ({
         <div className="start-new-chat">
           <span
             className="material-symbols-rounded"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => setIsCreateModalOpen(true)}
           >
             add
           </span>
@@ -49,7 +49,7 @@ const Sidebar = ({
             <span className="material-symbols-rounded icon">search</span>
             <span
               className="material-symbols-rounded icon add"
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => setIsCreateModalOpen(true)}
             >
               add
             </span>

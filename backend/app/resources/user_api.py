@@ -3,21 +3,34 @@ from flask_restx import Namespace, Resource
 from werkzeug.security import generate_password_hash
 
 from ..models.users import User
-from ..schemas.users_serializer import user_serializer
+from ..models.settings import Settings
+from ..schemas.users_serializer import user_serializer, house_section_serializer
 
 api = Namespace('users', description='User related operations')
 
-@api.route('/')
-class UserResource(Resource):
+
+@api.route('/house-sections')
+class HouseSectionResource(Resource):
+    @api.marshal_with(house_section_serializer)
+    def get(self):
+        settings = Settings.get_all()
+        last_setting = settings[-1]
+
+        print('This is the last setting:', last_setting)
+
+        return last_setting, 200
+
+@api.route('/get')
+class UserListResource(Resource):
     @api.marshal_with(user_serializer)
     def get(self):
         users = User.get_all()
-        
         for user in users:
             user.password = None
-
         return users, 200
-
+    
+@api.route('/post')
+class UserCreateResource(Resource):
     @api.expect(user_serializer)
     @api.marshal_with(user_serializer)
     def post(self):
