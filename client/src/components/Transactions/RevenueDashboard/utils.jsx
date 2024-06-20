@@ -1,4 +1,3 @@
-// utils.js
 import _ from "lodash";
 
 export const transformData = (revenue, filters) => {
