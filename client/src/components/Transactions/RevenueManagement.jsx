@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import RevenueDashboard from "./RevenueDashboard/RevenueDashboard";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
-import DeleteRevenue from "./DeleteRevenue";
-import EditRevenue from "./EditRevenue";
-import RefundRevenue from "./RefundRevenue";
-import AddRevenue from "./AddRevenue";
+import DeleteRevenue from "./TransactionForms/DeleteRevenue";
+import EditRevenue from "./TransactionForms/EditRevenue";
+import RefundRevenue from "./TransactionForms/RefundRevenue";
+import AddRevenue from "./TransactionForms/AddRevenue";
 import Spinner from "../Spinner/Spinner";
 import {
   fetchRevenue,

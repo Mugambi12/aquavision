@@ -1,4 +1,5 @@
 // utils.js
+import _ from "lodash";
 
 export const transformData = (revenue, filters) => {
   const filteredData = revenue.filter((rev) => {
@@ -10,31 +11,28 @@ export const transformData = (revenue, filters) => {
     return statusMatch && yearMatch;
   });
 
-  // Calculate monthly revenue for the AreaChart
-  const monthlyRevenue = filteredData.reduce((acc, rev) => {
-    const month = new Date(rev.payment_date).toLocaleString("default", {
-      month: "short",
-    });
-    acc[month] = (acc[month] || 0) + rev.amount;
-    return acc;
-  }, {});
+  // Calculate monthly revenue using lodash for the AreaChart
+  const monthlyRevenue = _.chain(filteredData)
+    .groupBy((rev) =>
+      new Date(rev.payment_date).toLocaleString("default", { month: "short" })
+    )
+    .map((group, month) => ({
+      month,
+      revenue: _.sumBy(group, "amount"),
+    }))
+    .orderBy((data) => new Date(`2000 ${data.month}`))
+    .value();
 
-  const lineChartData = Object.keys(monthlyRevenue).map((month) => ({
-    month,
-    revenue: monthlyRevenue[month],
-  }));
+  // Prepare data for pie chart (payment method breakdown)
+  const paymentMethodData = _.chain(filteredData)
+    .groupBy("payment_method")
+    .map((group, method) => ({
+      name: method,
+      value: _.sumBy(group, "amount"),
+    }))
+    .value();
 
-  const paymentMethodData = filteredData.reduce((acc, rev) => {
-    acc[rev.payment_method] = (acc[rev.payment_method] || 0) + rev.amount;
-    return acc;
-  }, {});
-
-  const pieChartData = Object.keys(paymentMethodData).map((method) => ({
-    name: method,
-    value: paymentMethodData[method],
-  }));
-
-  return { lineChartData, pieChartData };
+  return { lineChartData: monthlyRevenue, pieChartData: paymentMethodData };
 };
 
 export const COLORS = ["#8884d8", "#a4de6c", "#ffc658", "#82ca9d", "#ff8042"];

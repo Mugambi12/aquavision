@@ -1,8 +1,8 @@
 // components/Transactions/ExpensesManagement.jsx
 import React, { useEffect, useState } from "react";
 //import expensesData from "../../db/expenses";
-import ExpenseDashboard from "./ExpenseDashboard";
-import AddExpense from "./AddExpense";
+import ExpenseDashboard from "./ExpenseDashboard/ExpenseDashboard";
+import AddExpense from "./TransactionForms/AddExpense";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
 import Spinner from "../Spinner/Spinner";
 import { fetchExpenses, postExpense } from "../../resources/apiExpenses";

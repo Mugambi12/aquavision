@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import {
   fetchUnpaidInvoice,
   fetchActiveUsersList,
-} from "../../resources/apiRevenue";
+} from "../../../resources/apiRevenue";
 import "./AddRevenue.css";
 
 const AddRevenue = ({ onSubmit }) => {
