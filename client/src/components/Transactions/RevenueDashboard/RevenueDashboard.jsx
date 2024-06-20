@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./RevenueDashboard.css";
 import RevenueHeader from "./RevenueHeader";
-import RevenueTableContainer from "./RevenueTableContainer";
+import RevenueTable from "./RevenueTable";
 import RevenueCharts from "./RevenueCharts";
 
 // Main component for the RevenueDashboard
@@ -11,6 +11,7 @@ const RevenueDashboard = ({
   openEditRevenueModal,
   openRefundRevenueModal,
   openCreateRevenueModal,
+  openViewRevenueModal,
 }) => {
   const [filters, setFilters] = useState({ year: "", status: "all" });
   const [availableYears, setAvailableYears] = useState([]);
@@ -64,13 +65,14 @@ const RevenueDashboard = ({
       />
 
       {/* Table component */}
-      <RevenueTableContainer
+      <RevenueTable
         revenue={revenue}
         openDropdownId={openDropdownId}
         toggleDropdown={toggleDropdown}
         openDeleteRevenueModal={openDeleteRevenueModal}
         openEditRevenueModal={openEditRevenueModal}
         openRefundRevenueModal={openRefundRevenueModal}
+        openViewRevenueModal={openViewRevenueModal}
       />
     </div>
   );

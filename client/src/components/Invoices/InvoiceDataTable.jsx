@@ -115,11 +115,21 @@ const InvoiceDataTable = ({
                   </div>
                 </td>
                 <td>{invoice.full_name}</td>
-                <td>{invoice.consumption}</td>
-                <td>{invoice.total_amount}</td>
+                <td>{invoice.consumption} Units</td>
+                <td>
+                  {invoice.total_amount.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "KES",
+                  })}
+                </td>
                 <td>
                   <div className={`records-amount ${invoice.payment_status}`}>
-                    <span>{invoice.balance}</span>
+                    <span>
+                      {invoice.balance.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "KES",
+                      })}
+                    </span>
                   </div>
                 </td>
                 <td>

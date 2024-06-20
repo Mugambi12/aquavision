@@ -104,7 +104,7 @@ const ExpenseTable = ({
               >
                 {exp.amount.toLocaleString("en-US", {
                   style: "currency",
-                  currency: "USD",
+                  currency: "KES",
                 })}
               </td>
               <td

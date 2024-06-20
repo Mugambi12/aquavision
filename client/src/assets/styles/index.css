@@ -143,6 +143,18 @@ textarea:focus {
   cursor: pointer;
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  height: 65px;
+  text-align: center !important;
+  font-size: var(--fs-6);
+}
+
 html {
   font-family: var(--ff-vietnam);
   scroll-behavior: smooth;

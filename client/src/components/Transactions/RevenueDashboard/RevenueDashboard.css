@@ -186,10 +186,8 @@
 }
 
 .revenue-table th,
-.revenue-table-row {
-  height: 60px;
+.revenue-table td {
   background: var(--white);
-  font-size: var(--fs-6);
   font-weight: var(--fw-500);
   color: var(--davys-gray);
   text-align: center;
@@ -229,11 +227,6 @@
   .revenue-table {
     border-spacing: 0 0px;
     width: 100%;
-  }
-
-  .revenue-table th,
-  .revenue-table-row {
-    font-size: var(--fs-6);
   }
 }
 
@@ -278,24 +271,28 @@
   background: var(--davys-gray_12);
 }
 
-.revenue-table .revenue-option .edit {
-  color: var(--emerald);
-}
-
-.revenue-table .revenue-option .refund {
+.revenue-table .view {
   color: var(--pacific-blue);
 }
 
-.revenue-table .revenue-option .delete {
+.revenue-table .edit {
+  color: var(--emerald);
+}
+
+.revenue-table .refund {
+  color: var(--space-cadet);
+}
+
+.revenue-table .delete {
   color: var(--imperial-red);
 }
 
-.revenue-table .revenue-option .material-symbols-rounded {
+.revenue-table .material-symbols-rounded {
   font-size: var(--fs-4);
   margin-right: var(--fs-3);
 }
 
-.revenue-table .revenue-option .dropdown-option-label {
+.revenue-table .dropdown-option-label {
   margin-left: var(--fs-1);
 }
 

@@ -10,60 +10,104 @@ const ViewInvoice = ({ invoice }) => {
         Viewing Invoice of {invoice.full_name}
       </h2>
       <div className="view-invoice-details">
-        <p>
-          <strong>InvoiceID:</strong> {invoice._id}
-        </p>
-        <p>
-          <strong>Full Name:</strong> {invoice.full_name}
-        </p>
-        <p>
-          <strong>House Section:</strong> {invoice.house_section}
-        </p>
-        <p>
-          <strong>House Number:</strong> {invoice.house_number}
-        </p>
-        <p>
-          <strong>Previous Reading:</strong> {invoice.previous_reading}
-        </p>
-        <p>
-          <strong>Current Reading:</strong> {invoice.current_reading}
-        </p>
-        <p>
-          <strong>Consumption:</strong> {invoice.consumption}
-        </p>
-        <p>
-          <strong>Unit Price:</strong> {invoice.unit_price}
-        </p>
-        <p>
-          <strong>Service Fee:</strong> {invoice.service_fee}
-        </p>
-        <p>
-          <strong>Total Amount:</strong> {invoice.total_amount}
-        </p>
-        <p>
-          <strong>Paid Amount:</strong> {invoice.paid_amount}
-        </p>
-        <p>
-          <strong>Balance:</strong> {invoice.balance}
-        </p>
-        <p>
-          <strong>Payment Status:</strong> {invoice.payment_status_text}
-        </p>
-        <p>
-          <strong>Created At:</strong>{" "}
-          {new Date(invoice.created_at).toLocaleString()}
-        </p>
+        <div className="invoice-detail">
+          <span className="label">Invoice ID:</span>
+          <span className="value">{invoice._id}</span>
+        </div>
+        <div className="invoice-detail">
+          <span className="label">Full Name:</span>
+          <span className="value">{invoice.full_name}</span>
+        </div>
+        <div className="invoice-detail">
+          <span className="label">House Section:</span>
+          <span className="value">{invoice.house_section}</span>
+        </div>
+        <div className="invoice-detail">
+          <span className="label">House Number:</span>
+          <span className="value">{invoice.house_number}</span>
+        </div>
+        <div className="invoice-detail">
+          <span className="label">Previous Reading:</span>
+          <span className="value">{invoice.previous_reading}</span>
+        </div>
+        <div className="invoice-detail">
+          <span className="label">Current Reading:</span>
+          <span className="value">{invoice.current_reading}</span>
+        </div>
+        <div className="invoice-detail">
+          <span className="label">Consumption:</span>
+          <span className="value">{invoice.consumption}</span>
+        </div>
+        <div className="invoice-detail">
+          <span className="label">Unit Price:</span>
+          <span className="value">
+            {invoice.unit_price.toLocaleString("en-US", {
+              style: "currency",
+              currency: "KES",
+            })}
+          </span>
+        </div>
+        <div className="invoice-detail">
+          <span className="label">Service Fee:</span>
+          <span className="value">
+            {invoice.service_fee.toLocaleString("en-US", {
+              style: "currency",
+              currency: "KES",
+            })}
+          </span>
+        </div>
+        <div className="invoice-detail">
+          <span className="label">Total Amount:</span>
+          <span className="value">
+            {invoice.total_amount.toLocaleString("en-US", {
+              style: "currency",
+              currency: "KES",
+            })}
+          </span>
+        </div>
+        <div className="invoice-detail">
+          <span className="label">Paid Amount:</span>
+          <span className="value">
+            {invoice.paid_amount.toLocaleString("en-US", {
+              style: "currency",
+              currency: "KES",
+            })}
+          </span>
+        </div>
+        <div className="invoice-detail">
+          <span className="label">Balance:</span>
+          <span className="value">
+            {invoice.balance.toLocaleString("en-US", {
+              style: "currency",
+              currency: "KES",
+            })}
+          </span>
+        </div>
+        <div className="invoice-detail">
+          <span className="label">Payment Status:</span>
+          <span className="value">{invoice.payment_status_text}</span>
+        </div>
+        <div className="invoice-detail">
+          <span className="label">Created At:</span>
+          <span className="value">
+            {new Date(invoice.created_at).toLocaleString()}
+          </span>
+        </div>
         {invoice.updated_at && (
-          <p>
-            <strong>Updated At:</strong>{" "}
-            {new Date(invoice.updated_at).toLocaleString()}
-          </p>
+          <div className="invoice-detail">
+            <span className="label">Updated At:</span>
+            <span className="value">
+              {new Date(invoice.updated_at).toLocaleString()}
+            </span>
+          </div>
         )}
         {invoice.deleted_at && (
-          <p>
-            <strong>Deleted At:</strong>{" "}
-            {new Date(invoice.deleted_at).toLocaleString()}
-          </p>
+          <div className="invoice-detail">
+            <span className="label">Deleted At:</span>
+            <span className="value">
+              {new Date(invoice.deleted_at).toLocaleString()}
+            </span>
+          </div>
         )}
       </div>
     </div>

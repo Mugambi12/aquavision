@@ -1,16 +1,18 @@
 .edit-revenue-container {
-  padding: var(--radius-3) var(--radius-8) 0;
-  background: var(--white);
-  max-width: 700px;
-  max-height: 90vh;
-  margin: 0 auto;
-  overflow-y: auto;
+  font-family: var(--ff-vietnam);
+  background-color: var(--white);
+  color: var(--onyx);
+  max-width: 650px;
+  margin: 0;
+  padding: var(--radius-8);
+  border-radius: var(--radius-10);
 }
 
 .edit-revenue-title {
-  font-size: var(--fs-4);
-  color: var(--davys-gray);
+  font-size: var(--fs-3);
+  color: var(--space-cadet);
   margin-bottom: var(--fs-1);
+  text-align: center;
 }
 
 .edit-revenue-form {
@@ -27,7 +29,7 @@
 
 .form-group label {
   font-size: var(--fs-5);
-  color: var(--davys-gray);
+  color: var(--space-cadet);
   margin-bottom: var(--radius-6);
 }
 
@@ -37,10 +39,11 @@
   font-size: var(--fs-6);
   background: var(--white);
   width: 100%;
-  color: var(--sonic-sliver);
+  color: var(--onyx);
   margin-bottom: var(--radius-10);
   border: 1px solid var(--cultured);
   border-radius: var(--radius-6);
+  box-sizing: border-box;
 }
 
 .error-message {
@@ -51,9 +54,10 @@
 
 .button-group {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 10px;
   width: 100%;
+  margin-top: var(--radius-8);
 }
 
 .submit-button {

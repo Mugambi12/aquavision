@@ -13,7 +13,6 @@ const EditRevenue = ({ revenue, onSubmit, submitting }) => {
 
   const onSubmitForm = (data) => {
     onSubmit(data);
-
     console.log("This is the form data: ", data);
   };
 
@@ -96,7 +95,7 @@ const EditRevenue = ({ revenue, onSubmit, submitting }) => {
           <input
             type="text"
             id="payment_status"
-            placeholder="Payment sStatus"
+            placeholder="Payment Status"
             {...register("payment_status", {
               required: "Payment status is required",
             })}

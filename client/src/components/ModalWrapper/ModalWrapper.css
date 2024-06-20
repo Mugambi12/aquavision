@@ -30,13 +30,13 @@
   position: fixed;
   max-width: 900px;
   min-width: 450px;
-  max-height: 85vh;
+  max-height: 95vh;
   overflow-y: auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -100%) scale(0.5);
   background: var(--white);
-  padding: var(--radius-16) var(--radius-10);
+  padding: var(--radius-16);
   border-radius: var(--radius-12);
   border: none;
   box-shadow: var(--shadow-1);

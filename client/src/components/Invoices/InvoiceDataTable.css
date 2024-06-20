@@ -233,9 +233,7 @@
 
 .records-invoice-table th,
 .records-invoice-row {
-  height: 65px;
   background: var(--white);
-  font-size: var(--fs-14);
   font-weight: var(--fw-500);
   color: var(--davys-gray);
 }

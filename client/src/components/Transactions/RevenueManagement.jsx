@@ -1,4 +1,3 @@
-// components/Transactions/RevenueManagement.jsx
 import React, { useEffect, useState } from "react";
 import RevenueDashboard from "./RevenueDashboard/RevenueDashboard";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
@@ -6,6 +5,7 @@ import DeleteRevenue from "./TransactionForms/DeleteRevenue";
 import EditRevenue from "./TransactionForms/EditRevenue";
 import RefundRevenue from "./TransactionForms/RefundRevenue";
 import AddRevenue from "./TransactionForms/AddRevenue";
+import ViewRevenue from "./TransactionForms/ViewRevenue"; // Import the new component
 import Spinner from "../Spinner/Spinner";
 import {
   fetchRevenue,
@@ -27,6 +27,7 @@ const RevenueManagement = ({
   const [isEditRevenueModalOpen, setIsEditModalOpen] = useState(false);
   const [isRefundRevenueModalOpen, setIsRefundModalOpen] = useState(false);
   const [isDeleteRevenueModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isViewRevenueModalOpen, setIsViewRevenueModalOpen] = useState(false); // State for view modal
 
   useEffect(() => {
     callApiAndFetchRevenue();
@@ -107,12 +108,19 @@ const RevenueManagement = ({
 
   const openEditRevenueModal = (revenue) => {
     setSelectedRevenue(revenue);
+    setIsViewRevenueModalOpen(false);
     setIsEditModalOpen(true);
   };
 
   const openDeleteRevenueModal = (revenue) => {
     setSelectedRevenue(revenue);
     setIsDeleteModalOpen(true);
+  };
+
+  const openViewRevenueModal = (revenue) => {
+    // Function to open view modal
+    setSelectedRevenue(revenue);
+    setIsViewRevenueModalOpen(true);
   };
 
   return (
@@ -123,9 +131,9 @@ const RevenueManagement = ({
         <RevenueDashboard
           revenue={revenueData}
           openDeleteRevenueModal={openDeleteRevenueModal}
-          openEditRevenueModal={openEditRevenueModal}
           openRefundRevenueModal={openRefundRevenueModal}
           openCreateRevenueModal={openCreateRevenueModal}
+          openViewRevenueModal={openViewRevenueModal} // Pass the function
         />
       )}
 
@@ -166,6 +174,16 @@ const RevenueManagement = ({
           revenue={selectedRevenue}
           onSubmit={callApiAndDeleteRevenue}
           submitting={submitting}
+        />
+      </ModalWrapper>
+
+      <ModalWrapper
+        isOpen={isViewRevenueModalOpen} // View modal
+        onRequestClose={() => setIsViewRevenueModalOpen(false)}
+      >
+        <ViewRevenue
+          revenue={selectedRevenue}
+          openEditRevenueModal={openEditRevenueModal}
         />
       </ModalWrapper>
     </>

@@ -1,16 +1,18 @@
 .add-revenue-container {
-  background: var(--white);
-  margin: 0 auto;
+  font-family: var(--ff-vietnam);
+  background-color: var(--white);
+  color: var(--onyx);
+  max-width: 650px;
+  margin: 0;
   padding: var(--radius-8);
-  overflow-y: auto;
-  max-width: 600px;
-  border-radius: var(--radius-8);
+  border-radius: var(--radius-10);
 }
 
-.modal-title {
-  font-size: var(--fs-4);
-  color: var(--davys-gray);
+.add-revenue-container .modal-title {
+  font-size: var(--fs-3);
+  color: var(--space-cadet);
   margin-bottom: var(--fs-1);
+  text-align: center;
 }
 
 .add-revenue-form {
@@ -42,19 +44,19 @@
   border-radius: var(--radius-6);
 }
 
-.error-message {
+.form-group .error-message {
   color: var(--imperial-red);
   font-size: var(--fs-7);
   margin-top: 5px;
 }
 
-.form-actions {
+.form-group .form-actions {
   display: flex;
   justify-content: space-between;
   padding: var(--radius-10);
 }
 
-.submit-btn {
+.form-group .submit-btn {
   padding: var(--radius-10) var(--radius-12);
   font-size: var(--fs-6);
   text-align: center;
@@ -67,7 +69,7 @@
   width: 100%;
 }
 
-.submit-btn:hover {
+.form-group .submit-btn:hover {
   background: var(--pacific-blue);
 }
 
@@ -76,7 +78,7 @@
     flex-direction: column;
   }
 
-  .form-group {
+  .form-group .form-group {
     flex: 1 1 100%;
   }
 }
