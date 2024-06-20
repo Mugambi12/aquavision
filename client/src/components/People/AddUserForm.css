@@ -1,15 +1,18 @@
 .add-user-container {
-  padding: var(--radius-12);
-  margin: 0 auto;
-  border-radius: var(--radius-8);
-  max-width: 600px;
-  background: var(--light-gray);
+  font-family: var(--ff-vietnam);
+  background-color: var(--white);
+  color: var(--onyx);
+  max-width: 650px;
+  margin: 0;
+  padding: var(--radius-8);
+  border-radius: var(--radius-10);
 }
 
 .add-user-container .modal-title {
+  font-size: var(--fs-3);
+  color: var(--space-cadet);
   margin-bottom: var(--fs-1);
-  font-size: var(--fs-4);
-  color: var(--davys-gray);
+  text-align: center;
 }
 
 .add-user-container .add-user-form {
@@ -32,14 +35,14 @@
 }
 
 .add-user-container label {
-  font-size: var(--fs-8);
+  font-size: var(--fs-6);
   color: var(--davys-gray);
 }
 
 .add-user-container input,
 .add-user-container select {
   padding: var(--radius-8) var(--radius-12);
-  font-size: var(--fs-6);
+  font-size: var(--fs-7);
   background: var(--white);
   width: 100%;
   color: var(--cool-gray);
