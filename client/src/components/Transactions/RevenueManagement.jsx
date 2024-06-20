@@ -1,11 +1,11 @@
 // components/Transactions/RevenueManagement.jsx
 import React, { useEffect, useState } from "react";
 import RevenueDashboard from "./RevenueDashboard";
+import ModalWrapper from "../ModalWrapper/ModalWrapper";
 import DeleteRevenue from "./DeleteRevenue";
 import EditRevenue from "./EditRevenue";
 import RefundRevenue from "./RefundRevenue";
 import AddRevenue from "./AddRevenue";
-import ModalWrapper from "../ModalWrapper/ModalWrapper";
 import Spinner from "../Spinner/Spinner";
 import {
   fetchRevenue,
@@ -14,20 +14,19 @@ import {
   updateRevenue,
   refundRevenue,
 } from "../../resources/apiRevenue";
-import { set } from "react-hook-form";
 
 const RevenueManagement = ({
   openCreateRevenueModal,
   isCreateRevenueModalOpen,
   setIsCreateModalOpen,
 }) => {
+  const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [revenueData, setRevenueData] = useState([]);
   const [selectedRevenue, setSelectedRevenue] = useState(null);
   const [isEditRevenueModalOpen, setIsEditModalOpen] = useState(false);
   const [isRefundRevenueModalOpen, setIsRefundModalOpen] = useState(false);
   const [isDeleteRevenueModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     callApiAndFetchRevenue();

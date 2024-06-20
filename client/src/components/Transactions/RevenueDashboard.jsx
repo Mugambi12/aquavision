@@ -196,9 +196,9 @@ const RevenueTableContainer = ({
   revenue,
   openDropdownId,
   toggleDropdown,
-  openDeleteRevenueModal,
   openEditRevenueModal,
   openRefundRevenueModal,
+  openDeleteRevenueModal,
 }) => {
   // Sort the revenue array by payment_date in descending order
   const sortedRevenue = [...revenue].sort(
@@ -275,6 +275,7 @@ const RevenueTableContainer = ({
               >
                 {rev.payment_status}
               </td>
+
               <td
                 className={`revenue-table-row options ${
                   openDropdownId === rev._id ? "active" : ""
