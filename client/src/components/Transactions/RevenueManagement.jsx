@@ -1,6 +1,6 @@
 // components/Transactions/RevenueManagement.jsx
 import React, { useEffect, useState } from "react";
-import RevenueDashboard from "./RevenueDashboard";
+import RevenueDashboard from "./RevenueDashboard/RevenueDashboard";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
 import DeleteRevenue from "./DeleteRevenue";
 import EditRevenue from "./EditRevenue";
