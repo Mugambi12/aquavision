@@ -3,29 +3,27 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar/Navbar";
 import Spinner from "../components/Spinner/Spinner";
 
+import { fetchActiveHouses } from "../resources/apiHome";
+
 const Home = () => {
-  const [users, setUsers] = useState([]);
+  const [homeData, setHomeData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/users");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        console.log('user data:', data);
-        setUsers(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      }
-    };
-
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const data = await fetchActiveHouses();
+      setHomeData(data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -34,13 +32,13 @@ const Home = () => {
       </Helmet>
       <Navbar />
       <div className="main-container">
-        <h1>Users</h1>
+        <h1>General Dashboard</h1>
         {loading ? (
-          <Spinner /> // Display a spinner or loading indicator while fetching data
+          <Spinner />
         ) : (
           <ul>
-            {users.map((user) => (
-              <li key={user.id}>{user.full_name}</li> // Adjust this based on your actual user data structure
+            {homeData.map((item) => (
+              <li key={item._id}>{user.house_section}</li>
             ))}
           </ul>
         )}

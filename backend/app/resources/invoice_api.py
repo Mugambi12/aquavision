@@ -90,7 +90,7 @@ class InvoiceListResource(Resource):
             'full_name': user.full_name,
             'previous_reading': invoice.previous_reading,
             'current_reading': invoice.current_reading,
-            'consumption': invoice.current_reading - invoice.previous_reading,
+            'consumption': invoice.consumption,
             'unit_price': invoice.unit_price,
             'service_fee': invoice.service_fee,
             'total_amount': invoice.total_amount,
@@ -110,19 +110,18 @@ class InvoiceCreateResource(Resource):
         try:
             data = request.get_json()
             self._validate_fields(data)
-            new_invoice = self._prepare_invoice_data(data)
             
-            # Save the invoice to the database
+            user = self._get_user(data['house_section'], data['house_number'])
+            if not user:
+                abort(404, f'User not found with house section {data["house_section"]} and house number {data["house_number"]}')
+                
+            new_invoice = self._prepare_invoice_data(data, user._id)
+            
             new_invoice_obj = self._save_invoice(new_invoice)
             
-            # Update user balance
-            user_id = new_invoice['user_id']
-            user = User.get_by_id(user_id)
-            if not user:
-                abort(404, f'User with ID {user_id} not found')
-
-            user.balance += new_invoice['total_amount']
-            user.save()
+            if new_invoice['total_amount'] > 0:
+                user.balance += new_invoice['total_amount']
+                user.save()
 
             return new_invoice_obj, 201
 
@@ -140,12 +139,15 @@ class InvoiceCreateResource(Resource):
             if field not in data:
                 raise KeyError(field)
 
-    def _prepare_invoice_data(self, data):
+    def _get_user(self, house_section, house_number):
+        return User.query.filter_by(house_section=house_section, house_number=house_number, is_active=True).first()
+
+    def _prepare_invoice_data(self, data, user_id):
         new_invoice = {
             'house_section': data['house_section'],
             'house_number': data['house_number'],
             'current_reading': float(data['current_reading']),
-            'user_id': 10  # Assuming a user_id is being assigned for now
+            'user_id': user_id
         }
 
         settings = Settings.get_all()
@@ -160,21 +162,22 @@ class InvoiceCreateResource(Resource):
         latest_invoice = Invoice.get_latest_invoice(new_invoice['user_id'])
         previous_reading = latest_invoice.current_reading if latest_invoice else 0
 
-        print("This is previous reading's current reading:", previous_reading)
-        print("This is previous reading's current reading:", previous_reading, new_invoice['current_reading'])
-
-        if latest_invoice:
-            consumption = new_invoice['current_reading'] - previous_reading
+        if previous_reading > new_invoice['current_reading']:
+            consumption = 0
+            total_amount = 0
+            payment_status = 'paid'
         else:
-            consumption = new_invoice['current_reading']
+            consumption = new_invoice['current_reading'] - previous_reading
+            total_amount = consumption * unit_price + service_fee
+            payment_status = data.get('payment_status', 'unpaid')
 
         new_invoice.update({
             'unit_price': unit_price,
             'service_fee': service_fee,
-            'total_amount': consumption * unit_price + service_fee,
+            'total_amount': total_amount,
             'previous_reading': previous_reading,
             'consumption': consumption,
-            'payment_status': data.get('payment_status', 'unpaid')
+            'payment_status': payment_status
         })
 
         return new_invoice
@@ -184,8 +187,9 @@ class InvoiceCreateResource(Resource):
         new_invoice_obj.save()
         return new_invoice_obj
 
+
 @api.route('/delete/<int:_id>')
-class InvoiceDetailResource(Resource):
+class InvoiceDeleteResource(Resource):
     def delete(self, _id):
         try:
             invoice = Invoice.get_by_id(_id)
@@ -209,46 +213,40 @@ class InvoiceDetailResource(Resource):
             logging.error(f"An error occurred: {e}")
             abort(500, "An internal error occurred")
 
+
 @api.route('/pay/<int:_id>')
 class InvoicePaymentResource(Resource):
     @api.marshal_with(invoice_serializer)
-    def post(self, _id):
-        invoice = Invoice.get_by_id(_id)
-        print("This is the invoice from the API EndPoint:", invoice)
-        return invoice, 200
-    
-#        try:
-#            data = request.get_json()
-#
-#            print("This is the data:", data)
-#
-#            invoice = Invoice.get_by_id(_id)
-#            if not invoice:
-#                abort(404, 'Invoice not found')
-#
-#            user = User.get_by_id(invoice.user_id)
-#            if not user:
-#                abort(404, 'User not found')
-#
-#            self._validate_payment(user, invoice)
-#
-#            self._process_payment(user, invoice)
-#
-#            return data, 200
-#
-#        except ValueError as e:
-#            abort(400, str(e))
-#        except Exception as e:
-#            logging.error(f"An error occurred: {e}")
-#            abort(500, "An internal error occurred")
-#
-#    def _validate_payment(self, user, invoice):
-#        if user.balance < invoice.total_amount:
-#            raise ValueError('Insufficient balance')
-#
-#    def _process_payment(self, user, invoice):
-#        user.balance -= invoice.total_amount
-#        user.save()
-#
-#        invoice.payment_status = 'paid'
-#        invoice.save()
+    def put(self, _id):
+        try:
+            invoice = Invoice.get_by_id(_id)
+            if not invoice:
+                abort(404, 'Invoice not found')
+
+            user = User.get_by_id(invoice.user_id)
+            if not user:
+                abort(404, 'User not found')
+
+            self._validate_payment(user, invoice)
+
+            self._process_payment(user, invoice)
+
+            return invoice, 200
+
+        except ValueError as e:
+            abort(400, str(e))
+        except Exception as e:
+            logging.error(f"An error occurred: {e}")
+            abort(500, "An internal error occurred")
+
+    def _validate_payment(self, user, invoice):
+        if user.balance < invoice.total_amount:
+            raise ValueError('Insufficient balance')
+
+    def _process_payment(self, user, invoice):
+        user.balance -= invoice.total_amount
+        user.save()
+
+        invoice.payment_status = 'paid'
+        invoice.save()
+   

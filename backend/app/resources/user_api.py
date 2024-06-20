@@ -25,9 +25,10 @@ class UserListResource(Resource):
     @api.marshal_with(user_serializer)
     def get(self):
         users = User.get_all()
-        for user in users:
+        filtered_users = [user for user in users if user.house_section == 'Osupuko']
+        for user in filtered_users:
             user.password = None
-        return users, 200
+        return filtered_users, 200
     
 @api.route('/post')
 class UserCreateResource(Resource):

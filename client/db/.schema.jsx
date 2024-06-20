@@ -143,3 +143,12 @@ const data = [
     ],
   },
 ];
+
+const html = () => {
+  return (
+    <div>
+      <h1>Schema</h1>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </div>
+  );
+};

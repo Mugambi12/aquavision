@@ -15,6 +15,7 @@ const DeleteInvoice = ({ invoice, onSubmit }) => {
             Are you sure you want to delete this invoice?
           </p>
           <p className="delete-invoice-info">This action cannot be undone.</p>
+          <p>{invoice._id}</p>
         </div>
       )}
 
