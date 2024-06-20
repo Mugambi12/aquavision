@@ -87,7 +87,8 @@ const InvoiceRecords = () => {
 
   const callApiAndDeleteInvoice = async () => {
     try {
-      await deleteInvoice(selectedInvoice.invoiceNo);
+      console.log("Deleting invoice:", selectedInvoice._id);
+      await deleteInvoice(selectedInvoice._id);
       callApiAndGetInvoices();
 
       console.log("Invoice deleted successfully.");

@@ -197,7 +197,8 @@ class InvoiceDeleteResource(Resource):
                 abort(404, 'Invoice not found')
 
             if invoice.payment_status == 'paid':
-                abort(400, 'Cannot delete a paid invoice')
+                logging.warning(f"Cannot delete a paid invoice with ID: {_id}")
+                return {'message': 'Cannot delete a paid invoice'}, 400
 
             user = User.get_by_id(invoice.user_id)
             if not user:
@@ -212,6 +213,7 @@ class InvoiceDeleteResource(Resource):
         except Exception as e:
             logging.error(f"An error occurred: {e}")
             abort(500, "An internal error occurred")
+
 
 
 @api.route('/pay/<int:_id>')
