@@ -120,7 +120,6 @@ const RevenueCharts = ({
                 <YAxis type="number" />
                 <CartesianGrid strokeDasharray="0.5 0.5" />
                 <Tooltip />
-                <Legend wrapperStyle={{ fontSize: "14px" }} />
                 <Area
                   dataKey="revenue"
                   type="monotone"
