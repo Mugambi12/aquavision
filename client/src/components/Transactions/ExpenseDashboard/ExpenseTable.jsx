@@ -1,4 +1,3 @@
-/* JSX component for ExpenseTable */
 // ExpenseTable.jsx
 import React, { useEffect } from "react";
 import DataTable from "datatables.net-dt";

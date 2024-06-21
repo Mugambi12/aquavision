@@ -3,40 +3,26 @@ import React, { useState, useEffect } from "react";
 import ExpenseHeader from "./ExpenseHeader";
 import ExpenseCharts from "./ExpenseCharts";
 import ExpenseTable from "./ExpenseTable";
-import { fetchExpenses } from "../../../resources/apiExpenses";
 
 const ExpenseDashboard = ({
+  expenses,
   openViewExpenseModal,
   openCreateExpenseModal,
   openDeleteExpenseModal,
 }) => {
-  const [expenses, setExpenses] = useState([]);
   const [filters, setFilters] = useState({ year: "", status: "all" });
   const [availableYears, setAvailableYears] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    fetchExpenses()
-      .then((data) => {
-        console.log("Fetched expenses successfully.");
-        setExpenses(data);
-        const years = Array.from(
-          new Set(
-            data.map((exp) =>
-              new Date(exp.expense_date).getFullYear().toString()
-            )
-          )
-        ).sort();
-        setAvailableYears(["", ...years]);
-      })
-      .catch((error) => {
-        console.error("Error fetching expenses:", error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+    const years = Array.from(
+      new Set(
+        expenses.map((exp) =>
+          new Date(exp.expense_date).getFullYear().toString()
+        )
+      )
+    ).sort();
+    setAvailableYears(["", ...years]);
+  }, [expenses]);
 
   const handleYearChange = (e) => {
     setFilters((prevFilters) => ({
