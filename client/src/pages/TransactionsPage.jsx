@@ -9,17 +9,20 @@ import RevenueManagement from "../components/Transactions/RevenueManagement";
 import ExpensesManagement from "../components/Transactions/ExpensesManagement";
 import Spinner from "../components/Spinner/Spinner";
 import { fetchUnpaidInvoice } from "../resources/apiRevenue";
+import { fetchHighestExpenses } from "../resources/apiExpenses";
 
 const Transactions = () => {
+  const [loading, setLoading] = useState(false);
+  const [highestExpenses, setHighestExpenses] = useState([]);
   const [showRevenue, setShowRevenue] = useState(true);
   const [unpaidInvoiceData, setUnpaidInvoiceData] = useState([]);
   const [isCreateRevenueModalOpen, setIsCreateModalOpen] = useState(false);
   const [isCreateExpenseModalOpen, setIsCreateExpenseModalOpen] =
     useState(false);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     callApiAndGetUnpaidInvoice();
+    callApiAndGetHighestExpenses();
   }, []);
 
   const callApiAndGetUnpaidInvoice = async () => {
@@ -30,6 +33,19 @@ const Transactions = () => {
       setUnpaidInvoiceData(data);
     } catch (error) {
       console.error("Error fetching Unpaid Invoice:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const callApiAndGetHighestExpenses = async () => {
+    try {
+      setLoading(true);
+      const data = await fetchHighestExpenses();
+      console.log("Fetched highest expenses successfully.");
+      setHighestExpenses(data);
+    } catch (error) {
+      console.error("Error fetching highest expenses:", error);
     } finally {
       setLoading(false);
     }
@@ -71,9 +87,10 @@ const Transactions = () => {
         <>
           <div className="main-container">
             <TransactionSidebar
+              unpaidInvoice={unpaidInvoiceData}
+              highestExpenses={highestExpenses}
               openCreateRevenueModal={openCreateRevenueModal}
               openCreateExpenseModal={openCreateExpenseModal}
-              unpaidInvoice={unpaidInvoiceData}
               toggleView={toggleView}
               currentView={showRevenue ? "revenue" : "expenses"}
             />

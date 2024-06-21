@@ -6,6 +6,16 @@ from ..schemas.expense_serializer import expense_serializer
 
 api = Namespace('expenses', description='Expense related operations')
 
+@api.route('/get/highest')
+class HighestExpenseResource(Resource):
+    def get(self):
+        highest_expenses = [
+            {'type': 'Office Supplies', 'amount': 15000, 'monthly_avg': 8500},
+            {'type': 'Utilities', 'amount': 120000, 'monthly_avg': 12000},
+            {'type': 'Marketing', 'amount': 10000, 'monthly_avg': 5000}
+        ]
+        return highest_expenses, 200
+
 @api.route('/get')
 class ExpenseListResource(Resource):
     @api.marshal_with(expense_serializer)

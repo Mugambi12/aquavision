@@ -1,8 +1,8 @@
 /*==============================*/
-/* transactions sidebar */
+/* Transaction Sidebar */
 /*==============================*/
 
-.transactions-sidebar {
+.transaction-sidebar {
   width: 250px;
   height: fit-content;
   margin: 0 18px;
@@ -12,23 +12,23 @@
   box-shadow: var(--shadow-1);
 }
 
-.transactions-sidebar-container {
+.transaction-sidebar-content {
   padding-bottom: var(--radius-6);
 }
 
-.mobile-transactions-sidebar {
+.transaction-sidebar-mobile {
   display: none;
 }
 
 @media screen and (max-width: 768px) {
-  .transactions-sidebar {
+  .transaction-sidebar {
     width: calc(100% - (var(--radius-10) * 2));
     margin: 0 0 0 var(--radius-10);
     margin-bottom: var(--fs-8);
     background: var(--white);
   }
 
-  .mobile-transactions-sidebar {
+  .transaction-sidebar-mobile {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -38,39 +38,40 @@
     margin-bottom: 20px;
   }
 
-  .mobile-transactions-sidebar .material-symbols-rounded {
+  .transaction-sidebar-mobile .material-symbols-rounded {
     font-size: var(--fs-3);
   }
 
-  .mobile-revenue-info {
+  .transaction-sidebar-mobile-revenue-info {
     display: flex;
     align-items: center;
   }
 
-  .mobile-revenue-info .customer-invoice {
+  .transaction-sidebar-mobile-revenue-info
+    .transaction-sidebar-customer-invoice {
     font-size: var(--fs-4);
     font-weight: var(--fw-600);
     color: var(--eerie_black);
   }
 
-  .mobile-transactions-sidebar .icon-sort {
+  .transaction-sidebar-mobile .transaction-sidebar-icon {
     color: var(--primary-color);
   }
 
-  .mobile-transactions-sidebar .icon-segment {
+  .transaction-sidebar-mobile .transaction-sidebar-icon-segment {
     color: var(--secondary-color);
   }
 }
 
 /*==============================*/
-/* transactions sidebar header */
+/* Transaction Sidebar Header */
 /*==============================*/
 
-.transactions-sidebar-actions {
+.transaction-sidebar-actions {
   padding: var(--radius-3) var(--radius-8);
 }
 
-.transactions-sidebar-actions .transactions-sidebar-header {
+.transaction-sidebar-actions .transaction-sidebar-header {
   font-size: var(--fs-4);
   font-weight: var(--fw-600);
   margin-bottom: var(--fs-5);
@@ -83,27 +84,27 @@
   border-radius: var(--radius-8);
 }
 
-.transactions-sidebar-actions .transactions-sidebar-header .header-icon {
+.transaction-sidebar-actions .transaction-sidebar-header-icon {
   font-size: var(--fs-2);
   color: var(--pacific_blue);
 }
 
-.transactions-sidebar-actions .transactions-sidebar-header .header-text {
+.transaction-sidebar-actions .transaction-sidebar-header-text {
   font-size: var(--fs-4);
   font-weight: var(--fw-600);
 }
 
-.transactions-sidebar-actions .sidebar-links {
+.transaction-sidebar-actions .transaction-sidebar-links {
   list-style: none;
   padding: 0;
   margin-bottom: var(--fs-4);
 }
 
-.transactions-sidebar-actions .sidebar-links li {
+.transaction-sidebar-actions .transaction-sidebar-links li {
   margin-bottom: var(--radius-10);
 }
 
-.transactions-sidebar-actions .sidebar-button {
+.transaction-sidebar-actions .transaction-sidebar-button {
   background: none;
   border: none;
   gap: 20px;
@@ -118,34 +119,34 @@
   color: var(--davys_gray);
 }
 
-.transactions-sidebar-actions .sidebar-button:hover {
+.transaction-sidebar-actions .transaction-sidebar-button:hover {
   background: var(--pacific_blue_12);
   color: var(--pacific_blue);
 }
 
-.transactions-sidebar-actions .sidebar-button.active {
+.transaction-sidebar-actions .transaction-sidebar-button.active {
   background: var(--pacific_blue);
   color: var(--white);
   font-weight: var(--fw-600);
 }
 
 @media screen and (max-width: 768px) {
-  .transactions-sidebar-actions .transactions-sidebar-header {
+  .transaction-sidebar-actions .transaction-sidebar-header {
     display: none;
   }
 }
 
 /*==============================*/
-/* transactions sidebar due payments */
+/* Transaction Sidebar List Items  */
 /*==============================*/
 
-.transactions-sidebar-due-payments {
+.transaction-sidebar-list-items {
   list-style: none;
   padding: 0;
   border-radius: var(--radius-8);
 }
 
-.transactions-sidebar-due-payments .due-payments-title {
+.transaction-sidebar-list-items .transaction-sidebar-list-items-title {
   font-size: var(--fs-6);
   font-weight: var(--fw-600);
   color: var(--eerie_black);
@@ -157,45 +158,57 @@
   border-radius: var(--radius-8) var(--radius-8) 0 0;
 }
 
-.transactions-sidebar-due-payments .due-payments {
-  height: 285px;
+.transaction-sidebar-list-items .transaction-sidebar-list-items-list {
+  max-height: 450px;
   overflow-y: auto;
   background: var(--white);
   border-radius: 0 0 var(--radius-6) var(--radius-6);
   padding: 0 var(--radius-6);
 }
 
-.transactions-sidebar-due-payments .customer {
+.transaction-sidebar-list-items .transaction-sidebar-customer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0;
   padding: var(--radius-6) var(--radius-10);
   margin: var(--radius-6) 0;
-  background: var(--pacific_blue_12);
+  background: var(--black_08);
   border-radius: var(--radius-16);
 }
 
-.transactions-sidebar-due-payments .customer .customer-info {
+.transaction-sidebar-list-items
+  .transaction-sidebar-customer
+  .transaction-sidebar-customer-info {
   display: flex;
   flex-direction: column;
   gap: var(--radius-3);
 }
 
-.transactions-sidebar-due-payments .customer .customer-name {
-  font-weight: var(--fw-600);
+.transaction-sidebar-list-items
+  .transaction-sidebar-customer
+  .transaction-sidebar-customer-name {
+  font-weight: var(--fw-500);
   font-size: var(--fs-7);
-  color: var(--eerie_black);
+  color: var(--pacific_blue);
 }
 
-.transactions-sidebar-due-payments .customer .customer-house,
-.transactions-sidebar-due-payments .customer .customer-amount {
+.transaction-sidebar-list-items
+  .transaction-sidebar-customer
+  .transaction-sidebar-customer-house,
+.transaction-sidebar-list-items
+  .transaction-sidebar-customer
+  .transaction-sidebar-customer-amount {
   font-size: var(--fs-8);
   color: var(--davys_gray);
 }
 
 @media screen and (max-width: 768px) {
-  .transactions-sidebar-due-payments.mobile-view {
+  .transaction-sidebar-list-items.mobile-view {
     display: none;
+  }
+
+  .transaction-sidebar-list-items .transaction-sidebar-list-items-list {
+    max-height: 300px;
   }
 }

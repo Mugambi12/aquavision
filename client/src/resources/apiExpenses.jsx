@@ -1,5 +1,13 @@
 // src/api/apiExpenses.js
 
+export const fetchHighestExpenses = async () => {
+  const response = await fetch("/api/expenses/get/highest");
+  if (!response.ok) {
+    throw new Error("Failed to fetch highest expenses");
+  }
+  return await response.json();
+};
+
 export const fetchExpenses = async () => {
   const response = await fetch("/api/expenses/get");
   if (!response.ok) {

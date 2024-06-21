@@ -132,11 +132,14 @@
 /* CSS for expense table styling */
 /*================================*/
 .expense-table-container {
-  margin-left: -270px;
   padding: var(--fs-4);
   background: var(--white);
   border-radius: var(--radius-8);
   box-shadow: var(--shadow-1);
+}
+
+.expense-table-container.table {
+  margin-left: -270px;
 }
 
 .expense-table {

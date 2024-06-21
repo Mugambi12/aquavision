@@ -6,14 +6,14 @@ from ..models.users import User
 from ..models.invoice import Invoice
 from ..schemas.revenue_serializer import revenue_serializer
 from ..schemas.users_serializer import user_serializer
-from ..schemas.invoice_serializer import invoice_serializer
+from ..schemas.invoice_serializer import unpaid_invoices_serializer
 import logging
 
 api = Namespace('payments', description='Payment related operations')
 
 @api.route('/get/unpaid-invoices')
 class PaymentUnpaidInvoicesListResource(Resource):
-    @api.marshal_with(invoice_serializer, as_list=True)
+    @api.marshal_with(unpaid_invoices_serializer, as_list=True)
     def get(self):
         try:
             invoices = Invoice.query.all()

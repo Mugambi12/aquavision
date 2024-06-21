@@ -33,3 +33,14 @@ active_houses_serializer = api.model(
     'house_number': fields.String()
   }
 )
+
+unpaid_invoices_serializer = api.model(
+    'Invoice', {
+        '_id': fields.String(),
+        'full_name': fields.String(),
+        'user_id': fields.Integer(),
+        'house_section': fields.String(),
+        'house_number': fields.String(),
+        'total_amount': fields.Float()
+    }
+)

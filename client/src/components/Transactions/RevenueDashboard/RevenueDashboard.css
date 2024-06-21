@@ -172,11 +172,14 @@
 /*==============================*/
 
 .revenue-table-container {
-  margin-left: -270px;
   padding: var(--fs-5);
   background: var(--white);
   border-radius: var(--radius-8);
   box-shadow: var(--shadow-1);
+}
+
+.revenue-table-container.table {
+  margin-left: -270px;
 }
 
 .revenue-table {

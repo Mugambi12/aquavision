@@ -6,7 +6,7 @@ const ExpenseHeader = ({ openCreateExpenseModal }) => (
     <span className="material-symbols-rounded">arrow_left</span>
     <div className="expense-header-content">
       <div className="expense-info">
-        <span className="header-title">expense</span>
+        <span className="header-title">Expense</span>
       </div>
     </div>
     <span className="material-symbols-rounded" onClick={openCreateExpenseModal}>
