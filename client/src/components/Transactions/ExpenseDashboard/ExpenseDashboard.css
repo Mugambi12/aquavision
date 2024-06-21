@@ -193,11 +193,11 @@
 }
 
 .expense-table .completed {
-  color: var(--emerald);
+  color: var(--sonic_sliver);
 }
 
 .expense-table .pending {
-  color: var(--sonic_sliver);
+  color: var(--coral);
 }
 
 .expense-table .view {

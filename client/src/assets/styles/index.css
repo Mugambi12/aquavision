@@ -21,6 +21,10 @@
   --emerald_12: hsla(144, 62%, 53%, 0.12);
   --coral_12: hsla(15, 100%, 65%, 0.12);
 
+  /* Shades with 8% opacity */
+  --black_08: hsla(0, 0%, 0%, 0.06);
+  --black_12: hsla(0, 0%, 0%, 0.12);
+
   /* Standard Colors */
   --imperial_red: hsl(357, 86%, 57%);
   --pacific_blue: hsl(188, 78%, 41%);
@@ -32,13 +36,11 @@
   --emerald: hsl(144, 62%, 53%);
   --cool_gray: hsl(225, 11%, 59%);
   --cultured: hsl(225, 20%, 96%);
-  --black: hsl(0, 0%, 0%);
-  --black_08: hsla(0, 0%, 0%, 0.06);
-  --black_12: hsla(0, 0%, 0%, 0.12);
   --coral: hsl(15, 100%, 65%);
   --sunglow: hsl(44, 100%, 61%);
   --onyx: hsl(207, 8%, 21%);
   --onyx_2: hsl(210, 10%, 23%);
+  --black: hsl(0, 0%, 0%);
   --white: hsl(0, 0%, 100%);
 
   /**
