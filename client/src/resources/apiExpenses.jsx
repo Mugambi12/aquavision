@@ -29,3 +29,27 @@ export const postExpense = async (expense) => {
   }
   return await response.json();
 };
+
+export const updateExpense = async (expense) => {
+  const response = await fetch(`/api/expenses/update/${expense._id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(expense),
+  });
+  if (!response.ok) {
+    throw new Error("Failed to update expense");
+  }
+  return await response.json();
+};
+
+export const deleteExpense = async (expenseId) => {
+  const response = await fetch(`/api/expenses/delete/${expenseId}`, {
+    method: "DELETE",
+  });
+  if (!response.ok) {
+    throw new Error("Failed to delete expense");
+  }
+  return await response.json();
+};

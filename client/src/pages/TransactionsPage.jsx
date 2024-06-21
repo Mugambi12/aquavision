@@ -103,6 +103,7 @@ const Transactions = () => {
                 />
               ) : (
                 <ExpensesManagement
+                  highestExpenses={highestExpenses}
                   openCreateExpenseModal={openCreateExpenseModal}
                   isCreateExpenseModalOpen={isCreateExpenseModalOpen}
                   setIsCreateExpenseModalOpen={setIsCreateExpenseModalOpen}

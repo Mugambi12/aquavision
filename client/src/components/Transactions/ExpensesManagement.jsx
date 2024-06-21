@@ -5,7 +5,11 @@ import AddExpense from "./TransactionForms/AddExpense";
 import ViewExpense from "./TransactionForms/ViewExpense";
 import DeleteExpense from "./TransactionForms/DeleteExpense";
 import Spinner from "../Spinner/Spinner";
-import { fetchExpenses, postExpense } from "../../resources/apiExpenses";
+import {
+  fetchExpenses,
+  postExpense,
+  deleteExpense,
+} from "../../resources/apiExpenses";
 
 const ExpensesManagement = ({
   openCreateExpenseModal,
