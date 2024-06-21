@@ -77,7 +77,7 @@ const TransactionSidebar = ({
         {currentView === "revenue" && (
           <ul className="transaction-sidebar-list-items">
             <h2 className="transaction-sidebar-list-items-title">
-              Due Payments
+              Accounts Receivable
             </h2>
             <div className="transaction-sidebar-list-items-list">
               {unpaidInvoice.map((customer, index) => (

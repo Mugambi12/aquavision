@@ -1,5 +1,18 @@
 import _ from "lodash";
 
+export const COLORS = [
+  "#0088FE",
+  "#00C49F",
+  "#FFBB28",
+  "#FF8042",
+  "#AA336A",
+  "#9933CC",
+  "#FFCC00",
+  "#FF6600",
+  "#66FF33",
+  "#33CCCC",
+];
+
 export const transformData = (revenue, filters) => {
   const filteredData = revenue.filter((rev) => {
     const revDate = new Date(rev.payment_date);
@@ -33,5 +46,3 @@ export const transformData = (revenue, filters) => {
 
   return { lineChartData: monthlyRevenue, pieChartData: paymentMethodData };
 };
-
-export const COLORS = ["#8884d8", "#a4de6c", "#ffc658", "#82ca9d", "#ff8042"];
