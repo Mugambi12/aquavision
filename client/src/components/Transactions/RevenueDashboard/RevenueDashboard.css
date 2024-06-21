@@ -18,7 +18,7 @@
   background: var(--white);
   border-radius: var(--radius-8);
   box-shadow: var(--shadow-1);
-  margin-bottom: var(--fs-3);
+  margin-bottom: var(--fs-6);
 }
 
 .revenue-header span.material-symbols-rounded {
