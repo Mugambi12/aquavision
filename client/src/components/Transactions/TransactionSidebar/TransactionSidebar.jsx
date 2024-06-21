@@ -90,7 +90,10 @@ const TransactionSidebar = ({
                       {customer.house_section}, {customer.house_number}
                     </span>
                     <span className="transaction-sidebar-customer-amount">
-                      Ksh. {customer.total_amount}
+                      {customer.total_amount.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "KES",
+                      })}
                     </span>
                   </div>
                 </li>
@@ -112,10 +115,18 @@ const TransactionSidebar = ({
                       {expense.type}
                     </span>
                     <span className="transaction-sidebar-customer-amount">
-                      Ksh. {expense.amount}
+                      Amount:{" "}
+                      {expense.amount.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "KES",
+                      })}
                     </span>
                     <span className="transaction-sidebar-customer-house">
-                      Monthly Avg: {expense.monthly_avg}
+                      Average:{" "}
+                      {expense.average.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "KES",
+                      })}
                     </span>
                   </div>
                 </li>

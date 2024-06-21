@@ -1,5 +1,5 @@
+from flask import request, abort, jsonify
 from datetime import datetime
-from flask import request, abort
 from flask_restx import Namespace, Resource
 from ..models.expense import Expense
 from ..schemas.expense_serializer import expense_serializer
@@ -9,11 +9,34 @@ api = Namespace('expenses', description='Expense related operations')
 @api.route('/get/highest')
 class HighestExpenseResource(Resource):
     def get(self):
-        highest_expenses = [
-            {'type': 'Office Supplies', 'amount': 15000, 'monthly_avg': 8500},
-            {'type': 'Utilities', 'amount': 120000, 'monthly_avg': 12000},
-            {'type': 'Marketing', 'amount': 10000, 'monthly_avg': 5000}
-        ]
+        expenses = Expense.get_all()
+
+        if not expenses:
+            return {'message': 'No expenses found'}, 404
+
+        expense_totals = {}
+        expense_counts = {}
+
+        for expense in expenses:
+            if expense.type in expense_totals:
+                expense_totals[expense.type] += expense.amount
+                expense_counts[expense.type] += 1
+            else:
+                expense_totals[expense.type] = expense.amount
+                expense_counts[expense.type] = 1
+
+        highest_expenses = []
+        for expense_type, total_amount in expense_totals.items():
+            count = expense_counts[expense_type]
+            average = total_amount / count
+            highest_expenses.append({
+                'type': expense_type,
+                'amount': total_amount,
+                'average': average
+            })
+
+        highest_expenses = sorted(highest_expenses, key=lambda x: x['amount'], reverse=True)
+
         return highest_expenses, 200
 
 @api.route('/get')
