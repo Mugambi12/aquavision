@@ -10,7 +10,7 @@
 
 .add-user-container .modal-title {
   font-size: var(--fs-3);
-  color: var(--space-cadet);
+  color: var(--space_cadet);
   margin-bottom: var(--fs-1);
   text-align: center;
 }
@@ -36,7 +36,7 @@
 
 .add-user-container label {
   font-size: var(--fs-6);
-  color: var(--davys-gray);
+  color: var(--davys_gray);
 }
 
 .add-user-container input,
@@ -45,7 +45,7 @@
   font-size: var(--fs-7);
   background: var(--white);
   width: 100%;
-  color: var(--cool-gray);
+  color: var(--cool_gray);
   margin-top: var(--radius-6);
   border: 1px solid var(--cultured);
   border-radius: var(--radius-6);
@@ -59,14 +59,14 @@
 
 .add-user-container .role-options label {
   font-size: var(--fs-10);
-  color: var(--davys-gray);
+  color: var(--davys_gray);
 }
 
 .add-user-container .submit-button {
   padding: var(--radius-10) var(--radius-12);
   color: var(--white);
   font-size: var(--fs-5);
-  background: var(--space-cadet);
+  background: var(--space_cadet);
   border: none;
   text-align: center;
   border-radius: var(--radius-8);
@@ -75,7 +75,7 @@
 }
 
 .add-user-container .submit-button:hover {
-  background: var(--pacific-blue);
+  background: var(--pacific_blue);
 }
 
 @media (max-width: 600px) {

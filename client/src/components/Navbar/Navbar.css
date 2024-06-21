@@ -32,7 +32,7 @@
 .logo {
   font-size: var(--fs-1);
   font-weight: var(--fw-600);
-  color: var(--space-cadet);
+  color: var(--space_cadet);
 }
 
 .menu-toggle-btn .icon {
@@ -76,7 +76,7 @@
 }
 
 .navbar-link.active {
-  color: var(--blue-ryb);
+  color: var(--blue_ryb);
 }
 
 .user-action-list {
@@ -94,7 +94,7 @@
 }
 
 .navbar-icons .logout {
-  color: var(--imperial-red);
+  color: var(--imperial_red);
 }
 
 .header-profile {
@@ -122,7 +122,7 @@
 }
 
 .header .profile-subtitle {
-  color: var(--cool-gray);
+  color: var(--cool_gray);
   font-weight: var(--fw-500);
 }
 

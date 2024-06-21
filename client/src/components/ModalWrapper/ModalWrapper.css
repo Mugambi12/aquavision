@@ -60,7 +60,7 @@
   right: var(--radius-16);
   font-size: var(--fs-1);
   font-weight: var(--fw-600);
-  color: var(--imperial-red);
+  color: var(--imperial_red);
   background: none;
   border: none;
   cursor: pointer;

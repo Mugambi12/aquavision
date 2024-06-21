@@ -12,7 +12,7 @@
   font-size: var(--fs-3);
   font-weight: var(--fw-700);
   margin-bottom: 20px;
-  color: var(--space-cadet);
+  color: var(--space_cadet);
   text-align: center;
 }
 
@@ -29,7 +29,7 @@
 
 .expense-detail .label {
   font-weight: var(--fw-600);
-  color: var(--space-cadet);
+  color: var(--space_cadet);
 }
 
 .expense-detail .value {
@@ -40,7 +40,7 @@
   padding: var(--radius-8) var(--radius-12);
   font-size: var(--fs-6);
   color: var(--white);
-  background: var(--space-cadet);
+  background: var(--space_cadet);
   margin-top: 20px;
   border: none;
   border-radius: var(--radius-6);

@@ -10,7 +10,7 @@
 
 .edit-revenue-title {
   font-size: var(--fs-3);
-  color: var(--space-cadet);
+  color: var(--space_cadet);
   margin-bottom: var(--fs-1);
   text-align: center;
 }
@@ -29,7 +29,7 @@
 
 .form-group label {
   font-size: var(--fs-5);
-  color: var(--space-cadet);
+  color: var(--space_cadet);
   margin-bottom: var(--radius-6);
 }
 
@@ -47,7 +47,7 @@
 }
 
 .error-message {
-  color: var(--imperial-red);
+  color: var(--imperial_red);
   font-size: var(--fs-7);
   margin-top: 5px;
 }
@@ -64,7 +64,7 @@
   padding: var(--radius-8) var(--radius-12);
   font-size: var(--fs-6);
   color: var(--white);
-  background: var(--space-cadet);
+  background: var(--space_cadet);
   text-align: center;
   border: none;
   border-radius: var(--radius-6);
@@ -73,7 +73,7 @@
 }
 
 .submit-button:hover {
-  background: var(--pacific-blue);
+  background: var(--pacific_blue);
 }
 
 @media screen and (max-width: 768px) {

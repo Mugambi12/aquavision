@@ -15,7 +15,7 @@
   border-top-color: var(--coral);
   border-right-color: var(--black);
   border-bottom-color: var(--white);
-  border-left-color: var(--space-cadet);
+  border-left-color: var(--space_cadet);
   border-style: dotted;
   border-radius: 50%;
   width: 100%;
@@ -31,7 +31,7 @@
 .spinner-text {
   position: absolute;
   font-size: var(--fs-10);
-  color: var(--space-cadet);
+  color: var(--space_cadet);
   text-align: center;
 }
 

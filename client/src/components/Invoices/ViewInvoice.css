@@ -12,7 +12,7 @@
   font-size: var(--fs-3);
   font-weight: var(--fw-700);
   margin-bottom: 20px;
-  color: var(--space-cadet);
+  color: var(--space_cadet);
   text-align: center;
 }
 
@@ -31,13 +31,13 @@
 .label {
   font-size: var(--fs-5);
   font-weight: var(--fw-500);
-  color: var(--space-cadet);
+  color: var(--space_cadet);
 }
 
 .value {
   font-size: var(--fs-6);
   font-weight: var(--fw-400);
-  color: var(--davys-gray);
+  color: var(--davys_gray);
 }
 
 @media screen and (max-width: 768px) {

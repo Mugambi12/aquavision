@@ -29,7 +29,7 @@
 
 .chat-window-welcome-message .description {
   font-size: var(--fs-5);
-  color: var(--sonic-sliver);
+  color: var(--sonic_sliver);
 }
 
 /* chat-window */
@@ -50,7 +50,7 @@
   padding: 10px;
   max-width: 70%;
   width: fit-content;
-  background: var(--davys-gray_12);
+  background: var(--davys_gray_12);
   margin-bottom: 10px;
   border-radius: var(--radius-8);
   box-shadow: var(--shadow-2);
@@ -69,18 +69,18 @@
 
 .chat-window-message-time {
   font-size: var(--fs-10);
-  color: var(--sonic-sliver);
+  color: var(--sonic_sliver);
   align-self: flex-end;
   display: flex;
   gap: 5px;
 }
 
 .chat-window-message-time .message-read {
-  color: var(--pacific-blue);
+  color: var(--pacific_blue);
 }
 
 .chat-window-message-time .message-unread {
-  color: var(--sonic-sliver);
+  color: var(--sonic_sliver);
 }
 
 /* chat-window-message-input */
@@ -93,7 +93,7 @@
 .chat-window-message-input input {
   flex: 1;
   padding: 10px;
-  border: 1px solid var(--davys-gray_12);
+  border: 1px solid var(--davys_gray_12);
   border-radius: var(--radius-6);
   margin-right: 10px;
   background: var(--cultured);
@@ -103,7 +103,7 @@
   display: flex;
   align-items: center;
   padding: 12px;
-  background: var(--pacific-blue);
+  background: var(--pacific_blue);
   color: var(--white);
   border: none;
   border-radius: var(--radius-6);

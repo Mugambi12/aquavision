@@ -21,7 +21,7 @@
 
 .settings-sidebar {
   flex: 1;
-  background: var(--davys-gray_12);
+  background: var(--davys_gray_12);
   margin-right: calc(var(--radius-10) * 2);
   border-radius: var(--radius-8);
 }
@@ -50,7 +50,7 @@
 .company-name {
   font-size: var(--fs-4);
   font-weight: var(--fw-600);
-  color: var(--cool-gray);
+  color: var(--cool_gray);
   margin-top: 20px;
 }
 
@@ -70,11 +70,11 @@
 }
 
 .settings-nav-item:hover {
-  background: var(--blue-ryb_12);
+  background: var(--blue_ryb_12);
 }
 
 .settings-nav-item.active {
-  background: var(--pacific-blue_12);
+  background: var(--pacific_blue_12);
 }
 
 .settings-nav-item .material-symbols-rounded {
@@ -92,7 +92,7 @@
 
 .settings-form label {
   font-size: var(--fs-8);
-  color: var(--davys-gray);
+  color: var(--davys_gray);
   margin-bottom: var(--radius-6);
 }
 
@@ -102,14 +102,14 @@
   font-size: var(--fs-6);
   background: var(--white);
   width: 100%;
-  color: var(--sonic-sliver);
+  color: var(--sonic_sliver);
   margin: var(--radius-8) auto calc(var(--radius-10) * 1.4);
   border: 1px solid var(--cultured);
   border-radius: var(--radius-6);
 }
 
 .settings-form .error {
-  color: var(--imperial-red);
+  color: var(--imperial_red);
   font-size: var(--fs-7);
   margin-top: calc(var(--radius-10) * 0.5);
 }
@@ -124,7 +124,7 @@
 
 .settings-btn.primary {
   color: var(--white);
-  background: var(--imperial-red);
+  background: var(--imperial_red);
 }
 
 .settings-btn.primary:hover {
@@ -134,11 +134,11 @@
 
 .settings-btn.secondary {
   color: var(--black);
-  background: var(--blue-ryb_12);
+  background: var(--blue_ryb_12);
 }
 
 .settings-btn.secondary:hover {
-  background: var(--pacific-blue_12);
+  background: var(--pacific_blue_12);
 }
 
 .settings-btn.danger {
@@ -148,16 +148,16 @@
 }
 
 .settings-btn.danger:hover {
-  color: var(--imperial-red);
+  color: var(--imperial_red);
 }
 
 .settings-btn.success {
   color: var(--white);
-  background: var(--space-cadet);
+  background: var(--space_cadet);
 }
 
 .settings-btn.success:hover {
-  background: var(--pacific-blue);
+  background: var(--pacific_blue);
 }
 
 .material-symbols-rounded {
@@ -176,7 +176,7 @@
 .settings-pane h5 {
   font-size: var(--fs-4);
   margin-bottom: 20px;
-  color: var(--davys-gray);
+  color: var(--davys_gray);
 }
 
 .settings-pane-footer {

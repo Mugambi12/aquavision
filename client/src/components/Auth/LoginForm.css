@@ -61,7 +61,7 @@
 
 .login-form .label-icon {
   margin-left: 1rem;
-  color: var(--sonic-sliver);
+  color: var(--sonic_sliver);
 }
 
 .login-form label {
@@ -75,9 +75,9 @@
   width: 80%;
   padding: 0.75rem;
   font-size: var(--fs-6);
-  color: var(--sonic-sliver);
+  color: var(--sonic_sliver);
   margin-bottom: 2rem;
-  border: 1px solid var(--pacific-blue_12);
+  border: 1px solid var(--pacific_blue_12);
   border-radius: var(--radius-6);
 }
 
@@ -92,7 +92,7 @@
 
 .password-input-container .password-toggle {
   font-size: 1.5rem;
-  color: var(--sonic-sliver);
+  color: var(--sonic_sliver);
   position: absolute;
   top: 50%;
   right: 0.75rem;
@@ -101,7 +101,7 @@
 }
 
 .login-form .error {
-  color: var(--imperial-red);
+  color: var(--imperial_red);
   font-size: var(--fs-8);
   margin-top: -1rem;
   margin-bottom: 1rem;
@@ -112,7 +112,7 @@
   padding: 0.75rem;
   margin: 2rem auto 1rem;
   font-size: var(--fs-5);
-  background: var(--space-cadet);
+  background: var(--space_cadet);
   color: var(--white);
   text-align: center;
   border: none;
@@ -122,13 +122,13 @@
 }
 
 .login-form button:hover {
-  background: var(--pacific-blue);
+  background: var(--pacific_blue);
 }
 
 .forgot-password-link {
   margin-top: 1rem;
   font-size: var(--fs-7);
-  color: var(--pacific-blue);
+  color: var(--pacific_blue);
   text-decoration: none;
 }
 

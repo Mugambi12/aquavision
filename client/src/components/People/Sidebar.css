@@ -26,13 +26,13 @@
 }
 
 .sidebar-header-icons .icon:hover {
-  color: var(--blue-ryb);
+  color: var(--blue_ryb);
 }
 
 .sidebar-title {
   font-size: var(--fs-4);
   font-weight: var(--fw-600);
-  color: var(--onyx-2);
+  color: var(--onyx_2);
 }
 
 .search-icon {
@@ -57,13 +57,13 @@
 .full-name {
   font-size: var(--fs-7);
   font-weight: var(--fw-600);
-  color: var(--onyx-2);
+  color: var(--onyx_2);
   margin-bottom: 5px;
 }
 
 .gender-age {
   font-size: var(--fs-7);
-  color: var(--sonic-sliver);
+  color: var(--sonic_sliver);
 }
 
 .people-list {
@@ -83,7 +83,7 @@
 
 .person-item.active {
   border-radius: 20px;
-  background: var(--pacific-blue_12);
+  background: var(--pacific_blue_12);
 }
 
 /* Mobile Sidebar Styles */
@@ -107,7 +107,7 @@
 
   .sidebar-header {
     margin-top: 10px;
-    border-bottom: 1px solid var(--cool-gray);
+    border-bottom: 1px solid var(--cool_gray);
   }
 
   .sidebar-header-icons .icon.add {
@@ -139,7 +139,7 @@
   }
 
   .person-item.active {
-    background: var(--pacific-blue_12);
+    background: var(--pacific_blue_12);
   }
 
   .sidebar.show {

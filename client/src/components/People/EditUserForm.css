@@ -9,7 +9,7 @@
 .edit-user-container .modal-title {
   margin-bottom: var(--fs-1);
   font-size: var(--fs-4);
-  color: var(--davys-gray);
+  color: var(--davys_gray);
 }
 
 .edit-user-container .edit-user-form {
@@ -27,7 +27,7 @@
 
 .edit-user-container label {
   font-size: var(--fs-6);
-  color: var(--davys-gray);
+  color: var(--davys_gray);
 }
 
 .edit-user-container input {
@@ -35,7 +35,7 @@
   font-size: var(--fs-6);
   background: var(--white);
   width: 100%;
-  color: var(--cool-gray);
+  color: var(--cool_gray);
   margin-top: var(--radius-6);
   border: 1px solid var(--cultured);
   border-radius: var(--radius-6);
@@ -87,11 +87,11 @@
 }
 
 .edit-user-container input:checked + .toggle-slider {
-  background-color: var(--space-cadet);
+  background-color: var(--space_cadet);
 }
 
 .edit-user-container input:focus + .toggle-slider {
-  box-shadow: 0 0 1px var(--space-cadet);
+  box-shadow: 0 0 1px var(--space_cadet);
 }
 
 .edit-user-container input:checked + .toggle-slider:before {
@@ -104,7 +104,7 @@
   padding: var(--radius-10) var(--radius-12);
   color: var(--white);
   font-size: var(--fs-5);
-  background: var(--space-cadet);
+  background: var(--space_cadet);
   border: none;
   text-align: center;
   border-radius: var(--radius-8);
@@ -113,7 +113,7 @@
 }
 
 .edit-user-container .submit-button:hover {
-  background: var(--pacific-blue);
+  background: var(--pacific_blue);
 }
 
 @media screen and (max-width: 768px) {

@@ -20,20 +20,20 @@
 }
 
 .records-cust-invoice {
-  color: var(--pacific-blue);
+  color: var(--pacific_blue);
   font-weight: var(--fw-500);
   font-size: var(--fs-4);
 }
 
 .records-heading {
-  color: var(--davys-gray);
+  color: var(--davys_gray);
   font-weight: var(--fw-400);
   font-size: var(--fs-5);
   margin-top: 10px;
 }
 
 .records-company {
-  color: var(--cool-gray);
+  color: var(--cool_gray);
   font-size: var(--fs-8);
   font-weight: var(--fw-500);
   margin-top: 5px;
@@ -47,7 +47,7 @@
 }
 
 .records-label {
-  color: var(--cool-gray);
+  color: var(--cool_gray);
   font-size: var(--fs-10);
   font-weight: var(--fw-300);
   letter-spacing: 1px;
@@ -57,7 +57,7 @@
 .records-progress {
   width: 200px;
   height: 6px;
-  background: var(--eerie-black);
+  background: var(--eerie_black);
   border-radius: 20px;
   position: relative;
 }
@@ -65,7 +65,7 @@
 .records-progress::after {
   content: "";
   height: 100%;
-  background: var(--pacific-blue);
+  background: var(--pacific_blue);
   width: 50%;
   border-radius: 20px;
   position: absolute;
@@ -76,7 +76,7 @@
 }
 
 .blue {
-  background: var(--pacific-blue);
+  background: var(--pacific_blue);
 }
 
 .purple {
@@ -84,7 +84,7 @@
 }
 
 .add {
-  border: 1px solid var(--davys-gray);
+  border: 1px solid var(--davys_gray);
 }
 
 .records-download-section {
@@ -112,7 +112,7 @@
 }
 
 .download-button.blue {
-  color: var(--pacific-blue);
+  color: var(--pacific_blue);
 }
 
 .download-button.purple {
@@ -189,19 +189,19 @@
 }
 
 .records-menu span {
-  color: var(--cool-gray);
+  color: var(--cool_gray);
   font-size: var(--fs-10);
   padding: 10px 30px;
   cursor: pointer;
 }
 
 .records-menu span:hover {
-  color: var(--davys-gray);
+  color: var(--davys_gray);
 }
 
 .records-menu span.records-active {
-  color: var(--pacific-blue);
-  border-bottom: 2px solid var(--pacific-blue);
+  color: var(--pacific_blue);
+  border-bottom: 2px solid var(--pacific_blue);
   font-weight: bold;
 }
 
@@ -235,7 +235,7 @@
 .records-invoice-row {
   background: var(--white);
   font-weight: var(--fw-500);
-  color: var(--davys-gray);
+  color: var(--davys_gray);
 }
 
 .records-status {
@@ -249,7 +249,7 @@
 
 .records-invoice-row .pay {
   font-size: var(--fs-4);
-  color: var(--pacific-blue);
+  color: var(--pacific_blue);
   cursor: pointer;
   justify-content: center;
 }
@@ -280,13 +280,13 @@
 
 .records-month {
   font-size: var(--fs-10);
-  color: var(--cool-gray);
+  color: var(--cool_gray);
   letter-spacing: 2px;
 }
 
 .records-date {
   font-size: var(--fs-8);
-  color: var(--davys-gray);
+  color: var(--davys_gray);
   letter-spacing: 4px;
   line-height: 1.5;
 }
@@ -301,13 +301,13 @@
 
 .records-invoice-row .view {
   font-size: var(--fs-4);
-  color: var(--pacific-blue);
+  color: var(--pacific_blue);
   cursor: pointer;
 }
 
 .records-invoice-row .delete {
   font-size: var(--fs-4);
-  color: var(--imperial-red);
+  color: var(--imperial_red);
   cursor: pointer;
 }
 
@@ -395,7 +395,7 @@
   align-items: center;
   padding: var(--radius-8);
   color: var(--cultured);
-  background: var(--pacific-blue);
+  background: var(--pacific_blue);
   border-radius: var(--radius-16) var(--radius-16) var(--radius-3)
     var(--radius-3);
   box-shadow: var(--shadow-1);

@@ -8,7 +8,7 @@
 
 .refund-revenue-title {
   font-size: var(--fs-3);
-  color: var(--davys-gray);
+  color: var(--davys_gray);
   margin-bottom: 20px;
 }
 
@@ -20,7 +20,7 @@
 
 .refund-revenue-id {
   font-size: var(--fs-5);
-  color: var(--imperial-red);
+  color: var(--imperial_red);
   margin-bottom: 20px;
 }
 
@@ -44,11 +44,11 @@
 }
 
 .refund-revenue-buttons .confirm-button {
-  background: var(--space-cadet);
+  background: var(--space_cadet);
 }
 
 .refund-revenue-buttons .confirm-button:hover {
-  background: var(--pacific-blue);
+  background: var(--pacific_blue);
 }
 
 @media screen and (max-width: 768px) {

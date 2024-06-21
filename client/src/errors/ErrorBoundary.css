@@ -8,8 +8,8 @@
   position: absolute;
   align-items: center;
   justify-content: center;
-  background-color: var(--imperial-red_12);
-  color: var(--imperial-red);
+  background-color: var(--imperial_red_12);
+  color: var(--imperial_red);
   text-align: center;
   padding: 20px;
   box-sizing: border-box;
@@ -26,7 +26,7 @@
   margin-top: 20px;
   font-size: var(--fs-5);
   color: var(--white);
-  background-color: var(--imperial-red);
+  background-color: var(--imperial_red);
   border: none;
   border-radius: var(
     --radius-4,

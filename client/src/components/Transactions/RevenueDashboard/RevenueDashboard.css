@@ -24,7 +24,7 @@
 .revenue-header span.material-symbols-rounded {
   cursor: pointer;
   font-size: var(--fs-3);
-  color: var(--space-cadet);
+  color: var(--space_cadet);
 }
 
 .revenue-header-content {
@@ -40,7 +40,7 @@
 }
 
 .cust-invoice {
-  color: var(--pacific-blue);
+  color: var(--pacific_blue);
   font-weight: var(--fw-600);
   font-size: var(--fs-4);
 }
@@ -84,7 +84,7 @@
 }
 
 .revenue-charts .charts-revenue-data-filter .filter .cancelled {
-  color: var(--imperial-red);
+  color: var(--imperial_red);
 }
 
 .charts-revenue-data-filter label {
@@ -133,7 +133,7 @@
 .revenue-charts-container .chart-header {
   font-size: var(--fs-5);
   font-weight: var(--fw-600);
-  color: var(--eerie-black);
+  color: var(--eerie_black);
   margin-bottom: var(--fs-4);
 }
 
@@ -189,10 +189,11 @@
 .revenue-table td {
   background: var(--white);
   font-weight: var(--fw-500);
-  color: var(--davys-gray);
+  color: var(--davys_gray);
   text-align: center;
 }
 
+/* Status colors */
 .revenue-table .Card {
   color: #8884d8;
 }
@@ -214,9 +215,28 @@
 }
 
 .revenue-table .Cancelled {
-  color: var(--imperial-red);
+  color: var(--imperial_red);
 }
 
+/* Button styles */
+.revenue-table .view {
+  color: var(--pacific_blue);
+}
+
+.revenue-table .refund {
+  color: var(--space_cadet);
+}
+
+.revenue-table .delete {
+  color: var(--imperial_red);
+}
+
+.revenue-table .material-symbols-rounded {
+  font-size: var(--fs-4);
+  margin-right: var(--fs-3);
+}
+
+/* Responsive adjustments */
 @media screen and (max-width: 768px) {
   .revenue-table-container {
     margin-left: 0;
@@ -225,77 +245,7 @@
   }
 
   .revenue-table {
-    border-spacing: 0 0px;
+    border-spacing: 0;
     width: 100%;
   }
-}
-
-/*==============================*/
-/* revenue table options */
-/*==============================*/
-
-.revenue-table .options {
-  font-size: var(--fs-2);
-  cursor: pointer;
-  position: relative;
-}
-
-.revenue-table .active {
-  background: var(--davys-gray_12);
-}
-
-.revenue-table .revenue-options-dropdown {
-  display: none;
-  position: absolute;
-  background: var(--cultured);
-  box-shadow: 0 4px 6px var(--shadow-1);
-  border-radius: var(--radius-8);
-  top: calc(100% + var(--radius-3));
-  right: 0;
-  z-index: 1;
-}
-
-.revenue-table .revenue-option {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  padding: var(--fs-10);
-  font-size: var(--fs-5);
-  border-radius: var(--radius-8);
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.revenue-table .revenue-option:hover {
-  background: var(--davys-gray_12);
-}
-
-.revenue-table .view {
-  color: var(--pacific-blue);
-}
-
-.revenue-table .edit {
-  color: var(--emerald);
-}
-
-.revenue-table .refund {
-  color: var(--space-cadet);
-}
-
-.revenue-table .delete {
-  color: var(--imperial-red);
-}
-
-.revenue-table .material-symbols-rounded {
-  font-size: var(--fs-4);
-  margin-right: var(--fs-3);
-}
-
-.revenue-table .dropdown-option-label {
-  margin-left: var(--fs-1);
-}
-
-.revenue-table .active .revenue-options-dropdown {
-  display: block;
 }

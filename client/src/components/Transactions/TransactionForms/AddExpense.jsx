@@ -38,28 +38,25 @@ const AddExpense = ({ onSubmit, submitting }) => {
               {...register("type", { required: "Type is required" })}
             >
               <option value="">Select type</option>
-              <option value="Salary">Salary</option>
-              <option value="Bonus">Bonus</option>
-              <option value="Travel">Travel</option>
+              <option value="Equipment Maintenance">
+                Equipment Maintenance
+              </option>
+              <option value="Utility Bills">Utility Bills</option>
+              <option value="Office Supplies">Office Supplies</option>
+              <option value="Employee Salaries">Employee Salaries</option>
+              <option value="Transportation">Transportation</option>
+              <option value="Water Treatment Chemicals">
+                Water Treatment Chemicals
+              </option>
+              <option value="Consulting Services">Consulting Services</option>
+              <option value="Training and Development">
+                Training and Development
+              </option>
+              <option value="Customer Service">Customer Service</option>
               {/* Add more options as needed */}
             </select>
             {errors.type && (
               <p className="error-message">{errors.type.message}</p>
-            )}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="description">Description:</label>
-            <input
-              id="description"
-              type="text"
-              placeholder="Enter description"
-              {...register("description", {
-                required: "Description is required",
-              })}
-            />
-            {errors.description && (
-              <p className="error-message">{errors.description.message}</p>
             )}
           </div>
 
@@ -72,6 +69,19 @@ const AddExpense = ({ onSubmit, submitting }) => {
             />
             {errors.date && (
               <p className="error-message">{errors.date.message}</p>
+            )}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="amount">Amount:</label>
+            <input
+              id="amount"
+              type="number"
+              placeholder="Enter amount"
+              {...register("amount", { required: "Amount is required" })}
+            />
+            {errors.amount && (
+              <p className="error-message">{errors.amount.message}</p>
             )}
           </div>
 
@@ -91,34 +101,6 @@ const AddExpense = ({ onSubmit, submitting }) => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="transaction_id">Transaction ID:</label>
-            <input
-              id="transaction_id"
-              type="text"
-              placeholder="Enter transaction ID"
-              {...register("transaction_id", {
-                required: "Transaction ID is required",
-              })}
-            />
-            {errors.transaction_id && (
-              <p className="error-message">{errors.transaction_id.message}</p>
-            )}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="amount">Amount:</label>
-            <input
-              id="amount"
-              type="number"
-              placeholder="Enter amount"
-              {...register("amount", { required: "Amount is required" })}
-            />
-            {errors.amount && (
-              <p className="error-message">{errors.amount.message}</p>
-            )}
-          </div>
-
-          <div className="form-group">
             <label htmlFor="payment_status">Payment Status:</label>
             <select
               id="payment_status"
@@ -127,31 +109,13 @@ const AddExpense = ({ onSubmit, submitting }) => {
               })}
             >
               <option value="">Select payment status</option>
-              <option value="pending">Pending</option>
-              <option value="paid">Paid</option>
+              <option value="Completed">Completed</option>
+              <option value="Pending">Pending</option>
               <option value="failed">Failed</option>
               {/* Add more options as needed */}
             </select>
             {errors.payment_status && (
               <p className="error-message">{errors.payment_status.message}</p>
-            )}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="approval_status">Approval Status:</label>
-            <select
-              id="approval_status"
-              {...register("approval_status", {
-                required: "Approval status is required",
-              })}
-            >
-              <option value="">Select approval status</option>
-              <option value="Completed">Completed</option>
-              <option value="Approved">Approved</option>
-              <option value="Rejected">Rejected</option>
-            </select>
-            {errors.approval_status && (
-              <p className="error-message">{errors.approval_status.message}</p>
             )}
           </div>
         </div>

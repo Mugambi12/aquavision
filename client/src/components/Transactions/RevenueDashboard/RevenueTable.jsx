@@ -40,37 +40,37 @@ const RevenueTable = ({
           {revenue.map((rev) => (
             <tr key={rev._id}>
               <td
-                className={`${
+                className={
                   rev.payment_status === "Cancelled" ? "Cancelled" : ""
-                }`}
+                }
               >
                 #{rev._id}
               </td>
               <td
-                className={`${
+                className={
                   rev.payment_status === "Cancelled" ? "Cancelled" : ""
-                }`}
+                }
               >
                 {new Date(rev.payment_date).toLocaleDateString()}
               </td>
               <td
-                className={`${
+                className={
                   rev.payment_status === "Cancelled" ? "Cancelled" : ""
-                }`}
+                }
               >
                 {rev.full_name}
               </td>
               <td
-                className={`${
+                className={
                   rev.payment_status === "Cancelled" ? "Cancelled" : ""
-                }`}
+                }
               >
                 {rev.transaction_id}
               </td>
               <td
-                className={`${
+                className={
                   rev.payment_status === "Cancelled" ? "Cancelled" : ""
-                }`}
+                }
               >
                 {rev.amount.toLocaleString("en-US", {
                   style: "currency",
@@ -78,9 +78,9 @@ const RevenueTable = ({
                 })}
               </td>
               <td
-                className={`${
+                className={
                   rev.payment_status === "Cancelled" ? "Cancelled" : ""
-                }`}
+                }
               >
                 {rev.payment_status}
               </td>

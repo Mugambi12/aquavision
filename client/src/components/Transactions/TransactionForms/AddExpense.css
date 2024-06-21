@@ -10,7 +10,7 @@
 
 .add-expense-title {
   font-size: var(--fs-3);
-  color: var(--space-cadet);
+  color: var(--space_cadet);
   margin-bottom: var(--fs-1);
   text-align: center;
 }
@@ -27,7 +27,7 @@
 
 .form-group label {
   font-size: var(--fs-8);
-  color: var(--davys-gray);
+  color: var(--davys_gray);
   margin-bottom: var(--radius-3);
   display: block;
 }
@@ -37,7 +37,7 @@
   padding: var(--radius-8);
   font-size: var(--fs-6);
   background: var(--white);
-  color: var(--sonic-sliver);
+  color: var(--sonic_sliver);
   width: 100%;
   margin: var(--radius-6) 0 var(--radius-12);
   border: 1px solid var(--cultured);
@@ -45,7 +45,7 @@
 }
 
 .form-group .error-message {
-  color: var(--imperial-red);
+  color: var(--imperial_red);
   font-size: var(--fs-7);
   margin-top: 5px;
 }
@@ -65,11 +65,11 @@
   cursor: pointer;
   transition: background 0.3s ease;
   color: var(--white);
-  background: var(--space-cadet);
+  background: var(--space_cadet);
 }
 
 .form-group .submit-btn:hover {
-  background: var(--pacific-blue);
+  background: var(--pacific_blue);
 }
 
 @media screen and (max-width: 768px) {

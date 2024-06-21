@@ -8,7 +8,7 @@
 
 .delete-revenue-title {
   font-size: var(--fs-3);
-  color: var(--davys-gray);
+  color: var(--davys_gray);
   margin-bottom: 20px;
 }
 
@@ -20,7 +20,7 @@
 
 .delete-revenue-id {
   font-size: var(--fs-5);
-  color: var(--imperial-red);
+  color: var(--imperial_red);
   margin-bottom: 20px;
 }
 
@@ -43,12 +43,12 @@
 }
 
 .delete-revenue-buttons .confirm-button {
-  background: var(--imperial-red);
+  background: var(--imperial_red);
   text-align: center;
 }
 
 .delete-revenue-buttons .confirm-button:hover {
-  background: var(--pacific-blue);
+  background: var(--pacific_blue);
 }
 
 @media screen and (max-width: 768px) {

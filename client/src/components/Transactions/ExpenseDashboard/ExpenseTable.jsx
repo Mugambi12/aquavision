@@ -1,3 +1,4 @@
+/* JSX component for ExpenseTable */
 // ExpenseTable.jsx
 import React, { useEffect } from "react";
 import DataTable from "datatables.net-dt";
@@ -28,6 +29,7 @@ const ExpenseTable = ({
             <th>Merchant Name</th>
             <th>Expense Type</th>
             <th>Amount</th>
+            <th>Status</th>
             <th>View</th>
             <th>Delete</th>
           </tr>
@@ -36,27 +38,37 @@ const ExpenseTable = ({
           {expenses.map((exp) => (
             <tr key={exp._id}>
               <td
-                className={`${exp.status === "Cancelled" ? "Cancelled" : ""}`}
+                className={`${
+                  exp.payment_status === "Cancelled" ? "Cancelled" : ""
+                }`}
               >
                 #{exp._id}
               </td>
               <td
-                className={`${exp.status === "Cancelled" ? "Cancelled" : ""}`}
+                className={`${
+                  exp.payment_status === "Cancelled" ? "Cancelled" : ""
+                }`}
               >
                 {new Date(exp.date).toLocaleDateString()}
               </td>
               <td
-                className={`${exp.status === "Cancelled" ? "Cancelled" : ""}`}
+                className={`${
+                  exp.payment_status === "Cancelled" ? "Cancelled" : ""
+                }`}
               >
                 {exp.vendor}
               </td>
               <td
-                className={`${exp.status === "Cancelled" ? "Cancelled" : ""}`}
+                className={`${
+                  exp.payment_status === "Cancelled" ? "Cancelled" : ""
+                }`}
               >
                 {exp.type}
               </td>
               <td
-                className={`${exp.status === "Cancelled" ? "Cancelled" : ""}`}
+                className={`${
+                  exp.payment_status === "Cancelled" ? "Cancelled" : ""
+                }`}
               >
                 {exp.amount.toLocaleString("en-US", {
                   style: "currency",
@@ -64,7 +76,16 @@ const ExpenseTable = ({
                 })}
               </td>
               <td
-                className={`${exp.status === "Cancelled" ? "Cancelled" : ""}`}
+                className={`${
+                  exp.payment_status === "Completed" ? "completed" : "pending"
+                }`}
+              >
+                {exp.payment_status}
+              </td>
+              <td
+                className={`${
+                  exp.payment_status === "Cancelled" ? "Cancelled" : ""
+                }`}
               >
                 <button
                   className="material-symbols-rounded view"

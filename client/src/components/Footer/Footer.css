@@ -17,7 +17,7 @@
 
 .footer-link,
 .copyright {
-  color: var(--davys-gray);
+  color: var(--davys_gray);
   font-size: var(--fs-6);
   line-height: 1.7;
 }
@@ -29,7 +29,7 @@
 }
 
 :is(.footer-link, .copyright-link):is(:hover, :focus) {
-  color: var(--blue-ryb);
+  color: var(--blue_ryb);
 }
 
 .footer-item:not(:last-child)::after {

@@ -22,7 +22,7 @@
 .delete-invoice-btn {
   padding: 10px 20px;
   margin: 0 auto;
-  background: var(--imperial-red);
+  background: var(--imperial_red);
   color: var(--white);
   border: none;
   border-radius: 4px;
@@ -31,5 +31,5 @@
 }
 
 .delete-invoice-btn:hover {
-  background: var(--pacific-blue);
+  background: var(--pacific_blue);
 }

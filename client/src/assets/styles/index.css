@@ -13,30 +13,33 @@
      * colors
      */
 
-  --imperial-red_12: hsla(357, 86%, 57%, 0.12);
-  --pacific-blue_12: hsla(188, 78%, 41%, 0.12);
-  --davys-gray_12: hsla(210, 9%, 31%, 0.12);
-  --imperial-red: hsl(357, 86%, 57%);
-  --sonic-sliver: hsl(0, 0%, 47%);
-  --pacific-blue: hsl(188, 78%, 41%);
-  --blue-ryb_12: hsla(220, 100%, 50%, 0.12);
-  --space-cadet: hsl(220, 41%, 20%);
-  --eerie-black: hsl(214, 10%, 13%);
-  --davys-gray: hsl(210, 9%, 31%);
+  /* Shades with 12% opacity */
+  --imperial_red_12: hsla(357, 86%, 57%, 0.12);
+  --pacific_blue_12: hsla(188, 78%, 41%, 0.12);
+  --davys_gray_12: hsla(210, 9%, 31%, 0.12);
+  --blue_ryb_12: hsla(220, 100%, 50%, 0.12);
   --emerald_12: hsla(144, 62%, 53%, 0.12);
-  --cool-gray: hsl(225, 11%, 59%);
+  --coral_12: hsla(15, 100%, 65%, 0.12);
+
+  /* Standard Colors */
+  --imperial_red: hsl(357, 86%, 57%);
+  --pacific_blue: hsl(188, 78%, 41%);
+  --davys_gray: hsl(210, 9%, 31%);
+  --sonic_sliver: hsl(0, 0%, 47%);
+  --blue_ryb: hsl(220, 100%, 50%);
+  --space_cadet: hsl(220, 41%, 20%);
+  --eerie_black: hsl(214, 10%, 13%);
+  --emerald: hsl(144, 62%, 53%);
+  --cool_gray: hsl(225, 11%, 59%);
   --cultured: hsl(225, 20%, 96%);
-  --blue-ryb: hsl(220, 100%, 50%);
   --black: hsl(0, 0%, 0%);
   --black_08: hsla(0, 0%, 0%, 0.06);
   --black_12: hsla(0, 0%, 0%, 0.12);
-  --coral_12: hsla(15, 100%, 65%, 0.12);
-  --sunglow: hsl(44, 100%, 61%);
-  --emerald: hsl(144, 62%, 53%);
-  --onyx-2: hsl(210, 10%, 23%);
   --coral: hsl(15, 100%, 65%);
-  --white: hsl(0, 0%, 100%);
+  --sunglow: hsl(44, 100%, 61%);
   --onyx: hsl(207, 8%, 21%);
+  --onyx_2: hsl(210, 10%, 23%);
+  --white: hsl(0, 0%, 100%);
 
   /**
      * typography
@@ -182,7 +185,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--cool-gray);
+  background: var(--cool_gray);
   border-radius: 10px;
 }
 
@@ -224,7 +227,7 @@ body {
 }
 
 .error {
-  color: var(--imperial-red);
+  color: var(--imperial_red);
   font-size: var(--fs-8);
   margin-bottom: var(--radius-8);
 }

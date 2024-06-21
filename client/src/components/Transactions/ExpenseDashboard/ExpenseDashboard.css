@@ -15,7 +15,7 @@
 .expense-header span.material-symbols-rounded {
   cursor: pointer;
   font-size: var(--fs-3);
-  color: var(--space-cadet);
+  color: var(--space_cadet);
 }
 
 .expense-header-content {
@@ -31,7 +31,7 @@
 }
 
 .header-title {
-  color: var(--pacific-blue);
+  color: var(--pacific_blue);
   font-weight: var(--fw-600);
   font-size: var(--fs-4);
 }
@@ -129,10 +129,8 @@
   }
 }
 
+/* CSS for expense table styling */
 /*================================*/
-/* expense Table */
-/*================================*/
-
 .expense-table-container {
   margin-left: -270px;
   padding: var(--fs-4);
@@ -153,16 +151,24 @@
   background: var(--white);
   font-size: var(--fs-6);
   font-weight: var(--fw-500);
-  color: var(--davys-gray);
+  color: var(--davys_gray);
   text-align: center;
 }
 
+.expense-table .completed {
+  color: var(--emerald);
+}
+
+.expense-table .pending {
+  color: var(--sonic_sliver);
+}
+
 .expense-table .view {
-  color: var(--pacific-blue);
+  color: var(--pacific_blue);
 }
 
 .expense-table .delete {
-  color: var(--imperial-red);
+  color: var(--imperial_red);
 }
 
 @media screen and (max-width: 768px) {

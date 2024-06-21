@@ -128,7 +128,7 @@
 }
 
 .data-item-bulletin.lowest {
-  background: var(--pacific-blue);
+  background: var(--pacific_blue);
 }
 
 .data-item-label p {
@@ -160,7 +160,7 @@ hr {
   width: 100%;
   border: none;
   border-radius: 5px;
-  background: var(--davys-gray_12);
+  background: var(--davys_gray_12);
 }
 
 @media screen and (max-width: 768px) {
@@ -256,7 +256,7 @@ hr {
   margin: 15px 0;
   font-family: var(--ff-vietnam);
   font-size: var(--fs-7);
-  color: var(--onyx-2);
+  color: var(--onyx_2);
 }
 
 .personal-content-invoice-download-item .icon {
@@ -292,7 +292,7 @@ hr {
   font-family: var(--ff-vietnam);
   font-weight: var(--fw-600);
   font-size: var(--fs-4);
-  color: var(--onyx-2);
+  color: var(--onyx_2);
 }
 
 .personal-user-content-details {
@@ -328,7 +328,7 @@ hr {
   padding: 10px 20px;
   font-size: var(--fs-5);
   font-family: var(--ff-vietnam);
-  background: var(--pacific-blue_12);
+  background: var(--pacific_blue_12);
   border: none;
   border-radius: var(--radius-16);
   cursor: pointer;
@@ -358,11 +358,11 @@ hr {
 }
 
 .personal-content-card-billing-information {
-  background: var(--pacific-blue_12);
+  background: var(--pacific_blue_12);
 }
 
 .personal-content-card-repair-costs {
-  background: var(--imperial-red_12);
+  background: var(--imperial_red_12);
 }
 
 .personal-content-card-label,
@@ -398,7 +398,7 @@ hr {
     font-family: var(--ff-vietnam);
     font-weight: var(--fw-500);
     font-size: var(--fs-5);
-    color: var(--onyx-2);
+    color: var(--onyx_2);
     margin-bottom: var(--radius-8);
     text-align: center;
   }

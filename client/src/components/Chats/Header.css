@@ -8,11 +8,11 @@
 .chat-window-header-recipient-name {
   font-size: var(--fs-5);
   font-weight: var(--fw-600);
-  color: var(--eerie-black);
+  color: var(--eerie_black);
   margin-bottom: 5px;
 }
 
 .chat-window-header-recipient-status {
   font-size: var(--fs-8);
-  color: var(--pacific-blue);
+  color: var(--pacific_blue);
 }
