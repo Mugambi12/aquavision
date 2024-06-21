@@ -157,6 +157,14 @@
   text-align: center;
 }
 
+.expense-table .view {
+  color: var(--pacific-blue);
+}
+
+.expense-table .delete {
+  color: var(--imperial-red);
+}
+
 @media screen and (max-width: 768px) {
   .expense-table-container {
     margin-left: 0;

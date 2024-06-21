@@ -3,7 +3,7 @@
   background-color: var(--white);
   color: var(--onyx);
   max-width: 650px;
-  margin: 0;
+  margin: 0 auto;
   padding: var(--radius-8);
   border-radius: var(--radius-10);
 }
@@ -26,9 +26,10 @@
 }
 
 .form-group label {
-  font-size: var(--fs-8);
+  font-size: var(--fs-7);
   color: var(--davys-gray);
   margin-bottom: var(--radius-3);
+  display: block;
 }
 
 .form-group input,
@@ -52,6 +53,7 @@
 .form-group .button-group {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: var(--radius-10);
 }
 

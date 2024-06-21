@@ -118,7 +118,6 @@ const RevenueManagement = ({
   };
 
   const openViewRevenueModal = (revenue) => {
-    // Function to open view modal
     setSelectedRevenue(revenue);
     setIsViewRevenueModalOpen(true);
   };
@@ -178,7 +177,7 @@ const RevenueManagement = ({
       </ModalWrapper>
 
       <ModalWrapper
-        isOpen={isViewRevenueModalOpen} // View modal
+        isOpen={isViewRevenueModalOpen}
         onRequestClose={() => setIsViewRevenueModalOpen(false)}
       >
         <ViewRevenue

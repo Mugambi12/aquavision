@@ -1,4 +1,3 @@
-// ExpenseDashboard.jsx
 import "./ExpenseDashboard.css";
 import React, { useState, useEffect } from "react";
 import ExpenseHeader from "./ExpenseHeader";
@@ -7,14 +6,13 @@ import ExpenseTable from "./ExpenseTable";
 import { fetchExpenses } from "../../../resources/apiExpenses";
 
 const ExpenseDashboard = ({
+  openViewExpenseModal,
   openCreateExpenseModal,
-  openEditExpenseModal,
   openDeleteExpenseModal,
 }) => {
   const [expenses, setExpenses] = useState([]);
   const [filters, setFilters] = useState({ year: "", status: "all" });
   const [availableYears, setAvailableYears] = useState([]);
-  const [openDropdownId, setOpenDropdownId] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -54,10 +52,6 @@ const ExpenseDashboard = ({
     }));
   };
 
-  const toggleDropdown = (id) => {
-    setOpenDropdownId(openDropdownId === id ? null : id);
-  };
-
   return (
     <div id="expenses" className="expenses-container">
       <ExpenseHeader openCreateExpenseModal={openCreateExpenseModal} />
@@ -70,9 +64,7 @@ const ExpenseDashboard = ({
       />
       <ExpenseTable
         expenses={expenses}
-        openDropdownId={openDropdownId}
-        toggleDropdown={toggleDropdown}
-        openEditExpenseModal={openEditExpenseModal}
+        openViewExpenseModal={openViewExpenseModal}
         openDeleteExpenseModal={openDeleteExpenseModal}
       />
     </div>
