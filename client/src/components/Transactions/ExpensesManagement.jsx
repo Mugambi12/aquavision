@@ -12,6 +12,7 @@ import {
 } from "../../resources/apiExpenses";
 
 const ExpensesManagement = ({
+  highestExpenses,
   openCreateExpenseModal,
   isCreateExpenseModalOpen,
   setIsCreateExpenseModalOpen,
@@ -91,6 +92,7 @@ const ExpensesManagement = ({
       ) : (
         <ExpenseDashboard
           expenses={expensesData}
+          highestExpenses={highestExpenses}
           openCreateExpenseModal={openCreateExpenseModal}
           openViewExpenseModal={openViewExpenseModal}
           openDeleteExpenseModal={openDeleteExpenseModal}

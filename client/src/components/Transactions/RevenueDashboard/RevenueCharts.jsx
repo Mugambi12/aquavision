@@ -12,10 +12,8 @@ import {
   Pie,
   Cell,
 } from "recharts";
-
 import { transformData, COLORS } from "./utils";
 
-// Component for the RevenueCharts
 const RevenueCharts = ({
   revenue,
   filters,
@@ -26,14 +24,12 @@ const RevenueCharts = ({
   const [filteredRevenue, setFilteredRevenue] = useState([]);
   const [paymentMethodData, setPaymentMethodData] = useState([]);
 
-  // Update data when revenue or filters change
   useEffect(() => {
     const { lineChartData, pieChartData } = transformData(revenue, filters);
     setFilteredRevenue(lineChartData);
     setPaymentMethodData(pieChartData);
   }, [revenue, filters]);
 
-  // Render customized label for PieChart
   const renderCustomizedLabel = ({
     cx,
     cy,
@@ -63,7 +59,6 @@ const RevenueCharts = ({
   return (
     <div className="revenue-charts">
       <div className="charts-revenue-data-filter">
-        {/* Year filter */}
         <div className="filter">
           <label htmlFor="date-filter">Year:</label>
           <select
@@ -79,8 +74,6 @@ const RevenueCharts = ({
             ))}
           </select>
         </div>
-
-        {/* Status filter */}
         <div className="filter">
           <label htmlFor="status-filter">Status:</label>
           <select
@@ -99,10 +92,8 @@ const RevenueCharts = ({
         </div>
       </div>
 
-      {/* Conditionally render charts only if there is data */}
-      {filteredRevenue.length > 0 && paymentMethodData.length > 0 && (
+      {filteredRevenue.length > 0 && paymentMethodData.length > 0 ? (
         <div className="revenue-charts-container">
-          {/* AreaChart */}
           <div className="area-chart-container">
             <h2 className="chart-header">Monthly Revenue Trends</h2>
             <ResponsiveContainer height={300}>
@@ -132,7 +123,6 @@ const RevenueCharts = ({
             </ResponsiveContainer>
           </div>
 
-          {/* PieChart */}
           <div className="doughnut-chart-container">
             <h2 className="chart-header">Revenue by Payment Method</h2>
             <ResponsiveContainer height={300}>
@@ -159,10 +149,7 @@ const RevenueCharts = ({
             </ResponsiveContainer>
           </div>
         </div>
-      )}
-
-      {/* Optionally, you can add a message or alternative content when there's no data */}
-      {(filteredRevenue.length === 0 || paymentMethodData.length === 0) && (
+      ) : (
         <p>No data available</p>
       )}
     </div>
