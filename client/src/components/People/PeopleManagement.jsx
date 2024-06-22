@@ -2,6 +2,69 @@ import React, { useState, useMemo } from "react";
 import ReactECharts from "echarts-for-react";
 import "./PeopleManagement.css";
 
+const getLatestEntry = (entries) => {
+  if (!entries || entries.length === 0) return null;
+
+  return entries.reduce((latest, entry) => {
+    const entryDate = new Date(entry.year, entry.month);
+    const latestDate = new Date(latest.year, latest.month);
+
+    if (entryDate > latestDate) return entry;
+    return latest;
+  }, entries[0]);
+};
+
+const PersonalContentCard = ({ person, label, valueKey }) => {
+  const latestEntry = getLatestEntry(person.diagnosisHistory);
+
+  return (
+    <>
+      {latestEntry && (
+        <div
+          className={`personal-content-card personal-content-card-${label
+            .toLowerCase()
+            .replace(" ", "-")}`}
+        >
+          <div className="personal-content-card-label">{label}</div>
+          <div className="personal-content-card-value">
+            {latestEntry[valueKey].value}{" "}
+            {valueKey === "respiratory_rate" ? "Units" : "Ksh"}
+          </div>
+          {/*
+          <div className="personal-content-card-value-status">
+            {latestEntry[valueKey].levels}
+                  </div>
+                  */}
+        </div>
+      )}
+    </>
+  );
+};
+
+const WaterUsageCard = ({ person }) => (
+  <PersonalContentCard
+    person={person}
+    label="Water Usage"
+    valueKey="respiratory_rate"
+  />
+);
+
+const BillingInformationCard = ({ person }) => (
+  <PersonalContentCard
+    person={person}
+    label="Billing Information"
+    valueKey="temperature"
+  />
+);
+
+const UsageTrendsCard = ({ person }) => (
+  <PersonalContentCard
+    person={person}
+    label="Repair Costs"
+    valueKey="heart_rate"
+  />
+);
+
 const WaterConsumptionHistory = ({ person }) => {
   const { diagnosisHistory } = person;
   const [filter, setFilter] = useState("all");
@@ -125,69 +188,6 @@ const WaterConsumptionHistory = ({ person }) => {
     </>
   );
 };
-
-const getLatestEntry = (entries) => {
-  if (!entries || entries.length === 0) return null;
-
-  return entries.reduce((latest, entry) => {
-    const entryDate = new Date(entry.year, entry.month);
-    const latestDate = new Date(latest.year, latest.month);
-
-    if (entryDate > latestDate) return entry;
-    return latest;
-  }, entries[0]);
-};
-
-const PersonalContentCard = ({ person, label, valueKey }) => {
-  const latestEntry = getLatestEntry(person.diagnosisHistory);
-
-  return (
-    <>
-      {latestEntry && (
-        <div
-          className={`personal-content-card personal-content-card-${label
-            .toLowerCase()
-            .replace(" ", "-")}`}
-        >
-          <div className="personal-content-card-label">{label}</div>
-          <div className="personal-content-card-value">
-            {latestEntry[valueKey].value}{" "}
-            {valueKey === "respiratory_rate" ? "Units" : "Ksh"}
-          </div>
-          {/*
-          <div className="personal-content-card-value-status">
-            {latestEntry[valueKey].levels}
-                  </div>
-                  */}
-        </div>
-      )}
-    </>
-  );
-};
-
-const WaterUsageCard = ({ person }) => (
-  <PersonalContentCard
-    person={person}
-    label="Water Usage"
-    valueKey="respiratory_rate"
-  />
-);
-
-const BillingInformationCard = ({ person }) => (
-  <PersonalContentCard
-    person={person}
-    label="Billing Information"
-    valueKey="temperature"
-  />
-);
-
-const UsageTrendsCard = ({ person }) => (
-  <PersonalContentCard
-    person={person}
-    label="Repair Costs"
-    valueKey="heart_rate"
-  />
-);
 
 const PaymentHistory = ({ person }) => (
   <div className="content-card">
