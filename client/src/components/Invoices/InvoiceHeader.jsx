@@ -1,6 +1,5 @@
 // InvoicesHeader.js
 import React from "react";
-import "./InvoiceHeader.css";
 
 const InvoicesHeader = () => (
   <div className="records-header">

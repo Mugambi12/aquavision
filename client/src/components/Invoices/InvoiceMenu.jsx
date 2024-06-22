@@ -1,6 +1,5 @@
 // InvoicesMenu.js
 import React from "react";
-import "./InvoiceMenu.css";
 
 const InvoicesMenu = (
   {

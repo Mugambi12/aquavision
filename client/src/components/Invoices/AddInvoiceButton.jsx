@@ -3,10 +3,10 @@ import React from "react";
 import "./AddInvoiceButton.css";
 
 const AddInvoiceButton = ({ openPostModal }) => (
-  <div className="records-add-invoice-container">
-    <div className="records-add-invoice" onClick={openPostModal}>
+  <div className="add-button-invoice-container">
+    <div className="add-button-invoice" onClick={openPostModal}>
       <span className="material-symbols-rounded">add</span>
-      <span className="records-invoice-label">Invoice</span>
+      <span className="add-button-invoice-label">Invoice</span>
     </div>
   </div>
 );

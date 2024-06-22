@@ -1,5 +1,4 @@
 import React from "react";
-import "./ViewInvoice.css";
 
 const ViewInvoice = ({ invoice }) => {
   if (!invoice) return null;

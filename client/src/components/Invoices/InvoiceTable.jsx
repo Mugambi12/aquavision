@@ -2,7 +2,6 @@
 import React, { useEffect } from "react";
 import DataTable from "datatables.net-dt";
 import "datatables.net-responsive-dt";
-import "./InvoiceTable.css";
 
 const InvoiceTable = ({
   data,

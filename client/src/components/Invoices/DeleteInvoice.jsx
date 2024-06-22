@@ -1,5 +1,4 @@
 import React from "react";
-import "./DeleteInvoice.css";
 
 const DeleteInvoice = ({ invoice, onSubmit }) => {
   const handleDeleteInvoice = () => {
