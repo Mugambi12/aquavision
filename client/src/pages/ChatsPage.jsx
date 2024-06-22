@@ -4,31 +4,44 @@ import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Chats/Sidebar";
 import ChatWindow from "../components/Chats/ChatWindow";
 import Spinner from "../components/Spinner/Spinner";
+import { fetchMessage } from "../resources/apiChats";
 
 const Chats = () => {
   const [chats, setChats] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchChats = async () => {
+    const loadChats = async () => {
+      setLoading(true);
       try {
-        const response = await fetch("/api/chats");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        console.log("Chats data fetched successfully:");
+        const data = await fetchMessage();
         setChats(data);
-        setLoading(false);
       } catch (error) {
+        setError("Failed to fetch chats.");
         console.error("Error fetching chats:", error);
+      } finally {
         setLoading(false);
       }
     };
-
-    fetchChats();
+    loadChats();
   }, []);
+
+  const refreshChats = async () => {
+    setLoading(true);
+    try {
+      const data = await fetchMessage();
+      setChats(data);
+      if (selectedChat) {
+        setSelectedChat(data.find((chat) => chat._id === selectedChat._id));
+      }
+    } catch (error) {
+      console.error("Error refreshing chats:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleChatSelection = (chatId) => {
     setSelectedChat(chats.find((chat) => chat._id === chatId));
@@ -43,10 +56,12 @@ const Chats = () => {
       <div className="general-chat-container">
         {loading ? (
           <Spinner />
+        ) : error ? (
+          <div className="error-message">{error}</div>
         ) : (
           <>
             <Sidebar chats={chats} onChatSelect={handleChatSelection} />
-            <ChatWindow chat={selectedChat} />
+            <ChatWindow chat={selectedChat} refreshChats={refreshChats} />
           </>
         )}
       </div>
