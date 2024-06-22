@@ -130,13 +130,6 @@
   gap: var(--fs-3);
 }
 
-.revenue-charts-container .chart-header {
-  font-size: var(--fs-5);
-  font-weight: var(--fw-600);
-  color: var(--eerie_black);
-  margin-bottom: var(--fs-4);
-}
-
 .area-chart-container {
   flex-basis: 65%;
   overflow-x: auto;

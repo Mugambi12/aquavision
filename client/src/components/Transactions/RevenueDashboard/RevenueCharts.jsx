@@ -1,18 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  PieChart,
-  Pie,
-  Cell,
-} from "recharts";
-import { transformData, COLORS } from "./utils";
+import ReactECharts from "echarts-for-react";
+import { COLORS, transformData } from "./utils";
 
 const RevenueCharts = ({
   revenue,
@@ -29,32 +17,6 @@ const RevenueCharts = ({
     setFilteredRevenue(lineChartData);
     setPaymentMethodData(pieChartData);
   }, [revenue, filters]);
-
-  const renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-    index,
-  }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * (Math.PI / 180));
-    const y = cy + radius * Math.sin(-midAngle * (Math.PI / 180));
-
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="white"
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-      >
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
-  };
 
   return (
     <div className="revenue-charts">
@@ -95,58 +57,90 @@ const RevenueCharts = ({
       {filteredRevenue.length > 0 && paymentMethodData.length > 0 ? (
         <div className="revenue-charts-container">
           <div className="area-chart-container">
-            <h2 className="chart-header">Monthly Revenue Trends</h2>
-            <ResponsiveContainer height={300}>
-              <AreaChart
-                data={filteredRevenue}
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-              >
-                <defs>
-                  <linearGradient id="areaColor" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="15%" stopColor="#8884d8" stopOpacity={0.8} />
-                    <stop offset="85%" stopColor="#8884d8" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <XAxis dataKey="month" type="category" />
-                <YAxis type="number" />
-                <CartesianGrid strokeDasharray="0.5 0.5" />
-                <Tooltip />
-                <Area
-                  dataKey="revenue"
-                  type="monotone"
-                  stroke="#8884d8"
-                  fillOpacity={1}
-                  fill="url(#areaColor)"
-                  activeDot={{ r: 8 }}
-                />
-              </AreaChart>
-            </ResponsiveContainer>
+            <ReactECharts
+              option={{
+                title: {
+                  text: "Monthly Revenue Trends",
+                  textStyle: {
+                    fontSize: 14,
+                  },
+                },
+                tooltip: {
+                  trigger: "axis",
+                },
+                xAxis: {
+                  type: "category",
+                  data: filteredRevenue.map((data) => data.month),
+                },
+                yAxis: {
+                  type: "value",
+                },
+                series: [
+                  {
+                    data: filteredRevenue.map((data) => data.revenue),
+                    type: "line",
+                    smooth: true,
+                    areaStyle: {
+                      color: {
+                        type: "linear",
+                        x: 0,
+                        y: 0,
+                        x2: 0,
+                        y2: 1,
+                        colorStops: [
+                          { offset: 0, color: COLORS[0] },
+                          { offset: 1, color: COLORS[1] },
+                        ],
+                        global: false,
+                      },
+                    },
+                  },
+                ],
+              }}
+              style={{ height: 300 }}
+            />
           </div>
 
           <div className="doughnut-chart-container">
-            <h2 className="chart-header">Revenue by Payment Method</h2>
-            <ResponsiveContainer height={300}>
-              <PieChart>
-                <Pie
-                  data={paymentMethodData}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={renderCustomizedLabel}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="value"
-                >
-                  {paymentMethodData.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={COLORS[index % COLORS.length]}
-                    />
-                  ))}
-                </Pie>
-                <Legend wrapperStyle={{ fontSize: "14px" }} />
-              </PieChart>
-            </ResponsiveContainer>
+            <ReactECharts
+              option={{
+                title: {
+                  text: "Revenue by Payment Method",
+                  left: "center",
+                  textStyle: {
+                    fontSize: 14,
+                  },
+                },
+                tooltip: {
+                  trigger: "item",
+                },
+                legend: {
+                  bottom: "0%",
+                },
+                series: [
+                  {
+                    name: "Revenue",
+                    type: "pie",
+                    radius: "50%",
+                    data: paymentMethodData,
+                    emphasis: {
+                      itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: "rgba(0, 0, 0, 0.5)",
+                      },
+                    },
+                    label: {
+                      show: false,
+                    },
+                    labelLine: {
+                      show: false,
+                    },
+                  },
+                ],
+              }}
+              style={{ height: 300 }}
+            />
           </div>
         </div>
       ) : (

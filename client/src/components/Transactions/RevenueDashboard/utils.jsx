@@ -1,17 +1,6 @@
 import _ from "lodash";
 
-export const COLORS = [
-  "#0088FE",
-  "#00C49F",
-  "#FFBB28",
-  "#FF8042",
-  "#AA336A",
-  "#9933CC",
-  "#FFCC00",
-  "#FF6600",
-  "#66FF33",
-  "#33CCCC",
-];
+export const COLORS = ["#0088FE", "#F0F0F0"];
 
 export const transformData = (revenue, filters) => {
   const filteredData = revenue.filter((rev) => {
