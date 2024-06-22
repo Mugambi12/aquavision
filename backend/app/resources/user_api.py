@@ -77,28 +77,8 @@ class UserCreateResource(Resource):
         new_user.save()
         return new_user, 201
 
-@api.route('/<int:_id>')
-class UserDetailResource(Resource):
-    @api.marshal_with(user_serializer)
-    def get(self, _id):
-        user = User.get_by_id(_id)
-        user.password = None
-        if not user:
-            abort(404, 'User not found')
-        return user
-
-    @api.expect(user_serializer)
-    @api.marshal_with(user_serializer)
-    def put(self, _id):
-        data = request.get_json()
-        user = User.get_by_id(_id)
-        if not user:
-            abort(404, 'User not found')
-        hashed_password = generate_password_hash(data.get('password'))
-        user.update(**data)
-        user.password = hashed_password
-        return user
-
+@api.route('/delete/<int:_id>')
+class UserDeleteResource(Resource):
     def delete(self, _id):
         user = User.get_by_id(_id)
         if not user:
