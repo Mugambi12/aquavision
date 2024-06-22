@@ -47,15 +47,16 @@
 .water-row {
   display: flex;
   justify-content: space-between;
-  padding: 10px 0;
+  padding: 10px 0 0;
   background: var(--cultured);
   border-radius: var(--radius-6);
+  color: #dfa3d5;
 }
 
 /* Water Consumption Chart */
 .chart-container {
   flex: 4;
-  padding: 18px 0;
+  padding: 18px 0 0;
   position: relative;
 }
 

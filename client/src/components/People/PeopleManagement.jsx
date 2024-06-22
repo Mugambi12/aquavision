@@ -181,7 +181,7 @@ const WaterConsumptionHistory = ({ person }) => {
                 },
               ],
             }}
-            style={{ height: 250 }}
+            style={{ height: 300 }}
           />
         </div>
       </div>
