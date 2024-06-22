@@ -1,0 +1,164 @@
+/*-----------------------------------*\
+        #records TABLE
+  \*-----------------------------------*/
+
+.records-table-container {
+  padding: 20px;
+  background: var(--white);
+  border-radius: var(--radius-6);
+  margin-top: 10px;
+}
+
+.records-invoice-table {
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  text-align: center;
+}
+
+.records-invoice-table th,
+.records-invoice-row {
+  background: var(--white);
+  font-weight: var(--fw-500);
+  color: var(--davys_gray);
+}
+
+.records-status {
+  width: 10px;
+  height: 10px;
+  background: #ddd;
+  color: red;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+.records-invoice-row .pay {
+  font-size: var(--fs-4);
+  color: var(--pacific_blue);
+  cursor: pointer;
+  justify-content: center;
+}
+
+.records-invoice-row .loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--emerald);
+  border-radius: 50%;
+  padding: 8px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.records-date-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.records-month {
+  font-size: var(--fs-10);
+  color: var(--cool_gray);
+  letter-spacing: 2px;
+}
+
+.records-date {
+  font-size: var(--fs-8);
+  color: var(--davys_gray);
+  letter-spacing: 4px;
+  line-height: 1.5;
+}
+
+.records-status-text {
+  text-align: center;
+}
+
+.records-amount {
+  text-align: center;
+}
+
+.records-invoice-row .view {
+  font-size: var(--fs-4);
+  color: var(--pacific_blue);
+  cursor: pointer;
+}
+
+.records-invoice-row .delete {
+  font-size: var(--fs-4);
+  color: var(--imperial_red);
+  cursor: pointer;
+}
+
+.unpaid-bg {
+  background: #ff7c8c;
+}
+
+.unpaid {
+  color: #ff7c8c;
+}
+
+.drafted-bg {
+  background: #c1c2cc;
+}
+
+.drafted {
+  color: #c1c2cc;
+}
+
+.paid-bg {
+  background: #65eb97;
+}
+
+.paid {
+  color: #65eb97;
+}
+
+@media screen and (max-width: 768px) {
+  .records-container {
+    padding: 0 5px;
+  }
+
+  .records-header {
+    padding: 16px 0px;
+  }
+
+  .records-table-container {
+    padding: 10px 0;
+  }
+
+  .records-invoice-table {
+    padding: 0 0px;
+  }
+
+  .records-invoice-row {
+    height: 50px;
+  }
+
+  .records-status {
+    margin-left: 5px;
+  }
+
+  .records-date-info {
+    align-items: flex-start;
+  }
+
+  .records-month {
+    font-size: var(--fs-8);
+  }
+
+  .records-date {
+    font-size: var(--fs-6);
+  }
+
+  .records-status-text {
+    text-align: left;
+  }
+}

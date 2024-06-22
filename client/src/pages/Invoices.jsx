@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
-import InvoiceDataTable from "../components/Invoices/InvoiceDataTable";
+import InvoiceManagement from "../components/Invoices/InvoiceManagement";
 import AddInvoice from "../components/Invoices/AddInvoice";
 import ViewInvoice from "../components/Invoices/ViewInvoice";
 import DeleteInvoice from "../components/Invoices/DeleteInvoice";
@@ -124,7 +124,7 @@ const InvoiceRecords = () => {
       ) : (
         <>
           <div className="main-container">
-            <InvoiceDataTable
+            <InvoiceManagement
               data={invoicesData}
               processing={processing}
               handlePayment={callApiAndProcessInvoicePayment}

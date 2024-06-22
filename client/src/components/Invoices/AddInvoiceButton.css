@@ -1,0 +1,51 @@
+/*-----------------------------------*\
+          #records ADD INVOICE
+  \*-----------------------------------*/
+
+.records-add-invoice-container {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  right: var(--radius-8);
+  bottom: var(--radius-12);
+}
+
+.records-add-invoice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--radius-8);
+  color: var(--cultured);
+  background: var(--pacific_blue);
+  border-radius: var(--radius-16) var(--radius-16) var(--radius-3)
+    var(--radius-3);
+  box-shadow: var(--shadow-1);
+  cursor: pointer;
+}
+
+.records-add-invoice .material-symbols-rounded {
+  font-size: var(--fs-1);
+  padding-left: var(--radius-3);
+}
+
+.records-invoice-label {
+  font-size: var(--fs-10);
+  font-weight: var(--fw-300);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: var(--fs-5);
+}
+
+@media screen and (max-width: 768px) {
+  .records-add-invoice {
+    padding: 5px;
+  }
+
+  .records-add-invoice .material-symbols-rounded {
+    font-size: 30px;
+  }
+
+  .records-invoice-label {
+    display: none;
+  }
+}
