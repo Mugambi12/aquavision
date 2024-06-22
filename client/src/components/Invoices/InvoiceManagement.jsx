@@ -4,7 +4,6 @@ import InvoicesHeader from "./InvoiceHeader";
 import InvoicesMenu from "./InvoiceMenu";
 import InvoiceTable from "./InvoiceTable";
 import AddInvoiceButton from "./AddInvoiceButton";
-import "./InvoiceManagement.css";
 
 const InvoiceManagement = ({
   data,
