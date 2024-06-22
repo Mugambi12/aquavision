@@ -38,7 +38,6 @@ const ExpensesManagement = ({
       console.error("Failed to fetch expenses", error);
     } finally {
       setLoading(false);
-      console.log("Expenses fetched successfully.");
     }
   };
 

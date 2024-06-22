@@ -20,11 +20,6 @@ const Transactions = () => {
   const [isCreateExpenseModalOpen, setIsCreateExpenseModalOpen] =
     useState(false);
 
-  useEffect(() => {
-    callApiAndGetUnpaidInvoice();
-    callApiAndGetHighestExpenses();
-  }, []);
-
   const callApiAndGetUnpaidInvoice = async () => {
     try {
       setLoading(true);
@@ -50,6 +45,11 @@ const Transactions = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    callApiAndGetUnpaidInvoice();
+    callApiAndGetHighestExpenses();
+  }, []);
 
   useEffect(() => {
     const storedView = localStorage.getItem("transactionsView");
