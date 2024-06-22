@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import InvoiceManagement from "../components/Invoices/InvoiceManagement";
-import AddInvoice from "../components/Invoices/AddInvoice";
+import AddInvoiceForm from "../components/Invoices/AddInvoiceForm";
 import ViewInvoice from "../components/Invoices/ViewInvoice";
 import DeleteInvoice from "../components/Invoices/DeleteInvoice";
 import ModalWrapper from "../components/ModalWrapper/ModalWrapper";
@@ -141,7 +141,7 @@ const InvoiceRecords = () => {
         isOpen={isPostModalOpen}
         onRequestClose={() => setIsPostModalOpen(false)}
       >
-        <AddInvoice
+        <AddInvoiceForm
           onSubmit={callApiAndPostInvoice}
           activeHousesData={activeHousesData}
         />
