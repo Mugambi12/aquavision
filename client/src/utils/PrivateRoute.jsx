@@ -1,16 +1,8 @@
-import { Route, Redirect } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        localStorage.getItem("user") ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/login" />
-        )
-      }
-    />
-  );
+const PrivateRoutes = () => {
+  const user = null;
+  return user ? <Outlet /> : <Navigate to="/login" />;
 };
+
+export default PrivateRoutes;
