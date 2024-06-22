@@ -4,9 +4,9 @@ import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import ModalWrapper from "../components/ModalWrapper/ModalWrapper";
 import PeopleManagement from "../components/People/PeopleManagement";
-import Sidebar from "../components/People/Sidebar";
-import AddUserForm from "../components/People/AddUserForm";
-import EditUserForm from "../components/People/EditUserForm";
+import Sidebar from "../components/People/PeopleSidebar/PeopleSidebar";
+import AddUserForm from "../components/People/PeopleForms/AddUserForm";
+import EditUserForm from "../components/People/PeopleForms/EditUserForm";
 import Spinner from "../components/Spinner/Spinner";
 
 import { fetchHouseSections, getUsers } from "../resources/apiPeople";

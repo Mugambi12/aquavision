@@ -1,8 +1,8 @@
-// Sidebar.js
+// PeopleSidebar.js
 import React, { useState, useEffect } from "react";
-import "./Sidebar.css";
+import "./PeopleSidebar.css";
 
-const Sidebar = ({
+const PeopleSidebar = ({
   people,
   onPersonClick,
   setIsCreateModalOpen,
@@ -87,4 +87,4 @@ const Sidebar = ({
   );
 };
 
-export default Sidebar;
+export default PeopleSidebar;
