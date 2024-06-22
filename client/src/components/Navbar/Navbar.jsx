@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
 const Header = () => {
+  const location = useLocation();
+
   useEffect(() => {
     const header = document.querySelector("[data-header]");
     const navToggleBtn = document.querySelector("[data-menu-toggle-btn]");
@@ -12,42 +14,23 @@ const Header = () => {
       header.classList.toggle("active");
     };
 
-    const handleNavLinkClick = (event) => {
-      navLinks.forEach((link) => link.classList.remove("active"));
-
-      event.currentTarget.classList.add("active");
-
-      localStorage.setItem("activeLink", event.currentTarget.href);
-    };
-
     navToggleBtn.addEventListener("click", toggleNav);
-
-    navLinks.forEach((link) =>
-      link.addEventListener("click", handleNavLinkClick)
-    );
-
-    const activeLink = localStorage.getItem("activeLink");
-    if (activeLink) {
-      const activeNavLink = [...navLinks].find(
-        (link) => link.href === activeLink
-      );
-      if (activeNavLink) {
-        activeNavLink.classList.add("active");
-      }
-    } else {
-      const homeLink = document.querySelector(".navbar-link[href='/home']");
-      if (homeLink) {
-        homeLink.classList.add("active");
-      }
-    }
 
     return () => {
       navToggleBtn.removeEventListener("click", toggleNav);
-      navLinks.forEach((link) =>
-        link.removeEventListener("click", handleNavLinkClick)
-      );
     };
   }, []);
+
+  useEffect(() => {
+    const navLinks = document.querySelectorAll(".navbar-link");
+    navLinks.forEach((link) => {
+      if (link.getAttribute("href") === location.pathname) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
+    });
+  }, [location.pathname]);
 
   return (
     <header className="header" data-header>
