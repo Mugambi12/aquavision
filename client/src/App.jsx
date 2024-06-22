@@ -1,3 +1,4 @@
+import "./assets/styles/index.css";
 import React, { useState, useEffect, Suspense } from "react";
 import {
   BrowserRouter as Router,
@@ -6,7 +7,6 @@ import {
   Navigate,
 } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import "./assets/styles/index.css";
 import Spinner from "./components/Spinner/Spinner";
 import ErrorBoundary from "./errors/ErrorBoundary";
 import PrivateRoutes from "./utils/PrivateRoute";
@@ -17,9 +17,9 @@ const LazyForgotPassword = React.lazy(() => import("./pages/ForgotPassword"));
 const LazyHome = React.lazy(() => import("./pages/Home"));
 const LazyPeople = React.lazy(() => import("./pages/People"));
 const LazyInvoices = React.lazy(() => import("./pages/Invoices"));
+const LazyTransactions = React.lazy(() => import("./pages/Transactions"));
 const LazyChats = React.lazy(() => import("./pages/Chats"));
 const LazySettings = React.lazy(() => import("./pages/Settings"));
-const LazyTransactions = React.lazy(() => import("./pages/Transactions"));
 
 function App() {
   const [isRoutesLoaded, setIsRoutesLoaded] = useState(false);
@@ -44,11 +44,11 @@ function App() {
 
                 <Route element={<PrivateRoutes />}>
                   <Route path="/home" element={<LazyHome />} />
-                  <Route path="/chats" element={<LazyChats />} />
                   <Route path="/people" element={<LazyPeople />} />
                   <Route path="/invoices" element={<LazyInvoices />} />
-                  <Route path="/settings" element={<LazySettings />} />
                   <Route path="/transactions" element={<LazyTransactions />} />
+                  <Route path="/chats" element={<LazyChats />} />
+                  <Route path="/settings" element={<LazySettings />} />
                 </Route>
               </Routes>
             )}
