@@ -1,8 +1,11 @@
 from decouple import config
+import os
 from .default import Config
 
+BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+
 class TestConfig(Config):
-    SQLALCHEMY_DATABASE_URI = "sqlite:///test.sqlite3"
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(BASE_DIR, 'tmp', 'test.sqlite3')
     SQLALCHEMY_ECHO = False
     DEBUG = False
     PORT = 6500

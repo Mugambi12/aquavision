@@ -2,7 +2,7 @@ from decouple import config
 from .default import Config
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = "sqlite:///production.sqlite3"
+    SQLALCHEMY_DATABASE_URI = "postgresql://scott:tiger@localhost/mydatabase"
     SQLALCHEMY_ECHO = False
     DEBUG = False
     PORT = 8080
