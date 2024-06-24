@@ -25,18 +25,29 @@ const ViewInvoice = ({ invoice }) => {
           <span className="label">House Number:</span>
           <span className="value">{invoice.house_number}</span>
         </div>
+
         <div className="invoice-detail">
           <span className="label">Previous Reading:</span>
-          <span className="value">{invoice.previous_reading}</span>
+          <span className="value">
+            {invoice.previous_reading.toLocaleString()}{" "}
+            {invoice.previous_reading !== 1 ? "Units" : "Unit"}
+          </span>
         </div>
         <div className="invoice-detail">
           <span className="label">Current Reading:</span>
-          <span className="value">{invoice.current_reading}</span>
+          <span className="value">
+            {invoice.current_reading.toLocaleString()}{" "}
+            {invoice.current_reading !== 1 ? "Units" : "Unit"}
+          </span>
         </div>
         <div className="invoice-detail">
           <span className="label">Consumption:</span>
-          <span className="value">{invoice.consumption}</span>
+          <span className="value">
+            {invoice.consumption.toLocaleString()}{" "}
+            {invoice.consumption !== 1 ? "Units" : "Unit"}
+          </span>
         </div>
+
         <div className="invoice-detail">
           <span className="label">Unit Price:</span>
           <span className="value">
