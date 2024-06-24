@@ -59,7 +59,10 @@ const InvoiceTable = ({
                 </div>
               </td>
               <td>{invoice.full_name}</td>
-              <td>{invoice.consumption} Units</td>
+              <td>
+                {invoice.consumption}{" "}
+                {invoice.consumption !== 1 ? "Units" : "Unit"}
+              </td>
               <td>
                 {invoice.total_amount.toLocaleString("en-US", {
                   style: "currency",

@@ -1,27 +1,20 @@
 // InvoicesMenu.js
 import React from "react";
 
-const InvoicesMenu = (
-  {
-    /*Filter, setFilter*/
-  }
-) => (
+const InvoicesMenu = () => (
   <div className="records-menu">
     <span
-    /*className={Filter === "all" ? "records-active" : ""}
-      onClick={() => setFilter("all")}*/
+    /*onClick show ("all") invoices only*/
     >
       All
     </span>
     <span
-    /*className={Filter === "unpaid" ? "records-active" : ""}
-      onClick={() => setFilter("unpaid")}*/
+    /*onClick show ("unpaid") invoices only*/
     >
       Unpaid
     </span>
     <span
-    /*className={Filter === "paid" ? "records-active" : ""}
-      onClick={() => setFilter("paid")}*/
+    /*onClick show ("paid") invoices only*/
     >
       Paid
     </span>

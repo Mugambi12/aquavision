@@ -8,8 +8,6 @@ import "./InvoiceManagement.css";
 
 const InvoiceManagement = ({
   data,
-  /*Filter,*/
-  /*setFilter,*/
   processing,
   handlePayment,
   openPostModal,
@@ -19,7 +17,7 @@ const InvoiceManagement = ({
   return (
     <div className="records-container">
       <InvoicesHeader />
-      <InvoicesMenu /*Filter={Filter} setFilter={setFilter}*/ />
+      <InvoicesMenu />
       <InvoiceTable
         data={data}
         processing={processing}
