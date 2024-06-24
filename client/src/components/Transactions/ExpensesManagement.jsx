@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import ModalWrapper from "../ModalWrapper/ModalWrapper";
-import ExpenseDashboard from "./ExpenseDashboard/ExpenseDashboard";
-import AddExpense from "./TransactionForms/AddExpense";
-import ViewExpense from "./TransactionForms/ViewExpense";
-import DeleteExpense from "./TransactionForms/DeleteExpense";
-import Spinner from "../Spinner/Spinner";
+import ModalWrapper from "../modalWrapper/ModalWrapper";
+import ExpenseDashboard from "./expenseDashboard/ExpenseDashboard";
+import AddExpense from "./transactionForms/AddExpense";
+import ViewExpense from "./transactionForms/ViewExpense";
+import DeleteExpense from "./transactionForms/DeleteExpense";
+import Spinner from "../spinner/Spinner";
 import {
   fetchExpenses,
   postExpense,
   deleteExpense,
-} from "../../resources/apiExpenses";
+} from "../../apis/ApiExpenses";
 
 const ExpensesManagement = ({
   highestExpenses,

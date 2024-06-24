@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./ChatWindow.css";
 import Header from "./Header";
-import { postMessage } from "../../resources/apiChats";
+import { postMessage } from "../../apis/ApiChats";
 
 const ChatWindow = ({ chat, refreshChats }) => {
   const chatWindowRef = useRef(null);

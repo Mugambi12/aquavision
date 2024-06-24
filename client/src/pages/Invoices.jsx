@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
-import InvoiceManagement from "../components/Invoices/InvoiceManagement";
-import AddInvoiceForm from "../components/Invoices/AddInvoiceForm";
-import ViewInvoice from "../components/Invoices/ViewInvoice";
-import DeleteInvoice from "../components/Invoices/DeleteInvoice";
-import ModalWrapper from "../components/ModalWrapper/ModalWrapper";
-import Spinner from "../components/Spinner/Spinner";
+import Navbar from "../components/navbar/Navbar";
+import Footer from "../components/footer/Footer";
+import ModalWrapper from "../components/modalWrapper/ModalWrapper";
+import InvoiceManagement from "../components/invoices/InvoiceManagement";
+import AddInvoiceForm from "../components/invoices/AddInvoiceForm";
+import ViewInvoice from "../components/invoices/ViewInvoice";
+import DeleteInvoice from "../components/invoices/DeleteInvoice";
+import Spinner from "../components/spinner/Spinner";
 import {
   fetchActiveHouses,
   fetchInvoices,
   postInvoice,
   deleteInvoice,
   processInvoicePayment,
-} from "../resources/apiInvoices";
+} from "../apis/ApiInvoices";
 
 const InvoiceRecords = () => {
   const [loading, setLoading] = useState(false);

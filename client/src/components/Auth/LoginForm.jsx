@@ -20,7 +20,7 @@ const LoginForm = () => {
     console.log(data);
     // Handle login logic here
     // Redirect user to home page after successful login
-    navigate("/home");
+    navigate("/dashboard");
   };
 
   return (

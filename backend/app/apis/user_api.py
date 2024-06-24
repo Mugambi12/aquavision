@@ -51,7 +51,7 @@ class HouseSectionResource(Resource):
 
         return last_setting, 200
 
-@api.route('/get')
+@api.route('/users-list')
 class UserListResource(Resource):
     @api.marshal_with(user_serializer)
     def get(self):
@@ -61,7 +61,7 @@ class UserListResource(Resource):
             user.password = None
         return filtered_users, 200
     
-@api.route('/post')
+@api.route('/create-user')
 class UserCreateResource(Resource):
     @api.expect(user_serializer)
     @api.marshal_with(user_serializer)
@@ -77,7 +77,7 @@ class UserCreateResource(Resource):
         new_user.save()
         return new_user, 201
 
-@api.route('/delete/<int:_id>')
+@api.route('/delete-user/<int:_id>')
 class UserDeleteResource(Resource):
     def delete(self, _id):
         user = User.get_by_id(_id)

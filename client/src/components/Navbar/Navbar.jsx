@@ -53,7 +53,7 @@ const Header = () => {
           <div className="container">
             <ul className="navbar-list">
               <li>
-                <Link to="/home" className="navbar-link icon-box">
+                <Link to="/dashboard" className="navbar-link icon-box">
                   <span className="material-symbols-rounded icon">apps</span>
                   <span>Home</span>
                 </Link>

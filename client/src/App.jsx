@@ -7,14 +7,14 @@ import {
   Navigate,
 } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import Spinner from "./components/Spinner/Spinner";
+import Spinner from "./components/spinner/Spinner";
 import ErrorBoundary from "./errors/ErrorBoundary";
 import PrivateRoutes from "./utils/PrivateRoute";
 
 const LazyLogin = React.lazy(() => import("./pages/Login"));
 const LazyForgotPassword = React.lazy(() => import("./pages/ForgotPassword"));
 
-const LazyHome = React.lazy(() => import("./pages/Home"));
+const LazyDashboard = React.lazy(() => import("./pages/Dashboard"));
 const LazyPeople = React.lazy(() => import("./pages/People"));
 const LazyInvoices = React.lazy(() => import("./pages/Invoices"));
 const LazyTransactions = React.lazy(() => import("./pages/Transactions"));
@@ -43,7 +43,7 @@ function App() {
                 />
 
                 <Route element={<PrivateRoutes />}>
-                  <Route path="/home" element={<LazyHome />} />
+                  <Route path="/Dashboard" element={<LazyDashboard />} />
                   <Route path="/people" element={<LazyPeople />} />
                   <Route path="/invoices" element={<LazyInvoices />} />
                   <Route path="/transactions" element={<LazyTransactions />} />

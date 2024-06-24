@@ -3,7 +3,7 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 import ForgotPasswordForm from "../components/Auth/ForgotPasswordForm";
 import "../components/Auth/ForgotPasswordForm.css";
-import { postForgotPassword } from "../resources/apiLogin";
+import { postForgotPassword } from "../apis/ApiLogin";
 
 const ForgotPasswordPage = () => {
   const callApiAndResetPassword = async (email) => {

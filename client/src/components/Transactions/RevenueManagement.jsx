@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import RevenueDashboard from "./RevenueDashboard/RevenueDashboard";
-import ModalWrapper from "../ModalWrapper/ModalWrapper";
-import DeleteRevenue from "./TransactionForms/DeleteRevenue";
-import EditRevenue from "./TransactionForms/EditRevenue";
-import RefundRevenue from "./TransactionForms/RefundRevenue";
-import AddRevenue from "./TransactionForms/AddRevenue";
-import ViewRevenue from "./TransactionForms/ViewRevenue"; // Import the new component
-import Spinner from "../Spinner/Spinner";
+import RevenueDashboard from "./revenueDashboard/RevenueDashboard";
+import ModalWrapper from "../modalWrapper/ModalWrapper";
+import DeleteRevenue from "./transactionForms/DeleteRevenue";
+import EditRevenue from "./transactionForms/EditRevenue";
+import RefundRevenue from "./transactionForms/RefundRevenue";
+import AddRevenue from "./transactionForms/AddRevenue";
+import ViewRevenue from "./transactionForms/ViewRevenue"; // Import the new component
+import Spinner from "../spinner/Spinner";
 import {
   fetchRevenue,
   postRevenue,
   deleteRevenue,
   updateRevenue,
   refundRevenue,
-} from "../../resources/apiRevenue";
+} from "../../apis/ApiRevenue";
 
 const RevenueManagement = ({
   openCreateRevenueModal,

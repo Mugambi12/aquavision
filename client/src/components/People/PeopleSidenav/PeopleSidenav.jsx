@@ -1,6 +1,7 @@
-// PeopleSidebar.js
+// PeopleSidenav.js
+
 import React, { useState, useEffect } from "react";
-import "./PeopleSidebar.css";
+import "./PeopleSidenav.css";
 
 const PeopleSidebar = ({
   people,

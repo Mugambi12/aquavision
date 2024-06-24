@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import Navbar from "../components/Navbar/Navbar";
+import Navbar from "../components/navbar/Navbar";
 import CompanySettings from "../components/Settings/Settings";
-import Spinner from "../components/Spinner/Spinner";
-import { fetchSettings, postSettings } from "../resources/apiSettings";
+import Spinner from "../components/spinner/Spinner";
+import { fetchSettings, postSettings } from "../apis/ApiSettings";
 
 const Settings = () => {
   const [settingsData, setSettingsData] = useState(null);

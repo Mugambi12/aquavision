@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import Navbar from "../components/Navbar/Navbar";
-import Spinner from "../components/Spinner/Spinner";
+import Navbar from "../components/navbar/Navbar";
+import Spinner from "../components/spinner/Spinner";
 
-import { fetchActiveHouses } from "../resources/apiHome";
+import { fetchActiveHouses } from "../apis/ApiDashboard";
 
-const Home = () => {
+const Dashboard = () => {
   const [homeData, setHomeData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -47,4 +47,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Dashboard;

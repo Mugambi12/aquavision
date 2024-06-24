@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import Navbar from "../components/Navbar/Navbar";
+import Navbar from "../components/navbar/Navbar";
 import Sidebar from "../components/Chats/Sidebar";
 import ChatWindow from "../components/Chats/ChatWindow";
-import Spinner from "../components/Spinner/Spinner";
-import { fetchMessage } from "../resources/apiChats";
+import Spinner from "../components/spinner/Spinner";
+import { fetchMessage } from "../apis/ApiChats";
 
 const Chats = () => {
   const [chats, setChats] = useState([]);

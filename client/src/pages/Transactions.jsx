@@ -2,14 +2,14 @@
 import "../assets/styles/transactions.css";
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import Footer from "../components/Footer/Footer";
-import Navbar from "../components/Navbar/Navbar";
-import TransactionSidebar from "../components/Transactions/TransactionSidebar/TransactionSidebar";
-import RevenueManagement from "../components/Transactions/RevenueManagement";
-import ExpensesManagement from "../components/Transactions/ExpensesManagement";
-import Spinner from "../components/Spinner/Spinner";
-import { fetchUnpaidInvoice } from "../resources/apiRevenue";
-import { fetchHighestExpenses } from "../resources/apiExpenses";
+import Footer from "../components/footer/Footer";
+import Navbar from "../components/navbar/Navbar";
+import TransactionSidebar from "../components/transactions/transactionSidebar/TransactionSidebar";
+import RevenueManagement from "../components/transactions/RevenueManagement";
+import ExpensesManagement from "../components/transactions/ExpensesManagement";
+import Spinner from "../components/spinner/Spinner";
+import { fetchUnpaidInvoice } from "../apis/ApiRevenue";
+import { fetchHighestExpenses } from "../apis/ApiExpenses";
 
 const Transactions = () => {
   const [loading, setLoading] = useState(false);
