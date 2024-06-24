@@ -35,21 +35,3 @@
 .expense-detail .value {
   color: var(--onyx);
 }
-
-.edit-button {
-  padding: var(--radius-8) var(--radius-12);
-  font-size: var(--fs-6);
-  color: var(--white);
-  background: var(--space_cadet);
-  margin-top: 20px;
-  border: none;
-  border-radius: var(--radius-6);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.edit-button span {
-  margin-left: 5px;
-}

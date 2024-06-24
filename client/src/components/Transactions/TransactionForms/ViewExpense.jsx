@@ -48,16 +48,6 @@ const ViewExpense = ({ expense, openEditExpenseModal }) => {
         <span className="label">Payment Status:</span>
         <span className="value">{expense.payment_status}</span>
       </div>
-      <div className="expense-detail">
-        <span className="label">Approval Status:</span>
-        <span className="value">{expense.approval_status}</span>
-      </div>
-      <button
-        className="edit-button"
-        onClick={() => openEditExpenseModal(expense)}
-      >
-        <span className="material-symbols-rounded">Edit</span> Edit
-      </button>
     </div>
   );
 };

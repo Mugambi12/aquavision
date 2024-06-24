@@ -18,6 +18,77 @@ const RevenueCharts = ({
     setPaymentMethodData(pieChartData);
   }, [revenue, filters]);
 
+  const getLineChartOptions = (data) => ({
+    title: {
+      text: "Monthly Revenue Trends",
+      textStyle: {
+        fontSize: 14,
+      },
+    },
+    tooltip: {
+      trigger: "axis",
+    },
+    xAxis: {
+      type: "category",
+      data: data.map((d) => d.month),
+    },
+    yAxis: {
+      type: "value",
+    },
+    series: [
+      {
+        data: data.map((d) => d.revenue),
+        type: "line",
+        smooth: true,
+        areaStyle: {
+          color: {
+            type: "linear",
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              { offset: 0, color: COLORS[0] },
+              { offset: 1, color: COLORS[1] },
+            ],
+            global: false,
+          },
+        },
+      },
+    ],
+  });
+
+  const getPieChartOptions = (data) => ({
+    title: {
+      text: "Revenue by Payment Method",
+      left: "center",
+      textStyle: {
+        fontSize: 14,
+      },
+    },
+    tooltip: {
+      trigger: "item",
+    },
+    legend: {
+      bottom: "0%",
+    },
+    series: [
+      {
+        name: "Revenue",
+        type: "pie",
+        radius: "50%",
+        data,
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.5)",
+          },
+        },
+      },
+    ],
+  });
+
   return (
     <div className="revenue-charts">
       <div className="charts-revenue-data-filter">
@@ -58,87 +129,14 @@ const RevenueCharts = ({
         <div className="revenue-charts-container">
           <div className="area-chart-container">
             <ReactECharts
-              option={{
-                title: {
-                  text: "Monthly Revenue Trends",
-                  textStyle: {
-                    fontSize: 14,
-                  },
-                },
-                tooltip: {
-                  trigger: "axis",
-                },
-                xAxis: {
-                  type: "category",
-                  data: filteredRevenue.map((data) => data.month),
-                },
-                yAxis: {
-                  type: "value",
-                },
-                series: [
-                  {
-                    data: filteredRevenue.map((data) => data.revenue),
-                    type: "line",
-                    smooth: true,
-                    areaStyle: {
-                      color: {
-                        type: "linear",
-                        x: 0,
-                        y: 0,
-                        x2: 0,
-                        y2: 1,
-                        colorStops: [
-                          { offset: 0, color: COLORS[0] },
-                          { offset: 1, color: COLORS[1] },
-                        ],
-                        global: false,
-                      },
-                    },
-                  },
-                ],
-              }}
+              option={getLineChartOptions(filteredRevenue)}
               style={{ height: 300 }}
             />
           </div>
 
           <div className="doughnut-chart-container">
             <ReactECharts
-              option={{
-                title: {
-                  text: "Revenue by Payment Method",
-                  left: "center",
-                  textStyle: {
-                    fontSize: 14,
-                  },
-                },
-                tooltip: {
-                  trigger: "item",
-                },
-                legend: {
-                  bottom: "0%",
-                },
-                series: [
-                  {
-                    name: "Revenue",
-                    type: "pie",
-                    radius: "50%",
-                    data: paymentMethodData,
-                    emphasis: {
-                      itemStyle: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: "rgba(0, 0, 0, 0.5)",
-                      },
-                    },
-                    label: {
-                      show: false,
-                    },
-                    labelLine: {
-                      show: false,
-                    },
-                  },
-                ],
-              }}
+              option={getPieChartOptions(paymentMethodData)}
               style={{ height: 300 }}
             />
           </div>

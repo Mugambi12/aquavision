@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./LoginForm.css";
 
 const LoginForm = () => {
@@ -10,6 +10,7 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -18,6 +19,8 @@ const LoginForm = () => {
   const onSubmit = (data) => {
     console.log(data);
     // Handle login logic here
+    // Redirect user to home page after successful login
+    navigate("/home");
   };
 
   return (
@@ -31,6 +34,7 @@ const LoginForm = () => {
         <input
           type="tel"
           id="phone_number"
+          value={"0701234567"}
           placeholder="Enter phone number"
           {...register("phone_number", {
             required: "Phone number is required",
@@ -48,6 +52,7 @@ const LoginForm = () => {
           <input
             type={showPassword ? "text" : "password"}
             id="password"
+            value={"password"}
             placeholder="Enter password"
             {...register("password", { required: "Password is required" })}
           />

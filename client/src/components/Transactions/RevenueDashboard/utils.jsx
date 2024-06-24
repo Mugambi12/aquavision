@@ -21,7 +21,7 @@ export const transformData = (revenue, filters) => {
       month,
       revenue: _.sumBy(group, "amount"),
     }))
-    .orderBy((data) => new Date(`2000 ${data.month}`))
+    .orderBy([(data) => new Date(`2000 ${data.month}`)], ["asc"])
     .value();
 
   // Prepare data for pie chart (payment method breakdown)
