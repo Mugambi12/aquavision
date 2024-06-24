@@ -1,4 +1,6 @@
-from flask import request, abort
+# api.py
+
+from flask import request, abort, jsonify
 from flask_restx import Namespace, Resource, fields
 from ..models.users import User
 from ..models.invoice import Invoice
@@ -7,6 +9,10 @@ from ..schemas.invoice_serializer import invoice_serializer, active_houses_seria
 import logging
 
 api = Namespace('invoices', description='Invoice related operations')
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 @api.route('/active-houses')
 class ActiveHousesResource(Resource):
@@ -29,7 +35,6 @@ class ActiveHousesResource(Resource):
                     
                     active_houses[house_section].append(house_number)
 
-            # Transform the dictionary into the desired list format
             result = [
                 {
                     'house_section': section,
@@ -41,7 +46,7 @@ class ActiveHousesResource(Resource):
             return result, 200
         
         except Exception as e:
-            logging.error(f"An error occurred: {e}")
+            logger.error(f"An error occurred while fetching active houses: {e}")
             abort(500, "An internal error occurred")
 
 @api.route('/invoice-list')
@@ -73,15 +78,14 @@ class InvoiceListResource(Resource):
                 response_data.append(invoice_data)
 
             response_data.reverse()
-
             return response_data, 200
 
         except Exception as e:
-            logging.error(f"An error occurred: {e}")
+            logger.error(f"An error occurred while fetching invoice list: {e}")
             abort(500, "An internal error occurred")
 
     def _build_invoice_response(self, invoice, user, settings):
-        invoice_data = {
+        return {
             '_id': invoice._id,
             'company_name': settings.company_name,
             'user_id': invoice.user_id,
@@ -100,7 +104,6 @@ class InvoiceListResource(Resource):
             'payment_status_text': invoice.payment_status.upper(),
             'created_at': invoice.created_at,
         }
-        return invoice_data
 
 @api.route('/post')
 class InvoiceCreateResource(Resource):
@@ -116,7 +119,6 @@ class InvoiceCreateResource(Resource):
                 abort(404, f'User not found with house section {data["house_section"]} and house number {data["house_number"]}')
                 
             new_invoice = self._prepare_invoice_data(data, user._id)
-            
             new_invoice_obj = self._save_invoice(new_invoice)
             
             if new_invoice['total_amount'] > 0:
@@ -130,7 +132,7 @@ class InvoiceCreateResource(Resource):
         except ValueError as e:
             abort(400, f"Invalid value: {str(e)}")
         except Exception as e:
-            logging.error(f"An error occurred: {e}")
+            logger.error(f"An error occurred while creating an invoice: {e}")
             abort(500, "An internal error occurred")
 
     def _validate_fields(self, data):
@@ -187,7 +189,6 @@ class InvoiceCreateResource(Resource):
         new_invoice_obj.save()
         return new_invoice_obj
 
-
 @api.route('/delete/<int:_id>')
 class InvoiceDeleteResource(Resource):
     def delete(self, _id):
@@ -197,7 +198,7 @@ class InvoiceDeleteResource(Resource):
                 abort(404, 'Invoice not found')
 
             if invoice.payment_status == 'paid':
-                logging.warning(f"Cannot delete a paid invoice with ID: {_id}")
+                logger.warning(f"Cannot delete a paid invoice with ID: {_id}")
                 return {'message': 'Cannot delete a paid invoice'}, 400
 
             user = User.get_by_id(invoice.user_id)
@@ -211,10 +212,8 @@ class InvoiceDeleteResource(Resource):
             return {'message': 'Invoice deleted'}, 200
 
         except Exception as e:
-            logging.error(f"An error occurred: {e}")
+            logger.error(f"An error occurred while deleting invoice: {e}")
             abort(500, "An internal error occurred")
-
-
 
 @api.route('/pay/<int:_id>')
 class InvoicePaymentResource(Resource):
@@ -230,7 +229,6 @@ class InvoicePaymentResource(Resource):
                 abort(404, 'User not found')
 
             self._validate_payment(user, invoice)
-
             self._process_payment(user, invoice)
 
             return invoice, 200
@@ -238,7 +236,7 @@ class InvoicePaymentResource(Resource):
         except ValueError as e:
             abort(400, str(e))
         except Exception as e:
-            logging.error(f"An error occurred: {e}")
+            logger.error(f"An error occurred while processing payment: {e}")
             abort(500, "An internal error occurred")
 
     def _validate_payment(self, user, invoice):
@@ -251,4 +249,3 @@ class InvoicePaymentResource(Resource):
 
         invoice.payment_status = 'paid'
         invoice.save()
-   

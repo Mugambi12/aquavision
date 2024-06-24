@@ -3,10 +3,12 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar/Navbar";
 import CompanySettings from "../components/Settings/Settings";
 import Spinner from "../components/Spinner/Spinner";
+import { fetchSettings, postSettings } from "../resources/apiSettings";
 
 const Settings = () => {
   const [settingsData, setSettingsData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     callApiAndFetchSettingsData();
@@ -14,15 +16,12 @@ const Settings = () => {
 
   const callApiAndFetchSettingsData = async () => {
     try {
-      const response = await fetch("/api/settings");
-      if (!response.ok) {
-        throw new Error("Failed to fetch settings");
-      }
-      const data = await response.json();
+      setLoading(true);
+      const data = await fetchSettings();
       setSettingsData(data);
-      console.log("Settings data fetched successfully:");
     } catch (error) {
-      console.error("Error fetching settings:", error);
+      console.error("Error calling API:", error);
+      setError("Failed to load settings. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -30,21 +29,14 @@ const Settings = () => {
 
   const callApiAndSaveSettings = async (formData) => {
     try {
-      const response = await fetch("/api/settings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to save settings");
-      }
-      console.log("Settings saved successfully");
-      callApiAndFetchSettingsData();
+      setLoading(true);
+      await postSettings(formData);
+      setSettingsData(formData);
     } catch (error) {
       console.error("Error calling API:", error);
-      // Handle error appropriately
+      setError("Failed to save settings. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -57,11 +49,15 @@ const Settings = () => {
       <div className="main-container">
         {loading ? (
           <Spinner />
+        ) : error ? (
+          <div className="error">{error}</div>
         ) : (
-          <CompanySettings
-            settings={settingsData}
-            handleSaveSettings={callApiAndSaveSettings}
-          />
+          settingsData && (
+            <CompanySettings
+              settings={settingsData}
+              handleSaveSettings={callApiAndSaveSettings}
+            />
+          )
         )}
       </div>
     </>

@@ -439,7 +439,7 @@ const CompanySettings = ({ settings, handleSaveSettings }) => {
                 </div>
               </div>
 
-              {/* Submit and Cancel buttons */}
+              {/* Submit buttons */}
               <div className="settings-pane-footer">
                 <button type="submit" className="settings-btn success">
                   Save changes

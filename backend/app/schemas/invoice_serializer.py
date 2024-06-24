@@ -1,8 +1,9 @@
+# invoice_serializer.py
+
 from flask_restx import fields
 from ..extensions.rest_api import api
 
-
-# Serializer definition
+# Serializer definitions
 invoice_serializer = api.model(
     'Invoice', {
         '_id': fields.String(),
@@ -28,14 +29,14 @@ invoice_serializer = api.model(
 )
 
 active_houses_serializer = api.model(
-  'User', {
+  'ActiveHouses', {
     'house_section': fields.String(),
-    'house_number': fields.String()
+    'house_number': fields.List(fields.Integer)
   }
 )
 
 unpaid_invoices_serializer = api.model(
-    'Invoice', {
+    'UnpaidInvoice', {
         '_id': fields.String(),
         'full_name': fields.String(),
         'user_id': fields.Integer(),
