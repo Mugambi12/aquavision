@@ -32,12 +32,12 @@ const handleFetchResponse = async (response) => {
   return response.json();
 };
 
-export const fetchHouseSections = async () => {
-  const response = await fetch(`${BASE_URL}/house-sections`);
+export const fetchPeople = async () => {
+  const response = await fetch(`${BASE_URL}/users-data`);
   return handleFetchResponse(response);
 };
 
-export const fetchPeople = async () => {
-  const response = await fetch(`${BASE_URL}/users-list`);
+export const fetchHouseSections = async () => {
+  const response = await fetch(`${BASE_URL}/house-sections`);
   return handleFetchResponse(response);
 };

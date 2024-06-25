@@ -24,8 +24,8 @@ const People = () => {
 
   useEffect(() => {
     //callApiAndfetchUsers();
-    callApiAndGetHouseSections();
     callApiAndFetchPeople();
+    callApiAndGetHouseSections();
   }, []);
 
   //  const callApiAndfetchUsers = async () => {

@@ -7,13 +7,13 @@ from ..models.invoice import Invoice
 from ..models.revenue import Revenue
 from ..models.expense import Expense
 from ..models.settings import Settings
-from ..schemas.users_serializer import user_serializer, house_section_serializer, user_profile_serializer
+from ..schemas.users_serializer import user_serializer, house_section_serializer, user_data_serializer
 
 api = Namespace('users', description='User related operations')
 
-@api.route('/personal-profile')
+@api.route('/users-data')
 class UserProfileListResource(Resource):
-    @api.marshal_with(user_profile_serializer)
+    @api.marshal_with(user_data_serializer)
     def get(self):
         try:
             users = User.get_all()
