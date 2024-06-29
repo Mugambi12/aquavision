@@ -5,6 +5,7 @@ from .base import BaseMixin
 class Expense(db.Model, BaseMixin):
     __tablename__ = 'expense'
 
+    user_id = int, nullable=False
     type = str, nullable=False
     date = date, nullable=False
     vendor = str, nullable=False
@@ -19,6 +20,7 @@ class Expense(db.Model, BaseMixin):
 class Expense(db.Model, BaseMixin):
     __tablename__ = 'expense'
 
+    user_id = db.Column(db.Integer, nullable=False)
     type = db.Column(db.String, nullable=False)
     date = db.Column(db.Date, nullable=False)
     vendor = db.Column(db.String, nullable=False)

@@ -76,7 +76,7 @@ const PeopleSidebar = ({
               <div className="user-info">
                 <span className="full-name">{person.fullName}</span>
                 <span className="gender-age">
-                  {person.gender}, {person.age}
+                  {person.houseSection}, {person.houseNumber}
                 </span>
               </div>
               <span className="material-symbols-rounded icon">more_vert</span>

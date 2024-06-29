@@ -9,8 +9,8 @@ import AddUserForm from "../components/people/peopleForms/AddUserForm";
 import EditUserForm from "../components/people/peopleForms/EditUserForm";
 import Spinner from "../components/spinner/Spinner";
 
-import { fetchHouseSections, fetchUsersSampleData } from "../apis/ApiPeople";
-import { fetchPeople } from "../apis/ApiPeople";
+import { fetchPeople, fetchHouseSections } from "../apis/ApiPeople";
+import { fetchUsersSampleData } from "../apis/ApiPeople";
 
 const People = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -23,102 +23,79 @@ const People = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   useEffect(() => {
-    callApiAndfetchUsersSampleData();
+    //    callApiAndfetchUsersSampleData();
     callApiAndFetchPeople();
     callApiAndGetHouseSections();
   }, []);
 
-  const callApiAndfetchUsersSampleData = async () => {
-    try {
-      setIsLoading(true);
-      const data = await fetchUsersSampleData();
-
-      const transformedPeople = data.map((person, index) => ({
-        id: index + 1,
-        fullName: person.name,
-        gender: person.gender,
-        age: person.age,
-        profileImage: person.profile_picture,
-        dateOfBirth: person.date_of_birth,
-        phoneNumber: person.phone_number,
-        emergencyContact: person.emergency_contact,
-        insuranceType: person.insurance_type,
-        diagnosisHistory: person.diagnosis_history,
-        diagnosticList: person.diagnostic_list,
-        labResults: person.lab_results,
-      }));
-
-      setPeopleData(transformedPeople);
-    } catch (error) {
-      console.error("Error fetching people data:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  //  const callApiAndfetchUsersSampleData = async () => {
+  //    try {
+  //      setIsLoading(true);
+  //      const data = await fetchUsersSampleData();
+  //
+  //      const transformedPeople = data.map((person, index) => ({
+  //        id: index + 1,
+  //        fullName: person.name,
+  //        gender: person.gender,
+  //        age: person.age,
+  //        profileImage: person.profile_picture,
+  //        dateOfBirth: person.date_of_birth,
+  //        phoneNumber: person.phone_number,
+  //        emergencyContact: person.emergency_contact,
+  //        insuranceType: person.insurance_type,
+  //        diagnosisHistory: person.diagnosis_history,
+  //        diagnosticList: person.diagnostic_list,
+  //        labResults: person.lab_results,
+  //      }));
+  //
+  //      //setPeopleData(transformedPeople);
+  //      console.log(
+  //        "Fetched people data successfully. Sample data:",
+  //        transformedPeople
+  //      );
+  //    } catch (error) {
+  //      console.error("Error fetching people data:", error);
+  //    } finally {
+  //      setIsLoading(false);
+  //    }
+  //  };
 
   const callApiAndFetchPeople = async () => {
     try {
       setIsLoading(true);
       const data = await fetchPeople();
 
-      const mappedData = data.map((person) => {
-        // Extracting the first invoice and revenue, assuming there can be multiple
-        const invoice = person.invoices.length > 0 ? person.invoices[0] : {};
-        const revenue = person.revenues.length > 0 ? person.revenues[0] : {};
+      const mappedData = data.map((person) => ({
+        id: person._id,
+        fullName: person.full_name,
+        email: person.email,
+        phoneNumber: person.phone_number,
+        houseSection: person.house_section,
+        houseNumber: person.house_number,
+        profileImage: person.profile_image,
+        isActive: person.is_active,
+        isAdmin: person.is_admin,
+        balance: person.balance,
+        lastLogin: person.last_login,
+        lastLogout: person.last_logout,
+        createdAt: person.created_at,
+        updatedAt: person.updated_at,
+        deletedAt: person.deleted_at,
+        invoices: person.invoices,
+        revenues: person.revenues,
+        expenses: person.expenses,
+        totalWaterConsumption: person.total_water_consumption,
+        totalInvoiceAmount: person.total_invoice_amount,
+        totalRevenueAmount: person.total_revenue_amount,
+        totalExpenseAmount: person.total_expense_amount,
+      }));
 
-        return {
-          id: person._id,
-          fullName: person.full_name,
-          email: person.email,
-          phoneNumber: person.phone_number,
-          houseSection: person.house_section,
-          houseNumber: person.house_number,
-          profileImage: person.profile_image,
-          isActive: person.is_active,
-          isAdmin: person.is_admin,
-          balance: person.balance,
-          lastLogin: person.last_login,
-          lastLogout: person.last_logout,
-          createdAt: person.created_at,
-          updatedAt: person.updated_at,
-          deletedAt: person.deleted_at,
-          // Mapping invoice details
-          invoice_id: invoice._id || null,
-          invoice_user_id: invoice.user_id || null,
-          invoice_house_section: invoice.house_section || null,
-          invoice_house_number: invoice.house_number || null,
-          invoice_previous_reading: invoice.previous_reading || null,
-          invoice_current_reading: invoice.current_reading || null,
-          invoice_consumption: invoice.consumption || null,
-          invoice_unit_price: invoice.unit_price || null,
-          invoice_service_fee: invoice.service_fee || null,
-          invoice_total_amount: invoice.total_amount || null,
-          invoice_payment_status: invoice.payment_status || null,
-          invoice_created_at: invoice.created_at || null,
-          invoice_updated_at: invoice.updated_at || null,
-          invoice_deleted_at: invoice.deleted_at || null,
-          // Mapping revenue details
-          revenue_id: revenue._id || null,
-          revenue_source: revenue.source || null,
-          revenue_user_id: revenue.user_id || null,
-          revenue_invoice_id: revenue.invoice_id || null,
-          revenue_payment_date: revenue.payment_date || null,
-          revenue_amount: revenue.amount || null,
-          revenue_payment_method: revenue.payment_method || null,
-          revenue_payment_status: revenue.payment_status || null,
-          revenue_transaction_id: revenue.transaction_id || null,
-          revenue_phone_number: revenue.phone_number || null,
-          revenue_created_at: revenue.created_at || null,
-          revenue_updated_at: revenue.updated_at || null,
-          revenue_deleted_at: revenue.deleted_at || null,
-        };
-      });
-
-      // setPeopleData(mappedData);
+      setPeopleData(mappedData);
       console.log("Fetched people data successfully.");
       console.log("People data:", mappedData);
     } catch (error) {
       console.error("Error fetching people data:", error);
+      alert("Failed to fetch people data. Please try again later.");
     } finally {
       setIsLoading(false);
     }

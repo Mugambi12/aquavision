@@ -1,21 +1,22 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import ReactECharts from "echarts-for-react";
 import "./PeopleManagement.css";
 
+// Function to get the latest entry from a list of entries
 const getLatestEntry = (entries) => {
   if (!entries || entries.length === 0) return null;
 
   return entries.reduce((latest, entry) => {
-    const entryDate = new Date(entry.year, entry.month);
-    const latestDate = new Date(latest.year, latest.month);
+    const entryDate = new Date(entry.created_at);
+    const latestDate = new Date(latest.created_at);
 
-    if (entryDate > latestDate) return entry;
-    return latest;
+    return entryDate > latestDate ? entry : latest;
   }, entries[0]);
 };
 
-const PersonalContentCard = ({ person, label, valueKey }) => {
-  const latestEntry = getLatestEntry(person.diagnosisHistory);
+// PersonalContentCard component to display various user data
+const PersonalContentCard = ({ person, label, valueKey, unit }) => {
+  const latestEntry = getLatestEntry(person.invoices);
 
   return (
     <>
@@ -23,37 +24,34 @@ const PersonalContentCard = ({ person, label, valueKey }) => {
         <div
           className={`personal-content-card personal-content-card-${label
             .toLowerCase()
-            .replace(" ", "-")}`}
+            .replace(/\s+/g, "-")}`}
         >
           <div className="personal-content-card-label">{label}</div>
           <div className="personal-content-card-value">
-            {latestEntry[valueKey].value}{" "}
-            {valueKey === "respiratory_rate" ? "Units" : "Ksh"}
+            {person[valueKey]} {unit}
           </div>
-          {/*
-          <div className="personal-content-card-value-status">
-            {latestEntry[valueKey].levels}
-                  </div>
-                  */}
         </div>
       )}
     </>
   );
 };
 
+// Card components for specific data
 const WaterUsageCard = ({ person }) => (
   <PersonalContentCard
     person={person}
     label="Water Usage"
-    valueKey="respiratory_rate"
+    valueKey="totalWaterConsumption"
+    unit="Units"
   />
 );
 
-const BillingInformationCard = ({ person }) => (
+const TotalBillAmountCard = ({ person }) => (
   <PersonalContentCard
     person={person}
-    label="Billing Information"
-    valueKey="temperature"
+    label="Total Bill"
+    valueKey="totalInvoiceAmount"
+    unit="Ksh"
   />
 );
 
@@ -61,50 +59,63 @@ const UsageTrendsCard = ({ person }) => (
   <PersonalContentCard
     person={person}
     label="Repair Costs"
-    valueKey="heart_rate"
+    valueKey="totalExpenseAmount"
+    unit="Ksh"
+  />
+);
+const TotalPaymentAmountCard = ({ person }) => (
+  <PersonalContentCard
+    person={person}
+    label="Total Payment"
+    valueKey="totalRevenueAmount"
+    unit="Ksh"
   />
 );
 
+// Component to display water consumption history
 const WaterConsumptionHistory = ({ person }) => {
-  const { diagnosisHistory } = person;
+  const { invoices } = person;
   const [filter, setFilter] = useState("all");
 
-  if (!diagnosisHistory || diagnosisHistory.length === 0) {
-    return <div>No diagnosis history available</div>;
+  if (!invoices || invoices.length === 0) {
+    return <div>No water consumption history available</div>;
   }
 
-  const monthMap = useMemo(
-    () => ({
-      January: 0,
-      February: 1,
-      March: 2,
-      April: 3,
-      May: 4,
-      June: 5,
-      July: 6,
-      August: 7,
-      September: 8,
-      October: 9,
-      November: 10,
-      December: 11,
-    }),
-    []
-  );
+  // Map for months
+  const monthMap = {
+    January: 0,
+    February: 1,
+    March: 2,
+    April: 3,
+    May: 4,
+    June: 5,
+    July: 6,
+    August: 7,
+    September: 8,
+    October: 9,
+    November: 10,
+    December: 11,
+  };
 
-  const now = useMemo(() => new Date(), []);
+  // Current date
+  const now = new Date();
 
-  const filterOptions = useMemo(() => {
+  // Filter options based on invoice years
+  const filterOptions = (() => {
     const options = ["all"];
-    const historyYears = new Set(diagnosisHistory.map((entry) => entry.year));
+    const historyYears = new Set(
+      invoices.map((entry) => new Date(entry.created_at).getFullYear())
+    );
     for (let year of historyYears) {
       options.push(`${year}`);
     }
     return options;
-  }, [diagnosisHistory]);
+  })();
 
+  // Function to filter history data based on selected filter
   const filterData = (history, filter) => {
     return history.filter((entry) => {
-      const entryDate = new Date(entry.year, monthMap[entry.month]);
+      const entryDate = new Date(entry.created_at);
       if (filter === "all") {
         return true;
       } else {
@@ -114,99 +125,85 @@ const WaterConsumptionHistory = ({ person }) => {
     });
   };
 
-  const filteredDiagnosisHistory = useMemo(
-    () => filterData(diagnosisHistory, filter),
-    [diagnosisHistory, filter]
-  );
+  // Filtered invoices based on selected filter
+  const filteredInvoices = filterData(invoices, filter);
 
-  const chartData = useMemo(() => {
-    return filteredDiagnosisHistory.map((entry) => ({
-      time: `${entry.month} ${entry.year}`,
-      systolic: entry.blood_pressure.systolic.value,
-      diastolic: entry.blood_pressure.diastolic.value,
-    }));
-  }, [filteredDiagnosisHistory]);
+  // Chart data for consumption history
+  const chartData = filteredInvoices.map((entry) => ({
+    time: `${entry.created_at}`,
+    consumption: entry.consumption,
+  }));
 
+  // Handler for filter change
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
   };
 
   return (
-    <>
-      <div className="water-row">
-        <div className="chart-container">
-          <div className="filter-container">
-            <label htmlFor="filter">Filter:</label>
-            <select id="filter" value={filter} onChange={handleFilterChange}>
-              {filterOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option === "all" ? "All" : option}
-                </option>
-              ))}
-            </select>
-          </div>
-          <ReactECharts
-            option={{
-              tooltip: {
-                trigger: "axis",
-              },
-              legend: {
-                data: ["Systolic", "Diastolic"],
-              },
-              xAxis: {
-                type: "category",
-                data: chartData.map((data) => data.time),
-              },
-              yAxis: {
-                type: "value",
-              },
-              series: [
-                {
-                  name: "Systolic",
-                  data: chartData.map((data) => data.systolic),
-                  type: "line",
-                  smooth: true,
-                  lineStyle: {
-                    color: "#e66fd2",
-                  },
-                },
-                {
-                  name: "Diastolic",
-                  data: chartData.map((data) => data.diastolic),
-                  type: "line",
-                  smooth: true,
-                  lineStyle: {
-                    color: "#8c6fe6",
-                  },
-                },
-              ],
-            }}
-            style={{ height: 300 }}
-          />
+    <div className="water-row">
+      <div className="chart-container">
+        <div className="filter-container">
+          <label htmlFor="filter">Filter:</label>
+          <select id="filter" value={filter} onChange={handleFilterChange}>
+            {filterOptions.map((option) => (
+              <option key={option} value={option}>
+                {option === "all" ? "All" : option}
+              </option>
+            ))}
+          </select>
         </div>
+        <ReactECharts
+          option={{
+            tooltip: {
+              trigger: "axis",
+            },
+            xAxis: {
+              type: "category",
+              data: chartData.map((data) => data.time),
+            },
+            yAxis: {
+              type: "value",
+            },
+            series: [
+              {
+                name: "Consumption",
+                data: chartData.map((data) => data.consumption),
+                type: "line",
+                smooth: true,
+                lineStyle: {
+                  color: "#3398DB",
+                },
+              },
+            ],
+          }}
+          style={{ height: 300 }}
+        />
       </div>
-    </>
+    </div>
   );
 };
 
+// Component to display payment history
 const PaymentHistory = ({ person }) => (
   <div className="content-card">
     <div className="payment-history-content-table">
       <div className="table-title">Payment History</div>
       <div className="d-flex payment-history-content-header">
-        <div className="table_header">TransantionID</div>
+        <div className="table_header">Transaction ID</div>
         <div className="table_header">Date</div>
         <div className="table_header">Amount</div>
         <div className="table_header">Status</div>
       </div>
 
       <div className="payment-history-content-body">
-        {person.diagnosticList.map((item, index) => (
+        {person.revenues.map((item, index) => (
           <div key={index} className="d-flex">
-            <div className="table_content">{item.name}</div>
-            <div className="table_content">{item.status}</div>
-            <div className="table_content">{item.status}</div>
-            <div className="table_content">{item.status}</div>
+            <div className="table_content">{item.transaction_id}</div>
+            <div className="table_content">
+              {new Date(item.payment_date).toLocaleDateString()}
+            </div>
+            <div className="table_content">{item.amount}</div>
+            <div className="table_content">{item.payment_status}</div>
           </div>
         ))}
       </div>
@@ -214,13 +211,14 @@ const PaymentHistory = ({ person }) => (
   </div>
 );
 
+// Component to display invoices download links
 const InvoicesDownload = ({ person }) => (
   <div className="content-card personal-content-invoice-download">
     <div className="title">Invoice Download</div>
     <ul className="personal-content-invoice-download-list">
-      {person.labResults.map((result, index) => (
+      {person.invoices.map((invoice, index) => (
         <li key={index} className="personal-content-invoice-download-item">
-          {result}{" "}
+          Invoice {invoice._id}{" "}
           <span className="material-symbols-rounded icon">download</span>
         </li>
       ))}
@@ -228,6 +226,7 @@ const InvoicesDownload = ({ person }) => (
   </div>
 );
 
+// Component to display user profile card
 const ProfileCard = ({ person, onEditProfileClick }) => {
   const handleEditClick = () => {
     onEditProfileClick(person);
@@ -248,42 +247,29 @@ const ProfileCard = ({ person, onEditProfileClick }) => {
               calendar_month
             </span>
             <div className="column">
-              <span className="label">Date of Birth:</span>
-              <span className="value">{person.dateOfBirth}</span>
+              <span className="label">House Section:</span>
+              <span className="value">{person.houseSection}</span>
             </div>
           </div>
           <div className="d-flex personal-user-content-detail">
-            <span className="material-symbols-rounded icon">{`${
-              person.gender === "Female" ? "female" : "male"
-            }`}</span>
+            <span className="material-symbols-rounded icon">home</span>
             <div className="column">
-              <span className="label">Gender:</span>
-              <span className="value">{person.gender}</span>
+              <span className="label">House Number:</span>
+              <span className="value">{person.houseNumber}</span>
             </div>
           </div>
           <div className="d-flex personal-user-content-detail">
             <span className="material-symbols-rounded icon">phone</span>
             <div className="column">
-              <span className="label">Contact Info:</span>
+              <span className="label">Phone Number:</span>
               <span className="value">{person.phoneNumber}</span>
             </div>
           </div>
           <div className="d-flex personal-user-content-detail">
-            <span className="material-symbols-rounded icon">
-              contact_emergency
-            </span>
+            <span className="material-symbols-rounded icon">email</span>
             <div className="column">
-              <span className="label">Emergency Contact:</span>
-              <span className="value">{person.emergencyContact}</span>
-            </div>
-          </div>
-          <div className="d-flex personal-user-content-detail">
-            <span className="material-symbols-rounded icon">
-              health_and_safety
-            </span>
-            <div className="column">
-              <span className="label">Insurance Provider:</span>
-              <span className="value">{person.insuranceType}</span>
+              <span className="label">Email Address:</span>
+              <span className="value">{person.email}</span>
             </div>
           </div>
         </div>
@@ -296,6 +282,7 @@ const ProfileCard = ({ person, onEditProfileClick }) => {
   );
 };
 
+// Main component to manage people data and display the relevant information
 const PeopleManagement = ({ selectedPerson, onEditProfileClick }) => {
   return (
     <div className="row person-content">
@@ -304,13 +291,13 @@ const PeopleManagement = ({ selectedPerson, onEditProfileClick }) => {
           <>
             <div className="content-card content-diagnosis-history">
               <div className="selected-person-name">
-                {selectedPerson.fullName}, {selectedPerson.gender},{" "}
-                {selectedPerson.age}
+                {selectedPerson.fullName}
               </div>
               <div className="row personal-content-cards">
                 <WaterUsageCard person={selectedPerson} />
-                <BillingInformationCard person={selectedPerson} />
+                <TotalBillAmountCard person={selectedPerson} />
                 <UsageTrendsCard person={selectedPerson} />
+                <TotalPaymentAmountCard person={selectedPerson} />
               </div>
               <div className="chart-title">Water Consumption Chart History</div>
               <WaterConsumptionHistory person={selectedPerson} />

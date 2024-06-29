@@ -354,15 +354,15 @@ hr {
   margin-right: 0;
 }
 
-.personal-content-card-water-usage {
+.personal-content-card-total_water_consumption {
   background: var(--coral_12);
 }
 
-.personal-content-card-billing-information {
+.personal-content-card-total_invoice_amount {
   background: var(--pacific_blue_12);
 }
 
-.personal-content-card-repair-costs {
+.personal-content-card-total_expense_amount {
   background: var(--imperial_red_12);
 }
 

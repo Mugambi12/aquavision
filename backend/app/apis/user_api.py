@@ -16,29 +16,39 @@ class UserProfileListResource(Resource):
     @api.marshal_with(user_data_serializer)
     def get(self):
         try:
+            # Fetch all records from the database
             users = User.get_all()
             invoices = Invoice.get_all()
             revenues = Revenue.get_all()
-            
-            # Create a dictionary to map user IDs to their invoices and revenues
-            user_invoices = {user._id: [] for user in users}
-            user_revenues = {user._id: [] for user in users}
-            
+            expenses = Expense.get_all()
+
+            # Map user IDs to their related data
+            user_data = {user._id: {'invoices': [], 'revenues': [], 'expenses': []} for user in users}
             for invoice in invoices:
-                user_invoices[invoice.user_id].append(invoice)
-                
+                user_data[invoice.user_id]['invoices'].append(invoice)
             for revenue in revenues:
-                user_revenues[revenue.user_id].append(revenue)
+                user_data[revenue.user_id]['revenues'].append(revenue)
+            for expense in expenses:
+                user_data[expense.user_id]['expenses'].append(expense)
                 
-            # Attach invoices and revenues to each user
+            # Attach data and calculate totals for each user
             for user in users:
-                user.invoices = user_invoices[user._id]
-                user.revenues = user_revenues[user._id]
+                user.invoices = user_data[user._id]['invoices']
+                user.revenues = user_data[user._id]['revenues']
+                user.expenses = user_data[user._id]['expenses']
+                
+                user.total_water_consumption = sum(invoice.consumption for invoice in user.invoices)
+                user.total_invoice_amount = sum(invoice.total_amount for invoice in user.invoices)
+                user.total_revenue_amount = sum(revenue.amount for revenue in user.revenues)
+                user.total_expense_amount = sum(expense.amount for expense in user.expenses)
+
+                # Remove password from the response
+                user.password = None
             
             return users, 200
+
         except Exception as e:
             api.abort(500, f"An error occurred while fetching user profiles: {str(e)}")
-
 
 @api.route('/house-sections')
 class HouseSectionResource(Resource):

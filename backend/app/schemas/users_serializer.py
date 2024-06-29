@@ -30,8 +30,6 @@ house_section_serializer = api.model(
 )
 
 # Serializer definitions
-
-# Serializer definitions
 user_data_serializer = api.model('User', {
     '_id': fields.Integer,
     'full_name': fields.String,
@@ -45,9 +43,11 @@ user_data_serializer = api.model('User', {
     'balance': fields.Float,
     'last_login': fields.DateTime,
     'last_logout': fields.DateTime,
+    'total_water_consumption': fields.Float,
+    'total_invoice_amount': fields.Float,
+    'total_revenue_amount': fields.Float,
+    'total_expense_amount': fields.Float,
     'created_at': fields.DateTime,
-    'updated_at': fields.DateTime,
-    'deleted_at': fields.DateTime,
     'invoices': fields.List(fields.Nested(api.model('Invoice', {
         '_id': fields.String,
         'user_id': fields.Integer,
@@ -61,8 +61,6 @@ user_data_serializer = api.model('User', {
         'total_amount': fields.Float,
         'payment_status': fields.String,
         'created_at': fields.DateTime,
-        'updated_at': fields.DateTime,
-        'deleted_at': fields.DateTime,
     }))),
     'revenues': fields.List(fields.Nested(api.model('Revenue', {
         '_id': fields.String,
@@ -76,7 +74,19 @@ user_data_serializer = api.model('User', {
         'transaction_id': fields.String,
         'phone_number': fields.String,
         'created_at': fields.DateTime,
-        'updated_at': fields.DateTime,
-        'deleted_at': fields.DateTime,
-    })))
+    }))),
+    'expenses': fields.List(fields.Nested(api.model('Expense', {
+        '_id': fields.String,
+        'user_id': fields.Integer,
+        'type': fields.String,
+        'date': fields.DateTime,
+        'vendor': fields.String,
+        'amount': fields.Float,
+        'description': fields.String,
+        'approval_status': fields.String,
+        'payment_method': fields.String,
+        'payment_status': fields.String,
+        'transaction_id': fields.String,
+        'created_at': fields.DateTime,
+    }))),
 })

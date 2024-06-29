@@ -4,6 +4,7 @@ from ..extensions.rest_api import api
 expense_serializer = api.model(
   'Expense', {
     '_id': fields.String(),
+    'user_id': fields.Integer(),
     'type': fields.String(),
     'date': fields.String(),
     'vendor': fields.String(),
