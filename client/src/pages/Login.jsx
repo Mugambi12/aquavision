@@ -1,8 +1,8 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
-import LoginForm from "../components/Auth/LoginForm";
+import LoginForm from "../components/auth/LoginForm";
 import loginImg from "../assets/images/static/login-page-image.jpg";
-import "../components/Auth/LoginForm.css";
+import "../components/auth/LoginForm.css";
 
 const LoginPage = () => {
   return (

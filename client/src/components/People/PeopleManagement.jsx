@@ -2,73 +2,56 @@ import React, { useState } from "react";
 import ReactECharts from "echarts-for-react";
 import "./PeopleManagement.css";
 
-// Function to get the latest entry from a list of entries
-const getLatestEntry = (entries) => {
-  if (!entries || entries.length === 0) return null;
-
-  return entries.reduce((latest, entry) => {
-    const entryDate = new Date(entry.created_at);
-    const latestDate = new Date(latest.created_at);
-
-    return entryDate > latestDate ? entry : latest;
-  }, entries[0]);
-};
-
 // PersonalContentCard component to display various user data
-const PersonalContentCard = ({ person, label, valueKey, unit }) => {
-  const latestEntry = getLatestEntry(person.invoices);
-
+const PersonalContentCard = ({ label, value }) => {
   return (
-    <>
-      {latestEntry && (
-        <div
-          className={`personal-content-card personal-content-card-${label
-            .toLowerCase()
-            .replace(/\s+/g, "-")}`}
-        >
-          <div className="personal-content-card-label">{label}</div>
-          <div className="personal-content-card-value">
-            {person[valueKey]} {unit}
-          </div>
-        </div>
-      )}
-    </>
+    <div
+      className={`personal-content-card personal-content-card-${label
+        .toLowerCase()
+        .replace(/\s+/g, "-")}`}
+    >
+      <div className="personal-content-card-label">{label}</div>
+      <div className="personal-content-card-value">{value}</div>
+    </div>
   );
 };
+
+// Helper function to format currency
+const formatCurrency = (amount) =>
+  amount.toLocaleString("en-US", {
+    style: "currency",
+    currency: "KES",
+  });
+
+// Helper function to format water usage to 2 decimal places
+const formatWaterUsage = (usage) => usage.toFixed(2) + " Units";
 
 // Card components for specific data
 const WaterUsageCard = ({ person }) => (
   <PersonalContentCard
-    person={person}
     label="Water Usage"
-    valueKey="totalWaterConsumption"
-    unit="Units"
+    value={formatWaterUsage(person.totalWaterConsumption)}
   />
 );
 
 const TotalBillAmountCard = ({ person }) => (
   <PersonalContentCard
-    person={person}
     label="Total Bill"
-    valueKey="totalInvoiceAmount"
-    unit="Ksh"
+    value={formatCurrency(person.totalInvoiceAmount)}
   />
 );
 
 const UsageTrendsCard = ({ person }) => (
   <PersonalContentCard
-    person={person}
     label="Repair Costs"
-    valueKey="totalExpenseAmount"
-    unit="Ksh"
+    value={formatCurrency(person.totalExpenseAmount)}
   />
 );
+
 const TotalPaymentAmountCard = ({ person }) => (
   <PersonalContentCard
-    person={person}
     label="Total Payment"
-    valueKey="totalRevenueAmount"
-    unit="Ksh"
+    value={formatCurrency(person.totalRevenueAmount)}
   />
 );
 
@@ -81,21 +64,24 @@ const WaterConsumptionHistory = ({ person }) => {
     return <div>No water consumption history available</div>;
   }
 
-  // Map for months
+  // Map for short month names
   const monthMap = {
-    January: 0,
-    February: 1,
-    March: 2,
-    April: 3,
-    May: 4,
-    June: 5,
-    July: 6,
-    August: 7,
-    September: 8,
-    October: 9,
-    November: 10,
-    December: 11,
+    January: "Jan",
+    February: "Feb",
+    March: "Mar",
+    April: "Apr",
+    May: "May",
+    June: "Jun",
+    July: "Jul",
+    August: "Aug",
+    September: "Sep",
+    October: "Oct",
+    November: "Nov",
+    December: "Dec",
   };
+
+  // Array of all short month names
+  const months = Object.values(monthMap);
 
   // Current date
   const now = new Date();
@@ -128,10 +114,37 @@ const WaterConsumptionHistory = ({ person }) => {
   // Filtered invoices based on selected filter
   const filteredInvoices = filterData(invoices, filter);
 
-  // Chart data for consumption history
-  const chartData = filteredInvoices.map((entry) => ({
-    time: `${entry.created_at}`,
-    consumption: entry.consumption,
+  // Initialize data object for all months with zero values
+  const monthlyData = months.reduce((acc, month) => {
+    acc[month] = {
+      previousReading: 0,
+      currentReading: 0,
+      consumption: 0,
+      unitPrice: 0,
+      totalAmount: 0,
+    };
+    return acc;
+  }, {});
+
+  // Populate data from filtered invoices
+  filteredInvoices.forEach((entry) => {
+    const date = new Date(entry.created_at);
+    const month = months[date.getMonth()];
+    monthlyData[month].previousReading += entry.previous_reading;
+    monthlyData[month].currentReading += entry.current_reading;
+    monthlyData[month].consumption += entry.consumption;
+    monthlyData[month].unitPrice += entry.unit_price;
+    monthlyData[month].totalAmount += entry.total_amount;
+  });
+
+  // Convert monthlyData to chart-friendly format
+  const chartData = months.map((month) => ({
+    month,
+    previousReading: monthlyData[month].previousReading,
+    currentReading: monthlyData[month].currentReading,
+    consumption: monthlyData[month].consumption,
+    unitPrice: monthlyData[month].unitPrice,
+    totalAmount: monthlyData[month].totalAmount,
   }));
 
   // Handler for filter change
@@ -159,19 +172,55 @@ const WaterConsumptionHistory = ({ person }) => {
             },
             xAxis: {
               type: "category",
-              data: chartData.map((data) => data.time),
+              data: months,
             },
             yAxis: {
               type: "value",
             },
             series: [
               {
-                name: "Consumption",
+                name: "Previous:",
+                data: chartData.map((data) => data.previousReading),
+                type: "bar",
+                smooth: true,
+                lineStyle: {
+                  color: "#FF0000",
+                },
+              },
+              {
+                name: "Current:",
+                data: chartData.map((data) => data.currentReading),
+                type: "bar",
+                smooth: true,
+                lineStyle: {
+                  color: "#00FF00",
+                },
+              },
+              {
+                name: "Usage:",
                 data: chartData.map((data) => data.consumption),
-                type: "line",
+                type: "bar",
                 smooth: true,
                 lineStyle: {
                   color: "#3398DB",
+                },
+              },
+              {
+                name: "Price:",
+                data: chartData.map((data) => data.unitPrice),
+                type: "bar",
+                smooth: true,
+                lineStyle: {
+                  color: "#FFA500",
+                },
+              },
+              {
+                name: "Total:",
+                data: chartData.map((data) => data.totalAmount),
+                type: "bar",
+                smooth: true,
+                lineStyle: {
+                  color: "#FFA500",
                 },
               },
             ],
@@ -200,9 +249,18 @@ const PaymentHistory = ({ person }) => (
           <div key={index} className="d-flex">
             <div className="table_content">{item.transaction_id}</div>
             <div className="table_content">
-              {new Date(item.payment_date).toLocaleDateString()}
+              {new Date(item.payment_date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "2-digit",
+              })}
             </div>
-            <div className="table_content">{item.amount}</div>
+            <div className="table_content">
+              {item.amount.toLocaleString("en-US", {
+                style: "currency",
+                currency: "KES",
+              })}
+            </div>
             <div className="table_content">{item.payment_status}</div>
           </div>
         ))}

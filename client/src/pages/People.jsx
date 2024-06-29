@@ -92,7 +92,6 @@ const People = () => {
 
       setPeopleData(mappedData);
       console.log("Fetched people data successfully.");
-      console.log("People data:", mappedData);
     } catch (error) {
       console.error("Error fetching people data:", error);
       alert("Failed to fetch people data. Please try again later.");
