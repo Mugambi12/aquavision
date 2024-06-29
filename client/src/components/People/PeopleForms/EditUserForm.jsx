@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./EditUserForm.css";
 
-const EditUserForm = ({ onSubmit, userData }) => {
+const EditUserForm = ({ onSubmit, userData, houseSections }) => {
+  const [id, setId] = useState(userData.id || null);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -12,6 +13,7 @@ const EditUserForm = ({ onSubmit, userData }) => {
 
   useEffect(() => {
     if (userData) {
+      setId(userData.id || null);
       setFullName(userData.fullName || "");
       setEmail(userData.email || "");
       setPhoneNumber(userData.phoneNumber || "");
@@ -25,7 +27,8 @@ const EditUserForm = ({ onSubmit, userData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const updatedUser = {
-      ...userData,
+      /*...userData,*/
+      id,
       fullName,
       email,
       phoneNumber,
@@ -42,6 +45,18 @@ const EditUserForm = ({ onSubmit, userData }) => {
       <h2 className="modal-title">Update User Info</h2>
       <form onSubmit={handleSubmit} className="edit-user-form">
         <div className="form-group">
+          <label htmlFor="id">ID:</label>
+          <input
+            id="id"
+            placeholder="Selected ID"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+            required
+            disabled
+          />
+        </div>
+
+        <div className="form-group">
           <label htmlFor="fullName">Full Name:</label>
           <input
             type="text"
@@ -52,17 +67,7 @@ const EditUserForm = ({ onSubmit, userData }) => {
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="Enter email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+
         <div className="form-group">
           <label htmlFor="phoneNumber">Phone Number:</label>
           <input
@@ -74,17 +79,23 @@ const EditUserForm = ({ onSubmit, userData }) => {
             required
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="houseSection">House Section:</label>
-          <input
-            type="text"
+          <select
             id="houseSection"
-            placeholder="Enter house section"
             value={houseSection}
             onChange={(e) => setHouseSection(e.target.value)}
             required
-          />
+          >
+            {houseSections.services.house_sections.map((section) => (
+              <option key={section._id} value={section.section}>
+                {section.section}
+              </option>
+            ))}
+          </select>
         </div>
+
         <div className="form-group">
           <label htmlFor="houseNumber">House Number:</label>
           <input
@@ -96,6 +107,19 @@ const EditUserForm = ({ onSubmit, userData }) => {
             required
           />
         </div>
+
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+
         <div className="form-group">
           <label>Role:</label>
           <div className="role-options">
@@ -123,6 +147,7 @@ const EditUserForm = ({ onSubmit, userData }) => {
             </div>
           </div>
         </div>
+
         <div className="form-group">
           <label>Active:</label>
           <label className="toggle-switch">
@@ -134,6 +159,7 @@ const EditUserForm = ({ onSubmit, userData }) => {
             <span className="toggle-slider"></span>
           </label>
         </div>
+
         <button type="submit" className="submit-button">
           Update User
         </button>

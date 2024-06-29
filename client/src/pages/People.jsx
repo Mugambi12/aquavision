@@ -23,7 +23,7 @@ const People = () => {
 
   useEffect(() => {
     callApiAndFetchPeople();
-    callApiAndGetHouseSections();
+    callApiAndFetchHouseSections();
   }, []);
 
   const callApiAndFetchPeople = async () => {
@@ -66,7 +66,7 @@ const People = () => {
     }
   };
 
-  const callApiAndGetHouseSections = async () => {
+  const callApiAndFetchHouseSections = async () => {
     try {
       const data = await fetchHouseSections();
       setHouseSections(data);
@@ -75,7 +75,7 @@ const People = () => {
     }
   };
 
-  const callApiAndPostUser = (newUser) => {
+  const callApiAndCreateUser = (newUser) => {
     try {
       console.log("New user:", newUser);
       callApiAndFetchPeople();
@@ -143,7 +143,7 @@ const People = () => {
         onRequestClose={() => setIsCreateModalOpen(false)}
       >
         <AddUserForm
-          onSubmit={callApiAndPostUser}
+          onSubmit={callApiAndCreateUser}
           houseSections={houseSections}
         />
       </ModalWrapper>
@@ -152,7 +152,11 @@ const People = () => {
         isOpen={isEditModalOpen}
         onRequestClose={() => setIsEditModalOpen(false)}
       >
-        <EditUserForm onSubmit={callApiAndUpdateUser} userData={editUserData} />
+        <EditUserForm
+          onSubmit={callApiAndUpdateUser}
+          userData={editUserData}
+          houseSections={houseSections}
+        />
       </ModalWrapper>
     </>
   );

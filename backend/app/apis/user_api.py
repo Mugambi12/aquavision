@@ -86,6 +86,33 @@ class UserCreateResource(Resource):
         new_user.password = hashed_password
         new_user.save()
         return new_user, 201
+    
+
+@api.route('/update-user/<int:_id>')
+class UserUpdateResource(Resource):
+    @api.expect(user_serializer)
+    @api.marshal_with(user_serializer)
+    def put(self, _id):
+        data = request.get_json()
+        user = User.get_by_id(_id)
+        if not user:
+            abort(404, 'User not found')
+
+        updated_user = [
+            {
+                'full_name': data.get('fullName'),
+                'email': data.get('email'),
+                'phone_number': data.get('phoneNumber'),
+                'house_section': data.get('houseSection'),
+                'house_number': data.get('houseNumber'),
+                'is_active': data.get('isActive'),
+                'is_admin': data.get('isAdmin')
+            }
+        ]
+
+        print('This is the updated user:', updated_user)
+        #user.update(**updated_user)
+        return user, 200
 
 @api.route('/delete-user/<int:_id>')
 class UserDeleteResource(Resource):

@@ -30,7 +30,8 @@
   color: var(--davys_gray);
 }
 
-.edit-user-container input {
+.edit-user-container input,
+.edit-user-container select {
   padding: var(--radius-8) var(--radius-12);
   font-size: var(--fs-6);
   background: var(--white);
