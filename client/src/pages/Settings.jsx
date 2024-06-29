@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/navbar/Navbar";
-import CompanySettings from "../components/Settings/Settings";
+import CompanySettings from "../components/settings/Settings";
 import Spinner from "../components/spinner/Spinner";
 import { fetchSettings, postSettings } from "../apis/ApiSettings";
 

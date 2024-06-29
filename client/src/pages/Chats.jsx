@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/navbar/Navbar";
-import Sidebar from "../components/Chats/Sidebar";
-import ChatWindow from "../components/Chats/ChatWindow";
+import Sidebar from "../components/chats/Sidebar";
+import ChatWindow from "../components/chats/ChatWindow";
 import Spinner from "../components/spinner/Spinner";
 import { fetchMessage } from "../apis/ApiChats";
 

@@ -4,7 +4,7 @@ import "./AddUserForm.css";
 const AddUserForm = ({ onSubmit, houseSections }) => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [houseSection, setHouseSection] = useState("");
   const [houseNumber, setHouseNumber] = useState("");
   const [role, setRole] = useState("basic");
@@ -16,7 +16,7 @@ const AddUserForm = ({ onSubmit, houseSections }) => {
       profileImage: "default-profile.png",
       fullName,
       email,
-      phone,
+      phoneNumber,
       houseSection,
       houseNumber,
       isAdmin: role === "admin",
@@ -113,13 +113,13 @@ const AddUserForm = ({ onSubmit, houseSections }) => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="phone">Phone:</label>
+          <label htmlFor="phoneNumber">Phone Number:</label>
           <input
             type="tel"
-            id="phone"
+            id="phoneNumber"
             placeholder="Enter phone number"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
             required
           />
         </div>

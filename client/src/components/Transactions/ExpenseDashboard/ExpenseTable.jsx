@@ -48,7 +48,11 @@ const ExpenseTable = ({
                   exp.payment_status === "Cancelled" ? "Cancelled" : ""
                 }`}
               >
-                {new Date(exp.date).toLocaleDateString()}
+                {new Date(exp.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "2-digit",
+                })}
               </td>
               <td
                 className={`${

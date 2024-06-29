@@ -235,36 +235,41 @@ const WaterConsumptionHistory = ({ person }) => {
 // Component to display payment history
 const PaymentHistory = ({ person }) => (
   <div className="content-card">
-    <div className="payment-history-content-table">
-      <div className="table-title">Payment History</div>
-      <div className="d-flex payment-history-content-header">
-        <div className="table_header">Transaction ID</div>
-        <div className="table_header">Date</div>
-        <div className="table_header">Amount</div>
-        <div className="table_header">Status</div>
-      </div>
-
-      <div className="payment-history-content-body">
-        {person.revenues.map((item, index) => (
-          <div key={index} className="d-flex">
-            <div className="table_content">{item.transaction_id}</div>
-            <div className="table_content">
-              {new Date(item.payment_date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "2-digit",
-              })}
-            </div>
-            <div className="table_content">
-              {item.amount.toLocaleString("en-US", {
-                style: "currency",
-                currency: "KES",
-              })}
-            </div>
-            <div className="table_content">{item.payment_status}</div>
-          </div>
-        ))}
-      </div>
+    <div className="payment-history-content">
+      <h2 className="table-title">Payment History</h2>
+      <table className="payment-history-table">
+        <thead>
+          <tr>
+            <th>#ID</th>
+            <th>Transaction ID</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {person.revenues.map((item, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{item.transaction_id}</td>
+              <td>
+                {new Date(item.payment_date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "2-digit",
+                })}
+              </td>
+              <td>
+                {item.amount.toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "KES",
+                })}
+              </td>
+              <td>{item.payment_status}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   </div>
 );

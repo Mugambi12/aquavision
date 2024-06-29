@@ -197,36 +197,48 @@ hr {
 /* ================================ */
 /* Payment History */
 /* ================================ */
-.payment-history-content-table {
-  margin: 10px;
+.payment-history-content {
+  overflow-x: auto;
 }
 
-.payment-history-content-table .table-title {
+.table-title {
   font-size: var(--fs-4);
   font-weight: var(--fw-600);
+  color: var(--onyx);
   margin-bottom: 18px;
+  text-align: center;
 }
 
-.payment-history-content-header {
-  margin-bottom: 10px;
+.payment-history-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.payment-history-content-header .table_header {
+.payment-history-table th,
+.payment-history-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--onyx_2);
+}
+
+.payment-history-table th {
   font-size: var(--fs-6);
-  font-weight: var(--fw-500);
-  flex-basis: 25%;
+  font-weight: var(--fw-600);
+  background-color: #2c3e50;
+  color: var(--white);
 }
 
-.payment-history-content-body {
-  overflow-y: auto;
-  max-height: 39vh;
-}
-
-.payment-history-content-body .table_content {
+.payment-history-table td {
   font-size: var(--fs-6);
   font-weight: var(--fw-400);
-  line-height: 30px;
-  flex-basis: 25%;
+  color: var(--onyx);
+}
+
+@media (max-width: 768px) {
+  .payment-history-table th,
+  .payment-history-table td {
+    padding: 8px;
+  }
 }
 
 /* ================================ */
@@ -235,12 +247,16 @@ hr {
 .personal-content-invoice-download {
   margin-left: 8px;
   padding: 10px;
+  background: var(--white);
+  border-radius: var(--radius-6);
+  box-shadow: var(--shadow-1);
 }
 
 .personal-content-invoice-download .title {
   font-size: var(--fs-4);
   font-weight: var(--fw-600);
   margin-bottom: 18px;
+  color: var(--onyx);
 }
 
 .personal-content-invoice-download-list {
@@ -265,6 +281,7 @@ hr {
   height: 15px;
   margin-right: 10px;
   cursor: pointer;
+  color: var(--blue_ryb);
 }
 
 /* ================================ */

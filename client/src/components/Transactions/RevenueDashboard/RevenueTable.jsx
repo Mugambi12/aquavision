@@ -51,7 +51,11 @@ const RevenueTable = ({
                   rev.payment_status === "Cancelled" ? "Cancelled" : ""
                 }
               >
-                {new Date(rev.payment_date).toLocaleDateString()}
+                {new Date(rev.payment_date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "2-digit",
+                })}
               </td>
               <td
                 className={

@@ -10,7 +10,6 @@ import EditUserForm from "../components/people/peopleForms/EditUserForm";
 import Spinner from "../components/spinner/Spinner";
 
 import { fetchPeople, fetchHouseSections } from "../apis/ApiPeople";
-import { fetchUsersSampleData } from "../apis/ApiPeople";
 
 const People = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -23,42 +22,9 @@ const People = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   useEffect(() => {
-    //    callApiAndfetchUsersSampleData();
     callApiAndFetchPeople();
     callApiAndGetHouseSections();
   }, []);
-
-  //  const callApiAndfetchUsersSampleData = async () => {
-  //    try {
-  //      setIsLoading(true);
-  //      const data = await fetchUsersSampleData();
-  //
-  //      const transformedPeople = data.map((person, index) => ({
-  //        id: index + 1,
-  //        fullName: person.name,
-  //        gender: person.gender,
-  //        age: person.age,
-  //        profileImage: person.profile_picture,
-  //        dateOfBirth: person.date_of_birth,
-  //        phoneNumber: person.phone_number,
-  //        emergencyContact: person.emergency_contact,
-  //        insuranceType: person.insurance_type,
-  //        diagnosisHistory: person.diagnosis_history,
-  //        diagnosticList: person.diagnostic_list,
-  //        labResults: person.lab_results,
-  //      }));
-  //
-  //      //setPeopleData(transformedPeople);
-  //      console.log(
-  //        "Fetched people data successfully. Sample data:",
-  //        transformedPeople
-  //      );
-  //    } catch (error) {
-  //      console.error("Error fetching people data:", error);
-  //    } finally {
-  //      setIsLoading(false);
-  //    }
-  //  };
 
   const callApiAndFetchPeople = async () => {
     try {
@@ -112,11 +78,22 @@ const People = () => {
   const callApiAndPostUser = (newUser) => {
     try {
       console.log("New user:", newUser);
-      callApiAndfetchUsers();
+      callApiAndFetchPeople();
     } catch (error) {
       console.error("Error posting new user:", error);
     } finally {
       setIsCreateModalOpen(false);
+    }
+  };
+
+  const callApiAndUpdateUser = (updatedUser) => {
+    try {
+      console.log("Updated user:", updatedUser);
+      callApiAndFetchPeople();
+    } catch (error) {
+      console.error("Error updating user:", error);
+    } finally {
+      setIsEditModalOpen(false);
     }
   };
 
@@ -175,13 +152,7 @@ const People = () => {
         isOpen={isEditModalOpen}
         onRequestClose={() => setIsEditModalOpen(false)}
       >
-        <EditUserForm
-          onSubmit={(editedUser) => {
-            console.log("Edited user:", editedUser);
-            setIsEditModalOpen(false);
-          }}
-          userData={editUserData}
-        />
+        <EditUserForm onSubmit={callApiAndUpdateUser} userData={editUserData} />
       </ModalWrapper>
     </>
   );

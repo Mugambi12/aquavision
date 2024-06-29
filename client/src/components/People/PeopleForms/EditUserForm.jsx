@@ -4,20 +4,20 @@ import "./EditUserForm.css";
 const EditUserForm = ({ onSubmit, userData }) => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [houseSection, setHouseSection] = useState("");
   const [houseNumber, setHouseNumber] = useState("");
-  const [role, setRole] = useState("basic");
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     if (userData) {
       setFullName(userData.fullName || "");
       setEmail(userData.email || "");
-      setPhone(userData.phone || "");
+      setPhoneNumber(userData.phoneNumber || "");
       setHouseSection(userData.houseSection || "");
       setHouseNumber(userData.houseNumber || "");
-      setRole(userData.adminRole ? "admin" : "basic");
+      setIsAdmin(userData.isAdmin || false);
       setIsActive(userData.isActive || false);
     }
   }, [userData]);
@@ -28,10 +28,10 @@ const EditUserForm = ({ onSubmit, userData }) => {
       ...userData,
       fullName,
       email,
-      phone,
+      phoneNumber,
       houseSection,
       houseNumber,
-      adminRole: role === "admin",
+      isAdmin,
       isActive,
     };
     onSubmit(updatedUser);
@@ -64,13 +64,13 @@ const EditUserForm = ({ onSubmit, userData }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="phone">Phone:</label>
+          <label htmlFor="phoneNumber">Phone Number:</label>
           <input
             type="tel"
-            id="phone"
+            id="phoneNumber"
             placeholder="Enter phone number"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
             required
           />
         </div>
@@ -105,8 +105,8 @@ const EditUserForm = ({ onSubmit, userData }) => {
                 id="adminRole"
                 name="role"
                 value="admin"
-                checked={role === "admin"}
-                onChange={() => setRole("admin")}
+                checked={isAdmin}
+                onChange={() => setIsAdmin(true)}
               />
               <label htmlFor="adminRole">Admin</label>
             </div>
@@ -116,8 +116,8 @@ const EditUserForm = ({ onSubmit, userData }) => {
                 id="basicRole"
                 name="role"
                 value="basic"
-                checked={role === "basic"}
-                onChange={() => setRole("basic")}
+                checked={!isAdmin}
+                onChange={() => setIsAdmin(false)}
               />
               <label htmlFor="basicRole">Basic</label>
             </div>
