@@ -1,26 +1,26 @@
 // apiPeople.js
 
-//const apiEndPoint = "https://fedskillstest.coalitiontechnologies.workers.dev";
-//const credentials = "Y29hbGl0aW9uOnNraWxscy10ZXN0";
-//
-//export const fetchUsers = async () => {
-//  try {
-//    const response = await fetch(apiEndPoint, {
-//      headers: {
-//        Authorization: `Basic ${credentials}`,
-//      },
-//    });
-//
-//    if (!response.ok) {
-//      throw new Error(`HTTP error! status: ${response.status}`);
-//    }
-//
-//    return await response.json();
-//  } catch (error) {
-//    console.error("Error fetching people data:", error);
-//    return [];
-//  }
-//};
+const apiEndPoint = "https://fedskillstest.coalitiontechnologies.workers.dev";
+const credentials = "Y29hbGl0aW9uOnNraWxscy10ZXN0";
+
+export const fetchUsersSampleData = async () => {
+  try {
+    const response = await fetch(apiEndPoint, {
+      headers: {
+        Authorization: `Basic ${credentials}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching people data:", error);
+    return [];
+  }
+};
 
 const BASE_URL = "/api/users";
 
