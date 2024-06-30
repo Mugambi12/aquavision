@@ -61,7 +61,11 @@ const WaterConsumptionHistory = ({ person }) => {
   const [filter, setFilter] = useState("all");
 
   if (!invoices || invoices.length === 0) {
-    return <div>No water consumption history available</div>;
+    return (
+      <div className="not-available">
+        No water consumption history available
+      </div>
+    );
   }
 
   // Map for short month names

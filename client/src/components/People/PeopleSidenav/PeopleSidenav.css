@@ -55,14 +55,14 @@
 }
 
 .full-name {
-  font-size: var(--fs-7);
-  font-weight: var(--fw-600);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-500);
   color: var(--onyx_2);
   margin-bottom: 5px;
 }
 
 .gender-age {
-  font-size: var(--fs-7);
+  font-size: var(--fs-8);
   color: var(--sonic_sliver);
 }
 
