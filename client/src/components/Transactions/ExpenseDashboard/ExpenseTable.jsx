@@ -36,60 +36,30 @@ const ExpenseTable = ({
         <tbody>
           {expenses.map((exp) => (
             <tr key={exp._id}>
-              <td
-                className={`${
-                  exp.payment_status === "Cancelled" ? "Cancelled" : ""
-                }`}
-              >
-                #{exp._id}
-              </td>
-              <td
-                className={`${
-                  exp.payment_status === "Cancelled" ? "Cancelled" : ""
-                }`}
-              >
+              <td>{`#${exp._id}`}</td>
+              <td>
                 {new Date(exp.date).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "short",
                   day: "2-digit",
                 })}
               </td>
-              <td
-                className={`${
-                  exp.payment_status === "Cancelled" ? "Cancelled" : ""
-                }`}
-              >
-                {exp.vendor}
-              </td>
-              <td
-                className={`${
-                  exp.payment_status === "Cancelled" ? "Cancelled" : ""
-                }`}
-              >
-                {exp.type}
-              </td>
-              <td
-                className={`${
-                  exp.payment_status === "Cancelled" ? "Cancelled" : ""
-                }`}
-              >
+              <td>{exp.vendor}</td>
+              <td>{exp.type}</td>
+              <td>
                 {exp.amount.toLocaleString("en-US", {
                   style: "currency",
                   currency: "KES",
                 })}
               </td>
               <td
-                className={`${
+                className={
                   exp.payment_status === "Completed" ? "completed" : "pending"
-                }`}
+                }
               >
                 {exp.payment_status}
               </td>
-              <td
-                className={`${
-                  exp.payment_status === "Cancelled" ? "Cancelled" : ""
-                }`}
-              >
+              <td>
                 <button
                   className="material-symbols-rounded view"
                   onClick={() => openViewExpenseModal(exp)}

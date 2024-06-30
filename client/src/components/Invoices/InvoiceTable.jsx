@@ -118,7 +118,7 @@ const InvoiceTable = ({
         </thead>
         <tbody>
           {data.map((invoice) => (
-            <tr className="records-invoice-row" key={invoice._id}>
+            <tr key={invoice._id}>
               <td>
                 <div
                   className={`records-status ${invoice.payment_status}-bg`}
@@ -149,17 +149,15 @@ const InvoiceTable = ({
               </td>
               <td>
                 <div className={`records-amount ${invoice.payment_status}`}>
-                  <span>
-                    {invoice.balance.toLocaleString("en-US", {
-                      style: "currency",
-                      currency: "KES",
-                    })}
-                  </span>
+                  {invoice.balance.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "KES",
+                  })}
                 </div>
               </td>
               <td>
                 {processing === invoice._id ? (
-                  <span className="loader"></span>
+                  <div className="loader"></div>
                 ) : (
                   invoice.payment_status === "unpaid" && (
                     <span

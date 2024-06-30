@@ -165,22 +165,19 @@
   box-shadow: var(--shadow-1);
 }
 
-.expense-table-container.table {
-  margin-left: -270px;
-}
-
 .expense-table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 35px;
+  border-collapse: collapse; /* Changed to collapse to remove spacing */
 }
 
 .expense-table th,
 .expense-table td {
+  /* Adjust padding as needed */
   background: var(--white);
   font-weight: var(--fw-500);
   color: var(--davys_gray);
   text-align: center;
+  white-space: nowrap; /* Prevents names from collapsing */
 }
 
 .expense-table .completed {
@@ -202,10 +199,12 @@
 @media screen and (max-width: 768px) {
   .expense-table-container {
     margin-left: 0;
+    padding: var(--fs-10) 0;
     margin-top: var(--fs-3);
   }
 
-  .expense-table {
-    border-spacing: 0;
+  .expense-table th,
+  .expense-table td {
+    padding: 8px;
   }
 }
