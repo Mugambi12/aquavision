@@ -75,7 +75,7 @@
 @media screen and (max-width: 768px) {
   .modal-wrapper {
     min-width: 90%;
-    max-height: 80vh;
+    max-height: 90vh;
     padding: var(--radius-12) var(--radius-3);
   }
 

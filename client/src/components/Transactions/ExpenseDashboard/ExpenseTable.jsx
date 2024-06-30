@@ -25,7 +25,7 @@ const ExpenseTable = ({
           <tr>
             <th>ID</th>
             <th>Date</th>
-            <th>Merchant Name</th>
+            <th>Customer Name</th>
             <th>Expense Type</th>
             <th>Amount</th>
             <th>Status</th>

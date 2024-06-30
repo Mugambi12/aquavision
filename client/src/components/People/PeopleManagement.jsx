@@ -305,7 +305,7 @@ const ProfileCard = ({ person, onEditProfileClick }) => {
         <div className="personal-full-name">{person.fullName}</div>
 
         <div className="personal-user-content-details">
-          <div className="d-flex personal-user-content-detail">
+          <div className="personal-user-content-detail">
             <span className="material-symbols-rounded icon">
               calendar_month
             </span>
@@ -314,25 +314,47 @@ const ProfileCard = ({ person, onEditProfileClick }) => {
               <span className="value">{person.houseSection}</span>
             </div>
           </div>
-          <div className="d-flex personal-user-content-detail">
+          <div className="personal-user-content-detail">
             <span className="material-symbols-rounded icon">home</span>
             <div className="column">
               <span className="label">House Number:</span>
               <span className="value">{person.houseNumber}</span>
             </div>
           </div>
-          <div className="d-flex personal-user-content-detail">
+          <div className="personal-user-content-detail">
             <span className="material-symbols-rounded icon">phone</span>
             <div className="column">
               <span className="label">Phone Number:</span>
               <span className="value">{person.phoneNumber}</span>
             </div>
           </div>
-          <div className="d-flex personal-user-content-detail">
+          <div className="personal-user-content-detail">
             <span className="material-symbols-rounded icon">email</span>
             <div className="column">
               <span className="label">Email Address:</span>
               <span className="value">{person.email}</span>
+            </div>
+          </div>
+
+          <div className="personal-user-content-detail">
+            <span className="material-symbols-rounded icon">
+              {person.isAdmin ? "admin_panel_settings" : "person"}
+            </span>
+            <div className="column">
+              <span className="label">Account Type:</span>
+              <span className="value">{person.isAdmin ? "Admin" : "User"}</span>
+            </div>
+          </div>
+
+          <div className="personal-user-content-detail">
+            <span className="material-symbols-rounded icon">
+              {person.isActive ? "check_circle" : "cancel"}
+            </span>
+            <div className="column">
+              <span className="label">Active Status:</span>
+              <span className="value">
+                {person.isActive ? "Active" : "Inactive"}
+              </span>
             </div>
           </div>
         </div>

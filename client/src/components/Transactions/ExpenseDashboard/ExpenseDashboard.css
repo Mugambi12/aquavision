@@ -159,7 +159,7 @@
 /* CSS for expense table styling */
 /*================================*/
 .expense-table-container {
-  padding: var(--fs-4);
+  padding: var(--fs-5);
   background: var(--white);
   border-radius: var(--radius-8);
   box-shadow: var(--shadow-1);
@@ -177,9 +177,7 @@
 
 .expense-table th,
 .expense-table td {
-  height: 60px;
   background: var(--white);
-  font-size: var(--fs-6);
   font-weight: var(--fw-500);
   color: var(--davys_gray);
   text-align: center;

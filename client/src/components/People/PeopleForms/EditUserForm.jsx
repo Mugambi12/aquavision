@@ -1,41 +1,42 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import "./EditUserForm.css";
 
-const EditUserForm = ({ onSubmit, userData, houseSections }) => {
-  const [id, setId] = useState(userData.id || null);
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [houseSection, setHouseSection] = useState("");
-  const [houseNumber, setHouseNumber] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isActive, setIsActive] = useState(false);
+const EditUserForm = ({ onSubmit, userData, houseSections, isProcessing }) => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   useEffect(() => {
     if (userData) {
-      setId(userData.id || null);
-      setFullName(userData.fullName || "");
-      setEmail(userData.email || "");
-      setPhoneNumber(userData.phoneNumber || "");
-      setHouseSection(userData.houseSection || "");
-      setHouseNumber(userData.houseNumber || "");
-      setIsAdmin(userData.isAdmin || false);
-      setIsActive(userData.isActive || false);
+      setValue("id", userData.id || "");
+      setValue("fullName", userData.fullName || "");
+      setValue("email", userData.email || "");
+      setValue("phoneNumber", userData.phoneNumber || "");
+      setValue("houseSection", userData.houseSection || "");
+      setValue("houseNumber", userData.houseNumber || "");
+      setValue("isAdmin", userData.isAdmin || false);
+      setValue("isActive", userData.isActive || false);
     }
-  }, [userData]);
+  }, [userData, setValue]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // Set defaultChecked based on userData.isAdmin
+  useEffect(() => {
+    if (userData) {
+      setValue("role", userData.isAdmin ? "admin" : "basic");
+    }
+  }, [userData, setValue]);
+
+  const onSubmitForm = (data) => {
     const updatedUser = {
-      /*...userData,*/
-      id,
-      fullName,
-      email,
-      phoneNumber,
-      houseSection,
-      houseNumber,
-      isAdmin,
-      isActive,
+      ...data,
+      id: data.id || null,
+      isAdmin: data.role === "admin", // Set isAdmin based on role selection
+      isActive: data.isActive || false,
     };
     onSubmit(updatedUser);
   };
@@ -43,18 +44,8 @@ const EditUserForm = ({ onSubmit, userData, houseSections }) => {
   return (
     <div className="edit-user-container">
       <h2 className="modal-title">Update User Info</h2>
-      <form onSubmit={handleSubmit} className="edit-user-form">
-        <div className="form-group">
-          <label htmlFor="id">ID:</label>
-          <input
-            id="id"
-            placeholder="Selected ID"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-            required
-            disabled
-          />
-        </div>
+      <form onSubmit={handleSubmit(onSubmitForm)} className="edit-user-form">
+        <input type="hidden" {...register("id")} required disabled />
 
         <div className="form-group">
           <label htmlFor="fullName">Full Name:</label>
@@ -62,10 +53,11 @@ const EditUserForm = ({ onSubmit, userData, houseSections }) => {
             type="text"
             id="fullName"
             placeholder="Enter full name"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            required
+            {...register("fullName", { required: "Full Name is required" })}
           />
+          {errors.fullName && (
+            <p className="error-message">{errors.fullName.message}</p>
+          )}
         </div>
 
         <div className="form-group">
@@ -74,19 +66,22 @@ const EditUserForm = ({ onSubmit, userData, houseSections }) => {
             type="tel"
             id="phoneNumber"
             placeholder="Enter phone number"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            required
+            {...register("phoneNumber", {
+              required: "Phone Number is required",
+            })}
           />
+          {errors.phoneNumber && (
+            <p className="error-message">{errors.phoneNumber.message}</p>
+          )}
         </div>
 
         <div className="form-group">
           <label htmlFor="houseSection">House Section:</label>
           <select
             id="houseSection"
-            value={houseSection}
-            onChange={(e) => setHouseSection(e.target.value)}
-            required
+            {...register("houseSection", {
+              required: "House Section is required",
+            })}
           >
             {houseSections.services.house_sections.map((section) => (
               <option key={section._id} value={section.section}>
@@ -94,6 +89,9 @@ const EditUserForm = ({ onSubmit, userData, houseSections }) => {
               </option>
             ))}
           </select>
+          {errors.houseSection && (
+            <p className="error-message">{errors.houseSection.message}</p>
+          )}
         </div>
 
         <div className="form-group">
@@ -102,10 +100,13 @@ const EditUserForm = ({ onSubmit, userData, houseSections }) => {
             type="text"
             id="houseNumber"
             placeholder="Enter house number"
-            value={houseNumber}
-            onChange={(e) => setHouseNumber(e.target.value)}
-            required
+            {...register("houseNumber", {
+              required: "House Number is required",
+            })}
           />
+          {errors.houseNumber && (
+            <p className="error-message">{errors.houseNumber.message}</p>
+          )}
         </div>
 
         <div className="form-group">
@@ -114,10 +115,11 @@ const EditUserForm = ({ onSubmit, userData, houseSections }) => {
             type="email"
             id="email"
             placeholder="Enter email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
+            {...register("email", { required: "Email is required" })}
           />
+          {errors.email && (
+            <p className="error-message">{errors.email.message}</p>
+          )}
         </div>
 
         <div className="form-group">
@@ -127,10 +129,9 @@ const EditUserForm = ({ onSubmit, userData, houseSections }) => {
               <input
                 type="radio"
                 id="adminRole"
-                name="role"
                 value="admin"
-                checked={isAdmin}
-                onChange={() => setIsAdmin(true)}
+                {...register("role", { required: "Role is required" })}
+                defaultChecked={watch("role") === "admin"}
               />
               <label htmlFor="adminRole">Admin</label>
             </div>
@@ -138,30 +139,28 @@ const EditUserForm = ({ onSubmit, userData, houseSections }) => {
               <input
                 type="radio"
                 id="basicRole"
-                name="role"
                 value="basic"
-                checked={!isAdmin}
-                onChange={() => setIsAdmin(false)}
+                {...register("role", { required: "Role is required" })}
+                defaultChecked={watch("role") === "basic"}
               />
               <label htmlFor="basicRole">Basic</label>
             </div>
           </div>
+          {errors.role && (
+            <p className="error-message">{errors.role.message}</p>
+          )}
         </div>
 
         <div className="form-group">
           <label>Active:</label>
           <label className="toggle-switch">
-            <input
-              type="checkbox"
-              checked={isActive}
-              onChange={() => setIsActive(!isActive)}
-            />
+            <input type="checkbox" {...register("isActive")} />
             <span className="toggle-slider"></span>
           </label>
         </div>
 
         <button type="submit" className="submit-button">
-          Update User
+          {isProcessing ? "Updating User..." : "Update User"}
         </button>
       </form>
     </div>

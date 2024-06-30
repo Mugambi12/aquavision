@@ -9,10 +9,17 @@ import AddUserForm from "../components/people/peopleForms/AddUserForm";
 import EditUserForm from "../components/people/peopleForms/EditUserForm";
 import Spinner from "../components/spinner/Spinner";
 
-import { fetchPeople, fetchHouseSections } from "../apis/ApiPeople";
+import {
+  fetchPeople,
+  fetchHouseSections,
+  createNewUser,
+  updateUser,
+} from "../apis/ApiPeople";
+import { set } from "react-hook-form";
 
 const People = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [peopleData, setPeopleData] = useState([]);
   const [houseSections, setHouseSections] = useState([]);
   const [editUserData, setEditUserData] = useState(null);
@@ -75,24 +82,28 @@ const People = () => {
     }
   };
 
-  const callApiAndCreateUser = (newUser) => {
+  const callApiAndCreateUser = async (newUser) => {
     try {
-      console.log("New user:", newUser);
+      setIsProcessing(true);
+      await createNewUser(newUser);
       callApiAndFetchPeople();
     } catch (error) {
-      console.error("Error posting new user:", error);
+      console.error("Error creating user:", error);
     } finally {
+      setIsProcessing(false);
       setIsCreateModalOpen(false);
     }
   };
 
-  const callApiAndUpdateUser = (updatedUser) => {
+  const callApiAndUpdateUser = async (updatedUser) => {
     try {
-      console.log("Updated user:", updatedUser);
+      setIsProcessing(true);
+      await updateUser(updatedUser);
       callApiAndFetchPeople();
     } catch (error) {
       console.error("Error updating user:", error);
     } finally {
+      setIsProcessing(false);
       setIsEditModalOpen(false);
     }
   };
@@ -145,6 +156,7 @@ const People = () => {
         <AddUserForm
           onSubmit={callApiAndCreateUser}
           houseSections={houseSections}
+          isProcessing={isProcessing}
         />
       </ModalWrapper>
 
@@ -156,6 +168,7 @@ const People = () => {
           onSubmit={callApiAndUpdateUser}
           userData={editUserData}
           houseSections={houseSections}
+          isProcessing={isProcessing}
         />
       </ModalWrapper>
     </>
