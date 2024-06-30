@@ -56,7 +56,7 @@
   display: flex;
   justify-content: space-between;
   padding: 10px 0 0;
-  background: var(--cultured);
+  background: var(--white);
   border-radius: var(--radius-6);
   color: #dfa3d5;
 }
@@ -208,6 +208,9 @@ hr {
 /* ================================ */
 .payment-history-content {
   overflow-x: auto;
+  background: var(--white);
+  border-radius: var(--radius-16);
+  padding: var(--radius-16);
 }
 
 .table-title {
@@ -240,6 +243,10 @@ hr {
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
   color: var(--onyx);
+}
+
+.payment-history-table tr:nth-child(even) {
+  background: var(--pacific_blue_12);
 }
 
 @media (max-width: 768px) {
@@ -304,7 +311,7 @@ hr {
 }
 
 .personal-profile-info {
-  text-align: center;
+  text-align: right;
 }
 
 .personal-profile-image {
@@ -320,6 +327,7 @@ hr {
   font-weight: var(--fw-500);
   font-size: var(--fs-5);
   color: var(--onyx);
+  text-align: center;
 }
 
 .personal-user-content-details {
@@ -373,10 +381,6 @@ hr {
     padding: 8px 16px;
   }
 
-  .personal-profile-info {
-    text-align: right;
-  }
-
   .personal-profile-image {
     width: 80px;
     height: 80px;
@@ -384,7 +388,6 @@ hr {
 
   .personal-full-name {
     margin-top: 30px;
-    text-align: center;
   }
 
   .personal-user-content-detail .label {

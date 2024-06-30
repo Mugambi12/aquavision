@@ -238,43 +238,41 @@ const WaterConsumptionHistory = ({ person }) => {
 
 // Component to display payment history
 const PaymentHistory = ({ person }) => (
-  <div className="content-card">
-    <div className="payment-history-content">
-      <h2 className="table-title">Payment History</h2>
-      <table className="payment-history-table">
-        <thead>
-          <tr>
-            <th>#ID</th>
-            <th>Transaction ID</th>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Status</th>
+  <div className="payment-history-content">
+    <h2 className="table-title">Payment History</h2>
+    <table className="payment-history-table">
+      <thead>
+        <tr>
+          <th>#ID</th>
+          <th>Transaction ID</th>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {person.revenues.map((item, index) => (
+          <tr key={index}>
+            <td>{index + 1}</td>
+            <td>{item.transaction_id}</td>
+            <td>
+              {new Date(item.payment_date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "2-digit",
+              })}
+            </td>
+            <td>
+              {item.amount.toLocaleString("en-US", {
+                style: "currency",
+                currency: "KES",
+              })}
+            </td>
+            <td>{item.payment_status}</td>
           </tr>
-        </thead>
-        <tbody>
-          {person.revenues.map((item, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{item.transaction_id}</td>
-              <td>
-                {new Date(item.payment_date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "2-digit",
-                })}
-              </td>
-              <td>
-                {item.amount.toLocaleString("en-US", {
-                  style: "currency",
-                  currency: "KES",
-                })}
-              </td>
-              <td>{item.payment_status}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        ))}
+      </tbody>
+    </table>
   </div>
 );
 
