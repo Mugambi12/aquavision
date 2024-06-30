@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 import ModalWrapper from "../components/modalWrapper/ModalWrapper";
-import PeopleManagement from "../components/people/PeopleManagement";
+import PeopleManagement from "../components/people/peopleManagement/PeopleManagement";
 import PeopleSidebar from "../components/people/PeopleSidenav/PeopleSidenav";
 import AddUserForm from "../components/people/peopleForms/AddUserForm";
 import EditUserForm from "../components/people/peopleForms/EditUserForm";
