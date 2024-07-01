@@ -173,6 +173,9 @@ const WaterConsumptionHistory = ({ person }) => {
           option={{
             tooltip: {
               trigger: "axis",
+              textStyle: {
+                fontSize: 13,
+              },
             },
             xAxis: {
               type: "category",
@@ -183,49 +186,29 @@ const WaterConsumptionHistory = ({ person }) => {
             },
             series: [
               {
-                name: "Previous:",
+                name: "Previous",
                 data: chartData.map((data) => data.previousReading),
                 type: "bar",
-                smooth: true,
-                lineStyle: {
-                  color: "#FF0000",
-                },
               },
               {
-                name: "Current:",
+                name: "Current",
                 data: chartData.map((data) => data.currentReading),
                 type: "bar",
-                smooth: true,
-                lineStyle: {
-                  color: "#00FF00",
-                },
               },
               {
-                name: "Usage:",
+                name: "Usage",
                 data: chartData.map((data) => data.consumption),
                 type: "bar",
-                smooth: true,
-                lineStyle: {
-                  color: "#3398DB",
-                },
               },
               {
-                name: "Price:",
+                name: "Price",
                 data: chartData.map((data) => data.unitPrice),
                 type: "bar",
-                smooth: true,
-                lineStyle: {
-                  color: "#FFA500",
-                },
               },
               {
-                name: "Total:",
+                name: "Total",
                 data: chartData.map((data) => data.totalAmount),
                 type: "bar",
-                smooth: true,
-                lineStyle: {
-                  color: "#FFA500",
-                },
               },
             ],
           }}
