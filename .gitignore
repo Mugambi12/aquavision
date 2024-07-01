@@ -1,7 +1,0 @@
-sockets_server
-venv/
-live_server/
-__pycache__/
-sample.py
-.schema.jsx
-set.json
